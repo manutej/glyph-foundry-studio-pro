@@ -1,0 +1,25 @@
+file '/Users/cairo/Documents/CETI/ACCENTURE/content-factory v2/glyph-foundry-next/out/vbm/01-motion-atlas-milton25d-v10.png'
+duration 1.25
+file '/Users/cairo/Documents/CETI/ACCENTURE/content-factory v2/glyph-foundry-next/out/vbm/02-orpheum-dark-operad-v10.png'
+duration 1.25
+file '/Users/cairo/Documents/CETI/ACCENTURE/content-factory v2/glyph-foundry-next/out/vbm/03-hydrographic-survey-v10.png'
+duration 1.25
+file '/Users/cairo/Documents/CETI/ACCENTURE/content-factory v2/glyph-foundry-next/out/vbm/04-milton-warm-saul-bass-v10.png'
+duration 1.25
+file '/Users/cairo/Documents/CETI/ACCENTURE/content-factory v2/glyph-foundry-next/out/vbm/05-iridescent-voxel3d-v10.png'
+duration 1.25
+file '/Users/cairo/Documents/CETI/ACCENTURE/content-factory v2/glyph-foundry-next/out/vbm/06-editorial-collage-wada-v10.png'
+duration 1.25
+file '/Users/cairo/Documents/CETI/ACCENTURE/content-factory v2/glyph-foundry-next/out/vbm/07-live-tweaks-catalyst-v10.png'
+duration 1.25
+file '/Users/cairo/Documents/CETI/ACCENTURE/content-factory v2/glyph-foundry-next/out/vbm/08-tab-workflow-diagram-v10.png'
+duration 1.25
+file '/Users/cairo/Documents/CETI/ACCENTURE/content-factory v2/glyph-foundry-next/out/vbm/09-tab-motion-theatre-v10.png'
+duration 1.25
+file '/Users/cairo/Documents/CETI/ACCENTURE/content-factory v2/glyph-foundry-next/out/vbm/10-tab-rsi-sprite-vault-v10.png'
+duration 1.25
+file '/Users/cairo/Documents/CETI/ACCENTURE/content-factory v2/glyph-foundry-next/out/vbm/11-live-source-compile-v10.png'
+duration 1.25
+file '/Users/cairo/Documents/CETI/ACCENTURE/content-factory v2/glyph-foundry-next/out/vbm/12-video-explainer-theatre-v10.png'
+duration 1.25
+file '/Users/cairo/Documents/CETI/ACCENTURE/content-factory v2/glyph-foundry-next/out/vbm/12-video-explainer-theatre-v10.png'

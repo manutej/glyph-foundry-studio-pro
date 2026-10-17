@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1120" width="1800" height="1120" role="img" id="combined-workflow-svg">
 <style>
-    svg {
+    #combined-workflow-svg {
       --sw-hair: 1.1px;
       --sw-frame: 1.5px;
       --sw-glyph: 2.1px;
@@ -31,14 +31,14 @@
       --grid: rgba(24,20,18,0.06);
       background: var(--ground);
     }
-    .t-title { font-family: 'Fraunces', Georgia, serif; font-size: 20.5px; font-weight: 700; fill: var(--ink); }
-    .t-sub   { font-family: 'IBM Plex Sans', 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; fill: var(--muted); }
-    .t-sec   { font-family: 'Fraunces', Georgia, serif; font-size: 15.5px; font-weight: 700; fill: var(--ink); }
-    .t-h     { font-family: 'IBM Plex Sans', 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; fill: var(--ink); }
-    .t-b     { font-family: 'IBM Plex Sans', 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; fill: var(--muted); }
-    .t-mono  { font-family: 'IBM Plex Mono', 'Space Mono', monospace; font-size: 10px; font-weight: 600; fill: var(--actor-a); }
-    .t-badge { font-family: 'IBM Plex Mono', 'Space Mono', monospace; font-size: 9.5px; font-weight: 700; fill: var(--elev); }
-    .t-hand  { font-family: 'Caveat', 'Fraunces', cursive; font-size: 14.5px; font-weight: 700; fill: var(--accent); }
+    #combined-workflow-svg .t-title { font-family: 'Fraunces', Georgia, serif; font-size: 18px; font-weight: 700; fill: var(--ink); }
+    #combined-workflow-svg .t-sub   { font-family: 'IBM Plex Sans', 'DM Sans', sans-serif; font-size: 12.5px; font-weight: 500; fill: var(--muted); }
+    #combined-workflow-svg .t-sec   { font-family: 'Fraunces', Georgia, serif; font-size: 15px; font-weight: 700; fill: var(--ink); }
+    #combined-workflow-svg .t-h     { font-family: 'IBM Plex Sans', 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; fill: var(--ink); }
+    #combined-workflow-svg .t-b     { font-family: 'IBM Plex Sans', 'DM Sans', sans-serif; font-size: 10.8px; font-weight: 500; fill: var(--muted); }
+    #combined-workflow-svg .t-mono  { font-family: 'IBM Plex Mono', 'Space Mono', monospace; font-size: 10px; font-weight: 600; fill: var(--actor-a); }
+    #combined-workflow-svg .t-badge { font-family: 'IBM Plex Mono', 'Space Mono', monospace; font-size: 9.5px; font-weight: 700; fill: var(--elev); }
+    #combined-workflow-svg .t-hand  { font-family: 'Caveat', 'Fraunces', cursive; font-size: 14.5px; font-weight: 700; fill: var(--accent); }
     </style>
 <title>Universal Programmatic Source-to-Infographic &amp; Motion Workflow Diagram</title>
 <desc>A three-tier architectural blueprint uniting the 5-stage SymSpec compiler and 4-round Recursive Self-Improvement loop with the three programmatic engines (Milton 2.5D, Motion Atlas Wada 348, Orpheum Double Operad) and the grounded source document workflow DAG.</desc>
@@ -49,10 +49,10 @@
 <rect class="plinth-shadow" x="42.0" y="39.0" width="1724.0" height="74.0" rx="12.0" style="fill:var(--shadow);stroke:var(--line);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
 <rect class="plinth-face" x="38.0" y="34.0" width="1724.0" height="74.0" rx="12.0" style="fill:var(--elev);stroke:var(--line);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
 <path class="plinth-rim" d="M52.0,35.8 L1748.0,35.8" style="fill:none;stroke:var(--rim);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
-<text class="t-title" x="62.0" y="65.0" text-anchor="start">COMBINED PROGRAMMATIC WORKFLOW DIAGRAM · SOURCE DOCUMENT → RSI LOOP → MULTI-CHROME ARTIFACTS</text>
+<text class="t-title" x="62.0" y="64.0" text-anchor="start">COMBINED PROGRAMMATIC WORKFLOW DIAGRAM · SOURCE DOCUMENT → RSI LOOP → MULTI-CHROME ARTIFACTS</text>
 <text class="t-sub" x="62.0" y="90.0" text-anchor="start">Active Source: Talent Accelerator Program (TAP) (fnv1a:a48a83f3) · 52/52 Conservation Gates PASS (H1–H8 · G01–G20 · P1–P8)</text>
-<rect x="1490.0" y="48.0" width="250.0" height="44.0" rx="10.0" style="fill:var(--forest);stroke:var(--line);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
-<text class="t-badge" x="1615.0" y="77.0" text-anchor="middle">RSI R0→R3: 100% PASS</text>
+<rect x="1506.0" y="48.0" width="234.0" height="44.0" rx="10.0" style="fill:var(--forest);stroke:var(--line);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
+<text class="t-badge" x="1623.0" y="77.0" text-anchor="middle">RSI R0→R3: 100% PASS</text>
 </g>
 <g class="z-layer wf-tier1-base" data-z="0" data-seq="1">
 <rect class="plinth-shadow" x="42.8" y="132.0" width="1724.0" height="254.0" rx="14.0" style="fill:var(--shadow);stroke:var(--line);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
@@ -158,10 +158,10 @@
 <rect x="58" y="444" width="542" height="30" rx="9" style="fill:var(--actor-a)"/>
 <text class="t-badge" x="72.0" y="464.0" text-anchor="start">ENGINE A · GLYPH FOUNDRY v8 × MILTON GLASER</text>
 <text class="t-h" x="74.0" y="496.0" text-anchor="start">2.5D Volumetric Lithograph + 12 Poetic Moves</text>
-<text class="t-b" x="74.0" y="522.0" text-anchor="start">• 4 Structural Depth Planes (Z0 Plinth → Z1 Mech → Z2 Actor → Z3 Callout)</text>
-<text class="t-b" x="74.0" y="544.0" text-anchor="start">• Expressive Leaning Figures (±6°), Negative-Space var(--ground) Cutouts</text>
-<text class="t-b" x="74.0" y="566.0" text-anchor="start">• 12 Glaser Moves + Visual Puns [11-wow, 10-truth, 01-affection, 08-doubt]</text>
-<text class="t-b" x="74.0" y="588.0" text-anchor="start">• Mandatory &lt;title&gt; + Poetic &lt;desc&gt; &amp; Spring-Damped viewBox Camera</text>
+<text class="t-b" x="74.0" y="522.0" text-anchor="start">• 4 Depth Planes (Z0 Plinth → Z1 Mech → Z2 Actor → Z3 Callout)</text>
+<text class="t-b" x="74.0" y="544.0" text-anchor="start">• Leaning Figures (±6°), Negative-Space var(--ground) Cutouts</text>
+<text class="t-b" x="74.0" y="566.0" text-anchor="start">• 12 Glaser Moves + Visual Puns [11-wow, 10-truth, 01-affection]</text>
+<text class="t-b" x="74.0" y="588.0" text-anchor="start">• Mandatory &lt;title&gt; + Poetic &lt;desc&gt; &amp; Spring viewBox Camera</text>
 </g>
 <g class="z-layer wf-eng-icon-0" data-z="2" data-seq="1">
 <rect class="plinth-shadow" x="493.2" y="524.0" width="84.0" height="72.0" rx="10.0" style="fill:var(--shadow);stroke:var(--line);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
@@ -186,10 +186,10 @@
 <rect x="629" y="444" width="542" height="30" rx="9" style="fill:var(--actor-b)"/>
 <text class="t-badge" x="643.0" y="464.0" text-anchor="start">ENGINE B · CETI MOTION ATLAS STUDIO PRO v4</text>
 <text class="t-h" x="645.0" y="496.0" text-anchor="start">Sanzo Wada 348 + 15 Motion Styles + 8 Character Rigs</text>
-<text class="t-b" x="645.0" y="522.0" text-anchor="start">• 348 Sanzo Wada Combos + 4×4 OKLab Chord Matrix + CIEDE2000 Tokens</text>
-<text class="t-b" x="645.0" y="544.0" text-anchor="start">• 8 Parametric Archetypes (Whale, Falcon, Bathysphere, Crane, Astrolabe, Orpheus...)</text>
-<text class="t-b" x="645.0" y="566.0" text-anchor="start">• Saul Bass 5-Rung Reduction Ladder (Rung 1 Full Rig → Rung 5 16px Signal Dot)</text>
-<text class="t-b" x="645.0" y="588.0" text-anchor="start">• 15 Single-Clock Styles (Watercolor, Cutout, Hydrographic, Voxel, Sim, Saul-Severe)</text>
+<text class="t-b" x="645.0" y="522.0" text-anchor="start">• 348 Sanzo Wada Combos + 4×4 OKLab Chord Matrix + ΔE2000 Tokens</text>
+<text class="t-b" x="645.0" y="544.0" text-anchor="start">• 8 Parametric Rigs (Whale, Falcon, Bathysphere, Crane, Orpheus)</text>
+<text class="t-b" x="645.0" y="566.0" text-anchor="start">• Saul Bass 5-Rung Ladder (Rung 1 Full Rig → Rung 5 16px Signal)</text>
+<text class="t-b" x="645.0" y="588.0" text-anchor="start">• 15 Single-Clock Styles (Watercolor, Cutout, Hydro, Voxel, Sim)</text>
 </g>
 <g class="z-layer wf-eng-icon-1" data-z="2" data-seq="2">
 <rect class="plinth-shadow" x="1064.2" y="524.0" width="84.0" height="72.0" rx="10.0" style="fill:var(--shadow);stroke:var(--line);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
@@ -204,10 +204,10 @@
 <rect x="1200" y="444" width="542" height="30" rx="9" style="fill:var(--plum)"/>
 <text class="t-badge" x="1214.0" y="464.0" text-anchor="start">ENGINE C · ORPHEUM STUDIO PRO v4 (DOUBLE OPERAD)</text>
 <text class="t-h" x="1216.0" y="496.0" text-anchor="start">Operadic Geometry (O_geom × O_col) + Sheaf Overlap + k-Space</text>
-<text class="t-b" x="1216.0" y="522.0" text-anchor="start">• 3 Primary Atoms (Circle · Square · Triangle) × 16 Operadic Operations (OPS)</text>
+<text class="t-b" x="1216.0" y="522.0" text-anchor="start">• 3 Primary Atoms (Circle · Square · Triangle) × 16 Operadic OPS</text>
 <text class="t-b" x="1216.0" y="544.0" text-anchor="start">• Stasheff Associahedron K_n Homotopy &amp; Catalan Bracketing Tree</text>
-<text class="t-b" x="1216.0" y="566.0" text-anchor="start">• Commutative Sheaf Glue (a+b+1) mod m + OKLab Midpoint + Triple Glue A∩B∩C</text>
-<text class="t-b" x="1216.0" y="588.0" text-anchor="start">• Corner-Preserving C¹ Cubic Bézier Splines + 2D Radix-2 FFT k-Space (β = 1.34)</text>
+<text class="t-b" x="1216.0" y="566.0" text-anchor="start">• Sheaf Glue (a+b+1) mod m + OKLab Midpoint + Triple Glue A∩B∩C</text>
+<text class="t-b" x="1216.0" y="588.0" text-anchor="start">• C¹ Cubic Bézier Splines + 2D Radix-2 FFT k-Space (β = 1.34)</text>
 </g>
 <g class="z-layer wf-eng-icon-2" data-z="2" data-seq="3">
 <rect class="plinth-shadow" x="1635.2" y="524.0" width="84.0" height="72.0" rx="10.0" style="fill:var(--shadow);stroke:var(--line);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
@@ -234,6 +234,7 @@
 <text class="t-mono" x="1740.0" y="706.0" text-anchor="end">9 Grounded Nodes · 9 Parent-Owned Bezier Edges · 15 Verbatim Spans (S1–S15)</text>
 </g>
 <g class="z-layer wf-tier3-nodes" data-z="1" data-seq="3">
+<g class="wf-dag-node" data-dag-id="n-thesis">
 <rect class="plinth-shadow" x="65.2" y="734.0" width="230.0" height="96.0" rx="10.0" style="fill:var(--shadow);stroke:var(--line);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
 <rect class="plinth-face" x="62.0" y="730.0" width="230.0" height="96.0" rx="10.0" style="fill:var(--actor-a-tint);stroke:var(--line);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
 <path class="plinth-rim" d="M74.0,731.8 L280.0,731.8" style="fill:none;stroke:var(--rim);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
@@ -243,6 +244,8 @@
 <text class="t-h" x="74.0" y="776.0" text-anchor="start">Training × Staffing</text>
 <text class="t-b" x="74.0" y="796.0" text-anchor="start">Venn union [11-wow]</text>
 <text class="t-mono" x="74.0" y="814.0" text-anchor="start">Spans S1, S2</text>
+</g>
+<g class="wf-dag-node" data-dag-id="n-crowd">
 <rect class="plinth-shadow" x="65.2" y="850.0" width="230.0" height="96.0" rx="10.0" style="fill:var(--shadow);stroke:var(--line);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
 <rect class="plinth-face" x="62.0" y="846.0" width="230.0" height="96.0" rx="10.0" style="fill:var(--elev);stroke:var(--line);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
 <path class="plinth-rim" d="M74.0,847.8 L280.0,847.8" style="fill:none;stroke:var(--rim);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
@@ -252,6 +255,8 @@
 <text class="t-h" x="74.0" y="892.0" text-anchor="start">5–8 Candidates</text>
 <text class="t-b" x="74.0" y="912.0" text-anchor="start">Bench + Horizon [04-greatness]</text>
 <text class="t-mono" x="74.0" y="930.0" text-anchor="start">Spans S3, S4, S6</text>
+</g>
+<g class="wf-dag-node" data-dag-id="n-gate">
 <rect class="plinth-shadow" x="65.2" y="966.0" width="230.0" height="96.0" rx="10.0" style="fill:var(--shadow);stroke:var(--line);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
 <rect class="plinth-face" x="62.0" y="962.0" width="230.0" height="96.0" rx="10.0" style="fill:var(--forest-tint);stroke:var(--line);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
 <path class="plinth-rim" d="M74.0,963.8 L280.0,963.8" style="fill:none;stroke:var(--rim);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
@@ -261,15 +266,19 @@
 <text class="t-h" x="74.0" y="1008.0" text-anchor="start">Tech Background Gate</text>
 <text class="t-b" x="74.0" y="1028.0" text-anchor="start">Passed Arrow [10-truth]</text>
 <text class="t-mono" x="74.0" y="1046.0" text-anchor="start">Spans S6, S15</text>
-<rect class="plinth-shadow" x="363.2" y="822.0" width="270.0" height="148.0" rx="10.0" style="fill:var(--shadow);stroke:var(--line);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
-<rect class="plinth-face" x="360.0" y="818.0" width="270.0" height="148.0" rx="10.0" style="fill:var(--sunflower-tint);stroke:var(--line);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
-<path class="plinth-rim" d="M372.0,819.8 L618.0,819.8" style="fill:none;stroke:var(--rim);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
-<rect x="360" y="818" width="270" height="24" rx="7" style="fill:var(--actor-b)"/>
-<text class="t-badge" x="370.0" y="834.0" text-anchor="start">4 · COHORT (k1)</text>
-<text class="t-badge" x="620.0" y="834.0" text-anchor="end">ρ:85c065</text>
-<text class="t-h" x="372.0" y="864.0" text-anchor="start">8 Client + 8 Pursuit</text>
-<text class="t-b" x="372.0" y="884.0" text-anchor="start">Leaning Dyads [01-affection]</text>
-<text class="t-mono" x="372.0" y="902.0" text-anchor="start">Spans S5, S7, S14</text>
+</g>
+<g class="wf-dag-node" data-dag-id="n-cohort">
+<rect class="plinth-shadow" x="363.2" y="798.0" width="270.0" height="142.0" rx="10.0" style="fill:var(--shadow);stroke:var(--line);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
+<rect class="plinth-face" x="360.0" y="794.0" width="270.0" height="142.0" rx="10.0" style="fill:var(--sunflower-tint);stroke:var(--line);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
+<path class="plinth-rim" d="M372.0,795.8 L618.0,795.8" style="fill:none;stroke:var(--rim);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
+<rect x="360" y="794" width="270" height="24" rx="7" style="fill:var(--actor-b)"/>
+<text class="t-badge" x="370.0" y="810.0" text-anchor="start">4 · COHORT (k1)</text>
+<text class="t-badge" x="620.0" y="810.0" text-anchor="end">ρ:85c065</text>
+<text class="t-h" x="372.0" y="840.0" text-anchor="start">8 Client + 8 Pursuit</text>
+<text class="t-b" x="372.0" y="860.0" text-anchor="start">Leaning Dyads [01-affection]</text>
+<text class="t-mono" x="372.0" y="878.0" text-anchor="start">Spans S5, S7, S14</text>
+</g>
+<g class="wf-dag-node" data-dag-id="n-contract">
 <rect class="plinth-shadow" x="703.2" y="734.0" width="275.0" height="96.0" rx="10.0" style="fill:var(--shadow);stroke:var(--line);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
 <rect class="plinth-face" x="700.0" y="730.0" width="275.0" height="96.0" rx="10.0" style="fill:var(--elev);stroke:var(--line);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
 <path class="plinth-rim" d="M712.0,731.8 L963.0,731.8" style="fill:none;stroke:var(--rim);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
@@ -279,6 +288,8 @@
 <text class="t-h" x="712.0" y="776.0" text-anchor="start">1-Yr Contract · 40 h/wk</text>
 <text class="t-b" x="712.0" y="796.0" text-anchor="start">13th Open Block [05-just-enough]</text>
 <text class="t-mono" x="712.0" y="814.0" text-anchor="start">Spans S8, S10</text>
+</g>
+<g class="wf-dag-node" data-dag-id="n-taper">
 <rect class="plinth-shadow" x="703.2" y="850.0" width="275.0" height="96.0" rx="10.0" style="fill:var(--shadow);stroke:var(--line);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
 <rect class="plinth-face" x="700.0" y="846.0" width="275.0" height="96.0" rx="10.0" style="fill:var(--plum-tint);stroke:var(--line);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
 <path class="plinth-rim" d="M712.0,847.8 L963.0,847.8" style="fill:none;stroke:var(--rim);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
@@ -288,6 +299,8 @@
 <text class="t-h" x="712.0" y="892.0" text-anchor="start">Mo 1: 100% → 1–2 d/wk</text>
 <text class="t-b" x="712.0" y="912.0" text-anchor="start">Mountain Peak [04-greatness]</text>
 <text class="t-mono" x="712.0" y="930.0" text-anchor="start">Spans S9, S13</text>
+</g>
+<g class="wf-dag-node" data-dag-id="n-fork">
 <rect class="plinth-shadow" x="703.2" y="966.0" width="275.0" height="96.0" rx="10.0" style="fill:var(--shadow);stroke:var(--line);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
 <rect class="plinth-face" x="700.0" y="962.0" width="275.0" height="96.0" rx="10.0" style="fill:var(--forest-tint);stroke:var(--line);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
 <path class="plinth-rim" d="M712.0,963.8 L963.0,963.8" style="fill:none;stroke:var(--rim);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
@@ -297,6 +310,8 @@
 <text class="t-h" x="712.0" y="1008.0" text-anchor="start">Client vs Convert at 1 Yr</text>
 <text class="t-b" x="712.0" y="1028.0" text-anchor="start">Switchyard [10-truth]</text>
 <text class="t-mono" x="712.0" y="1046.0" text-anchor="start">Spans S5, S11</text>
+</g>
+<g class="wf-dag-node" data-dag-id="n-math">
 <rect class="plinth-shadow" x="1053.2" y="754.0" width="340.0" height="138.0" rx="10.0" style="fill:var(--shadow);stroke:var(--line);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
 <rect class="plinth-face" x="1050.0" y="750.0" width="340.0" height="138.0" rx="10.0" style="fill:var(--sunflower-tint);stroke:var(--line);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
 <path class="plinth-rim" d="M1062.0,751.8 L1378.0,751.8" style="fill:none;stroke:var(--rim);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
@@ -306,6 +321,8 @@
 <text class="t-h" x="1062.0" y="796.0" text-anchor="start">$25/h × 40h × 8 × 50w = $1M</text>
 <text class="t-b" x="1062.0" y="816.0" text-anchor="start">Tree Rings + 3D Ingot [09-aging]</text>
 <text class="t-mono" x="1062.0" y="834.0" text-anchor="start">Span S12 (10/yr = $10M)</text>
+</g>
+<g class="wf-dag-node" data-dag-id="n-ratio">
 <rect class="plinth-shadow" x="1053.2" y="918.0" width="340.0" height="144.0" rx="10.0" style="fill:var(--shadow);stroke:var(--line);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
 <rect class="plinth-face" x="1050.0" y="914.0" width="340.0" height="144.0" rx="10.0" style="fill:var(--elev);stroke:var(--line);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
 <path class="plinth-rim" d="M1062.0,915.8 L1378.0,915.8" style="fill:none;stroke:var(--rim);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
@@ -315,11 +332,20 @@
 <text class="t-h" x="1062.0" y="960.0" text-anchor="start">8:8 Parity vs 8:2–4 Catalyst</text>
 <text class="t-b" x="1062.0" y="980.0" text-anchor="start">Doubt × 18° Square [08×06]</text>
 <text class="t-mono" x="1062.0" y="998.0" text-anchor="start">Span S14 (Unresolved)</text>
+</g>
+<rect class="plinth-shadow" x="363.2" y="960.0" width="270.0" height="102.0" rx="10.0" style="fill:var(--shadow);stroke:var(--line);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
+<rect class="plinth-face" x="360.0" y="956.0" width="270.0" height="102.0" rx="10.0" style="fill:var(--elev);stroke:var(--line);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
+<path class="plinth-rim" d="M372.0,957.8 L618.0,957.8" style="fill:none;stroke:var(--rim);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
+<rect x="360" y="956" width="270" height="22" rx="7" style="fill:var(--forest)"/>
+<text class="t-badge" x="370.0" y="971.0" text-anchor="start">SHEAF COHOMOLOGY &amp; FNV-1A SEAL</text>
+<text class="t-h" x="372.0" y="998.0" text-anchor="start">δ⁰ = 0 Across All 9 Fork &amp; Join Edges</text>
+<text class="t-b" x="372.0" y="1018.0" text-anchor="start">100% Verbatim Span Grounding (H1–H4)</text>
+<text class="t-mono" x="372.0" y="1040.0" text-anchor="start">Root Hash: fnv1a:a48a83f3</text>
 <rect class="plinth-shadow" x="1446.0" y="735.0" width="300.0" height="328.0" rx="12.0" style="fill:var(--shadow);stroke:var(--line);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
 <rect class="plinth-face" x="1442.0" y="730.0" width="300.0" height="328.0" rx="12.0" style="fill:var(--elev);stroke:var(--line);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
 <path class="plinth-rim" d="M1456.0,731.8 L1728.0,731.8" style="fill:none;stroke:var(--rim);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
 <rect x="1442" y="730" width="300" height="28" rx="8" style="fill:var(--forest)"/>
-<text class="t-badge" x="1454.0" y="749.0" text-anchor="start">EMITTED ARTIFACT BUNDLE (v9)</text>
+<text class="t-badge" x="1454.0" y="749.0" text-anchor="start">EMITTED ARTIFACT BUNDLE (v10)</text>
 <rect x="1456.0" y="766.0" width="272.0" height="42.0" rx="7.0" style="fill:var(--panel);stroke:var(--line);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
 <text class="t-h" x="1466.0" y="782.0" text-anchor="start">1. Infographic Plates</text>
 <text class="t-mono" x="1466.0" y="799.0" text-anchor="start">18 Styles × 348 Wada Combos</text>
@@ -337,22 +363,22 @@
 <text class="t-mono" x="1466.0" y="1007.0" text-anchor="start">5 Live Chromes + RSI Engine</text>
 </g>
 <g class="z-layer wf-tier3-edges" data-z="2" data-seq="4">
-<path d="M 292 778.0 C 326.0 778.0, 326.0 892.0, 354 892.0" style="fill:none;stroke:var(--actor-a);stroke-width:2.2px;stroke-linecap:round"/>
-<path d="M348.5,891.8 Q353.7,892.8 357.4,891.6" style="fill:none;stroke:var(--actor-a);stroke-width:var(--sw-glyph);stroke-linecap:round;stroke-linejoin:round"/>
-<path d="M358.0,892.0 L352.1,895.8 L352.1,888.2 Z" style="fill:var(--actor-a);stroke:var(--actor-a);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
-<path d="M 292 894.0 C 326.0 894.0, 326.0 892.0, 354 892.0" style="fill:none;stroke:var(--actor-a);stroke-width:2.2px;stroke-linecap:round"/>
-<path d="M348.3,892.3 Q352.8,891.8 358.4,891.5" style="fill:none;stroke:var(--actor-a);stroke-width:var(--sw-glyph);stroke-linecap:round;stroke-linejoin:round"/>
-<path d="M358.0,892.0 L352.1,895.8 L352.1,888.2 Z" style="fill:var(--actor-a);stroke:var(--actor-a);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
-<path d="M 292 1010.0 C 326.0 1010.0, 326.0 892.0, 354 892.0" style="fill:none;stroke:var(--actor-a);stroke-width:2.2px;stroke-linecap:round"/>
-<path d="M348.4,892.2 Q352.5,892.1 358.5,892.7" style="fill:none;stroke:var(--actor-a);stroke-width:var(--sw-glyph);stroke-linecap:round;stroke-linejoin:round"/>
-<path d="M358.0,892.0 L352.1,895.8 L352.1,888.2 Z" style="fill:var(--actor-a);stroke:var(--actor-a);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
-<path d="M 630 892.0 C 665.0 892.0, 665.0 778.0, 694 778.0" style="fill:none;stroke:var(--actor-a);stroke-width:2.2px;stroke-linecap:round"/>
+<path d="M 292 778.0 C 326.0 778.0, 326.0 865.0, 354 865.0" style="fill:none;stroke:var(--actor-a);stroke-width:2.2px;stroke-linecap:round"/>
+<path d="M348.5,864.8 Q353.7,865.8 357.4,864.6" style="fill:none;stroke:var(--actor-a);stroke-width:var(--sw-glyph);stroke-linecap:round;stroke-linejoin:round"/>
+<path d="M358.0,865.0 L352.1,868.8 L352.1,861.2 Z" style="fill:var(--actor-a);stroke:var(--actor-a);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
+<path d="M 292 894.0 C 326.0 894.0, 326.0 865.0, 354 865.0" style="fill:none;stroke:var(--actor-a);stroke-width:2.2px;stroke-linecap:round"/>
+<path d="M348.3,865.3 Q352.8,864.8 358.4,864.5" style="fill:none;stroke:var(--actor-a);stroke-width:var(--sw-glyph);stroke-linecap:round;stroke-linejoin:round"/>
+<path d="M358.0,865.0 L352.1,868.8 L352.1,861.2 Z" style="fill:var(--actor-a);stroke:var(--actor-a);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
+<path d="M 292 1010.0 C 326.0 1010.0, 326.0 865.0, 354 865.0" style="fill:none;stroke:var(--actor-a);stroke-width:2.2px;stroke-linecap:round"/>
+<path d="M348.4,865.2 Q352.5,865.1 358.5,865.7" style="fill:none;stroke:var(--actor-a);stroke-width:var(--sw-glyph);stroke-linecap:round;stroke-linejoin:round"/>
+<path d="M358.0,865.0 L352.1,868.8 L352.1,861.2 Z" style="fill:var(--actor-a);stroke:var(--actor-a);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
+<path d="M 630 865.0 C 665.0 865.0, 665.0 778.0, 694 778.0" style="fill:none;stroke:var(--actor-a);stroke-width:2.2px;stroke-linecap:round"/>
 <path d="M688.5,778.4 Q692.3,778.0 697.6,777.3" style="fill:none;stroke:var(--actor-a);stroke-width:var(--sw-glyph);stroke-linecap:round;stroke-linejoin:round"/>
 <path d="M698.0,778.0 L692.1,781.8 L692.1,774.2 Z" style="fill:var(--actor-a);stroke:var(--actor-a);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
-<path d="M 630 892.0 C 665.0 892.0, 665.0 894.0, 694 894.0" style="fill:none;stroke:var(--actor-a);stroke-width:2.2px;stroke-linecap:round"/>
+<path d="M 630 865.0 C 665.0 865.0, 665.0 894.0, 694 894.0" style="fill:none;stroke:var(--actor-a);stroke-width:2.2px;stroke-linecap:round"/>
 <path d="M687.4,894.6 Q693.6,893.5 698.6,894.7" style="fill:none;stroke:var(--actor-a);stroke-width:var(--sw-glyph);stroke-linecap:round;stroke-linejoin:round"/>
 <path d="M698.0,894.0 L692.1,897.8 L692.1,890.2 Z" style="fill:var(--actor-a);stroke:var(--actor-a);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
-<path d="M 630 892.0 C 665.0 892.0, 665.0 1010.0, 694 1010.0" style="fill:none;stroke:var(--actor-a);stroke-width:2.2px;stroke-linecap:round"/>
+<path d="M 630 865.0 C 665.0 865.0, 665.0 1010.0, 694 1010.0" style="fill:none;stroke:var(--actor-a);stroke-width:2.2px;stroke-linecap:round"/>
 <path d="M688.4,1009.9 Q693.4,1010.6 697.5,1010.1" style="fill:none;stroke:var(--actor-a);stroke-width:var(--sw-glyph);stroke-linecap:round;stroke-linejoin:round"/>
 <path d="M698.0,1010.0 L692.1,1013.8 L692.1,1006.2 Z" style="fill:var(--actor-a);stroke:var(--actor-a);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
 <path d="M 975 778.0 C 1012.5 778.0, 1012.5 819.0, 1044 819.0" style="fill:none;stroke:var(--actor-a);stroke-width:2.2px;stroke-linecap:round"/>

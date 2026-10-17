@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 960" width="1600" height="960" role="img" id="saul-bass-infographic-svg">
 <style>
-    svg {
+    #saul-bass-infographic-svg {
       --sw-hair: 1.1px;
       --sw-frame: 1.5px;
       --sw-glyph: 2.1px;
@@ -16,13 +16,13 @@
       --rim: rgba(255,255,255,0.65); --grid: rgba(20,17,15,0.08);
       background: var(--ground);
     }
-    .t-title { font-family: 'Fraunces', Georgia, serif; font-size: 32px; font-weight: 700; fill: var(--ink); }
-    .t-sub   { font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; fill: var(--accent); }
-    .t-h     { font-family: 'Fraunces', Georgia, serif; font-size: 17px; font-weight: 700; fill: var(--elev); }
-    .t-hd    { font-family: 'Fraunces', Georgia, serif; font-size: 18px; font-weight: 700; fill: var(--ink); }
-    .t-b     { font-family: 'DM Sans', sans-serif; font-size: 12.5px; font-weight: 600; fill: var(--muted); }
-    .t-mono  { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; fill: var(--ink); }
-    .t-num   { font-family: 'Fraunces', Georgia, serif; font-size: 42px; font-weight: 700; fill: var(--elev); }
+    #saul-bass-infographic-svg .t-title { font-family: 'Fraunces', Georgia, serif; font-size: 32px; font-weight: 700; fill: var(--ink); }
+    #saul-bass-infographic-svg .t-sub   { font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; fill: var(--accent); }
+    #saul-bass-infographic-svg .t-h     { font-family: 'Fraunces', Georgia, serif; font-size: 16.5px; font-weight: 700; fill: var(--elev); }
+    #saul-bass-infographic-svg .t-hd    { font-family: 'Fraunces', Georgia, serif; font-size: 18px; font-weight: 700; fill: var(--ink); }
+    #saul-bass-infographic-svg .t-b     { font-family: 'DM Sans', sans-serif; font-size: 11.5px; font-weight: 600; fill: var(--muted); }
+    #saul-bass-infographic-svg .t-mono  { font-family: 'Space Mono', monospace; font-size: 10.8px; font-weight: 700; fill: var(--ink); }
+    #saul-bass-infographic-svg .t-num   { font-family: 'Fraunces', Georgia, serif; font-size: 42px; font-weight: 700; fill: var(--elev); }
     </style>
 <title>Saul Bass Severe Cut-Paper Infographic &amp; 5-Rung Reduction Plate</title>
 <desc>A stark three-tone cut-paper infographic plate (Bone Black, Vermilion Cut, Warm Paper) presenting the 5-rung graphic reduction ladder and the 8+8 vs 8+2-4 catalyst severance.</desc>
@@ -30,14 +30,15 @@
 <rect x="0" y="0" width="1600" height="960" style="fill:var(--ground)"/>
 <polygon points="40,36 1560,28 1548,128 32,136" style="fill:var(--ink)"/>
 <text class="t-h" x="72.0" y="82.0" text-anchor="start">SAUL BASS CUT-PAPER INFOGRAPHIC · THE 5-RUNG REDUCTION &amp; SEVERANCE</text>
-<text x="72" y="112" style="font-family:Space Mono,monospace;font-size:12px;font-weight:700;fill:var(--sunflower)">WADA NO. 126 (VERMILION CUT &amp; BONE BLACK) · DOMINANT INK FIELD · MAX 2 SIMULTANEOUS MOVES</text>
+<text class="t-sub" x="72" y="112" style="font-family:Space Mono,monospace;font-size:12px;font-weight:700;fill:var(--sunflower)">WADA NO. 126 (VERMILION CUT &amp; BONE BLACK) · DOMINANT INK FIELD · MAX 2 SIMULTANEOUS MOVES</text>
 </g>
 <g class="z-layer sb-rungs" data-z="1" data-seq="1">
 <text class="t-sub" x="56.0" y="174.0" text-anchor="start">I · THE 5-RUNG GRAPHIC REDUCTION LADDER (INVENTORY → PIVOT → SILHOUETTE → SEVERANCE → THE CUT)</text>
 <polygon points="62,202 344,198 338,430 56,434" style="fill:var(--shadow)"/>
 <polygon points="56,194 338,190 332,422 50,426" style="fill:var(--elev);stroke:var(--ink);stroke-width:3px"/>
 <polygon points="56,194 338,190 336,230 54,234" style="fill:var(--ink)"/>
-<text class="t-h" x="70.0" y="218.0" text-anchor="start">RUNG 1 · INVENTORY</text>
+<text class="t-h" x="68.0" y="218.0" text-anchor="start">RUNG 1 · INVENTORY</text>
+<text x="326" y="217" text-anchor="end" style="font-family:Space Mono,monospace;font-size:10px;font-weight:700;fill:var(--sunflower)">Δ=0.00</text>
 </g>
 <g class="z-layer sb-rung-icon-1" data-z="2" data-seq="1">
 <path d="M241.6,308.0 C241.7,314.3 239.4,321.3 236.6,327.1 C233.8,332.9 229.7,338.9 224.7,342.8 C219.8,346.7 212.9,349.1 206.7,350.4 C200.4,351.7 193.5,351.7 187.3,350.4 C181.1,349.1 174.4,346.5 169.5,342.5 C164.6,338.6 160.7,332.5 158.0,326.8 C155.3,321.0 153.4,314.3 153.4,308.0 C153.4,301.7 155.2,294.9 157.9,289.2 C160.6,283.4 164.6,277.5 169.5,273.5 C174.4,269.5 181.1,266.5 187.2,265.2 C193.4,264.0 200.5,264.4 206.6,265.9 C212.8,267.3 219.3,270.0 224.2,273.9 C229.2,277.7 233.3,283.4 236.2,289.1 C239.1,294.8 241.6,301.7 241.6,308.0 Z" style="fill:var(--panel);stroke:var(--ink);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
@@ -56,36 +57,45 @@
 <path d="M197.0,289.0 Q197.0,298.0 206.0,298.0 Q197.0,298.0 197.0,307.0 Q197.0,298.0 188.0,298.0 Q197.0,298.0 197.0,289.0 Z" style="fill:var(--sunflower);stroke:var(--line);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
 </g>
 <g class="z-layer sb-rung-cap-1" data-z="3" data-seq="1">
-<text class="t-mono" x="70.0" y="382.0" text-anchor="start">Full Painted Rig (24 strokes)</text>
-<text class="t-b" x="70.0" y="404.0" text-anchor="start">Complete anatomical actor + cohort context</text>
+<text class="t-mono" x="68.0" y="382.0" text-anchor="start">Full Painted Rig (24 strokes)</text>
+<text class="t-b" x="68.0" y="404.0" text-anchor="start">Full actor rig + studio cohort context</text>
+<path d="M341.0,307.9 Q348.3,309.7 359.8,308.4" style="fill:none;stroke:var(--accent);stroke-width:var(--sw-glyph);stroke-linecap:round;stroke-linejoin:round"/>
+<path d="M360.0,308.0 L354.1,311.8 L354.1,304.2 Z" style="fill:var(--accent);stroke:var(--accent);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
 <polygon points="368,202 650,198 644,430 362,434" style="fill:var(--shadow)"/>
 <polygon points="362,194 644,190 638,422 356,426" style="fill:var(--elev);stroke:var(--ink);stroke-width:3px"/>
 <polygon points="362,194 644,190 642,230 360,234" style="fill:var(--ink)"/>
-<text class="t-h" x="376.0" y="218.0" text-anchor="start">RUNG 2 · PIVOT</text>
+<text class="t-h" x="374.0" y="218.0" text-anchor="start">RUNG 2 · PIVOT</text>
+<text x="632" y="217" text-anchor="end" style="font-family:Space Mono,monospace;font-size:10px;font-weight:700;fill:var(--sunflower)">Δ=0.11</text>
 </g>
 <g class="z-layer sb-rung-icon-2" data-z="2" data-seq="2">
 <polygon points="461.0,336 479.0,274 531.0,278 545.0,334" style="fill:var(--ink)"/>
 <polygon points="487.0,326 503.0,286 521.0,326" style="fill:var(--accent)"/>
-<path d="M508.3,304.0 C508.4,304.9 509.2,306.0 509.0,306.9 C508.8,307.8 508.0,308.8 507.2,309.3 C506.4,309.8 505.2,309.7 504.3,309.8 C503.4,309.9 502.6,309.9 501.7,309.7 C500.8,309.6 499.8,309.4 499.1,308.9 C498.3,308.4 497.8,307.5 497.4,306.7 C496.9,305.9 496.4,304.9 496.4,304.0 C496.4,303.1 496.6,301.9 497.1,301.2 C497.6,300.4 498.7,300.0 499.4,299.5 C500.2,299.0 500.9,298.3 501.7,298.1 C502.5,298.0 503.5,298.4 504.2,298.6 C505.0,298.9 505.6,299.5 506.3,299.9 C506.9,300.4 508.0,300.7 508.4,301.4 C508.7,302.1 508.2,303.1 508.3,304.0 Z" style="fill:var(--ground)"/>
+<path d="M509.3,304.0 C509.3,305.0 509.3,306.0 508.9,306.9 C508.6,307.7 507.9,308.7 507.1,309.1 C506.3,309.6 505.2,309.4 504.3,309.6 C503.4,309.7 502.4,310.1 501.7,309.9 C500.9,309.7 500.1,308.9 499.6,308.3 C499.0,307.7 498.7,307.0 498.3,306.3 C497.9,305.6 497.3,304.9 497.1,304.0 C496.8,303.1 496.6,301.9 497.0,301.1 C497.3,300.3 498.5,299.8 499.2,299.3 C500.0,298.8 500.8,298.4 501.7,298.2 C502.5,298.0 503.6,297.7 504.4,297.9 C505.2,298.2 505.7,299.1 506.5,299.6 C507.3,300.2 508.5,300.4 509.0,301.1 C509.5,301.8 509.3,303.0 509.3,304.0 Z" style="fill:var(--ground)"/>
 </g>
 <g class="z-layer sb-rung-cap-2" data-z="3" data-seq="2">
-<text class="t-mono" x="376.0" y="382.0" text-anchor="start">Cut-Paper Emblem (12 strokes)</text>
-<text class="t-b" x="376.0" y="404.0" text-anchor="start">Torn-paper silhouette with knockout border</text>
+<text class="t-mono" x="374.0" y="382.0" text-anchor="start">Cut-Paper Emblem (12 strokes)</text>
+<text class="t-b" x="374.0" y="404.0" text-anchor="start">Torn-paper silhouette + knockout rim</text>
+<path d="M647.0,308.0 Q657.1,308.6 666.0,308.9" style="fill:none;stroke:var(--accent);stroke-width:var(--sw-glyph);stroke-linecap:round;stroke-linejoin:round"/>
+<path d="M666.0,308.0 L660.1,311.8 L660.1,304.2 Z" style="fill:var(--accent);stroke:var(--accent);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
 <polygon points="674,202 956,198 950,430 668,434" style="fill:var(--shadow)"/>
 <polygon points="668,194 950,190 944,422 662,426" style="fill:var(--elev);stroke:var(--ink);stroke-width:3px"/>
 <polygon points="668,194 950,190 948,230 666,234" style="fill:var(--ink)"/>
-<text class="t-h" x="682.0" y="218.0" text-anchor="start">RUNG 3 · SILHOUETTE</text>
+<text class="t-h" x="680.0" y="218.0" text-anchor="start">RUNG 3 · SILHOUETTE</text>
+<text x="938" y="217" text-anchor="end" style="font-family:Space Mono,monospace;font-size:10px;font-weight:700;fill:var(--sunflower)">Δ=0.15</text>
 </g>
 <g class="z-layer sb-rung-icon-3" data-z="2" data-seq="3">
 <path d="M 771.0 328 C 779.0 272, 839.0 272, 847.0 328 Z" style="fill:none;stroke:var(--ink);stroke-width:4.5px;stroke-linecap:round"/>
 </g>
 <g class="z-layer sb-rung-cap-3" data-z="3" data-seq="3">
-<text class="t-mono" x="682.0" y="382.0" text-anchor="start">Monoline Contour (6 strokes)</text>
-<text class="t-b" x="682.0" y="404.0" text-anchor="start">Single unbroken perimeter vector</text>
+<text class="t-mono" x="680.0" y="382.0" text-anchor="start">Monoline Contour (6 strokes)</text>
+<text class="t-b" x="680.0" y="404.0" text-anchor="start">Single unbroken perimeter vector</text>
+<path d="M951.2,309.0 Q963.1,307.2 972.1,307.7" style="fill:none;stroke:var(--accent);stroke-width:var(--sw-glyph);stroke-linecap:round;stroke-linejoin:round"/>
+<path d="M972.0,308.0 L966.1,311.8 L966.1,304.2 Z" style="fill:var(--accent);stroke:var(--accent);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
 <polygon points="980,202 1262,198 1256,430 974,434" style="fill:var(--shadow)"/>
 <polygon points="974,194 1256,190 1250,422 968,426" style="fill:var(--elev);stroke:var(--ink);stroke-width:3px"/>
 <polygon points="974,194 1256,190 1254,230 972,234" style="fill:var(--ink)"/>
-<text class="t-h" x="988.0" y="218.0" text-anchor="start">RUNG 4 · SEVERANCE</text>
+<text class="t-h" x="986.0" y="218.0" text-anchor="start">RUNG 4 · SEVERANCE</text>
+<text x="1244" y="217" text-anchor="end" style="font-family:Space Mono,monospace;font-size:10px;font-weight:700;fill:var(--sunflower)">Δ=0.19</text>
 </g>
 <g class="z-layer sb-rung-icon-4" data-z="2" data-seq="4">
 <path d="M 1079.0 326 L 1119.0 276" style="stroke:var(--ink);stroke-width:6px;stroke-linecap:round"/>
@@ -93,33 +103,36 @@
 <line x1="1073.0" y1="306" x2="1157.0" y2="306" style="stroke:var(--ink);stroke-width:4px;stroke-linecap:round"/>
 </g>
 <g class="z-layer sb-rung-cap-4" data-z="3" data-seq="4">
-<text class="t-mono" x="988.0" y="382.0" text-anchor="start">3-Stroke Severed Glyph</text>
-<text class="t-b" x="988.0" y="404.0" text-anchor="start">One structural cut carries the tension</text>
+<text class="t-mono" x="986.0" y="382.0" text-anchor="start">3-Stroke Severed Glyph</text>
+<text class="t-b" x="986.0" y="404.0" text-anchor="start">One structural cut carries tension</text>
+<path d="M1258.6,307.1 Q1267.4,306.7 1278.4,308.9" style="fill:none;stroke:var(--accent);stroke-width:var(--sw-glyph);stroke-linecap:round;stroke-linejoin:round"/>
+<path d="M1278.0,308.0 L1272.1,311.8 L1272.1,304.2 Z" style="fill:var(--accent);stroke:var(--accent);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
 <polygon points="1286,202 1568,198 1562,430 1280,434" style="fill:var(--shadow)"/>
 <polygon points="1280,194 1562,190 1556,422 1274,426" style="fill:var(--elev);stroke:var(--ink);stroke-width:3px"/>
 <polygon points="1280,194 1562,190 1560,230 1278,234" style="fill:var(--ink)"/>
-<text class="t-h" x="1294.0" y="218.0" text-anchor="start">RUNG 5 · THE CUT</text>
+<text class="t-h" x="1292.0" y="218.0" text-anchor="start">RUNG 5 · THE CUT</text>
+<text x="1550" y="217" text-anchor="end" style="font-family:Space Mono,monospace;font-size:10px;font-weight:700;fill:var(--sunflower)">16px ✓</text>
 </g>
 <g class="z-layer sb-rung-icon-5" data-z="2" data-seq="5">
-<path d="M1445.7,308.0 C1445.8,311.4 1444.3,315.3 1442.7,318.4 C1441.0,321.6 1438.7,324.5 1435.9,326.7 C1433.2,328.9 1429.8,330.9 1426.4,331.6 C1423.0,332.3 1419.2,331.7 1415.8,331.0 C1412.3,330.3 1408.4,329.3 1405.6,327.3 C1402.8,325.2 1400.4,321.8 1399.0,318.6 C1397.5,315.4 1396.8,311.6 1396.7,308.0 C1396.7,304.4 1397.2,300.4 1398.7,297.3 C1400.3,294.1 1403.2,291.4 1406.0,289.2 C1408.9,287.1 1412.3,285.5 1415.7,284.6 C1419.1,283.7 1423.1,283.2 1426.5,283.9 C1429.9,284.6 1433.6,286.6 1436.2,288.9 C1438.9,291.2 1440.7,294.6 1442.3,297.7 C1443.9,300.9 1445.6,304.6 1445.7,308.0 Z" style="fill:var(--accent);stroke:var(--ink);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
+<path d="M1444.6,308.0 C1444.7,311.5 1444.7,315.6 1443.2,318.7 C1441.7,321.8 1438.6,324.4 1435.8,326.6 C1433.0,328.7 1429.7,330.5 1426.3,331.3 C1423.0,332.1 1419.1,332.0 1415.7,331.4 C1412.2,330.7 1408.3,329.5 1405.6,327.4 C1402.8,325.2 1400.5,321.8 1399.1,318.5 C1397.8,315.3 1397.3,311.5 1397.3,308.0 C1397.3,304.5 1397.5,300.5 1399.0,297.4 C1400.5,294.3 1403.4,291.5 1406.2,289.4 C1409.0,287.4 1412.4,286.1 1415.8,285.2 C1419.2,284.3 1423.2,283.4 1426.4,284.2 C1429.7,284.9 1432.8,287.6 1435.5,289.8 C1438.3,292.0 1441.3,294.5 1442.8,297.5 C1444.3,300.5 1444.6,304.5 1444.6,308.0 Z" style="fill:var(--accent);stroke:var(--ink);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
 <line x1="1387.0" y1="330" x2="1455.0" y2="286" style="stroke:var(--ground);stroke-width:6px;stroke-linecap:round"/>
 </g>
 <g class="z-layer sb-rung-cap-5" data-z="3" data-seq="5">
-<text class="t-mono" x="1294.0" y="382.0" text-anchor="start">1-Stroke 16px Signal Mark</text>
-<text class="t-b" x="1294.0" y="404.0" text-anchor="start">Irreducible emblem (passes 16px gauntlet)</text>
+<text class="t-mono" x="1292.0" y="382.0" text-anchor="start">1-Stroke 16px Signal Mark</text>
+<text class="t-b" x="1292.0" y="404.0" text-anchor="start">Irreducible mark (16px gauntlet PASS)</text>
 </g>
 <g class="z-layer sb-acts" data-z="1" data-seq="2">
 <polygon points="56,468 536,476 526,910 48,904" style="fill:var(--ink)"/>
 <text class="t-h" x="82.0" y="516.0" text-anchor="start">ACT I · THE THRESHOLD BAR</text>
-<text x="82" y="550" style="font-family:Space Mono,monospace;font-size:13px;fill:var(--sunflower)">5–8 CANDIDATES · TECH PREREQUISITE</text>
+<text class="sb-act1-sub" x="82" y="550" style="font-family:Space Mono,monospace;font-size:13px;fill:var(--sunflower)">5–8 CANDIDATES · TECH PREREQUISITE</text>
 <polygon points="82,658 390,633 390,603 495,663 390,723 390,693 82,683" style="fill:var(--accent)"/>
 <rect x="235" y="578" width="26" height="175" style="fill:var(--ground)"/>
 <text class="t-h" x="82.0" y="803.0" text-anchor="start">$0 COST TO CLIENT FOR PURSUIT COHORT</text>
-<text x="82" y="836" style="font-family:DM Sans,sans-serif;font-size:14px;fill:var(--ground)">16 trained together (8 billable + 8 pursuit) · Spans S5, S7</text>
+<text class="sb-act1-cap" x="82" y="836" style="font-family:DM Sans,sans-serif;font-size:14px;fill:var(--ground)">16 trained together (8 billable + 8 pursuit) · Spans S5, S7</text>
 <polygon points="566,474 1056,464 1048,910 558,902" style="fill:var(--accent);stroke:var(--ink);stroke-width:3.5px"/>
 <text class="t-h" x="596.0" y="516.0" text-anchor="start">ACT II · THE ECONOMIC MONOLITH</text>
 <text class="t-num" x="596.0" y="600.0" text-anchor="start">$1,000,000</text>
-<text x="596" y="636" style="font-family:Space Mono,monospace;font-size:14px;font-weight:700;fill:var(--sunflower)">$25/HR × 40 HR/WK × 8 PEOPLE × 50 WKS</text>
+<text class="sb-act2-eq" x="596" y="636" style="font-family:Space Mono,monospace;font-size:14px;font-weight:700;fill:var(--sunflower)">$25/HR × 40 HR/WK × 8 PEOPLE × 50 WKS</text>
 <rect x="596" y="673" width="32" height="110" style="fill:var(--ink)"/>
 <rect x="602" y="683" width="20" height="20" style="fill:var(--ground)"/>
 <rect x="638" y="673" width="32" height="110" style="fill:var(--ink)"/>
@@ -141,7 +154,7 @@
 <rect x="974" y="673" width="32" height="110" style="fill:var(--ink)"/>
 <rect x="980" y="683" width="20" height="20" style="fill:var(--ground)"/>
 <text class="t-h" x="596.0" y="824.0" text-anchor="start">10 COHORTS / YEAR = $10,000,000 CAPACITY</text>
-<text x="596" y="856" style="font-family:DM Sans,sans-serif;font-size:14px;fill:var(--elev)">Month 1: 100% immersion → Months 2–12: 1–2 d/wk · Span S12</text>
+<text class="sb-act2-cap" x="596" y="856" style="font-family:DM Sans,sans-serif;font-size:14px;fill:var(--elev)">Month 1: 100% immersion → Months 2–12: 1–2 d/wk · Span S12</text>
 <polygon points="1084,468 1552,478 1544,910 1076,904" style="fill:var(--elev);stroke:var(--ink);stroke-width:3.5px"/>
 <text class="t-hd" x="1112.0" y="516.0" text-anchor="start">ACT III · THE CATALYST CUT</text>
 <text class="t-sub" x="1112.0" y="546.0" text-anchor="start">BUT IS 1:1 (8:8) TOO MUCH?</text>

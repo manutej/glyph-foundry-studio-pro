@@ -1797,15 +1797,16 @@ function showEvidence(b) {
   }
   if (claimId && D.candidates_by_claim[claimId]) {
     const cands = D.candidates_by_claim[claimId];
-    const win = cands.find(c => !c.rejected);
-    const rejs = cands.filter(c => c.rejected);
+    const win = cands.find(c => !c.reject && !c.rejected);
+    const rejs = cands.filter(c => c.reject || c.rejected);
     if (win) {
-      let html = `<div class="candidate-mini"><span class="win">✓ Selected Idiom: ${win.idiom}</span><span>${win.encoding}</span>`;
+      const winMetrics = win.encoding || (win.scores ? `Fidelity ${win.scores.fidelity}/5 · Clarity ${win.scores.clarity}/5 · Novelty ${win.scores.novelty}/5 · Feasibility ${win.scores.feasibility}/5` : 'Canonical 2.5D Poetic Idiom');
+      let html = `<div class="candidate-mini"><span class="win">✓ Selected Idiom: ${win.idiom}</span><span>${winMetrics}</span>`;
       if (poeticDesc) {
         html += `<span style="display:block;margin-top:6px;padding-top:6px;border-top:1px dashed var(--rule);color:var(--ink);font-style:italic">✦ <b>Milton Poetic &lt;desc&gt;:</b> “${poeticDesc}”</span>`;
       }
       rejs.forEach(r => {
-        html += `<span class="rej">✗ Rejected (${r.idiom}): ${r.rejected}</span>`;
+        html += `<span class="rej">✗ Rejected (${r.idiom}): ${r.reject || r.rejected}</span>`;
       });
       html += `</div>`;
       candBox.innerHTML = html;

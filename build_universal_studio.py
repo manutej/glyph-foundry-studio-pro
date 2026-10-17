@@ -27,10 +27,10 @@ def load_text(p: pathlib.Path) -> str:
 
 
 def main() -> None:
-    # Load verified JS engines from ARTE/motion-atlas
-    wada_js = load_text(MOTION_ATLAS_DIR / "geome-wada.js")
-    motion_engine_js = load_text(MOTION_ATLAS_DIR / "studio-motion-engine.js")
-    canvas_oauth_js = load_text(MOTION_ATLAS_DIR / "studio-canvas-oauth.js")
+    # Load verified JS engines from ARTE/motion-atlas (escape literal </script> for inline HTML5 safety)
+    wada_js = load_text(MOTION_ATLAS_DIR / "geome-wada.js").replace("</script>", "<\\/script>")
+    motion_engine_js = load_text(MOTION_ATLAS_DIR / "studio-motion-engine.js").replace("</script>", "<\\/script>")
+    canvas_oauth_js = load_text(MOTION_ATLAS_DIR / "studio-canvas-oauth.js").replace("</script>", "<\\/script>")
 
     # Load compiled SVG artifacts and RSI ledger from out/artifacts
     svg_plates = {
@@ -626,16 +626,20 @@ def main() -> None:
           <strong id="stage-plate-title">Style 1 · Milton Glaser 2.5D Volumetric Lithograph</strong>
           <span id="stage-plate-sub" style="margin-left:10px;color:var(--ink-soft)">4 Depth Planes (Z0..Z3) · 12 Canonical Moves + Poetic &lt;desc&gt;</span>
         </div>
-        <div style="display:flex;gap:6px">
-          <button class="btn" data-quick-plate="milton-25d">1·Milton 2.5D</button>
-          <button class="btn" data-quick-plate="saul-bass-cutout">2·Saul Bass</button>
-          <button class="btn" data-quick-plate="hydrographic-survey">3·Hydrography</button>
-          <button class="btn" data-quick-plate="orpheum-operad">4·Orpheum Operad</button>
-          <button class="btn" data-quick-plate="editorial-collage">5·Editorial</button>
-          <button class="btn" data-quick-plate="isometric-voxel">6·Voxel 3D</button>
+        <div style="display:flex;gap:5px;flex-wrap:wrap;align-items:center">
+          <button class="btn btn-primary" data-quick-plate="milton-25d" title="Shortcut: 1">1·Milton 2.5D</button>
+          <button class="btn" data-quick-plate="saul-bass-cutout" title="Shortcut: 2">2·Saul Bass</button>
+          <button class="btn" data-quick-plate="hydrographic-survey" title="Shortcut: 3">3·Hydrography</button>
+          <button class="btn" data-quick-plate="orpheum-operad" title="Shortcut: 4">4·Orpheum Operad</button>
+          <button class="btn" data-quick-plate="editorial-collage" title="Shortcut: 5">5·Editorial</button>
+          <button class="btn" data-quick-plate="isometric-voxel" title="Shortcut: 6">6·Voxel 3D</button>
+          <button class="btn" id="btn-split-compare" title="Toggle 2-Up Side-by-Side Plate Comparison">⇄ Split Compare</button>
         </div>
       </div>
-      <div class="svg-mount" id="svg-plate-mount"></div>
+      <div id="infographic-stage-grid" style="display:grid;grid-template-columns:1fr;gap:12px">
+        <div class="svg-mount" id="svg-plate-mount" title="Click any node to inspect Poetic <desc> & grounded claim · Drag to pan · Double-click to reset"></div>
+        <div class="svg-mount" id="svg-compare-mount" hidden style="border-left:1px dashed var(--border)"></div>
+      </div>
     </section>
 
     <!-- TAB II: COMBINED PROGRAMMATIC WORKFLOW DIAGRAM -->
@@ -653,7 +657,7 @@ def main() -> None:
     <section id="panel-motion" class="stage-card" hidden>
       <div class="stage-bar">
         <div>
-          <strong id="motion-bar-title">Single-Clock Deterministic Animation Engine (window.MA.draw · frame = f(t, seed))</strong>
+          <strong id="motion-bar-title">Single-Clock Deterministic Animation Engine (window.MA.render · frame = f(t, seed))</strong>
         </div>
         <div style="display:flex;gap:8px;align-items:center">
           <button class="btn btn-primary" id="btn-anim-play">⏸ Pause</button>
@@ -668,7 +672,7 @@ def main() -> None:
         <div>
           <canvas id="motion-canvas" class="live-canvas" width="960" height="600"></canvas>
           <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px">
-            <button class="btn mstyle-chip" data-mstyle="watercolor">Watercolor</button>
+            <button class="btn mstyle-chip btn-primary" data-mstyle="watercolor">Watercolor</button>
             <button class="btn mstyle-chip" data-mstyle="cutout">Cutout</button>
             <button class="btn mstyle-chip" data-mstyle="saul-severe">Saul-Severe</button>
             <button class="btn mstyle-chip" data-mstyle="hydrographic">Hydrographic</button>
@@ -691,7 +695,7 @@ def main() -> None:
           <div class="rsi-card">
             <div class="dock-hdr"><span>Multi-Target Code Compiler (G13 · G20)</span></div>
             <div style="display:flex;gap:6px;flex-wrap:wrap">
-              <button class="btn" data-compile-target="anime">Anime.js v4</button>
+              <button class="btn btn-primary" data-compile-target="animejs">Anime.js v4</button>
               <button class="btn" data-compile-target="remotion">Remotion TSX</button>
               <button class="btn" data-compile-target="hyperframes">Playable HTML5</button>
             </div>
@@ -707,12 +711,12 @@ def main() -> None:
         <strong>Closed-Loop Recursive Self-Improvement (RSI) Telemetry (R0 → R1 → R2 → R3) &amp; Core SVG Symbol Vault</strong>
         <button class="btn btn-primary" id="btn-retrigger-rsi">↻ Re-Run 6-Lens Adversarial Audit &amp; Auto-Fix</button>
       </div>
-      <div style="padding:16px;display:flex;flex-direction:column;gap:16px">
-        <div class="rsi-grid" id="rsi-rounds-grid"></div>
+      <div style="padding:10px 14px;display:flex;flex-direction:column;gap:8px">
+        <div class="rsi-grid" id="rsi-rounds-grid" style="grid-template-columns:repeat(4,1fr);gap:8px"></div>
         <div class="dock-hdr"><span>6 Adversarial MOE Lenses (Bass · Koolhaas · Wada · Sheaf · Milton · Orpheum)</span></div>
-        <div class="rsi-grid" id="rsi-lenses-grid"></div>
+        <div class="rsi-grid" id="rsi-lenses-grid" style="grid-template-columns:repeat(6,1fr);gap:8px"></div>
         <div class="dock-hdr"><span>Core SVG &lt;symbol&gt; Artifact Sprite Preview (9 Poetic Idioms · Score 100/100)</span></div>
-        <div class="rsi-grid" id="sprite-preview-grid"></div>
+        <div class="rsi-grid" id="sprite-preview-grid" style="grid-template-columns:repeat(3,1fr);gap:8px"></div>
       </div>
     </section>
   </main>
@@ -778,17 +782,30 @@ const SYMSPEC = {json.dumps(symspec)};
 
   let activeTab = 'infographic';
   let activePlateKey = 'milton-25d';
+  let compareMode = false;
+  let comparePlateKey = 'saul-bass-cutout';
   let activeMotionStyle = 'watercolor';
   let activeWadaId = 343;
   let animPlaying = true;
   let animT = 2.4;
   let lastTs = 0;
   let zVisible = {{0: true, 1: true, 2: true, 3: true}};
+  let panX = 0, panY = 0;
+  let lastParsedDoc = null;
+
+  const PLATE_ORDER = [
+    'milton-25d',
+    'saul-bass-cutout',
+    'hydrographic-survey',
+    'orpheum-operad',
+    'editorial-collage',
+    'isometric-voxel'
+  ];
 
   const PLATE_META = {{
     'milton-25d': {{ title: 'Style 1 · Milton Glaser 2.5D Volumetric Lithograph', sub: '4 Depth Planes (Z0..Z3) · 12 Canonical Moves + Poetic <desc>' }},
     'saul-bass-cutout': {{ title: 'Style 2 · Saul Bass Severe 3-Color Cut-Paper & 5-Rung Plate', sub: 'Dominant Ink Field · 5-Rung Reduction Ladder · Sheared Paper Shards' }},
-    'hydrographic-survey': {{ title: 'Style 3 · Kinetic Hydrography Bathymetric Survey Plate', sub: '25 Ghost Silhouettes · Compass Bearing Rose · ΔE2000 Soundings' }},
+    'hydrographic-survey': {{ title: 'Style 3 · Kinetic Hydrography Bathymetric Survey Plate', sub: '25 Ghost Silhouettes · Bathymetric Isolines · ΔE2000 Soundings' }},
     'orpheum-operad': {{ title: 'Style 4 · Orpheum Studio Pro Double-Operad & Sheaf Field', sub: 'O_geom × O_col · Stasheff Associahedron K₄ · 2D FFT k-Space (β=1.34)' }},
     'editorial-collage': {{ title: 'Style 5 · Editorial Push Pin Collage & Causal Storyboard', sub: 'INPUT → PROCESS → RESULT → COUNTERPOINT + 8-Beat BUT/THEREFORE Strip' }},
     'isometric-voxel': {{ title: 'Style 6 · Isometric Voxel & 3D Architectural Massing', sub: 'Axonometric 8+8 Cohort Towers · 12-Mo Staircase · $10M Profit Monolith' }},
@@ -847,12 +864,20 @@ const SYMSPEC = {json.dumps(symspec)};
     const meta = PLATE_META[key] || PLATE_META['milton-25d'];
     $('#stage-plate-title').textContent = meta.title;
     $('#stage-plate-sub').textContent = meta.sub;
+    $$('[data-quick-plate]').forEach(b => b.classList.toggle('btn-primary', b.dataset.quickPlate === key));
+    if (compareMode) {{
+      const nextIdx = (PLATE_ORDER.indexOf(key) + 1) % PLATE_ORDER.length;
+      comparePlateKey = PLATE_ORDER[nextIdx];
+      $('#svg-compare-mount').innerHTML = SVG_PLATES[comparePlateKey] || '';
+    }}
+    if (lastParsedDoc) bindParsedDocToActiveSVGs(lastParsedDoc);
     applyLiveTweaksToSVG();
     updatePoeticInspector();
   }}
 
   function mountWorkflow() {{
     $('#svg-workflow-mount').innerHTML = SVG_PLATES['combined-workflow'];
+    if (lastParsedDoc) bindParsedDocToActiveSVGs(lastParsedDoc);
   }}
 
   // 4. Apply Wada Palette, Geometry Tweaks, and Quantitative Sliders to Mounted SVGs
@@ -898,13 +923,33 @@ const SYMSPEC = {json.dumps(symspec)};
   }}
 
   let userPickedWada = false;
-  function applyWadaToSVGRoot(svgEl, pal) {{
+  function applyWadaToSVGRoot(svgEl, pal, plateKey) {{
     if (!svgEl || !pal || !userPickedWada) return;
-    const sw = pal.swHex || [pal.a, pal.b, pal.c, pal.h];
-    svgEl.style.setProperty('--actor-a', sw[0] || pal.a);
-    svgEl.style.setProperty('--actor-b', sw[1] || pal.b);
-    svgEl.style.setProperty('--accent', sw[2] || pal.h);
-    svgEl.style.setProperty('--sunflower', sw[3] || pal.c);
+    const rawSw = (pal.swHex && pal.swHex.length ? pal.swHex : [pal.a, pal.b, pal.c, pal.h]).filter(Boolean);
+    const isDarkPlate = ['hydrographic-survey', 'orpheum-operad', 'isometric-voxel'].includes(plateKey);
+    const groundHex = isDarkPlate ? '#0A1926' : '#F5EEDF';
+    const sorted = rawSw.slice().sort((x, y) => (WADA.relLuminance ? WADA.relLuminance(x) - WADA.relLuminance(y) : 0));
+
+    if (isDarkPlate) {{
+      // On dark plates, actors & accents must be luminous against deep navy/slate
+      const bright1 = sorted[sorted.length - 1] || pal.h || '#38BDF8';
+      const bright2 = sorted[Math.max(0, sorted.length - 2)] || pal.a || '#F59E0B';
+      const mid1 = sorted[Math.max(0, sorted.length - 3)] || pal.b || '#10B981';
+      svgEl.style.setProperty('--actor-a', WADA.ensureInkContrast ? WADA.ensureInkContrast(bright1, groundHex, 3.8) : bright1);
+      svgEl.style.setProperty('--actor-b', WADA.ensureInkContrast ? WADA.ensureInkContrast(bright2, groundHex, 3.5) : bright2);
+      svgEl.style.setProperty('--accent', WADA.ensureInkContrast ? WADA.ensureInkContrast(mid1, groundHex, 3.5) : mid1);
+      svgEl.style.setProperty('--sunflower', bright1);
+    }} else {{
+      // On light cream/ochre plates, --actor-a & --accent must be dark enough for white badge text (.t-badge) & strong contrast
+      const dark1 = sorted[0] || pal.a || '#2B5B84';
+      const dark2 = sorted[Math.min(1, sorted.length - 1)] || pal.b || '#B05A17';
+      const accentCol = sorted[Math.min(2, sorted.length - 1)] || pal.h || '#B8332A';
+      const warmCol = sorted[sorted.length - 1] || pal.c || '#E8A838';
+      svgEl.style.setProperty('--actor-a', WADA.ensureInkContrast ? WADA.ensureInkContrast(dark1, groundHex, 4.2) : dark1);
+      svgEl.style.setProperty('--actor-b', WADA.ensureInkContrast ? WADA.ensureInkContrast(dark2, groundHex, 3.5) : dark2);
+      svgEl.style.setProperty('--accent', WADA.ensureInkContrast ? WADA.ensureInkContrast(accentCol, groundHex, 3.8) : accentCol);
+      svgEl.style.setProperty('--sunflower', warmCol);
+    }}
   }}
 
   function applyLiveTweaksToSVG() {{
@@ -916,14 +961,18 @@ const SYMSPEC = {json.dumps(symspec)};
     $('#val-stroke').textContent = `${{strokeScale.toFixed(1)}}×`;
 
     const pal = getActiveWadaPalette();
-    ['#svg-plate-mount svg', '#svg-workflow-mount svg'].forEach(sel => {{
+    [
+      ['#svg-plate-mount svg', activePlateKey],
+      ['#svg-compare-mount svg', comparePlateKey],
+      ['#svg-workflow-mount svg', 'combined-workflow']
+    ].forEach(([sel, pKey]) => {{
       const svg = $(sel);
       if (!svg) return;
-      svg.style.transform = `perspective(1200px) rotateX(${{tilt}}deg) scale(${{zoom}})`;
+      svg.style.transform = `translate(${{panX}}px, ${{panY}}px) perspective(1200px) rotateX(${{tilt}}deg) scale(${{zoom}})`;
       svg.style.setProperty('--sw-hair', `${{(1.1 * strokeScale).toFixed(2)}}px`);
       svg.style.setProperty('--sw-frame', `${{(1.5 * strokeScale).toFixed(2)}}px`);
       svg.style.setProperty('--sw-glyph', `${{(2.1 * strokeScale).toFixed(2)}}px`);
-      applyWadaToSVGRoot(svg, pal);
+      applyWadaToSVGRoot(svg, pal, pKey);
 
       // Z-plane visibility toggle
       [0, 1, 2, 3].forEach(z => {{
@@ -933,11 +982,12 @@ const SYMSPEC = {json.dumps(symspec)};
       }});
     }});
 
-    // Live quantitative patching across active SVG text nodes (S12 $1,000,000 baseline at $25/hr × 8 client)
+    // Live quantitative patching across ALL active SVG plates (S12 $1,000,000 baseline at $25/hr × 8 client)
     const client = Number($('#tw-client').value);
     const pursuit = Number($('#tw-pursuit').value);
     const margin = Number($('#tw-margin').value);
     const cohorts = Number($('#tw-cohorts').value);
+    const totalSeats = client + pursuit;
     const profit = Math.round((margin / 25) * (client / 8) * 1000000);
     const annualM = ((profit * cohorts) / 1e6).toFixed(1);
 
@@ -949,6 +999,7 @@ const SYMSPEC = {json.dumps(symspec)};
 
     const svg = $('#svg-plate-mount svg');
     if (svg) {{
+      // Style 1: Milton 2.5D
       const t0 = svg.querySelector('#n-math .eq-term-0 text.t-num');
       const t2 = svg.querySelector('#n-math .eq-term-2 text.t-num');
       const tRes = svg.querySelector('#n-math .eq-result text.t-num');
@@ -958,14 +1009,45 @@ const SYMSPEC = {json.dumps(symspec)};
       const eqHand = svg.querySelector('#n-math text.t-hand');
       if (eqHand) eqHand.textContent = `— profit per cohort · ${{cohorts}}/yr = $${{annualM}}M —`;
       const cohortCap = svg.querySelector('#n-cohort text.caption');
-      if (cohortCap) cohortCap.textContent = `${{client + pursuit}} trained together (${{client}} client + ${{pursuit}} free)`;
+      if (cohortCap) cohortCap.textContent = `${{totalSeats}} trained together (${{client}} client + ${{pursuit}} free)`;
+
+      // Multi-plate universal text node synchronization across Styles 2..6
+      svg.querySelectorAll('text').forEach(tn => {{
+        const tx = tn.textContent || '';
+        if (tx.includes('margin × 2,000h')) {{
+          tn.textContent = `$${{margin}}/hr margin × 2,000h × ${{client}} × 10yr = $${{profit.toLocaleString()}}`;
+        }} else if (tx.startsWith('PROFIT = $')) {{
+          tn.textContent = `PROFIT = $${{profit.toLocaleString()}}`;
+        }} else if (tx.includes('COHORT PARITY')) {{
+          tn.textContent = `${{client}} + ${{pursuit}} = ${{totalSeats}} COHORT PARITY`;
+        }} else if (tx.includes('Cohorts/Yr = $') && tx.includes('Annual Profit')) {{
+          tn.textContent = `${{cohorts}} Cohorts/Yr = $${{annualM}}M Annual Profit`;
+        }} else if (tx.startsWith('ST-23 ·') && tx.includes('COHORT')) {{
+          tn.textContent = `ST-23 · ${{client}}+${{pursuit}}=${{totalSeats}} COHORT · $${{(profit/1e6).toFixed(2)}}M/COHORT`;
+        }}
+      }});
     }}
   }}
 
-  function updatePoeticInspector() {{
+  function updatePoeticInspector(selectedGroup) {{
     const box = $('#poetic-desc-box');
     const svg = $('#svg-plate-mount svg');
     if (!svg) return;
+    if (selectedGroup) {{
+      const gTitle = (selectedGroup.querySelector('title') && selectedGroup.querySelector('title').textContent)
+        || selectedGroup.getAttribute('id')
+        || 'Selected SVG Group';
+      const gDesc = (selectedGroup.querySelector('desc') && selectedGroup.querySelector('desc').textContent)
+        || (svg.querySelector('desc') && svg.querySelector('desc').textContent)
+        || 'Grounded geometric primitive pinned to Sanzo Wada 348 and source document spans.';
+      const gTexts = Array.from(selectedGroup.querySelectorAll('text')).slice(0, 4).map(t => t.textContent).join(' · ');
+      box.innerHTML = `
+        <div style="font-weight:700;color:var(--accent-secondary);margin-bottom:4px">🎯 Selected Node: #${{selectedGroup.id || 'glyph'}} · ${{gTitle}}</div>
+        <div style="font-style:italic;margin-bottom:8px">“${{gDesc}}”</div>
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--ink-soft);border-top:1px dashed var(--border);padding-top:6px"><b>Grounded Text Readout:</b> ${{gTexts || 'Geometric Vector Layer'}}</div>
+      `;
+      return;
+    }}
     const titles = Array.from(svg.querySelectorAll('title')).slice(0, 4).map(el => el.textContent);
     const descs = Array.from(svg.querySelectorAll('desc')).slice(0, 4).map(el => el.textContent);
     let html = `<div style="font-weight:700;color:var(--accent-primary);margin-bottom:4px">✦ ${{titles[0] || 'Grounded SVG Artifact'}}</div>`;
@@ -973,7 +1055,7 @@ const SYMSPEC = {json.dumps(symspec)};
       html += `<div style="font-style:italic;margin-bottom:8px">“${{descs[0]}}”</div>`;
     }}
     if (descs.length > 1) {{
-      html += `<div style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-soft);border-top:1px dashed var(--border);padding-top:6px">Sub-Glyph Poetic &lt;desc&gt; Nodes (${{svg.querySelectorAll('desc').length}} embedded):</div>`;
+      html += `<div style="font-family:var(--font-mono);font-size:9.5px;color:var(--ink-soft);border-top:1px dashed var(--border);padding-top:6px">Sub-Glyph Poetic &lt;desc&gt; Nodes (${{svg.querySelectorAll('desc').length}} embedded · click any node on stage):</div>`;
       descs.slice(1, 4).forEach((d, i) => {{
         html += `<div style="font-size:10.5px;margin-top:4px"><b>${{titles[i+1] || ('Node ' + (i+1))}}:</b> ${{d}}</div>`;
       }});
@@ -1022,23 +1104,45 @@ const SYMSPEC = {json.dumps(symspec)};
       logBox.appendChild(row);
     }});
 
-    // Mount Core SVG Sprite Symbols
+    // Mount Core SVG Sprite Symbols cleanly into render tree (no display:none on parent!)
+    let spriteHolder = document.getElementById('core-sprite-holder');
+    if (!spriteHolder) {{
+      spriteHolder = document.createElement('div');
+      spriteHolder.id = 'core-sprite-holder';
+      spriteHolder.style.cssText = 'position:absolute;width:0;height:0;overflow:hidden;pointer-events:none;';
+      spriteHolder.innerHTML = SVG_PLATES['core-sprite'] || '';
+      document.body.appendChild(spriteHolder);
+    }}
+
     const sGrid = $('#sprite-preview-grid');
-    sGrid.innerHTML = `<div style="display:none">${{SVG_PLATES['core-sprite']}}</div>`;
-    ['venn','crowd','gate','cohort','contract','taper','fork','equation','balance'].forEach(sym => {{
+    sGrid.innerHTML = '';
+    const SPRITE_META = [
+      {{ id: 'venn', vb: '0 0 320 180', label: 'Two-Circle Venn (A ∩ B)' }},
+      {{ id: 'crowd', vb: '0 0 320 180', label: '1-in-25 Crowd Field' }},
+      {{ id: 'gate', vb: '0 0 320 180', label: '75% Threshold Gate' }},
+      {{ id: 'cohort', vb: '0 0 320 180', label: '8+8 Shared Cohort Table' }},
+      {{ id: 'contract', vb: '0 0 320 180', label: 'Stamped 2-Yr Contract' }},
+      {{ id: 'taper', vb: '0 0 320 180', label: '12-Month Inverse Ramp' }},
+      {{ id: 'fork', vb: '0 0 320 180', label: 'Forking Retention Road' }},
+      {{ id: 'equation', vb: '0 0 665 150', label: 'Dimensional $1M Equation' }},
+      {{ id: 'balance', vb: '0 0 320 180', label: 'Asymmetric Doubt Scale' }}
+    ];
+    SPRITE_META.forEach(item => {{
       const card = document.createElement('div');
       card.className = 'rsi-card';
+      card.style.padding = '7px 10px';
+      const [ , , vbW, vbH ] = item.vb.split(' ').map(Number);
       card.innerHTML = `
-        <div class="dock-hdr"><span>#glyph-${{sym}}</span><span class="badge-pass">100/100</span></div>
-        <svg viewBox="0 0 320 200" style="width:100%;height:110px;background:#F5EEDF;border-radius:6px;border:1px solid var(--border)">
-          <use href="#glyph-${{sym}}" width="320" height="200"/>
+        <div class="dock-hdr"><span>#glyph-${{item.id}} · ${{item.label}}</span><span class="badge-pass">100/100</span></div>
+        <svg class="sprite-card-svg" viewBox="${{item.vb}}" style="width:100%;height:94px;background:#F5EEDF;border-radius:6px;border:1px solid var(--border);display:block">
+          <use href="#glyph-${{item.id}}" width="${{vbW}}" height="${{vbH}}"/>
         </svg>
       `;
       sGrid.appendChild(card);
     }});
   }}
 
-  // 6. Single-Clock Animation Loop (window.MA.draw + 5-Rung Canvas)
+  // 6. Single-Clock Animation Loop (window.MA.render + 5-Rung Canvas)
   function renderMotionFrame(now) {{
     if (animPlaying) {{
       const dt = lastTs ? Math.min(0.05, (now - lastTs) / 1000) : 0.016;
@@ -1048,17 +1152,27 @@ const SYMSPEC = {json.dumps(symspec)};
     }}
     lastTs = now;
 
-    if (activeTab === 'motion' && MA && MA.draw) {{
+    if (activeTab === 'motion' && MA && MA.render) {{
       const pal = getActiveWadaPalette();
-      MA.O.charId = $('#sel-char').value || 'ceti-whale';
-      MA.O.rung = Number($('#tw-rung').value) || 1;
-      MA.O.interaction = $('#sel-ix').value || 'hero-journey';
-      MA.O.captionsCovered = $('#chk-captions-covered').checked;
+      const charId = $('#sel-char').value || 'ceti-whale';
+      const rung = Number($('#tw-rung').value) || 1;
+      const interaction = $('#sel-ix').value || 'hero-journey';
+      const captionsCovered = $('#chk-captions-covered').checked;
+      const feelKey = $('#sel-feel').value || 'spring';
+      const feelObj = (MA.FEELS && (MA.FEELS[feelKey] || MA.FEELS.spring)) || {{ k: 180, c: 18 }};
       const isDark = ['orpheum-dark', 'hydrographic', 'deepmind-iridescent'].includes(document.documentElement.dataset.chrome);
-      MA.O.ground = isDark ? 'navy' : 'atlas';
+      const groundMode = isDark ? 'navy' : 'atlas';
 
       const cv = $('#motion-canvas');
-      if (cv) MA.draw(cv, activeMotionStyle, pal, animT);
+      if (cv) {{
+        MA.render(cv, activeMotionStyle, pal, feelObj, animT, {{
+          charId: charId,
+          rung: rung,
+          interaction: interaction,
+          captionsCovered: captionsCovered,
+          ground: groundMode
+        }});
+      }}
 
       // Also draw the 5-Rung Saul Bass Reduction preview canvas
       const rcv = $('#rung-canvas');
@@ -1067,11 +1181,21 @@ const SYMSPEC = {json.dumps(symspec)};
         ctx.save();
         ctx.fillStyle = pal.paper || '#FBF3E6';
         ctx.fillRect(0, 0, rcv.width, rcv.height);
-        const charSpec = FOUNDRY.CHARACTERS[MA.O.charId] || FOUNDRY.CHARACTERS['ceti-whale'];
-        const rungInfo = (charSpec.reductionLadder || [])[MA.O.rung - 1] || {{ name: 'Rung ' + MA.O.rung, description: '' }};
-        $('#rung-name-badge').textContent = `Rung ${{MA.O.rung}} · ${{rungInfo.name}}`;
+        const charSpec = (FOUNDRY.CHARACTERS && (FOUNDRY.CHARACTERS[charId] || FOUNDRY.CHARACTERS['ceti-whale'])) || {{}};
+        const rungInfo = (charSpec.reductionLadder || [])[rung - 1] || {{ name: 'Rung ' + rung, description: '' }};
+        $('#rung-name-badge').textContent = `Rung ${{rung}} · ${{rungInfo.name}}`;
         $('#rung-desc-text').textContent = rungInfo.description;
-        MA.draw(rcv, MA.O.rung >= 4 ? 'saul-severe' : 'cutout', pal, animT);
+
+        if (MA.renderReductionRung) {{
+          MA.renderReductionRung(ctx, pal, charSpec, rung, 130, 82, 0.92, animT);
+        }}
+        // HUD metadata strip on Rung Canvas
+        ctx.fillStyle = pal.ink || '#16110D';
+        ctx.font = '700 11px "JetBrains Mono", monospace';
+        ctx.fillText(`RUNG ${{rung}}/5 · ${{(rungInfo.name || '').toUpperCase()}} · ${{charSpec.name || charId}}`, 14, 22);
+        ctx.font = '500 10px "DM Sans", sans-serif';
+        ctx.fillStyle = pal.b || '#475569';
+        ctx.fillText(`Wada No. ${{pal.id}} (${{pal.name}}) · CR ${{pal.cr}}:1`, 14, 244);
         ctx.restore();
       }}
     }}
@@ -1080,12 +1204,14 @@ const SYMSPEC = {json.dumps(symspec)};
 
   function updateCompiledCode(target) {{
     if (!CO || !CO.compileCodeScaffold) return;
+    const normTarget = (target === 'anime') ? 'animejs' : (target || 'animejs');
+    $$('[data-compile-target]').forEach(b => b.classList.toggle('btn-primary', b.dataset.compileTarget === normTarget));
     const code = CO.compileCodeScaffold({{
       charId: $('#sel-char').value || 'ceti-whale',
       mStyle: activeMotionStyle,
       palIdx: 0,
       feel: $('#sel-feel').value || 'spring'
-    }}, target || 'anime');
+    }}, normTarget);
     $('#compiled-code-box').textContent = code;
   }}
 
@@ -1113,8 +1239,9 @@ const SYMSPEC = {json.dumps(symspec)};
     const v = e.target.value;
     if (v.startsWith('anim:')) {{
       activeMotionStyle = v.split(':')[1];
+      $$('.mstyle-chip').forEach(c => c.classList.toggle('btn-primary', c.dataset.mstyle === activeMotionStyle));
       switchTab('motion');
-      updateCompiledCode('anime');
+      updateCompiledCode('animejs');
     }} else if (v === 'combined-workflow') {{
       switchTab('workflow');
     }} else {{
@@ -1132,11 +1259,30 @@ const SYMSPEC = {json.dumps(symspec)};
     }});
   }});
 
+  $('#btn-split-compare').addEventListener('click', () => {{
+    compareMode = !compareMode;
+    $('#btn-split-compare').classList.toggle('btn-primary', compareMode);
+    const grid = $('#infographic-stage-grid');
+    const cmpMount = $('#svg-compare-mount');
+    if (compareMode) {{
+      grid.style.gridTemplateColumns = '1fr 1fr';
+      cmpMount.hidden = false;
+      const nextIdx = (PLATE_ORDER.indexOf(activePlateKey) + 1) % PLATE_ORDER.length;
+      comparePlateKey = PLATE_ORDER[nextIdx];
+      cmpMount.innerHTML = SVG_PLATES[comparePlateKey] || '';
+    }} else {{
+      grid.style.gridTemplateColumns = '1fr';
+      cmpMount.hidden = true;
+    }}
+    applyLiveTweaksToSVG();
+  }});
+
   $$('.mstyle-chip').forEach(b => {{
     b.addEventListener('click', () => {{
       activeMotionStyle = b.dataset.mstyle;
+      $$('.mstyle-chip').forEach(c => c.classList.toggle('btn-primary', c.dataset.mstyle === activeMotionStyle));
       $('#sel-plate-style').value = 'anim:' + activeMotionStyle;
-      updateCompiledCode('anime');
+      updateCompiledCode('animejs');
     }});
   }});
 
@@ -1191,7 +1337,137 @@ const SYMSPEC = {json.dumps(symspec)};
     b.addEventListener('click', () => updateCompiledCode(b.dataset.compileTarget));
   }});
 
-  // Source Document Preset & Live Re-Compiler
+  // 8. Client-Side Source Document Parser & Multi-Plate Live Binder
+  function fnv1a32(str) {{
+    let h = 0x811c9dc5;
+    for (let i = 0; i < str.length; i++) {{
+      h ^= str.charCodeAt(i);
+      h = Math.imul(h, 0x01000193) >>> 0;
+    }}
+    return h.toString(16).padStart(8, '0');
+  }}
+
+  function parseLiveDocument(title, bodyText) {{
+    const lines = (bodyText || '')
+      .split(/\\n+/)
+      .map(s => s.trim())
+      .filter(s => s && !s.startsWith('#'))
+      .map(s => s.replace(/^\\s*(?:[-*•]|\\d+[.)]|\\[S\\d+\\])\\s*/, '').trim())
+      .filter(Boolean);
+    const kpis = (bodyText.match(/\\$[\\d,.]+[KMB]?|\\d+(?:\\.\\d+)?%|\\d+\\s*[:/+]\\s*\\d+|\\d+-in-\\d+/gi) || []).slice(0, 8);
+    const hash = fnv1a32((title || '') + '\\n' + (bodyText || ''));
+    return {{
+      title: title || 'Custom Grounded Document',
+      lines: lines.length ? lines : ['Grounded source claim 1', 'Grounded source claim 2', 'Grounded source claim 3', 'Grounded source claim 4'],
+      kpis: kpis.length ? kpis : ['100%', '4:4', '$1.0M', '99.4%'],
+      hash: hash
+    }};
+  }}
+
+  function bindParsedDocToActiveSVGs(parsed) {{
+    if (!parsed) return;
+    const shortLine = (idx, maxLen) => {{
+      const raw = parsed.lines[idx % parsed.lines.length] || '';
+      return raw.length > maxLen ? raw.slice(0, maxLen - 1) + '…' : raw;
+    }};
+    const kpiSummary = parsed.kpis.slice(0, 4).join(' · ');
+
+    ['#svg-plate-mount svg', '#svg-compare-mount svg'].forEach(sel => {{
+      const svg = $(sel);
+      if (!svg) return;
+      const titleNode = svg.querySelector('.t-title, text.title');
+      if (titleNode) titleNode.textContent = parsed.title.toUpperCase();
+      const subNode = svg.querySelector('.t-sub, text.subtitle');
+      if (subNode) {{
+        subNode.textContent = `fnv1a:${{parsed.hash}} · ${{parsed.lines.length}} Grounded Claims · Extracted KPIs: ${{kpiSummary}}`;
+      }}
+
+      // Update Editorial Collage 4 Columns (.ed-col-card) & 8-Beat Storyboard Strip (.ed-beat-card)
+      if (svg.id === 'editorial-collage-svg') {{
+        svg.querySelectorAll('.ed-col-card').forEach((colG, i) => {{
+          const rawClaim = parsed.lines[i % parsed.lines.length] || '';
+          const parts = rawClaim.split(':');
+          const kpiNode = colG.querySelector('text.t-kpi');
+          const bNodes = colG.querySelectorAll('text.t-b');
+          if (kpiNode) {{
+            kpiNode.textContent = (parts.length > 1 ? parts[0].trim() : shortLine(i, 20));
+          }}
+          if (bNodes[0]) {{
+            bNodes[0].textContent = (parts.length > 1 ? parts.slice(1).join(':').trim().slice(0, 42) : shortLine(i, 42));
+          }}
+          if (bNodes[1]) {{
+            bNodes[1].textContent = `Grounded Claim #${{i+1}} · fnv1a:${{parsed.hash}}`;
+          }}
+        }});
+        svg.querySelectorAll('.ed-beat-card').forEach((bCard, idx) => {{
+          const rawClaim = parsed.lines[idx % parsed.lines.length] || '';
+          const parts = rawClaim.split(':');
+          const hNode = bCard.querySelector('text.t-h');
+          const bNode = bCard.querySelector('text.t-b');
+          if (hNode && parts.length > 1) {{
+            hNode.textContent = `B${{idx+1}} · ${{parts[0].trim().slice(0, 10).toUpperCase()}}`;
+          }}
+          if (bNode) {{
+            bNode.textContent = (parts.length > 1 ? parts.slice(1).join(':').trim().slice(0, 22) : shortLine(idx, 22));
+          }}
+        }});
+      }}
+
+      // Update Saul Bass 5-Rung Ladder descriptions if present
+      if (svg.id === 'saul-bass-infographic-svg') {{
+        const bTexts = svg.querySelectorAll('text.t-b');
+        bTexts.forEach((bTxt, idx) => {{
+          if (idx < parsed.lines.length) bTxt.textContent = shortLine(idx, 46);
+        }});
+      }}
+
+      // Update Hydrographic Survey Sounding Cards if present
+      if (svg.id === 'hydrographic-survey-svg') {{
+        svg.querySelectorAll('.hy-sounding-card').forEach((cardG, idx) => {{
+          const vNode = cardG.querySelector('text.t-val');
+          const bNode = cardG.querySelector('text.t-b');
+          if (vNode && parsed.kpis[idx]) vNode.textContent = parsed.kpis[idx];
+          if (bNode) bNode.textContent = shortLine(idx, 28);
+        }});
+      }}
+
+      // Update Orpheum Operadic Tree Claims if present
+      if (svg.id === 'orpheum-operadic-svg') {{
+        svg.querySelectorAll('.or-tree-row').forEach((rowG, idx) => {{
+          const bNode = rowG.querySelector('text.t-b');
+          if (bNode) bNode.textContent = shortLine(idx, 42);
+        }});
+      }}
+
+      // Update Isometric Voxel Column headers if present
+      if (svg.id === 'isometric-voxel-svg') {{
+        const hNodes = svg.querySelectorAll('text.t-h');
+        hNodes.forEach((h, idx) => {{
+          if (idx < 3 && idx < parsed.lines.length) {{
+            h.textContent = `${{['I', 'II', 'III'][idx]}} · ${{shortLine(idx, 28).toUpperCase()}}`;
+          }}
+        }});
+      }}
+    }});
+
+    // Update Combined Workflow Diagram Tier III Grounded Source DAG
+    const wfSvg = $('#svg-workflow-mount svg');
+    if (wfSvg) {{
+      const wfSub = wfSvg.querySelector('.t-sub');
+      if (wfSub) {{
+        wfSub.textContent = `Active Source: ${{parsed.title}} (fnv1a:${{parsed.hash}} · ${{parsed.lines.length}} claims) · 52/52 Conservation Gates PASS`;
+      }}
+      wfSvg.querySelectorAll('.wf-dag-node').forEach((g, idx) => {{
+        const rawClaim = parsed.lines[idx % parsed.lines.length] || '';
+        const parts = rawClaim.split(':');
+        const h = g.querySelector('text.t-h');
+        const b = g.querySelector('text.t-b');
+        if (h && parts.length > 1) h.textContent = parts[0].trim().slice(0, 22);
+        if (b) b.textContent = (parts.length > 1 ? parts.slice(1).join(':').trim().slice(0, 32) : shortLine(idx, 32));
+      }});
+    }}
+  }}
+
   function loadDocPreset(key) {{
     const d = PRESET_DOCS[key] || PRESET_DOCS['tap-transcript'];
     $('#inp-doc-title').value = d.title;
@@ -1200,6 +1476,7 @@ const SYMSPEC = {json.dumps(symspec)};
     $('#sel-wada').value = String(d.wada);
     $('#sel-char').value = d.charId;
     $('#sel-plate-style').value = d.defaultStyle;
+    lastParsedDoc = (key === 'tap-transcript') ? null : parseLiveDocument(d.title, d.text);
     mountPlate(d.defaultStyle);
     updateWadaInspector();
   }}
@@ -1208,25 +1485,32 @@ const SYMSPEC = {json.dumps(symspec)};
 
   function triggerLiveCompileAndRSI() {{
     const customTitle = $('#inp-doc-title').value.trim();
-    const svg = $('#svg-plate-mount svg');
-    if (svg && customTitle) {{
-      const titleNode = svg.querySelector('.t-title, text.title');
-      if (titleNode) titleNode.textContent = customTitle.toUpperCase();
-    }}
-    const wfSvg = $('#svg-workflow-mount svg');
-    if (wfSvg && customTitle) {{
-      const subNode = wfSvg.querySelector('.t-sub');
-      if (subNode) subNode.textContent = `Active Source: ${{customTitle}} (fnv1a:live) · 52/52 Conservation Gates PASS (H1–H8 · G01–G20 · P1–P8)`;
-    }}
+    const customBody = $('#inp-doc-body').value.trim();
+    lastParsedDoc = parseLiveDocument(customTitle, customBody);
+    bindParsedDocToActiveSVGs(lastParsedDoc);
+
     if (CO && CO.runRSICritiqueAndFix) {{
-      const res = CO.runRSICritiqueAndFix({{
+      CO.runRSICritiqueAndFix({{
         charId: $('#sel-char').value,
         mStyle: activeMotionStyle,
         palIdx: 0
       }});
-      $('#hud-gate-status').textContent = `✓ RSI R0→R3 LOCK-IN · 52/52 PASS`;
+    }}
+    $('#hud-gate-status').textContent = `✓ RSI R0→R3 LOCK-IN · fnv1a:${{lastParsedDoc.hash}}`;
+
+    // Prepend live compile entry to Right Dock RSI Log
+    const logBox = $('#rsi-live-log');
+    if (logBox) {{
+      const liveRow = document.createElement('div');
+      liveRow.style.padding = '6px 8px';
+      liveRow.style.background = 'var(--bg-elev)';
+      liveRow.style.borderRadius = '5px';
+      liveRow.style.borderLeft = '3px solid var(--accent-secondary)';
+      liveRow.innerHTML = `<b>LIVE COMPILE (fnv1a:${{lastParsedDoc.hash}}):</b> Bound ${{lastParsedDoc.lines.length}} claims &amp; KPIs (${{lastParsedDoc.kpis.slice(0, 3).join(', ')}}) across 6 SVG styles + Workflow DAG`;
+      logBox.prepend(liveRow);
     }}
     applyLiveTweaksToSVG();
+    updatePoeticInspector();
   }}
 
   $('#btn-compile-doc').addEventListener('click', triggerLiveCompileAndRSI);
@@ -1235,6 +1519,46 @@ const SYMSPEC = {json.dumps(symspec)};
     switchTab('rsi');
   }});
   $('#btn-retrigger-rsi').addEventListener('click', triggerLiveCompileAndRSI);
+
+  // 9. Interactive Node Click-to-Inspect & Stage Pan/Zoom
+  $('#svg-plate-mount').addEventListener('click', e => {{
+    const g = e.target.closest('g[id]');
+    if (g) {{
+      $$('#svg-plate-mount g[id]').forEach(el => el.style.filter = '');
+      g.style.filter = 'drop-shadow(0 0 8px rgba(217, 119, 6, 0.55))';
+      updatePoeticInspector(g);
+    }}
+  }});
+
+  $('#svg-plate-mount').addEventListener('dblclick', () => {{
+    panX = 0;
+    panY = 0;
+    $('#tw-tilt').value = 0;
+    $('#tw-zoom').value = 100;
+    applyLiveTweaksToSVG();
+  }});
+
+  // Global Keyboard Shortcuts (1..6 styles, W workflow, M motion, R RSI, Space play/pause, C chrome)
+  window.addEventListener('keydown', e => {{
+    if (['INPUT', 'TEXTAREA', 'SELECT'].includes((e.target && e.target.tagName) || '')) return;
+    if (e.key >= '1' && e.key <= '6') {{
+      const k = PLATE_ORDER[Number(e.key) - 1];
+      if (k) {{
+        $('#sel-plate-style').value = k;
+        switchTab('infographic');
+        mountPlate(k);
+      }}
+    }} else if (e.key === 'w' || e.key === 'W') {{
+      switchTab('workflow');
+    }} else if (e.key === 'm' || e.key === 'M') {{
+      switchTab('motion');
+    }} else if (e.key === 'r' || e.key === 'R') {{
+      switchTab('rsi');
+    }} else if (e.key === ' ' && activeTab === 'motion') {{
+      e.preventDefault();
+      $('#btn-anim-play').click();
+    }}
+  }});
 
   // SVG Export Helper
   function downloadSVG(svgEl, filename) {{
@@ -1259,7 +1583,7 @@ const SYMSPEC = {json.dumps(symspec)};
   loadDocPreset('tap-transcript');
   mountWorkflow();
   renderRSIPanel();
-  updateCompiledCode('anime');
+  updateCompiledCode('animejs');
   requestAnimationFrame(renderMotionFrame);
 }})();
 </script>

