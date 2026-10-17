@@ -1,0 +1,236 @@
+/* =============================================================
+   Milton — Canonical Design Tokens
+   ---------------------------------------------------------------
+   This is the DEFAULT PRESET (CETI brand).
+
+   To fork for another brand:
+
+     1. Copy this file as `tokens-{brand}.css` OR override the
+        relevant variables on `:root` in your artifact.
+     2. Override:  --paper, --ink, --actor-1 through --actor-N
+                   --font-display, --font-body, --font-mono
+        (and their dark variants)
+     3. Leave alone: type ramp, spacing, radii, motion curves.
+     4. Storage key (`localStorage("ceti-theme")` in JS) may be
+        renamed `<brand>-theme`. The mechanism stays.
+
+   The token NAMES are frozen across all forks. The token VALUES
+   are how each brand expresses the contract.
+
+   See `BRAND_BOOK.md` §C for the complete fork procedure.
+   ============================================================= */
+
+/* =============================================================
+   CETI × Glaser — Design Tokens
+   ---------------------------------------------------------------
+   Single source of truth. Every colour, type ramp, motion curve
+   in DESIGN/ pulls from these custom properties.
+
+   Philosophy notes:
+   - Warm grounds (Glaser worked on cream, never white).
+   - Five rotating accents (one per principle group), tuned for
+     WCAG AA against the cream ground.
+   - Type ramp uses Bricolage Grotesque (display) + DM Sans
+     (body) + JetBrains Mono (code), matching the
+     codebase-to-course design system referenced in CLAUDE.md.
+   - Motion is short (≤320ms) and respects prefers-reduced-motion.
+   ============================================================= */
+
+@layer reset, tokens, components, utilities;
+
+@layer tokens {
+  :root {
+    /* ─── Core CETI palette (from CLAUDE.md) ──────────────── */
+    --olive:  #262721;
+    --slate:  #324555;
+    --sage:   #C7D8B9;
+    --cream:  #E7E1D7;
+    --camel:  #A67756;
+
+    /* ─── Glaser-warmed extensions ────────────────────────── */
+    --paper:       #FAF7F2;   /* the warmer ground he actually drew on */
+    --ink:         #1A1916;   /* near-black with a green undertone */
+    --ink-soft:    #3B3A33;
+    --ink-faint:   color-mix(in oklab, var(--ink) 56%, var(--paper));
+    --rule:        color-mix(in oklab, var(--ink) 14%, var(--paper));
+    --rule-strong: color-mix(in oklab, var(--ink) 28%, var(--paper));
+
+    /* ─── The five rotating accents ───────────────────────── */
+    /*  1. Vermilion  — boldness, the I♥NY heart            */
+    /*  2. Cobalt     — doubt, the question mark            */
+    /*  3. Sunflower  — surprise, the WOW                   */
+    /*  4. Forest     — affection, the people you like      */
+    /*  5. Plum       — ambiguity, the pause before meaning */
+    --actor-1: #D1422A;   /* vermilion  */
+    --actor-2: #2D5BA9;   /* cobalt     */
+    --actor-3: #E8B53C;   /* sunflower  */
+    --actor-4: #3B6E47;   /* forest     */
+    --actor-5: #6B3F6E;   /* plum       */
+
+    /* the ten-thing principle map */
+    --p-affection:    var(--actor-4);
+    --p-no-job:       var(--actor-2);
+    --p-toxic:        var(--actor-1);
+    --p-greatness:    var(--actor-3);
+    --p-just-enough:  var(--actor-5);
+    --p-style:        var(--actor-2);
+    --p-brain:        var(--actor-4);
+    --p-doubt:        var(--actor-2);
+    --p-aging:        var(--actor-5);
+    --p-truth:        var(--actor-1);
+
+    /* ─── Type stack ──────────────────────────────────────── */
+    --font-display: 'Bricolage Grotesque', 'Times New Roman', serif;
+    --font-body:    'DM Sans', system-ui, sans-serif;
+    --font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+
+    /* fluid type ramp — clamp(min, vw, max) */
+    --t-xs:   clamp(0.75rem, 0.71rem + 0.20vw, 0.875rem);
+    --t-sm:   clamp(0.875rem, 0.83rem + 0.22vw, 1rem);
+    --t-base: clamp(1rem, 0.94rem + 0.28vw, 1.125rem);
+    --t-lg:   clamp(1.125rem, 1.04rem + 0.42vw, 1.375rem);
+    --t-xl:   clamp(1.5rem, 1.35rem + 0.75vw, 2rem);
+    --t-2xl:  clamp(2rem, 1.75rem + 1.25vw, 2.875rem);
+    --t-3xl:  clamp(2.75rem, 2.25rem + 2.5vw, 4.5rem);
+    --t-4xl:  clamp(3.75rem, 2.75rem + 5vw, 7rem);
+    --t-mega: clamp(5rem, 3rem + 10vw, 12rem);
+
+    --leading-tight: 1.05;
+    --leading-snug:  1.2;
+    --leading-body:  1.55;
+    --leading-loose: 1.7;
+
+    --tracking-tight:  -0.022em;
+    --tracking-normal:  0;
+    --tracking-wide:    0.04em;
+    --tracking-caps:    0.12em;
+
+    /* ─── Spacing (8-point with golden inserts) ───────────── */
+    --s-1:   4px;
+    --s-2:   8px;
+    --s-3:   12px;
+    --s-4:   16px;
+    --s-5:   24px;
+    --s-6:   32px;
+    --s-7:   48px;
+    --s-8:   64px;
+    --s-9:   96px;
+    --s-10: 144px;
+    --s-11: 192px;
+
+    /* ─── Radii (Glaser used circles & half-moons; rectangles get small radii) ── */
+    --r-1: 2px;
+    --r-2: 6px;
+    --r-3: 12px;
+    --r-4: 24px;
+    --r-pill: 999px;
+
+    /* ─── Shadows: warm-tinted, never neutral grey ────────── */
+    --shadow-1: 0 1px 2px color-mix(in oklab, var(--ink) 8%, transparent);
+    --shadow-2: 0 6px 18px color-mix(in oklab, var(--ink) 10%, transparent);
+    --shadow-3: 0 18px 42px color-mix(in oklab, var(--ink) 14%, transparent);
+    --shadow-warm: 0 12px 32px color-mix(in oklab, var(--camel) 32%, transparent);
+
+    /* ─── Motion ──────────────────────────────────────────── */
+    --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --ease-glaser: cubic-bezier(0.34, 1.56, 0.64, 1); /* slight overshoot — surprise */
+    --dur-1: 120ms;
+    --dur-2: 200ms;
+    --dur-3: 320ms;
+    --dur-4: 520ms;
+    --dur-5: 820ms;
+
+    /* ─── Layout ──────────────────────────────────────────── */
+    --content-narrow:  640px;
+    --content:         960px;
+    --content-wide:   1180px;
+    --content-mega:   1440px;
+
+    /* ─── Viewport-driven (scroll-driven animations) ──────── */
+    --scroll-progress: 0;        /* set by JS where animation-timeline isn't enough */
+  }
+
+  /* ─── Dark mode ───────────────────────────────────────
+     Activated three ways:
+       1. :root[data-theme="dark"]      — explicit user choice
+       2. @media (prefers-color-scheme:dark) — system preference, only
+          when no explicit choice has been set (data-theme="system" or unset)
+     The accent colours are LIFTED for AA contrast against dark grounds.
+     Derived tokens (--ink-soft, --ink-faint, --rule, …) auto-cascade
+     because they reference --ink and --paper via var() inside color-mix().
+     ──────────────────────────────────────────────────── */
+  :root[data-theme="dark"],
+  :root[data-theme="dark"] .invert {
+    --paper: #1C1A15;          /* warm near-black, book-leather */
+    --ink:   #F0EBDD;          /* warm cream */
+    --rule:        color-mix(in oklab, var(--ink) 14%, var(--paper));
+    --rule-strong: color-mix(in oklab, var(--ink) 28%, var(--paper));
+    --ink-soft:    color-mix(in oklab, var(--ink) 90%, var(--paper));
+    --ink-faint:   color-mix(in oklab, var(--ink) 56%, var(--paper));
+
+    /* lifted accents for contrast on dark ground */
+    --actor-1: #EA5E40;        /* lifted vermilion  */
+    --actor-2: #6F90D1;        /* lifted cobalt     */
+    --actor-3: #F0C34A;        /* sunflower         */
+    --actor-4: #79AC8A;        /* lifted forest     */
+    --actor-5: #B58FB7;        /* lifted plum       */
+
+    --shadow-2: 0 6px 18px color-mix(in oklab, #000 28%, transparent);
+    --shadow-3: 0 18px 42px color-mix(in oklab, #000 36%, transparent);
+
+    color-scheme: dark;
+  }
+
+  /* System preference — only when user hasn't picked. */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) {
+      --paper: #1C1A15;
+      --ink:   #F0EBDD;
+      --rule:        color-mix(in oklab, var(--ink) 14%, var(--paper));
+      --rule-strong: color-mix(in oklab, var(--ink) 28%, var(--paper));
+      --ink-soft:    color-mix(in oklab, var(--ink) 90%, var(--paper));
+      --ink-faint:   color-mix(in oklab, var(--ink) 56%, var(--paper));
+      --actor-1: #EA5E40;
+      --actor-2: #6F90D1;
+      --actor-3: #F0C34A;
+      --actor-4: #79AC8A;
+      --actor-5: #B58FB7;
+      --shadow-2: 0 6px 18px color-mix(in oklab, #000 28%, transparent);
+      --shadow-3: 0 18px 42px color-mix(in oklab, #000 36%, transparent);
+      color-scheme: dark;
+    }
+  }
+}
+
+/* Smooth body-level theme transition (limited to bg/colour). */
+@layer components {
+  body {
+    transition: background-color 480ms var(--ease-out), color 480ms var(--ease-out);
+  }
+}
+
+/* ─── Reset (minimal) ─────────────────────────────────────── */
+@layer reset {
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body { margin: 0; }
+  img, svg, video { display: block; max-width: 100%; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+  a { color: inherit; }
+  :focus-visible {
+    outline: 2px solid var(--actor-2);
+    outline-offset: 3px;
+    border-radius: var(--r-1);
+  }
+}
+
+/* ─── Reduced motion ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

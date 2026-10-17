@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>[Subject] · An interactive reader</title>
+<meta name="description" content="An interactive reader on [subject's] principles." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=DM+Sans:opsz,wght@9..40,300..700&family=JetBrains+Mono:wght@400;500;700&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Paper */
+  --paper:       #F1EBDD;
+  --paper-deep:  #E8DFC8;
+  --ink:         #1A1612;
+  --ink-soft:    #4A4039;
+
+  /* Jewels */
+  --red:    #D62828;
+  --blue:   #1D3557;
+  --yellow: #F4C430;
+  --pink:   #F26A8D;
+  --green:  #2D6A4F;
+  --orange: #E76F51;
+
+  /* ----------------------------------------------------------------------
+     CROSS-CULTURAL ADAPTATION (uncomment + customize for non-Western subjects)
+     See references/cultural-adaptation.md. The pattern is: introduce
+     culturally-tuned tokens, then alias them to the semantic names above
+     so existing icon code from svg-icons.md keeps working unchanged.
+
+     --vermilion:   #B8312F;  --vermilion-d: #8E1F1D;
+     --jade:        #4F7A57;  --jade-soft:   #88A98E;
+     --gold:        #C8932F;  --indigo:      #2A3A5A;
+     --plum:        #7A3F4D;  --bone:        #D6C9AA;
+     --red:    var(--vermilion);
+     --blue:   var(--indigo);
+     --yellow: var(--gold);
+     --pink:   var(--plum);
+     --green:  var(--jade);
+     --orange: var(--vermilion);
+     ---------------------------------------------------------------------- */
+
+  /* Type */
+  --display: 'Fraunces', 'Times New Roman', serif;
+  --body:    'DM Sans', system-ui, sans-serif;
+  --mono:    'JetBrains Mono', ui-monospace, monospace;
+  --hand:    'Caveat', cursive;
+
+  /* For non-Latin scripts, ADD a script-specific stack alongside the above:
+     --cn:       'Ma Shan Zheng', 'Noto Serif SC', serif;
+     --cn-serif: 'Noto Serif SC', serif;
+     and append the families to the Google Fonts URL. */
+
+  /* Spacing */
+  --section: clamp(4rem, 8vw, 7rem);
+}
+
+/* Reset */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--body);
+  background: var(--paper);
+  color: var(--ink-soft);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; background: none; border: none; cursor: pointer; color: inherit; }
+
+/* Containers */
+.wrap { width: min(100% - 2rem, 1200px); margin: 0 auto; }
+.wrap-narrow { width: min(100% - 2rem, 760px); margin: 0 auto; }
+
+/* Type utilities */
+.mono { font-family: var(--mono); font-size: 0.78em; letter-spacing: 0.02em; text-transform: uppercase; }
+.hand { font-family: var(--hand); font-weight: 600; letter-spacing: 0.005em; }
+.marginalia {
+  font-family: var(--hand); font-weight: 600;
+  font-size: 1.15rem; color: var(--red);
+  display: inline-block; transform: rotate(-2.5deg);
+}
+.marginalia.blue { color: var(--blue); }
+.marginalia.ink  { color: var(--ink); }
+
+/* Scribble underline (for emphasized words inside quotes) */
+.scribble { position: relative; display: inline-block; }
+.scribble::after {
+  content: ""; position: absolute;
+  left: -2%; right: -2%; bottom: -0.18em; height: 0.22em;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8' preserveAspectRatio='none'><path d='M2,5 Q20,1 40,5 T80,5 T120,5 T160,5 T198,5' stroke='%23D62828' stroke-width='2.2' fill='none' stroke-linecap='round'/></svg>") center/100% 100% no-repeat;
+}
+
+/* Top nav */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--paper);
+  border-bottom: 1px solid var(--ink);
+}
+.topbar .wrap {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 0;
+  font-family: var(--mono); font-size: 0.78rem;
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
+.topbar .mark {
+  font-weight: 700;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+}
+.topbar .mark .dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--red);
+}
+.topbar nav { display: flex; gap: 1.5rem; }
+.topbar nav a { transition: color 200ms; }
+.topbar nav a:hover { color: var(--red); }
+
+/* Hero */
+.hero { padding: var(--section) 0 calc(var(--section) * 0.7); }
+.hero-grid {
+  display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center;
+}
+@media (min-width: 900px) {
+  .hero-grid { grid-template-columns: 1.2fr 1fr; gap: 4rem; }
+}
+.kicker {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-family: var(--mono); font-size: 0.74rem;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--red); margin-bottom: 1rem;
+}
+.kicker .pulse {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--red);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.9); }
+}
+.hero h1 {
+  font-family: var(--display);
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+  font-weight: 700;
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  line-height: 0.96;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+}
+.hero h1 em {
+  font-style: italic;
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  color: var(--red);
+}
+.hero .lede {
+  font-family: var(--display);
+  font-variation-settings: "opsz" 14, "SOFT" 30;
+  font-size: 1.2rem; line-height: 1.5;
+  color: var(--ink-soft);
+  max-width: 56ch;
+  margin-bottom: 1.5rem;
+}
+.hero .meta {
+  display: flex; flex-wrap: wrap; gap: 1.2rem;
+  font-family: var(--mono); font-size: 0.7rem;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--ink-soft);
+}
+.hero-art { position: relative; }
+
+/* Section heads */
+.section-head { margin-bottom: 3rem; max-width: 60ch; }
+.section-eyebrow {
+  font-family: var(--mono); font-size: 0.72rem;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--red);
+  display: inline-flex; align-items: center; gap: 0.5rem;
+}
+.section-eyebrow::before {
+  content: ""; width: 24px; height: 1.5px; background: var(--red);
+}
+.section-title {
+  font-family: var(--display);
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.02; letter-spacing: -0.025em;
+  margin: 0.6rem 0 1rem; color: var(--ink);
+}
+.section-title em {
+  font-style: italic;
+  font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  color: var(--red);
+}
+.section-lede {
+  font-family: var(--display);
+  font-variation-settings: "opsz" 14, "SOFT" 30;
+  font-size: 1.15rem; line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+/* Section spacing */
+section { padding: var(--section) 0; }
+
+/* Fleurons (between sections) */
+.fleuron {
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--ink);
+  background: var(--paper);
+}
+.fleuron svg { width: 64px; height: 28px; opacity: 0.7; }
+.fleuron.dark { background: var(--ink); }
+.fleuron.dark svg { opacity: 0.55; }
+
+/* Footer */
+footer {
+  background: var(--ink); color: var(--paper);
+  padding: 4rem 0 2rem;
+}
+footer .wrap {
+  display: grid; gap: 2rem;
+}
+.footer-grid {
+  display: grid; gap: 2rem;
+}
+@media (min-width: 720px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr; } }
+.footer-col h5 {
+  font-family: var(--mono); font-size: 0.72rem;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--paper-deep); margin-bottom: 1rem;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.footer-col p {
+  font-family: var(--display);
+  font-variation-settings: "opsz" 14, "SOFT" 40;
+  font-size: 0.95rem; line-height: 1.5;
+  color: var(--paper-deep);
+}
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(241,235,221,0.2);
+  font-family: var(--mono); font-size: 0.7rem;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--paper-deep);
+  flex-wrap: wrap; gap: 1rem;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body id="top">
+
+<header class="topbar">
+  <div class="wrap">
+    <a href="#top" class="mark"><span class="dot"></span>[Reader name]</a>
+    <nav>
+      <a href="#section1">Section 1</a>
+      <a href="#section2">Section 2</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================================================================
+     HERO
+     ================================================================ -->
+<section class="hero wrap">
+  <div class="hero-grid">
+    <div>
+      <span class="kicker"><span class="pulse"></span>An interactive reader</span>
+      <h1>
+        [Headline] with one <em>italic word</em>.
+      </h1>
+      <p class="lede">
+        Two-sentence introduction in the display serif. Sets the stakes,
+        tells the reader why this dashboard exists.
+      </p>
+      <div class="meta">
+        <span>1929 — 2020</span>
+        <span>Source · year</span>
+        <span>Source · year</span>
+      </div>
+    </div>
+    <div class="hero-art">
+      <!-- The hero artifact goes here. Replace with a custom SVG that becomes
+           the symbol the dashboard turns on. NOT a portrait — a *symbol*.
+           See references/svg-icons.md for idioms. -->
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SECTION 1
+     ================================================================ -->
+<section id="section1">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">§ One · A subtitle</span>
+      <h2 class="section-title">The big idea, with one <em>italic word</em>.</h2>
+      <p class="section-lede">
+        Two-sentence introduction setting up the section. Concrete and warm,
+        not abstract.
+      </p>
+      <span class="marginalia">↳ optional hand-lettered aside</span>
+    </div>
+
+    <!-- Section content goes here -->
+  </div>
+</section>
+
+<!-- Hand-drawn ornament between sections -->
+<div class="fleuron" aria-hidden="true">
+  <svg viewBox="0 0 64 28" xmlns="http://www.w3.org/2000/svg" fill="none"
+       stroke="#1A1612" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 2,14 Q 8,8 14,14 Q 20,20 26,14"/>
+    <circle cx="32" cy="14" r="2.4" fill="#D62828" stroke="#1A1612" stroke-width="1.4"/>
+    <path d="M 38,14 Q 44,8 50,14 Q 56,20 62,14"/>
+  </svg>
+</div>
+
+<!-- ================================================================
+     SECTION 2
+     ================================================================ -->
+<section id="section2">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">§ Two · A subtitle</span>
+      <h2 class="section-title">Another <em>idea</em>, illustrated.</h2>
+      <p class="section-lede">Lede.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     FOOTER
+     ================================================================ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h5>Sources</h5>
+        <p>
+          A short paragraph naming the source materials drawn on for this
+          dashboard. Always cite. Editorial credibility depends on it.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h5>Read</h5>
+        <ul>
+          <li><a href="#" target="_blank" rel="noopener">Source 1</a></li>
+          <li><a href="#" target="_blank" rel="noopener">Source 2</a></li>
+          <li><a href="#" target="_blank" rel="noopener">Source 3</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Built with</h5>
+        <ul>
+          <li>Fraunces · DM Sans · JetBrains Mono · Caveat</li>
+          <li>Inline SVG · vanilla JS</li>
+          <li>One file. No dependencies.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>An interactive reader</span>
+      <span>A closing aphorism</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* ----- Subtle scroll fade-in -----
+     Wrap any cards/articles you want to fade in with this observer. */
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.fade-in').forEach(function(el, i){
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(16px)';
+      el.style.transition = 'opacity 600ms ease ' + (i * 50) + 'ms, transform 600ms ease ' + (i * 50) + 'ms';
+      io.observe(el);
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

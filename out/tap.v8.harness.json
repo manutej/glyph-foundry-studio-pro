@@ -1,0 +1,14 @@
+[
+ {
+  "check": "H5",
+  "severity": "warn",
+  "anchor": "text:accent",
+  "msg": "contrast 4.02:1 on ground (need 4.5)"
+ },
+ {
+  "check": "H5",
+  "severity": "warn",
+  "anchor": "text:ground",
+  "msg": "contrast 4.02:1 on accent (need 4.5)"
+ }
+]

@@ -1,0 +1,56 @@
+{
+  "id": "deepmind-iridescent",
+  "note": "DeepMind frontier research obsidian: electric cyan, warm solar amber, magenta-coral catalyst, emerald verification, and violet reflection.",
+  "roles": {
+    "ground": "#0B0F19",
+    "panel": "#131A2A",
+    "elev": "#1B2438",
+    "shadow": "#05070D",
+    "rim": "#334466",
+    "grid": "#202B42",
+    "ink": "#F3F6FC",
+    "muted": "#9BA8C2",
+    "line": "#DCE4F5",
+    "actor-a": "#38BDF8",
+    "actor-a-tint": "#14334A",
+    "actor-a-deep": "#0284C7",
+    "actor-b": "#FBBF24",
+    "actor-b-tint": "#3B3015",
+    "actor-b-deep": "#D97706",
+    "accent": "#F43F5E",
+    "accent-tint": "#421825",
+    "accent-deep": "#BE123C",
+    "sunflower": "#FBBF24",
+    "sunflower-tint": "#3B3015",
+    "forest": "#34D399",
+    "forest-tint": "#13392E",
+    "plum": "#A78BFA",
+    "plum-tint": "#2A2248",
+    "soft": "#1E293B"
+  },
+  "fonts": {
+    "display": "Fraunces, Georgia, serif",
+    "body": "'DM Sans', system-ui, sans-serif",
+    "hand": "Caveat, 'Comic Sans MS', cursive",
+    "mono": "'JetBrains Mono', ui-monospace, monospace"
+  },
+  "type": {
+    "title": [30, 600],
+    "sub": [15, 400],
+    "caption": [14.5, 500],
+    "tick": [12.5, 500],
+    "hand": [20, 500],
+    "num": [15.5, 400],
+    "edge": [18, 500]
+  },
+  "stroke": {
+    "glyph": 2.1,
+    "edge": 2.0,
+    "frame": 1.35,
+    "hair": 0.9
+  },
+  "jitter": 0.45,
+  "radius": 10,
+  "edge_label_font": "hand",
+  "caption_font": "body"
+}

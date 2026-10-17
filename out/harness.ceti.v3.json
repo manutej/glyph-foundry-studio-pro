@@ -1,0 +1,8 @@
+[
+ {
+  "check": "H4",
+  "severity": "warn",
+  "anchor": "ratio",
+  "msg": "drawing spills 9px outside its layout box"
+ }
+]

@@ -1,0 +1,168 @@
+{
+ "beats": [
+  {
+   "id": "b1",
+   "claim": "k0",
+   "caption": "Staffing alone doesn't coach your people. Training alone doesn't add new ones. TAP does both.",
+   "reveal": [
+    "title",
+    "venn"
+   ],
+   "emphasis": [
+    "c_tap"
+   ],
+   "spans": [
+    "S14"
+   ],
+   "start": 0.0,
+   "end": 7.16
+  },
+  {
+   "id": "b2",
+   "claim": "k1",
+   "caption": "The client picks six to eight of its own employees.",
+   "reveal": [
+    "client"
+   ],
+   "emphasis": [
+    "c_client"
+   ],
+   "spans": [
+    "S1"
+   ],
+   "start": 7.16,
+   "end": 12.46
+  },
+  {
+   "id": "b3",
+   "claim": "k1",
+   "caption": "Pursuit matches them fifty-fifty with new hires at the same level.",
+   "reveal": [
+    "hires",
+    "gate",
+    "e_in_a",
+    "e_in_b"
+   ],
+   "emphasis": [
+    "c_hires",
+    "c_prereq"
+   ],
+   "spans": [
+    "S2",
+    "S3",
+    "S4"
+   ],
+   "start": 12.46,
+   "end": 18.13
+  },
+  {
+   "id": "b4",
+   "claim": "k1",
+   "caption": "All sixteen train together, at no cost to the client.",
+   "reveal": [
+    "cohort",
+    "e_train"
+   ],
+   "emphasis": [
+    "c_cohort"
+   ],
+   "spans": [
+    "S5"
+   ],
+   "start": 18.13,
+   "end": 23.43
+  },
+  {
+   "id": "b5",
+   "claim": "k2",
+   "caption": "Pursuit's eight stay billable, forty hours a week, for at least a year.",
+   "reveal": [
+    "contract",
+    "e_deploy"
+   ],
+   "emphasis": [
+    "c_contract"
+   ],
+   "spans": [
+    "S6",
+    "S7"
+   ],
+   "start": 23.43,
+   "end": 29.84
+  },
+  {
+   "id": "b6",
+   "claim": "k2",
+   "caption": "A coach supports them, then steps down month by month.",
+   "reveal": [
+    "taper"
+   ],
+   "emphasis": [
+    "c_coach"
+   ],
+   "spans": [
+    "S8"
+   ],
+   "start": 29.84,
+   "end": 35.14
+  },
+  {
+   "id": "b7",
+   "claim": "k3",
+   "caption": "At year end the client hires them, lets them go, or extends at a higher rate.",
+   "reveal": [
+    "fork",
+    "e_yearend"
+   ],
+   "emphasis": [
+    "c_hire",
+    "c_dismiss",
+    "c_extend"
+   ],
+   "spans": [
+    "S9",
+    "S10",
+    "S11"
+   ],
+   "start": 35.14,
+   "end": 42.67
+  },
+  {
+   "id": "b8",
+   "claim": "k4",
+   "caption": "Twenty-five dollars an hour of margin comes to about four hundred thousand per cohort.",
+   "reveal": [
+    "math"
+   ],
+   "emphasis": [
+    "c_margin",
+    "c_repeat"
+   ],
+   "spans": [
+    "S12b",
+    "S12",
+    "S13"
+   ],
+   "start": 42.67,
+   "end": 49.46
+  },
+  {
+   "id": "b9",
+   "claim": "k5",
+   "caption": "The open question: is one-to-one too much? Two to four core people may work better at first.",
+   "reveal": [
+    "ratio"
+   ],
+   "emphasis": [
+    "c_ratio"
+   ],
+   "spans": [
+    "S15",
+    "S16"
+   ],
+   "start": 49.46,
+   "end": 57.36
+  }
+ ],
+ "total": 58.86
+}

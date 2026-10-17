@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/ceti-design-system-cd9ddfb8-95af-48a0-95e2-1ba029594df0/colors_and_type.css">
+  <link rel="stylesheet" href="_ds/ceti-design-system-cd9ddfb8-95af-48a0-95e2-1ba029594df0/motion.css">
+  <script src="_ds/ceti-design-system-cd9ddfb8-95af-48a0-95e2-1ba029594df0/_ds_bundle.js"></script>
+  <script src="geome-wada.js"></script>
+  <style>
+    body { margin:0; background:#0a0a0b; }
+    a { color:#d4a84b; } a:hover { color:#e0b85c; }
+    select option { background:#121214; color:#edeae3; }
+    input[type="range"] { accent-color:#d4a84b; height:18px; }
+    ::-webkit-scrollbar { width:9px; } ::-webkit-scrollbar-thumb { background:rgba(255,255,255,.13); border-radius:5px; }
+  </style>
+</helmet>
+<div style="height:100vh;display:flex;flex-direction:column;background:#0a0a0b;color:#edeae3;font-family:'Space Mono',monospace;font-size:12px;overflow:hidden">
+  <header style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;min-height:46px;flex:0 0 auto;padding:6px 14px;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(10,10,11,.9)">
+    <span style="color:#d4a84b;font-size:15px">&#9672;</span>
+    <span style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:18px;white-space:nowrap">Orpheum <span style="color:#d4a84b">reveal</span></span>
+    <span style="font-size:9px;color:#d4a84b;letter-spacing:.14em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0">PAINT ORDER &#183; GROUND &#8594; SOLIDS &#8594; GLUE &#8594; VEILS</span>
+    <span style="font-size:10px;color:#908e87;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1 1 120px">{{srcLabel}}</span>
+    <nav style="display:flex;gap:10px;align-items:center;white-space:nowrap">
+      <a href="Orpheum v3.dc.html" style="font-size:10px;color:#908e87;text-decoration:none" style-hover="color:#d4a84b">&#8592; v3 studio</a>
+    </nav>
+    <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+      <button onClick="{{seedClick}}" style="background:transparent;border:1px solid rgba(255,255,255,.16);border-radius:6px;color:#edeae3;padding:7px 10px;font-family:inherit;font-size:11px;cursor:pointer;white-space:nowrap" style-hover="border-color:#d4a84b;color:#d4a84b">Demo plate</button>
+      <sc-if value="{{hasAutosave}}" hint-placeholder-val="{{false}}"><button onClick="{{restoreAutosave}}" style="background:transparent;border:1px solid rgba(232,114,88,.6);border-radius:6px;color:#e87258;padding:7px 10px;font-family:inherit;font-size:11px;cursor:pointer;white-space:nowrap" style-hover="background:rgba(232,114,88,.1)">&#8634; Last v3 session</button></sc-if>
+      <button onClick="{{openClick}}" style="background:#d4a84b;color:#141210;border:none;border-radius:6px;padding:7px 12px;font-family:inherit;font-weight:700;font-size:11px;cursor:pointer;white-space:nowrap" style-hover="filter:brightness(1.08)" style-active="filter:brightness(.94);transform:translateY(1px)">Open .orpheum.json</button>
+      <input type="file" accept=".json,application/json" ref="{{fileRef}}" onChange="{{onOpen}}" style="display:none">
+    </div>
+  </header>
+
+  <div style="flex:1;display:flex;min-height:0">
+    <main data-screen-label="Plate" style="flex:1;min-width:0;min-height:0;display:flex;flex-direction:column;background:#0a0a0b">
+      <div style="flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:22px">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="{{viewBox}}" style="{{svgStyle}}">
+          <rect x="0" y="0" width="{{plateW}}" height="{{plateH}}" fill="{{ground}}"></rect>
+          <defs><sc-for list="{{clips}}" as="c" hint-placeholder-count="0"><clipPath id="{{c.id}}"><path d="{{c.d}}"></path></clipPath></sc-for></defs>
+          <sc-for list="{{solids}}" as="s" hint-placeholder-count="0"><path d="{{s.d}}" fill="{{s.fill}}" fill-opacity="{{s.op}}" style="{{s.style}}"></path></sc-for>
+          <sc-for list="{{glues}}" as="o" hint-placeholder-count="0"><path d="{{o.d}}" fill="{{o.fill}}" clip-path="{{o.clip}}"></path></sc-for>
+          <sc-for list="{{veils}}" as="v" hint-placeholder-count="0"><path d="{{v.d}}" fill="{{v.fill}}" fill-opacity="{{v.op}}" style="{{v.style}}"></path></sc-for>
+          <sc-if value="{{hasCur}}" hint-placeholder-val="{{false}}"><path d="{{curD}}" fill="none" stroke="#d4a84b" stroke-width="2" stroke-dasharray="7 5" vector-effect="non-scaling-stroke" style="pointer-events:none"></path></sc-if>
+        </svg>
+      </div>
+      <div style="flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:9px 16px;border-top:1px solid rgba(255,255,255,.06);flex-wrap:wrap">
+        <button onClick="{{togglePlay}}" style="min-width:76px;min-height:32px;background:#d4a84b;color:#141210;border:none;border-radius:6px;padding:0 12px;font-family:inherit;font-weight:700;font-size:11px;cursor:pointer" style-hover="filter:brightness(1.08)">{{playLabel}}</button>
+        <button onClick="{{rewind}}" title="Back to the ground" style="min-height:32px;background:transparent;border:1px solid rgba(255,255,255,.16);border-radius:6px;color:#edeae3;padding:0 10px;font-family:inherit;font-size:12px;cursor:pointer" style-hover="border-color:#d4a84b;color:#d4a84b">&#8634;</button>
+        <input type="range" min="0" max="{{N}}" step="1" value="{{cutInt}}" onChange="{{onScrub}}" aria-label="Layers revealed" style="flex:1;min-width:140px">
+        <span style="font-size:10.5px;color:#d4a84b;white-space:nowrap;min-width:120px;text-align:right">{{cutLabel}}</span>
+        <select value="{{speed}}" onChange="{{onSpeed}}" aria-label="Playback speed" style="background:#1a1a1d;border:1px solid rgba(255,255,255,.12);color:#edeae3;padding:6px 8px;border-radius:6px;font-family:inherit;font-size:11px">
+          <option value="0.5">&#189;&#215;</option><option value="1">1&#215;</option><option value="2">2&#215;</option><option value="4">4&#215;</option><option value="8">8&#215;</option>
+        </select>
+        <div style="display:flex;gap:5px">
+          <sc-for list="{{phaseBtns}}" as="p" hint-placeholder-count="3"><button onClick="{{p.onClick}}" style="{{p.style}}" style-hover="border-color:#d4a84b">{{p.label}}</button></sc-for>
+        </div>
+      </div>
+    </main>
+
+    <aside data-screen-label="Diagnosis" style="width:350px;flex:0 0 auto;border-left:1px solid rgba(255,255,255,.08);background:#121214;overflow-y:auto;padding:12px 12px 40px;display:flex;flex-direction:column;gap:8px">
+
+      <div style="border:1px solid rgba(212,168,75,.3);border-radius:10px;background:rgba(212,168,75,.05);padding:10px 12px 12px">
+        <div style="font-size:10px;letter-spacing:.13em;color:#d4a84b;margin-bottom:6px">NOW PAINTING &#183; {{curIndex}}</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="{{curDot}}"></span>
+          <span style="font-size:12px;font-weight:700">{{curKind}}</span>
+          <span style="font-size:10.5px;color:#908e87;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0">{{curUnit}}</span>
+        </div>
+        <div style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:12px;color:#c9c2b2;line-height:1.5;margin-top:5px">{{curMeta}}</div>
+      </div>
+
+      <div style="border:1px solid rgba(255,255,255,.07);border-radius:10px;background:rgba(255,255,255,.015);padding:10px 12px 12px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><span style="font-size:10px;letter-spacing:.13em;color:#d4a84b">BLACK FRACTION &#183; BY LAYER</span><span style="font-size:10px;color:#908e87">now {{blackNow}} &#183; end {{blackEnd}}</span></div>
+        <svg viewBox="0 0 300 92" style="width:100%;display:block;background:#0e0e10;border-radius:6px">
+          <sc-for list="{{bands}}" as="b" hint-placeholder-count="3"><rect x="{{b.x}}" y="0" width="{{b.w}}" height="92" fill="{{b.fill}}"></rect><text x="{{b.tx}}" y="10" font-size="7" fill="#908e87" font-family="Space Mono, monospace" letter-spacing="1">{{b.label}}</text></sc-for>
+          <line x1="0" y1="88" x2="300" y2="88" stroke="rgba(255,255,255,.12)"></line>
+          <line x1="0" y1="48" x2="300" y2="48" stroke="rgba(255,255,255,.06)" stroke-dasharray="3 3"></line>
+          <text x="2" y="46" font-size="7" fill="#908e87" font-family="Space Mono, monospace">50%</text>
+          <polyline points="{{tlPoints}}" fill="none" stroke="#e87258" stroke-width="1.6" stroke-linejoin="round"></polyline>
+          <line x1="{{cursorX}}" y1="0" x2="{{cursorX}}" y2="92" stroke="#d4a84b" stroke-width="1"></line>
+        </svg>
+        <div style="font-size:9.5px;color:#908e87;line-height:1.5;margin-top:6px">Pixels at or below the ground&#8217;s darkest channel after each layer, measured on a {{probeRes}}px raster of the same stack. Change the probe size in Tweaks &#8212; if black is a density problem the curve moves; if not, it doesn&#8217;t.</div>
+      </div>
+
+      <div style="border:1px solid rgba(232,114,88,.35);border-radius:10px;background:rgba(232,114,88,.05);padding:10px 12px 12px">
+        <div style="font-size:10px;letter-spacing:.13em;color:#e87258;margin-bottom:6px">VERDICT</div>
+        <div style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:13px;color:#edeae3;line-height:1.55">{{verdict}}</div>
+      </div>
+
+      <div style="border:1px solid rgba(255,255,255,.07);border-radius:10px;background:rgba(255,255,255,.015);padding:10px 12px 12px">
+        <div style="font-size:10px;letter-spacing:.13em;color:#d4a84b;margin-bottom:6px">TINT STACK &#183; HOW MANY VEILS + SHADOWS PER PIXEL</div>
+        <div style="border:1px solid rgba(255,255,255,.08);border-radius:6px;overflow:hidden;background:#0e0e10"><canvas ref="{{heatRef}}" style="width:100%;display:block;image-rendering:pixelated;aspect-ratio:{{aspect}}"></canvas></div>
+        <div style="display:flex;justify-content:space-between;font-size:9px;color:#908e87;margin-top:4px"><span>0</span><span>stack depth &#8594;</span><span style="color:#e87258">{{tintMax}}</span></div>
+        <div style="display:flex;flex-direction:column;gap:3px;margin-top:8px">
+          <sc-for list="{{stats}}" as="s" hint-placeholder-count="6"><div style="display:flex;justify-content:space-between;gap:8px;font-size:10.5px"><span style="color:#908e87">{{s.k}}</span><span style="{{s.style}}">{{s.v}}</span></div></sc-for>
+        </div>
+      </div>
+
+      <div style="border:1px solid rgba(255,255,255,.07);border-radius:10px;background:rgba(255,255,255,.015);padding:10px 12px 12px">
+        <div style="font-size:10px;letter-spacing:.13em;color:#d4a84b;margin-bottom:6px">EXPORT PROBE &#183; THE PNG TILER</div>
+        <div style="font-size:10.5px;color:#c9c2b2;line-height:1.55">{{exportNote}}</div>
+      </div>
+
+      <div style="border:1px solid rgba(255,255,255,.07);border-radius:10px;background:rgba(255,255,255,.015);padding:10px 12px 12px">
+        <div style="font-size:10px;letter-spacing:.13em;color:#d4a84b;margin-bottom:6px">WHAT CHANGES IT</div>
+        <div style="font-size:10.5px;color:#c9c2b2;line-height:1.6">
+          <div><span style="color:#edeae3">Veil &#945; and blend.</span> Multiply compounds: every stacked veil keeps only part of the tone beneath. Lower &#945;, or set blend to normal. Try the <em>Blend override</em> tweak here first.</div>
+          <div style="margin-top:5px"><span style="color:#edeae3">Where the Veil sits in the tree.</span> A Veil inside an echo or harmonic is copied with every echo. Put it above the operator so it paints once.</div>
+          <div style="margin-top:5px"><span style="color:#edeae3">Depth.</span> Fewer layers, lower shadow opacity, or shade &#8216;rank&#8217; instead of ink.</div>
+          <div style="margin-top:5px"><span style="color:#edeae3">Glue to ink.</span> Overlaps resolve to (a+b+1) mod m; when that lands on the darkest swatch the overlap goes black. Shift a rank, or turn recut off.</div>
+          <div style="margin-top:5px"><span style="color:#edeae3">Not pixel density.</span> The plate is vector; the probe curve is the same at 96 or 240 px.</div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;blendOverride&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;as saved&quot;,&quot;options&quot;:[&quot;as saved&quot;,&quot;normal&quot;,&quot;screen&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Veils &amp; shadows&quot;},&quot;hideVeils&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Veils &amp; shadows&quot;},&quot;hideShadows&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Veils &amp; shadows&quot;},&quot;recut&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sheaf&quot;},&quot;markInkGlue&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sheaf&quot;},&quot;probeRes&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:160,&quot;options&quot;:[96,160,240],&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Probe&quot;}}">
+class Component extends DCLogic {
+  state={cut:0,playing:false,speed:1,tick:0,srcLabel:'loading…',hasAutosave:false,palKey:'lin:spectraPaper',imgPals:[]};
+  E=null; root=null; L=[]; P=null; shapes=[]; phases=[]; diag=null; svgBytes=0; raf=0; last=0; heatRef=React.createRef(); fileRef=React.createRef();
+  async componentDidMount(){ this.E=await import('./orpheum-engine-v3.js?v=3.0'); this.seed(); try{ this.setState({hasAutosave:!!localStorage.getItem('orpheum-v3-autosave')}); }catch(e){} }
+  componentWillUnmount(){ cancelAnimationFrame(this.raf); }
+  componentDidUpdate(prev){
+    const keys=['blendOverride','hideVeils','hideShadows','recut','markInkGlue','probeRes']; if(prev&&keys.some(k=>prev[k]!==this.props[k]))this.build();
+    const cv=this.heatRef.current; if(cv&&this.diag&&cv._key!==this.diag.key){ cv._key=this.diag.key; this.paintHeat(cv); } }
+  pal(){ const E=this.E, k=this.state.palKey;
+    if(k.startsWith('wada:')){ const w=window.GEOME_WADA&&window.GEOME_WADA[k]; if(w)return E.wadaToPalette(w); }
+    if(k.startsWith('img:')){ const p=this.state.imgPals[+k.slice(4)]; if(p)return p; }
+    return E.PALETTES[k.slice(4)]||E.PALETTES.orpheum; }
+  // demo: a Fourier split (solid body + veil) echoed six times under a harmonic ring, plus a Depth triangle — the stacks that crush to black
+  seed(){ const E=this.E; E.setPlate(1000,1000); const r={id:'root',kind:'op',op:null,children:[],t:{x:0,y:0,s:1,r:0},rank:0};
+    const a=E.makeAtom('circle',500,470,1,190); const fs=E.makeOp('fsplit',[a],{K:3,alpha:0.6,blend:'multiply',rankStep:1});
+    const ec=E.makeOp('affine',[fs],{copies:7,s:0.86,r:22,dx:28,dy:-14,rankStep:1}); const hm=E.makeOp('harmonic',[ec],{n:3,law:'1/φ^k',mode:'nested',rankStep:1});
+    const b=E.makeAtom('triangle',500,540,3,300); const dp=E.makeOp('extrude',[b],{depth:48,steps:8,shade:'ink',alpha:0.4,blend:'multiply'});
+    r.children=[dp,hm]; this.root=r; this.setState({palKey:'lin:spectraPaper',imgPals:[],srcLabel:'demo · Depth triangle + echoed Fourier split in a harmonic ring · Spectra paper',cut:0,playing:false}); this.build(true); }
+  seedClick=()=>this.seed();
+  openClick=()=>{ const f=this.fileRef.current; if(f){ f.value=''; f.click(); } };
+  onOpen=async e=>{ const f=e.target.files&&e.target.files[0]; if(!f)return; try{ await this.loadDoc(await f.text(),f.name); }catch(err){ this.setState({srcLabel:'Open failed: '+err.message}); } };
+  restoreAutosave=async()=>{ try{ const s=localStorage.getItem('orpheum-v3-autosave'); if(s)await this.loadDoc(s,'last v3 session'); }catch(err){ this.setState({srcLabel:'Restore failed: '+err.message}); } };
+  async loadDoc(json,label){ const E=this.E; const d=await E.deserialize(json); this.root=d.root; let n=0; E.walk(d.root,x=>{ if(x.kind==='atom')n++; });
+    this.setState({palKey:d.palKey||'lin:orpheum',imgPals:d.imgPals||[],srcLabel:label+' · '+E.plate.W+'×'+E.plate.H+' · '+n+' atoms',cut:0,playing:false}); this.build(true); }
+  // ── the layer list, in exact paint order ──
+  build(fresh){ const E=this.E; if(!E||!this.root)return; cancelAnimationFrame(this.raf);
+    const pal=this.pal(), m=pal.ramp.length; const shapes=E.evaluateRoot(this.root); const P=E.buildPlate(shapes,pal,{recut:this.props.recut??true,maxPairs:6000});
+    const lum=h=>{ const n=parseInt(h.slice(1),16); return (0.2126*(n>>16)+0.7152*((n>>8)&255)+0.0722*(n&255))/255; };
+    let darkest=0; pal.ramp.forEach((h,i)=>{ if(lum(h)<lum(pal.ramp[darkest]))darkest=i; });
+    const ov=this.props.blendOverride??'as saved', hideV=!!this.props.hideVeils, hideS=!!this.props.hideShadows, mark=this.props.markInkGlue??true;
+    const unitName=id=>{ const n=this.root.children.find(c=>c.id===id); if(!n)return 'k-space trace'; if(n.kind==='atom'){ const a=E.ATOMS.find(a=>a.key===n.shape); return a?a.name:'form'; } return (n.label?n.label+' · ':'')+E.OPS[n.op].name+' ('+n.children.length+')'; };
+    const clipD={}; P.clips.forEach(c=>{ clipD['url(#'+c.id+')']=c.d; });
+    const L=[];
+    for(const it of P.items){ if(it.veil)continue; if(it.shadow&&hideS)continue; const s=shapes[it.i];
+      L.push({kind:it.shadow?'shadow':'solid',d:it.d,fill:it.fill,op:it.op,blend:it.shadow?(ov==='as saved'?it.blend:ov):'normal',rank:s.rank,unit:unitName(s.unit),ink:!it.shadow&&((s.rank%m)+m)%m===darkest}); }
+    const a=L.length;
+    for(const o of P.overs){ const ink=o.fill===pal.ramp[darkest]; L.push({kind:'glue',d:o.d,clip:o.clip,clipD:clipD[o.clip],fill:(ink&&mark)?'#ff2d95':o.fill,op:1,blend:'normal',ink}); }
+    const g=L.length-a;
+    if(!hideV)for(const v of P.veils){ const s=shapes[v.i]; L.push({kind:'veil',d:v.d,fill:v.fill,op:v.op,blend:ov==='as saved'?v.blend:ov,rank:s.rank,unit:unitName(s.unit)}); }
+    this.phases=[{key:'solids',label:'SOLIDS + SHADOWS',from:0,to:a},{key:'glue',label:'GLUE',from:a,to:a+g},{key:'veils',label:'VEILS',from:a+g,to:L.length}];
+    this.L=L; this.P=P; this.shapes=shapes; this.pal_=pal; this.darkest=darkest; this.svgBytes=E.plateSVG(P).length;
+    this.diag=this.diagnose(L,pal,darkest,m);
+    let cut=Math.min(this.state.cut,L.length); if(fresh){ cut=0; try{ const f=+localStorage.getItem('orpheum-reveal-pos'); if(f>0&&f<=1)cut=Math.round(f*L.length); }catch(e){} }
+    this.setState({cut,playing:false,tick:this.state.tick+1}); }
+  // ── raster probe: paint the same stack on a small canvas, measure black after each layer, count tint stacks ──
+  diagnose(L,pal,darkest,m){ const E=this.E, {W,H}=E.plate, R=+(this.props.probeRes??160), sc=R/Math.max(W,H), cw=Math.max(2,Math.round(W*sc)), ch=Math.max(2,Math.round(H*sc));
+    const chan=h=>{ const n=parseInt(h.slice(1),16); return [n>>16,(n>>8)&255,n&255]; }; const lumC=c=>(0.2126*c[0]+0.7152*c[1]+0.0722*c[2])/255; const gl=lumC(chan(pal.ground));
+    // "black" = perceptually crushed: luma under 0.10, and darker than the ground itself (dark grounds count only what falls below them)
+    const thr=Math.min(0.10,Math.max(0.03,gl-0.03));
+    const cv=document.createElement('canvas'); cv.width=cw; cv.height=ch; const x=cv.getContext('2d',{willReadFrequently:true});
+    x.fillStyle=pal.ground; x.fillRect(0,0,cw,ch);
+    const N=L.length, every=Math.max(1,Math.ceil(N/64)), bounds=new Set(this.phases.map(p=>p.to));
+    const measure=()=>{ const d=x.getImageData(0,0,cw,ch).data; let b=0; for(let i=0;i<d.length;i+=4)if((0.2126*d[i]+0.7152*d[i+1]+0.0722*d[i+2])/255<thr)b++; return b/(cw*ch); };
+    const tl=[{cut:0,black:measure()}]; const paths=new Array(N);
+    for(let i=0;i<N;i++){ const l=L[i]; const p=paths[i]=new Path2D(l.d); x.save(); x.setTransform(sc,0,0,sc,0,0); x.globalAlpha=l.op; x.globalCompositeOperation=(l.blend==='multiply'||l.blend==='screen')?l.blend:'source-over'; x.fillStyle=l.fill;
+      if(l.clipD){ x.clip(new Path2D(l.clipD)); } x.fill(p); x.restore();
+      if((i+1)%every===0||bounds.has(i+1)||i===N-1)tl.push({cut:i+1,black:measure()}); }
+    const cover=kinds=>{ const idx=[]; L.forEach((l,i)=>{ if(kinds.includes(l.kind))idx.push(i); }); const stride=Math.max(1,Math.ceil(idx.length/1000)); const cnt=new Uint16Array(cw*ch);
+      const c2=document.createElement('canvas'); c2.width=cw; c2.height=ch; const y=c2.getContext('2d',{willReadFrequently:true}); y.fillStyle='#000';
+      for(let k=0;k<idx.length;k+=stride){ const l=L[idx[k]]; y.clearRect(0,0,cw,ch); y.save(); y.setTransform(sc,0,0,sc,0,0); if(l.clipD)y.clip(new Path2D(l.clipD)); y.fill(paths[idx[k]]); y.restore(); const d=y.getImageData(0,0,cw,ch).data; for(let i=0,j=3;i<cnt.length;i++,j+=4)if(d[j]>127)cnt[i]+=stride; }
+      let max=0,ge3=0,ge5=0; for(const c of cnt){ if(c>max)max=c; if(c>=3)ge3++; if(c>=5)ge5++; } return {cnt,max,ge3:ge3/cnt.length,ge5:ge5/cnt.length,n:idx.length,sampled:stride>1}; };
+    const tint=cover(['veil','shadow']), solid=cover(['solid']);
+    // the culprit: the checkpoint interval with the largest rise, and what kind of layer dominates it
+    let best=null; for(let i=1;i<tl.length;i++){ const dlt=tl[i].black-tl[i-1].black; if(!best||dlt>best.dlt)best={dlt,from:tl[i-1].cut,to:tl[i].cut,a:tl[i-1].black,b:tl[i].black}; }
+    const kinds={solid:0,shadow:0,glue:0,veil:0}; if(best)for(let i=best.from;i<best.to;i++)kinds[L[i].kind]++;
+    const dom=best?Object.keys(kinds).sort((p,q)=>kinds[q]-kinds[p])[0]:null;
+    const veils=L.filter(l=>l.kind==='veil'), shadows=L.filter(l=>l.kind==='shadow'), glues=L.filter(l=>l.kind==='glue');
+    const inkGlue=glues.filter(l=>l.ink).length, inkSolid=L.filter(l=>l.kind==='solid'&&l.ink).length;
+    const lumOf=h=>{ const c=chan(h); return (0.2126*c[0]+0.7152*c[1]+0.0722*c[2])/255; };
+    const pool=dom==='shadow'?shadows:veils; const alpha=pool.length?pool.reduce((s,l)=>s+l.op,0)/pool.length:0; const lv=pool.length?pool.reduce((s,l)=>s+lumOf(l.fill),0)/pool.length:0.5;
+    const keep=1-alpha+alpha*lv; const lg=Math.max(0.02,lumOf(pal.ground)); const toBlack=keep<0.999?Math.max(1,Math.ceil(Math.log(0.07/lg)/Math.log(keep))):Infinity;
+    const pc=v=>Math.round(v*100)+'%'; const end=tl[tl.length-1].black; let verdict;
+    const signal=end>=0.01||inkGlue>0||tint.max>=4;
+    if(!signal||!best||best.dlt<=0)verdict=`No crush at ${R}px — black ends at ${pc(end)}. If the exported PNG still reads black, it is not the composition; it is the tiler. See the export probe below.`;
+    else if(dom==='veil')verdict=`Black climbs ${pc(best.a)} → ${pc(best.b)} while veils ${best.from+1}–${best.to} paint. ${veils.length} veils stack up to ${tint.max} deep; at α ${alpha.toFixed(2)} multiply each layer keeps ${Math.round(keep*100)}% of the tone beneath — ${toBlack===Infinity?'it never':toBlack+' layers and it'} crushes to black. The veil setting is the cause, not pixel density.`;
+    else if(dom==='shadow')verdict=`Black climbs ${pc(best.a)} → ${pc(best.b)} while Depth shadows ${best.from+1}–${best.to} paint. ${shadows.length} ink shadows (multiply, α ${alpha.toFixed(2)}) stack up to ${tint.max} deep; ${toBlack===Infinity?'they never':toBlack+' layers'} crush to black. Fewer Depth layers, lower shadow opacity, or shade by rank.`;
+    else if(dom==='glue')verdict=`Black climbs ${pc(best.a)} → ${pc(best.b)} during glue ${best.from+1}–${best.to}. ${inkGlue} of ${glues.length} glued overlaps resolve to rank ${darkest} — the ink swatch — because (a+b+1) mod ${m} hits ${darkest} whenever a+b ≡ ${((darkest-1)%m+m)%m}. Where three or more solids overlap, the last pair wins. Shift one rank, or turn recut off.`;
+    else verdict=`Black climbs ${pc(best.a)} → ${pc(best.b)} while solids ${best.from+1}–${best.to} paint: ${inkSolid} forms sit on rank ${darkest}, the ink swatch. Re-rank the unit.`;
+    return {key:Math.random(),tl,tint,solid,verdict,inkGlue,inkSolid,cw,ch,end,thr,R};
+  }
+  paintHeat(cv){ const D=this.diag; cv.width=D.cw; cv.height=D.ch; const x=cv.getContext('2d'), id=x.createImageData(D.cw,D.ch), d=id.data, mx=Math.max(1,D.tint.max);
+    for(let i=0;i<D.tint.cnt.length;i++){ const v=Math.pow(D.tint.cnt[i]/mx,0.6); d[i*4]=14+v*(232-14); d[i*4+1]=14+v*(114-14); d[i*4+2]=16+v*(88-16); d[i*4+3]=255; } x.putImageData(id,0,0); }
+  // ── transport ──
+  savePos(){ try{ localStorage.setItem('orpheum-reveal-pos',String(this.L.length?this.state.cut/this.L.length:0)); }catch(e){} }
+  togglePlay=()=>{ if(this.state.playing){ cancelAnimationFrame(this.raf); this.setState({playing:false}); this.savePos(); return; } if(!this.L.length)return;
+    const cut=this.state.cut>=this.L.length?0:this.state.cut; this.setState({playing:true,cut}); this.last=performance.now(); this.raf=requestAnimationFrame(this.step); };
+  step=t=>{ if(!this.state.playing)return; const dt=Math.min(0.1,(t-this.last)/1000); this.last=t; const N=this.L.length; let c=this.state.cut+N/14*this.state.speed*dt;
+    if(c>=N){ this.setState({cut:N,playing:false}); this.savePos(); return; } this.setState({cut:c}); this.raf=requestAnimationFrame(this.step); };
+  rewind=()=>{ cancelAnimationFrame(this.raf); this.setState({cut:0,playing:false}); this.savePos(); };
+  onScrub=e=>{ cancelAnimationFrame(this.raf); this.setState({cut:+e.target.value,playing:false}); this.savePos(); };
+  onSpeed=e=>this.setState({speed:+e.target.value});
+  jump(c){ cancelAnimationFrame(this.raf); this.setState({cut:c,playing:false}); this.savePos(); }
+  renderVals(){
+    const E=this.E, st=this.state; const base={srcLabel:st.srcLabel,hasAutosave:st.hasAutosave,seedClick:this.seedClick,openClick:this.openClick,onOpen:this.onOpen,restoreAutosave:this.restoreAutosave,fileRef:this.fileRef,heatRef:this.heatRef,togglePlay:this.togglePlay,rewind:this.rewind,onScrub:this.onScrub,onSpeed:this.onSpeed,speed:String(st.speed),playLabel:st.playing?'❚❚ Pause':'▶ Play',probeRes:String(this.props.probeRes??160)};
+    if(!E||!this.diag)return Object.assign(base,{viewBox:'0 0 1000 1000',plateW:1000,plateH:1000,ground:'#141210',svgStyle:'max-width:100%;max-height:100%;aspect-ratio:1;display:block',clips:[],solids:[],glues:[],veils:[],hasCur:false,N:0,cutInt:0,cutLabel:'',phaseBtns:[],curIndex:'',curKind:'',curUnit:'',curMeta:'',curDot:'',bands:[],tlPoints:'',cursorX:0,blackNow:'—',blackEnd:'—',verdict:'Evaluating the composition…',stats:[],tintMax:'',aspect:'1',exportNote:''});
+    const L=this.L, N=L.length, D=this.diag, pal=this.pal_, PL=E.plate, c=Math.min(N,Math.floor(st.cut)); const [ph0,ph1,ph2]=this.phases;
+    const sty=l=>({d:l.d,fill:l.fill,op:l.op,style:l.blend&&l.blend!=='normal'?`mix-blend-mode:${l.blend}`:''});
+    const solids=L.slice(0,Math.min(c,ph0.to)).map(sty), glues=L.slice(ph1.from,Math.max(ph1.from,Math.min(c,ph1.to))).map(l=>({d:l.d,fill:l.fill,clip:l.clip})), veils=L.slice(ph2.from,Math.max(ph2.from,Math.min(c,N))).map(sty);
+    const cur=c>0?L[c-1]:null; const KIND={solid:'Solid form',shadow:'Depth shadow',glue:'Glued overlap',veil:'Veil'};
+    const curMeta=!cur?'The ground. Nothing painted yet.':cur.kind==='solid'?`rank ${cur.rank} → ${cur.fill}${cur.ink?' — the ink swatch':''}. Opaque; later solids re-cut it where they overlap.`:cur.kind==='shadow'?`ink at α ${cur.op.toFixed(2)}, ${cur.blend}. Shadows stack on each other — each one darkens what is already there.`:cur.kind==='glue'?`the sheaf re-cut: the overlap of two solids, filled with rank (a+b+1) mod m → ${cur.fill}${cur.ink?' — ink. This is a black patch.':''}`:`rank ${cur.rank} at α ${cur.op.toFixed(2)}, ${cur.blend}. Never re-cut; multiplies onto everything beneath.`;
+    const curDot=`width:12px;height:12px;border-radius:${cur&&cur.kind==='veil'?'50%':'3px'};flex:0 0 auto;background:${cur?cur.fill:pal.ground};opacity:${cur?Math.max(0.35,cur.op):1};border:1px solid rgba(255,255,255,.3)`;
+    const bands=this.phases.filter(p=>p.to>p.from).map(p=>({x:p.from/N*300,w:(p.to-p.from)/N*300,tx:p.from/N*300+3,label:p.label,fill:p.key==='solids'?'rgba(237,234,227,.05)':p.key==='glue'?'rgba(212,168,75,.10)':'rgba(232,114,88,.10)'}));
+    const tlPoints=D.tl.map(p=>`${(p.cut/Math.max(1,N)*300).toFixed(1)},${(88-p.black*80).toFixed(1)}`).join(' ');
+    let now=D.tl[0]; for(const p of D.tl){ if(p.cut<=c)now=p; else break; }
+    const pc=v=>Math.round(v*100)+'%';
+    const phaseBtns=this.phases.map(p=>({label:p.key+' '+(p.to-p.from),onClick:()=>this.jump(p.from),style:`min-height:32px;background:${c>=p.from&&c<p.to?'rgba(212,168,75,.14)':'transparent'};border:1px solid ${c>=p.from&&c<p.to?'#d4a84b':'rgba(255,255,255,.14)'};border-radius:6px;color:#edeae3;padding:0 9px;font-family:inherit;font-size:10px;cursor:pointer;white-space:nowrap`}));
+    const hot=v=>`color:${v?'#e87258':'#edeae3'}`;
+    const stats=[{k:'forms on the plate',v:String(this.shapes.length),style:hot(false)},{k:'solids · shadows',v:`${L.filter(l=>l.kind==='solid').length} · ${L.filter(l=>l.kind==='shadow').length}`,style:hot(false)},{k:'glued overlaps',v:String(this.P.overs.length)+(this.P.capped?' (cap)':''),style:hot(this.P.capped)},{k:'overlaps glued to ink',v:String(D.inkGlue),style:hot(D.inkGlue>0)},{k:'veils',v:String(L.filter(l=>l.kind==='veil').length),style:hot(false)},{k:'veil + shadow stack, max',v:String(D.tint.max)+(D.tint.sampled?' ≈':''),style:hot(D.tint.max>=4)},{k:'plate under ≥3 tints',v:pc(D.tint.ge3),style:hot(D.tint.ge3>0.05)},{k:'solid overlap, max',v:String(D.solid.max)+(D.solid.sampled?' ≈':''),style:hot(false)},{k:'plate under ≥3 solids (glue ambiguous)',v:pc(D.solid.ge3),style:hot(D.solid.ge3>0.05)}];
+    const mb=this.svgBytes/1048576; const heavy=mb>3||this.P.clips.length>2500;
+    const exportNote=`SVG ${mb.toFixed(1)} MB · ${this.P.clips.length} clipPaths · ${N} paths. `+(heavy?`Heavy. The print exporter rasterises 2048px tiles through the browser's SVG image decoder; a tile this complex can fail silently, leaving it transparent — and a transparent region reads as black in Preview, Photoshop and most viewers. Flatten units to atoms or lower the glue cap before a 900dpi export.`:`Light enough for the tiler. A black export from this plate is the composition, not the exporter.`);
+    return Object.assign(base,{viewBox:`0 0 ${PL.W} ${PL.H}`,plateW:PL.W,plateH:PL.H,ground:pal.ground,svgStyle:`max-width:100%;max-height:100%;aspect-ratio:${PL.W} / ${PL.H};display:block;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 0 48px -18px rgba(212,168,75,.25)`,
+      clips:this.P.clips,solids,glues,veils,hasCur:!!cur,curD:cur?cur.d:'',N,cutInt:c,cutLabel:`${c} / ${N} layers`,phaseBtns,
+      curIndex:cur?`${c} OF ${N}`:'GROUND',curKind:cur?KIND[cur.kind]:'Ground',curUnit:cur?(cur.unit||''):pal.label,curMeta,curDot,
+      bands,tlPoints,cursorX:(c/Math.max(1,N)*300).toFixed(1),blackNow:pc(now.black),blackEnd:pc(D.end),verdict:D.verdict,stats,tintMax:String(D.tint.max),aspect:`${PL.W} / ${PL.H}`,exportNote});
+  }
+}
+</script>
+</body>
+</html>

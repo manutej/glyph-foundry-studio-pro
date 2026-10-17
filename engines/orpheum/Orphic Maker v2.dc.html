@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/ceti-design-system-cd9ddfb8-95af-48a0-95e2-1ba029594df0/colors_and_type.css">
+  <link rel="stylesheet" href="_ds/ceti-design-system-cd9ddfb8-95af-48a0-95e2-1ba029594df0/motion.css">
+  <script src="_ds/ceti-design-system-cd9ddfb8-95af-48a0-95e2-1ba029594df0/_ds_bundle.js"></script>
+  <style>
+    body { margin: 0; }
+    a { color: hsl(var(--support-foreground)); }
+    a:hover { color: hsl(var(--foreground)); }
+    select option { background: #131316; color: #e8e2d4; }
+    input[type="range"] { accent-color: #f4b50d; }
+  </style>
+</helmet>
+<div class="palette-boardwalk dark" style="min-height:100vh;background:#0d0d0f;color:#e8e2d4;font-family:var(--font-mono);display:flex;flex-direction:column">
+
+  <header style="display:flex;align-items:center;gap:14px;padding:0 18px;height:48px;border-bottom:1px solid #26262b;background:#0d0d0f;flex:0 0 auto">
+    <span style="color:#f4b50d;font-size:14px">&#9670;</span>
+    <span style="font-weight:700;font-size:14px;letter-spacing:.14em">ORPHIC MAKER</span>
+    <span style="font-size:10px;color:#8a857a;letter-spacing:.14em">V2 &#183; &#966;</span>
+    <span style="margin-left:auto;font-size:10px;color:#8a857a;letter-spacing:.14em">SIZE</span>
+    <select value="{{format}}" onChange="{{onFormat}}" aria-label="Size" style="background:#17171a;border:1px solid #2c2c31;color:#e8e2d4;padding:6px 10px;border-radius:6px;font-family:var(--font-mono);font-size:12px">
+      <option value="square">Plate &#8212; 1000&#215;1000</option>
+      <option value="card">Card &#8212; 700&#215;1200</option>
+    </select>
+    <button onClick="{{exportSVG}}" style="background:#17171a;border:1px solid #2c2c31;color:#e8e2d4;padding:7px 12px;border-radius:6px;font-family:var(--font-mono);font-size:11px;cursor:pointer;transition:border-color 180ms var(--ease-warm-in)" style-hover="border-color:#f4b50d">SVG</button>
+    <button onClick="{{exportPNG}}" style="background:#17171a;border:1px solid #2c2c31;color:#e8e2d4;padding:7px 12px;border-radius:6px;font-family:var(--font-mono);font-size:11px;cursor:pointer;transition:border-color 180ms var(--ease-warm-in)" style-hover="border-color:#f4b50d">PNG</button>
+  </header>
+
+  <div style="flex:1;display:flex;min-height:0">
+    <aside data-screen-label="Generate" style="width:312px;flex:0 0 auto;border-right:1px solid #26262b;background:#101013;overflow-y:auto;padding:18px 18px 28px;display:flex;flex-direction:column;gap:20px">
+      <div style="font-weight:700;font-size:15px;letter-spacing:.12em">GENERATE</div>
+
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.18em;color:#c9c2b2;margin-bottom:8px"><span style="width:6px;height:6px;background:#f4b50d;display:inline-block"></span>METHOD &#8212; AFTER ADI DA SAMRAJ</div>
+        <div style="border:1px solid #26262b;border-radius:8px;padding:12px 14px;font-size:11.5px;line-height:1.7;color:#a9a396">{{methodNote}}</div>
+      </div>
+
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.18em;color:#c9c2b2;margin-bottom:8px"><span style="width:6px;height:6px;background:#f4b50d;display:inline-block"></span>SEED</div>
+        <input type="number" value="{{seed}}" onChange="{{onSeed}}" aria-label="Seed" style="width:100%;box-sizing:border-box;background:#17171a;border:1px solid #2c2c31;border-radius:8px;color:#e8e2d4;padding:12px 14px;font-family:var(--font-mono);font-size:16px;text-align:center">
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button onClick="{{prevSeed}}" style="flex:1;min-height:38px;background:#f4b50d;color:#171204;border:none;border-radius:8px;font-family:var(--font-mono);font-weight:700;font-size:12px;cursor:pointer" style-hover="filter:brightness(1.08)" style-active="filter:brightness(.92)">&#8592; Prev</button>
+          <button onClick="{{nextSeed}}" style="flex:1;min-height:38px;background:#f4b50d;color:#171204;border:none;border-radius:8px;font-family:var(--font-mono);font-weight:700;font-size:12px;cursor:pointer" style-hover="filter:brightness(1.08)" style-active="filter:brightness(.92)">Next &#8594;</button>
+        </div>
+        <button onClick="{{randSeed}}" style="width:100%;margin-top:8px;min-height:36px;background:#17171a;border:1px solid #2c2c31;border-radius:8px;color:#e8e2d4;font-family:var(--font-mono);font-size:12px;cursor:pointer;transition:border-color 180ms var(--ease-warm-in)" style-hover="border-color:#f4b50d">&#8635; Random plate</button>
+      </div>
+
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.18em;color:#c9c2b2;margin-bottom:8px"><span style="width:6px;height:6px;background:#f4b50d;display:inline-block"></span>MOVEMENT &#8212; THE MYTH</div>
+        <select value="{{movement}}" onChange="{{onMovement}}" aria-label="Movement" style="width:100%;background:#17171a;border:1px solid #2c2c31;color:#e8e2d4;padding:10px 10px;border-radius:8px;font-family:var(--font-mono);font-size:12px">
+          <sc-for list="{{movementOpts}}" as="m" hint-placeholder-count="6"><option value="{{m.key}}">{{m.name}}</option></sc-for>
+        </select>
+      </div>
+
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.18em;color:#c9c2b2;margin-bottom:8px"><span style="width:6px;height:6px;background:#f4b50d;display:inline-block"></span>STAGE &#8212; THE DESCENT OF FORM</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+          <sc-for list="{{stageOpts}}" as="s" hint-placeholder-count="4">
+            <button onClick="{{s.onClick}}" style="{{s.style}}">{{s.label}}</button>
+          </sc-for>
+        </div>
+        <label style="display:flex;align-items:center;gap:8px;margin-top:10px;font-size:11px;color:#a9a396;cursor:pointer">
+          <input type="checkbox" checked="{{ghost}}" onChange="{{onGhost}}" style="accent-color:#f4b50d">
+          ghost of the prior stage
+        </label>
+      </div>
+
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.18em;color:#c9c2b2;margin-bottom:8px"><span style="width:6px;height:6px;background:#f4b50d;display:inline-block"></span>ABSTRACTION</div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#8a857a"><span>faithful</span><span>{{abstrPct}}</span><span>radical</span></div>
+        <input type="range" min="0" max="1" step="0.05" value="{{abstr}}" onChange="{{onAbstr}}" aria-label="Abstraction" style="width:100%">
+      </div>
+
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.18em;color:#c9c2b2;margin-bottom:8px"><span style="width:6px;height:6px;background:#f4b50d;display:inline-block"></span>&#966; HARMONIC &#8212; THE GOLDEN SCISSION</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+          <sc-for list="{{basisOpts}}" as="b" hint-placeholder-count="2">
+            <button onClick="{{b.onClick}}" style="{{b.style}}">{{b.label}}</button>
+          </sc-for>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#8a857a;margin-top:12px"><span>echoes at 137.5&#176;</span><span>{{echoes}}</span></div>
+        <input type="range" min="0" max="8" step="1" value="{{echoes}}" onChange="{{onEchoes}}" aria-label="Golden-angle echoes" style="width:100%">
+        <div style="font-size:10.5px;color:#8a857a;margin-top:8px;line-height:1.6">Acts at stage V. Abstraction sets the partial count &#8212; {{partialNote}}.</div>
+      </div>
+
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.18em;color:#c9c2b2;margin-bottom:8px"><span style="width:6px;height:6px;background:#f4b50d;display:inline-block"></span>PALETTE</div>
+        <select value="{{palKey}}" onChange="{{onPal}}" aria-label="Palette" style="width:100%;background:#17171a;border:1px solid #2c2c31;color:#e8e2d4;padding:10px 10px;border-radius:8px;font-family:var(--font-mono);font-size:12px">
+          <sc-for list="{{palOpts}}" as="p" hint-placeholder-count="6"><option value="{{p.key}}">{{p.name}}</option></sc-for>
+        </select>
+        <div style="display:flex;gap:5px;margin-top:10px;flex-wrap:wrap">
+          <sc-for list="{{wheelDots}}" as="d" hint-placeholder-count="8"><span title="{{d.hex}}" style="{{d.style}}"></span></sc-for>
+        </div>
+        <div style="font-size:10.5px;color:#8a857a;margin-top:8px;line-height:1.6">Overlaps chord to the nearest wheel color &#8212; nothing off-palette can sound.</div>
+      </div>
+    </aside>
+
+    <main data-screen-label="Plate" style="flex:1;min-width:0;overflow:auto;display:flex;align-items:center;justify-content:center;padding:28px;background:#0d0d0f">
+      <figure style="margin:0;max-height:100%;box-shadow:0 0 0 1px #26262b, 0 0 48px -18px rgba(244,181,13,.25)">
+        <svg ref="{{svgRef}}" xmlns="http://www.w3.org/2000/svg" viewBox="{{viewBox}}" style="{{svgStyle}}">
+          <rect x="0" y="0" width="{{W}}" height="{{H}}" fill="{{ground}}"></rect>
+          <defs>
+            <sc-for list="{{clips}}" as="c" hint-placeholder-count="1">
+              <clipPath id="{{c.id}}"><path d="{{c.d}}"></path></clipPath>
+            </sc-for>
+          </defs>
+          <sc-for list="{{ops}}" as="o" hint-placeholder-count="6">
+            <path d="{{o.d}}" fill="{{o.fill}}" stroke="{{o.stroke}}" stroke-width="{{o.sw}}" stroke-linecap="round" stroke-linejoin="round" opacity="{{o.op}}" clip-path="{{o.clip}}"></path>
+          </sc-for>
+        </svg>
+      </figure>
+    </main>
+  </div>
+
+  <footer style="flex:0 0 auto;display:flex;gap:8px;align-items:center;padding:0 18px;height:34px;border-top:1px solid #26262b;font-size:11px;color:#8a857a">
+    <span>seed <span style="color:#f4b50d">{{seed}}</span></span><span>&#183;</span><span>{{statusLine}}</span>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;lineWeight&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1,&quot;min&quot;:0.5,&quot;max&quot;:2,&quot;step&quot;:0.1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Plate&quot;}}">
+class Component extends DCLogic {
+  state = { seed: 1927, movement: 'pentad', stage: 4, abstr: 0.5, pal: 'prism', ghost: false, format: 'square', basis: 'fib', echoes: 3 };
+  svgRef = React.createRef();
+
+  engine() {
+    if (this._E) return this._E;
+    const TAU = Math.PI * 2;
+    const mul32 = a => () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+    const f1 = v => Math.round(v * 10) / 10;
+
+    // v2 palettes, verbatim (geome-engine.js)
+    const PALETTES = {
+      prism: { label: 'Prism · radiant', ground: '#0a0a0e', ink: '#f3ecda', accent: '#fff3c4', kind: 'field', wheel: ['#e0241b', '#ef6a1e', '#f4b50d', '#3a9b3f', '#1aa6b8', '#1f4fd0', '#6a2fb6', '#c01f7a'] },
+      prismLight: { label: 'Prism · on paper', ground: '#f1ece2', ink: '#2c2824', accent: '#b03a2e', kind: 'field', wheel: ['#cf2017', '#e0691a', '#e2a90c', '#2f8b3c', '#1690a3', '#1a47bd', '#5e2aa6', '#ad1c6e'] },
+      hermetic: { label: 'Hermetic deck', ground: '#f1ece2', ink: '#2c2824', accent: '#b03a2e', kind: 'field', wheel: ['#b03a2e', '#1a4fd0', '#d99e00', '#2c2824'] },
+      austere: { label: 'Austere line', ground: '#0a0a0c', ink: '#efe6d2', accent: '#efe6d2', kind: 'line', wheel: ['#efe6d2', '#cfc9ba', '#9a958a', '#6f6b62'] },
+      rouge: { label: 'Rouge noir', ground: '#0a0708', ink: '#f0d9cf', accent: '#ff4326', kind: 'field', wheel: ['#e2200f', '#9c1109', '#ff5234', '#5e0a05'] },
+      cobalt: { label: 'Cream · cobalt', ground: '#f1ece2', ink: '#16234e', accent: '#c8881a', kind: 'field', wheel: ['#1a47bd', '#16234e', '#4f7fd6', '#c8881a'] },
+      wadaAntique: { label: 'Wada · Antique', ground: '#f3e6c2', ink: '#4b3317', accent: '#cc1236', kind: 'field', wheel: ['#cc1236', '#bb7125', '#d6b43e', '#6b7140', '#648f7b', '#005b8d', '#d46d7a', '#762c19'] },
+      wadaJewel: { label: 'Wada · Jewel', ground: '#12354e', ink: '#ebd3a2', accent: '#ffdd00', kind: 'field', wheel: ['#e31f26', '#fcb315', '#1a7444', '#00b49b', '#0093a5', '#6450a1', '#cc1236', '#62c6bf'] },
+      wadaPastel: { label: 'Wada · Pastel', ground: '#fdf4e1', ink: '#34454c', accent: '#f58e84', kind: 'field', wheel: ['#f9c1ce', '#fdc57e', '#c1c494', '#b5decc', '#97acc8', '#b5b1d8', '#ca92a8', '#96d1aa'] },
+      wadaIndigo: { label: 'Wada · Indigo night', ground: '#051230', ink: '#a7d4e4', accent: '#f9c1ce', kind: 'field', wheel: ['#005b8d', '#5a82b3', '#6450a1', '#4e1d4c', '#62c6bf', '#78cdd0', '#1c4286', '#4f4086'] },
+      wadaOliveRose: { label: 'Wada · Olive & rose', ground: '#253122', ink: '#ebd3a2', accent: '#d46d7a', kind: 'field', wheel: ['#d46d7a', '#6b7140', '#d6b43e', '#a36752', '#8fa071', '#a94151', '#96874d', '#709390'] },
+      wadaSumi: { label: 'Wada · Sumi line', ground: '#f3e6c2', ink: '#111314', accent: '#cc1236', kind: 'line', wheel: ['#111314', '#34454c', '#7a4456', '#cc1236'] }
+    };
+    // chord: nearest wheel color to OKLab midpoint (parents penalized)
+    const hex2rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255);
+    const oklab = rgb => { const g = c => c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); const r = g(rgb[0]), gg = g(rgb[1]), b = g(rgb[2]); const l = Math.cbrt(0.4122214708 * r + 0.5363325363 * gg + 0.0514459929 * b), m = Math.cbrt(0.2119034982 * r + 0.6806995451 * gg + 0.1073969566 * b), s = Math.cbrt(0.0883024619 * r + 0.2817188376 * gg + 0.6299787005 * b); return [0.2104542553 * l + 0.7936177850 * m - 0.0040720468 * s, 1.9779984951 * l - 2.4285922050 * m + 0.4505937099 * s, 0.0259040371 * l + 0.7827717662 * m - 0.8086757660 * s]; };
+    for (const k in PALETTES) { const p = PALETTES[k]; p.lab = p.wheel.map(h => oklab(hex2rgb(h))); p.chord = (i, j) => { const mid = [0, 1, 2].map(t => (p.lab[i][t] + p.lab[j][t]) / 2); let best = 0, bs = 1e9; for (let n = 0; n < p.lab.length; n++) { const d = Math.hypot(p.lab[n][0] - mid[0], p.lab[n][1] - mid[1], p.lab[n][2] - mid[2]) + ((n === i || n === j) ? 0.045 : 0); if (d < bs) { bs = d; best = n; } } return best; }; }
+
+    // ── armatures: the hidden figure, unit coords, y down ──
+    const A = (pts, w, closed) => ({ pts, w: w || 1, closed: !!closed });
+    const MOVEMENTS = [
+      { key: 'lyre', name: 'I · The Lyre', note: 'Seven strings given by the god. The frame of all song: two arms, a crossbar, a body that resonates.', strokes: [
+        A([[.38,.78],[.30,.62],[.27,.45],[.30,.30],[.36,.22]]), A([[.62,.78],[.70,.62],[.73,.45],[.70,.30],[.64,.22]]),
+        A([[.36,.30],[.5,.27],[.64,.30]], .7), A([[.38,.78],[.44,.84],[.56,.84],[.62,.78],[.55,.72],[.45,.72]], 1, true),
+        A([[.42,.32],[.42,.72]], .35), A([[.47,.31],[.47,.73]], .35), A([[.53,.31],[.53,.73]], .35), A([[.58,.32],[.58,.72]], .35) ] },
+      { key: 'song', name: 'II · The Song', note: 'The singer bends the world: trees walk, rivers pause. A figure, and the widening arcs of what it sounds.', strokes: [
+        A([[.30,.85],[.28,.65],[.34,.50],[.30,.38],[.35,.28],[.42,.24]]), A([[.42,.24],[.47,.20],[.50,.26],[.45,.30]], .8, true),
+        A([[.52,.30],[.62,.26],[.72,.30],[.80,.24]], .6), A([[.52,.42],[.64,.37],[.76,.42],[.86,.35]], .5),
+        A([[.52,.55],[.66,.49],[.80,.55],[.90,.47]], .4), A([[.22,.85],[.5,.88],[.75,.85]], .5) ] },
+      { key: 'descent', name: 'III · The Descent', note: 'Down through the gate, winding inward toward what was lost. The spiral is the road; the pillars are the door.', strokes: [
+        A([[.5,.15],[.68,.28],[.72,.5],[.6,.66],[.44,.66],[.36,.54],[.42,.44],[.52,.46],[.54,.54]]),
+        A([[.18,.2],[.18,.75]], .6), A([[.82,.2],[.82,.75]], .6), A([[.14,.2],[.5,.16],[.86,.2]], .5),
+        A([[.15,.85],[.3,.8],[.45,.86],[.6,.8],[.75,.86],[.88,.8]], .5) ] },
+      { key: 'lookback', name: 'IV · The Look Back', note: 'Two figures on the road up. One turn of the head, and the second is lost. The fatal arc is the picture.', strokes: [
+        A([[.12,.82],[.4,.74],[.7,.66],[.9,.6]], .5),
+        A([[.66,.7],[.68,.5],[.66,.36]]), A([[.66,.36],[.71,.31],[.66,.26],[.61,.31]], .8, true),
+        A([[.38,.78],[.36,.58],[.38,.44]]), A([[.38,.44],[.43,.39],[.38,.34],[.33,.39]], .8, true),
+        A([[.64,.30],[.55,.24],[.46,.28],[.42,.36]], .7) ] },
+      { key: 'sparagmos', name: 'V · The Dismemberment', note: 'Torn apart by the frenzy, scattered to the field. What cannot be destroyed is the form of the song itself.', strokes: [
+        A([[.42,.44],[.5,.38],[.58,.44],[.56,.54],[.46,.54]]),
+        A([[.2,.25],[.28,.2],[.33,.27]], .6), A([[.7,.2],[.78,.25],[.75,.33]], .6),
+        A([[.15,.6],[.22,.66],[.18,.74]], .5), A([[.8,.6],[.88,.66],[.84,.75]], .5), A([[.45,.78],[.53,.83],[.6,.78]], .6) ] },
+      { key: 'head', name: 'VI · The Singing Head', note: 'The head floats down the Hebrus, still singing. The river carries it; the song keeps rising.', strokes: [
+        A([[.32,.5],[.38,.42],[.46,.44],[.48,.54],[.42,.6],[.34,.58]], 1, true),
+        A([[.1,.68],[.3,.62],[.5,.68],[.7,.62],[.9,.68]], .6), A([[.1,.78],[.32,.72],[.54,.78],[.76,.72],[.92,.78]], .5),
+        A([[.46,.44],[.56,.34],[.6,.22]], .7), A([[.5,.48],[.64,.4],[.74,.3]], .4),
+        A([[.68,.56],[.74,.5],[.8,.56],[.77,.63],[.7,.62]], .5, true) ] },
+      { key: 'scission', name: 'VII · The Scission', note: 'One length cut so the parts compare the same way — whole to larger as larger to smaller. The proportion is the act, not the result.', strokes: [
+        A([[.1,.56],[.9,.56]]), A([[.594,.47],[.594,.65]], .9),
+        A([[.1,.56],[.5,.3],[.9,.56]], .6), A([[.1,.56],[.35,.44],[.594,.56]], .5), A([[.594,.56],[.75,.49],[.9,.56]], .4) ] },
+      { key: 'pentad', name: 'VIII · The Pentad', note: 'The pentagon brackets φ: every chord of the star cuts every other in the golden section. The figure is the proportion made visible.', strokes: [
+        A([[.5,.18],[.785,.387],[.676,.723],[.324,.723],[.215,.387]], 1, true),
+        A([[.5,.18],[.676,.723],[.215,.387],[.785,.387],[.324,.723]], .6, true),
+        A([[.8,.48],[.65,.74],[.35,.74],[.2,.48],[.35,.22],[.65,.22]], .35, true) ] },
+      { key: 'spira', name: 'IX · The Spiral', note: 'Growth by φ each quarter turn. It keeps its shape at every scale and never closes — the descent that returns changed.', strokes: [
+        A([[.585,.52],[.582,.552],[.55,.577],[.499,.571],[.458,.52],[.468,.438],[.55,.372],[.683,.387],[.79,.52],[.766,.736]]),
+        A([[.55,.485],[.55,.555]], .45) ] }
+    ];
+    const STAGES = [
+      { label: 'I · FIGURE', note: 'The hidden armature — the figurative source drawn as bare line. Nothing yet abstracted.' },
+      { label: 'II · LINEAD', note: 'The free line. The figure re-drawn by hand-quality gesture — perturbed, simplified, alive.' },
+      { label: 'III · GEOME', note: 'Primary geometry. Each gesture resolved to circle, bar, or triangle — flat fields, chorded overlaps.' },
+      { label: 'IV · ORPHIC FONT', note: 'The final reduction: the few forms that survive dismemberment, centered as a repeatable sign.' },
+      { label: 'V · HARMONIC', note: 'The harmonic reading: each gesture rebuilt from φ-spaced partials — a decomposition that never closes. Abstraction sets how few partials survive; echoes repeat the figure at the golden angle.' }
+    ];
+
+    // ── curve helpers ──
+    const catmull = (pts, closed) => {
+      const n = pts.length; if (n < 2) return '';
+      const pt = i => pts[closed ? ((i % n) + n) % n : Math.max(0, Math.min(n - 1, i))];
+      let d = 'M ' + f1(pts[0][0]) + ' ' + f1(pts[0][1]);
+      const end = closed ? n : n - 1;
+      for (let i = 0; i < end; i++) {
+        const p0 = pt(i - 1), p1 = pt(i), p2 = pt(i + 1), p3 = pt(i + 2);
+        d += ' C ' + f1(p1[0] + (p2[0] - p0[0]) / 6) + ' ' + f1(p1[1] + (p2[1] - p0[1]) / 6) + ', ' + f1(p2[0] - (p3[0] - p1[0]) / 6) + ' ' + f1(p2[1] - (p3[1] - p1[1]) / 6) + ', ' + f1(p2[0]) + ' ' + f1(p2[1]);
+      }
+      return d + (closed ? ' Z' : '');
+    };
+    const resample = (pts, n, closed) => {
+      const src = closed ? pts.concat([pts[0]]) : pts;
+      const segs = []; let total = 0;
+      for (let i = 1; i < src.length; i++) { const l = Math.hypot(src[i][0] - src[i - 1][0], src[i][1] - src[i - 1][1]); segs.push(l); total += l; }
+      const out = []; let acc = 0, si = 0;
+      for (let k = 0; k < n; k++) {
+        const t = total * k / (n - (closed ? 0 : 1));
+        while (si < segs.length - 1 && acc + segs[si] < t) { acc += segs[si]; si++; }
+        const lt = segs[si] ? (t - acc) / segs[si] : 0;
+        out.push([src[si][0] + (src[si + 1][0] - src[si][0]) * lt, src[si][1] + (src[si + 1][1] - src[si][1]) * lt]);
+      }
+      return out;
+    };
+    const pca = pts => {
+      let cx = 0, cy = 0; pts.forEach(p => { cx += p[0]; cy += p[1]; }); cx /= pts.length; cy /= pts.length;
+      let xx = 0, yy = 0, xy = 0; pts.forEach(p => { const dx = p[0] - cx, dy = p[1] - cy; xx += dx * dx; yy += dy * dy; xy += dx * dy; });
+      xx /= pts.length; yy /= pts.length; xy /= pts.length;
+      const tr = xx + yy, det = Math.sqrt(Math.max(0, (xx - yy) * (xx - yy) + 4 * xy * xy));
+      const l1 = (tr + det) / 2, l2 = Math.max((tr - det) / 2, 1e-6);
+      return { cx, cy, ang: 0.5 * Math.atan2(2 * xy, xx - yy), l1, l2 };
+    };
+    const rot = (x, y, a) => [x * Math.cos(a) - y * Math.sin(a), x * Math.sin(a) + y * Math.cos(a)];
+    const poly = pts => 'M ' + pts.map(p => f1(p[0]) + ' ' + f1(p[1])).join(' L ') + ' Z';
+    const discP = (cx, cy, r, ccw) => { const sw = ccw ? 0 : 1; return 'M ' + f1(cx - r) + ' ' + f1(cy) + ' a ' + f1(r) + ' ' + f1(r) + ' 0 1 ' + sw + ' ' + f1(2 * r) + ' 0 a ' + f1(r) + ' ' + f1(r) + ' 0 1 ' + sw + ' ' + f1(-2 * r) + ' 0 Z'; };
+    const shapePath = s => {
+      if (s.kind === 'disc') return discP(s.cx, s.cy, s.r, false);
+      if (s.kind === 'ring') return discP(s.cx, s.cy, s.r, false) + ' ' + discP(s.cx, s.cy, s.r * 0.62, true);
+      if (s.kind === 'bar') { const hl = s.len / 2, hw = s.wid / 2; return poly([[-hl, -hw], [hl, -hw], [hl, hw], [-hl, hw]].map(p => { const q = rot(p[0], p[1], s.ang); return [s.cx + q[0], s.cy + q[1]]; })); }
+      const a0 = -TAU / 4; return poly([a0, a0 + TAU / 3, a0 + 2 * TAU / 3].map(a => { const q = rot(Math.cos(a) * s.r, Math.sin(a) * s.r, s.ang); return [s.cx + q[0], s.cy + q[1]]; }));
+    };
+    const shapeArea = s => s.kind === 'bar' ? s.len * s.wid : s.kind === 'tri' ? 1.3 * s.r * s.r : Math.PI * s.r * s.r * (s.kind === 'ring' ? 0.62 : 1);
+    const shapeRad = s => s.kind === 'bar' ? Math.max(s.len, s.wid) / 2 : s.r;
+
+    this._E = { TAU, mul32, PALETTES, MOVEMENTS, STAGES, catmull, resample, pca, shapePath, shapeArea, shapeRad, f1 };
+    return this._E;
+  }
+
+  // deterministic build of one plate at a given stage
+  build(stage) {
+    const E = this.engine();
+    const { seed, movement, abstr, pal, format, basis, echoes } = this.state;
+    const P = E.PALETTES[pal], mv = E.MOVEMENTS.find(m => m.key === movement) || E.MOVEMENTS[0];
+    const W = format === 'card' ? 700 : 1000, H = format === 'card' ? 1200 : 1000;
+    const S = Math.min(W, H) * 0.92, ox = (W - S) / 2, oy = (H - S) / 2;
+    const lw = this.props.lineWeight ?? 1;
+    const rng = E.mul32((seed * 2654435761) ^ (mv.key.length * 40503) ^ (stage * 977));
+    const jr = E.mul32(seed * 7919 + 13); // shared jitter across stages (same figure descends)
+    const grot = (jr() - 0.5) * 0.16, gsc = 0.94 + jr() * 0.1;
+    const mapPt = p => {
+      let x = (p[0] - 0.5) * gsc, y = (p[1] - 0.5) * gsc;
+      const q = [x * Math.cos(grot) - y * Math.sin(grot), x * Math.sin(grot) + y * Math.cos(grot)];
+      return [ox + (q[0] + 0.5 + (jr() - 0.5) * 0) * S, oy + (q[1] + 0.5) * S];
+    };
+    const strokes = mv.strokes.map(st => ({ w: st.w, closed: st.closed, pts: st.pts.map(p => { const m = mapPt(p); return [m[0] + (jr() - 0.5) * S * 0.03, m[1] + (jr() - 0.5) * S * 0.03]; }) }));
+    const ops = [], clips = [];
+    const isLine = P.kind === 'line';
+
+    if (stage === 0) {
+      strokes.forEach(st => ops.push({ d: E.catmull(st.pts, st.closed), fill: 'none', stroke: P.ink, sw: (2.2 + st.w * 3) * lw }));
+      return { ops, clips, W, H, ground: P.ground };
+    }
+    if (stage === 1) {
+      strokes.forEach((st, i) => {
+        const n = Math.max(5, Math.round(26 - abstr * 16));
+        const rs = E.resample(st.pts, n, st.closed);
+        const amp = S * (0.006 + abstr * 0.03), ph = rng() * E.TAU, fq = 2 + rng() * 3;
+        const pp = rs.map((p, k) => { const t = k / rs.length; return [p[0] + Math.sin(t * fq * E.TAU + ph) * amp * (0.4 + rng() * 0.6), p[1] + Math.cos(t * (fq * 0.7) * E.TAU + ph * 1.3) * amp * (0.4 + rng() * 0.6)]; });
+        const color = isLine ? P.wheel[i % P.wheel.length] : (st.w >= 0.9 ? P.ink : P.wheel[i % P.wheel.length]);
+        ops.push({ d: E.catmull(pp, st.closed), fill: 'none', stroke: color, sw: (3.5 + st.w * 8) * lw });
+      });
+      return { ops, clips, W, H, ground: P.ground };
+    }
+    if (stage === 4) {
+      const PHI = 1.6180339887, GA = E.TAU * (1 - 1 / PHI);
+      const rr = (x, y, a) => [x * Math.cos(a) - y * Math.sin(a), x * Math.sin(a) + y * Math.cos(a)];
+      // scission grid — recursive golden-section hairlines
+      let rx0 = ox, ry0 = oy, rx1 = ox + S, ry1 = oy + S;
+      for (let k = 0; k < 8; k++) {
+        const gw = rx1 - rx0, gh = ry1 - ry0, m = k % 4;
+        let d;
+        if (m === 0) { const x = rx0 + gw / PHI; d = 'M ' + E.f1(x) + ' ' + E.f1(ry0) + ' L ' + E.f1(x) + ' ' + E.f1(ry1); rx0 = x; }
+        else if (m === 1) { const y = ry0 + gh / PHI; d = 'M ' + E.f1(rx0) + ' ' + E.f1(y) + ' L ' + E.f1(rx1) + ' ' + E.f1(y); ry0 = y; }
+        else if (m === 2) { const x = rx1 - gw / PHI; d = 'M ' + E.f1(x) + ' ' + E.f1(ry0) + ' L ' + E.f1(x) + ' ' + E.f1(ry1); rx1 = x; }
+        else { const y = ry1 - gh / PHI; d = 'M ' + E.f1(rx0) + ' ' + E.f1(y) + ' L ' + E.f1(rx1) + ' ' + E.f1(y); ry1 = y; }
+        ops.push({ d, fill: 'none', stroke: P.ink, sw: 1, op: 0.13 });
+      }
+      // φ-spaced partial decomposition of each gesture
+      const lad = basis === 'phi' ? [1, 2, 4, 7, 11, 18, 29, 47] : [1, 2, 3, 5, 8, 13, 21, 34];
+      const nKeep = 2 + Math.round((1 - abstr) * 6);
+      const freqs = lad.slice(0, nKeep);
+      const line = pts => 'M ' + pts.map(p => E.f1(p[0]) + ' ' + E.f1(p[1])).join(' L ');
+      const recon = strokes.map((stk, si) => {
+        let pts = E.resample(stk.pts, stk.closed ? 96 : 48, stk.closed);
+        if (!stk.closed) pts = pts.concat(pts.slice(1, -1).reverse()); // mirror open gestures into a period
+        const n = pts.length;
+        const coef = m => { let re = 0, im = 0; for (let i = 0; i < n; i++) { const a = -E.TAU * m * i / n, ca = Math.cos(a), sa = Math.sin(a); re += pts[i][0] * ca - pts[i][1] * sa; im += pts[i][0] * sa + pts[i][1] * ca; } return [re / n, im / n]; };
+        const ms = [0]; freqs.forEach(f => { ms.push(f, -f); });
+        const cs = ms.map(coef);
+        const out = [];
+        for (let i = 0; i <= 140; i++) {
+          const t = i / 140; let x = 0, y = 0;
+          for (let k = 0; k < ms.length; k++) { const a = E.TAU * ms[k] * t, ca = Math.cos(a), sa = Math.sin(a), c = cs[k]; x += c[0] * ca - c[1] * sa; y += c[0] * sa + c[1] * ca; }
+          out.push([x, y]);
+        }
+        return { out, w: stk.w, tone: si % P.wheel.length };
+      });
+      // φ proportion ladder for line weights
+      recon.slice().sort((a, b) => b.w - a.w).forEach((r, rank) => { r.sw = 7 * lw * Math.pow(PHI, -Math.min(rank, 4)); r.rank = rank; });
+      // golden-angle echoes, farthest first
+      const cx = W / 2, cy = H / 2;
+      for (let e = echoes; e >= 1; e--) {
+        const sc = Math.pow(PHI, -e / 2), ang = e * GA, eop = Math.max(0.16, 0.6 * Math.pow(PHI, -e / 3));
+        recon.forEach(r => {
+          const pp = r.out.map(p => { const q = rr(p[0] - cx, p[1] - cy, ang); return [cx + q[0] * sc, cy + q[1] * sc]; });
+          ops.push({ d: line(pp), fill: 'none', stroke: P.wheel[(r.tone + e) % P.wheel.length], sw: Math.max(r.sw * sc, 1.2), op: eop });
+        });
+      }
+      recon.forEach(r => {
+        const color = isLine ? P.wheel[r.tone] : (r.rank === 0 ? P.accent : P.ink);
+        ops.push({ d: line(r.out), fill: 'none', stroke: color, sw: r.sw });
+      });
+      return { ops, clips, W, H, ground: P.ground };
+    }
+    // stages 2 & 3: fit primary geometry to each gesture
+    const shapes = strokes.map((st, i) => {
+      const rs = E.resample(st.pts, 24, st.closed);
+      const g = E.pca(rs);
+      let turn = 0; for (let k = 2; k < rs.length; k++) { const a1 = Math.atan2(rs[k - 1][1] - rs[k - 2][1], rs[k - 1][0] - rs[k - 2][0]), a2 = Math.atan2(rs[k][1] - rs[k - 1][1], rs[k][0] - rs[k - 1][0]); let da = a2 - a1; while (da > Math.PI) da -= E.TAU; while (da < -Math.PI) da += E.TAU; turn += Math.abs(da); }
+      const avgR = rs.reduce((a, p) => a + Math.hypot(p[0] - g.cx, p[1] - g.cy), 0) / rs.length;
+      const elong = Math.sqrt(g.l1 / g.l2);
+      let s;
+      if (st.closed || turn > 4.4) s = avgR > S * 0.16 ? { kind: 'ring', cx: g.cx, cy: g.cy, r: avgR } : { kind: 'disc', cx: g.cx, cy: g.cy, r: Math.max(avgR, S * 0.022) };
+      else if (elong > 2.5) { const len = Math.sqrt(g.l1) * 2 * 1.75; s = { kind: 'bar', cx: g.cx, cy: g.cy, len, wid: Math.max(len * (0.1 + (1 - abstr) * 0.12), S * 0.018), ang: g.ang }; }
+      else s = { kind: 'tri', cx: g.cx, cy: g.cy, r: Math.max(avgR * 1.15, S * 0.03), ang: g.ang };
+      s.tone = i % P.wheel.length; s.w = st.w;
+      return s;
+    }).filter((s, i) => abstr < 0.75 || strokes[i].w >= 0.45); // radical abstraction drops the faint gestures
+
+    if (stage === 3) {
+      const keep = shapes.slice().sort((a, b) => E.shapeArea(b) - E.shapeArea(a)).slice(0, 3);
+      let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+      keep.forEach(s => { const r = E.shapeRad(s); x0 = Math.min(x0, s.cx - r); y0 = Math.min(y0, s.cy - r); x1 = Math.max(x1, s.cx + r); y1 = Math.max(y1, s.cy + r); });
+      const sc = (S * 0.6) / Math.max(x1 - x0, y1 - y0), mx = (x0 + x1) / 2, my = (y0 + y1) / 2;
+      keep.forEach(s => { s.cx = W / 2 + (s.cx - mx) * sc; s.cy = H / 2 + (s.cy - my) * sc; if (s.r) s.r *= sc; if (s.len) { s.len *= sc; s.wid *= sc; } });
+      keep.forEach((s, i) => {
+        const d = E.shapePath(s);
+        if (isLine) ops.push({ d, fill: 'none', stroke: P.ink, sw: 5 * lw });
+        else ops.push({ d, fill: i === keep.length - 1 ? P.accent : P.ink });
+      });
+      return { ops, clips, W, H, ground: P.ground };
+    }
+    // stage 2: geome — flat fields, chorded overlaps
+    shapes.forEach(s => { s.d = E.shapePath(s); });
+    let accented = false;
+    shapes.forEach(s => {
+      if (isLine) { ops.push({ d: s.d, fill: 'none', stroke: P.wheel[s.tone], sw: 4 * lw }); return; }
+      let fill = P.wheel[s.tone];
+      if (!accented && s.w >= 1) { fill = P.accent; accented = true; s.acc = true; }
+      ops.push({ d: s.d, fill });
+    });
+    if (!isLine) {
+      for (let i = 0; i < shapes.length && clips.length < 120; i++) for (let j = i + 1; j < shapes.length; j++) {
+        const a = shapes[i], b = shapes[j];
+        if (a.acc || b.acc || a.tone === b.tone) continue;
+        const ra = E.shapeRad(a), rb = E.shapeRad(b);
+        if (Math.hypot(a.cx - b.cx, a.cy - b.cy) > (ra + rb) * 0.85) continue;
+        const id = 'oc' + clips.length;
+        clips.push({ id, d: a.d });
+        ops.push({ d: b.d, fill: P.wheel[P.chord(a.tone, b.tone)], clip: 'url(#' + id + ')' });
+      }
+    }
+    return { ops, clips, W, H, ground: P.ground };
+  }
+
+  download(name, blob) { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
+
+  renderVals() {
+    const E = this.engine();
+    const st = this.state;
+    const P = E.PALETTES[st.pal], mv = E.MOVEMENTS.find(m => m.key === st.movement) || E.MOVEMENTS[0];
+    const cur = this.build(st.stage);
+    let ops = cur.ops, clips = cur.clips;
+    if (st.ghost && st.stage > 0) {
+      const prev = this.build(st.stage - 1);
+      ops = prev.ops.map(o => Object.assign({}, o, { op: 0.13, clip: undefined })).concat(ops);
+      clips = prev.clips.concat(clips);
+    }
+    const segBtn = on => ({ minHeight: '36px', border: on ? '1px solid #f4b50d' : '1px solid #2c2c31', background: on ? 'rgba(244,181,13,.12)' : '#17171a', color: on ? '#f4b50d' : '#a9a396', borderRadius: '8px', fontFamily: 'var(--font-mono)', fontSize: '10.5px', letterSpacing: '.08em', cursor: 'pointer', transition: 'all 180ms var(--ease-warm-in)' });
+    const fname = ('orphic-' + mv.key + '-s' + st.seed + '-' + E.STAGES[st.stage].label.split(' ').pop().toLowerCase()).toLowerCase();
+    return {
+      svgRef: this.svgRef,
+      seed: st.seed, movement: st.movement, stage: st.stage, abstr: st.abstr, palKey: st.pal, ghost: st.ghost, format: st.format,
+      abstrPct: Math.round(st.abstr * 100) + '%',
+      viewBox: '0 0 ' + cur.W + ' ' + cur.H, W: cur.W, H: cur.H, ground: cur.ground,
+      svgStyle: { display: 'block', height: st.format === 'card' ? 'min(78vh, 760px)' : 'min(78vh, 700px)', width: 'auto' },
+      ops, clips,
+      methodNote: mv.note + ' ' + E.STAGES[st.stage].note,
+      statusLine: mv.name.replace(/&#183;|·/g, '·') + ' · ' + E.STAGES[st.stage].label.toLowerCase() + ' · ' + P.label + (st.stage === 4 ? ' · ' + (2 + Math.round((1 - st.abstr) * 6)) + ' partials · ' + (st.basis === 'phi' ? 'φ-power ladder' : 'fibonacci ladder') + (st.echoes ? ' · ' + st.echoes + ' echoes' : '') : ' · abstraction ' + Math.round(st.abstr * 100) + '%'),
+      movementOpts: E.MOVEMENTS.map(m => ({ key: m.key, name: m.name })),
+      palOpts: Object.keys(E.PALETTES).map(k => ({ key: k, name: E.PALETTES[k].label })),
+      stageOpts: E.STAGES.map((s, i) => ({ label: s.label, style: segBtn(st.stage === i), onClick: () => this.setState({ stage: i }) })),
+      wheelDots: P.wheel.map(h => ({ hex: h, style: { width: '22px', height: '22px', borderRadius: '999px', background: h, border: '1px solid rgba(232,226,212,.25)', display: 'inline-block' } })),
+      basisOpts: [{ key: 'fib', label: 'FIBONACCI 1·2·3·5·8' }, { key: 'phi', label: 'φ-POWERS 1·2·4·7·11' }].map(b => ({ label: b.label, style: segBtn(st.basis === b.key), onClick: () => this.setState({ basis: b.key }) })),
+      echoes: st.echoes,
+      onEchoes: e => this.setState({ echoes: +e.target.value }),
+      partialNote: (2 + Math.round((1 - st.abstr) * 6)) + ' partials on the ' + (st.basis === 'phi' ? 'φ-power' : 'Fibonacci') + ' ladder',
+      onSeed: e => this.setState({ seed: Math.max(1, Math.floor(+e.target.value || 1)) }),
+      prevSeed: () => this.setState(s => ({ seed: Math.max(1, s.seed - 1) })),
+      nextSeed: () => this.setState(s => ({ seed: s.seed + 1 })),
+      randSeed: () => this.setState({ seed: 1 + Math.floor(Math.random() * 99989) }),
+      onMovement: e => this.setState({ movement: e.target.value }),
+      onAbstr: e => this.setState({ abstr: +e.target.value }),
+      onPal: e => this.setState({ pal: e.target.value }),
+      onGhost: e => this.setState({ ghost: e.target.checked }),
+      onFormat: e => this.setState({ format: e.target.value }),
+      exportSVG: () => { const n = this.svgRef.current; if (n) this.download(fname + '.svg', new Blob([new XMLSerializer().serializeToString(n)], { type: 'image/svg+xml' })); },
+      exportPNG: () => { const n = this.svgRef.current; if (!n) return; const t = new XMLSerializer().serializeToString(n); const img = new Image(); const url = URL.createObjectURL(new Blob([t], { type: 'image/svg+xml' })); img.onload = () => { const sc = 2400 / cur.W; const c = document.createElement('canvas'); c.width = cur.W * sc; c.height = cur.H * sc; c.getContext('2d').drawImage(img, 0, 0, c.width, c.height); URL.revokeObjectURL(url); c.toBlob(b => b && this.download(fname + '.png', b)); }; img.src = url; }
+    };
+  }
+}
+</script>
+</body>
+</html>

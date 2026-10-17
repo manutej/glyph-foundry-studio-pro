@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/ceti-design-system-cd9ddfb8-95af-48a0-95e2-1ba029594df0/colors_and_type.css">
+  <link rel="stylesheet" href="_ds/ceti-design-system-cd9ddfb8-95af-48a0-95e2-1ba029594df0/motion.css">
+  <script src="_ds/ceti-design-system-cd9ddfb8-95af-48a0-95e2-1ba029594df0/_ds_bundle.js"></script>
+  <style>
+    body { margin:0; background:#0a0a0b; }
+    a { color:#d4a84b; } a:hover { color:#e0b85c; }
+    select option { background:#121214; color:#edeae3; }
+    input[type="range"] { accent-color:#d4a84b; height:18px; }
+    ::-webkit-scrollbar { width:9px; } ::-webkit-scrollbar-thumb { background:rgba(255,255,255,.13); border-radius:5px; }
+  </style>
+</helmet>
+<div style="height:100vh;display:flex;flex-direction:column;background:#0a0a0b;color:#edeae3;font-family:'Space Mono',monospace;font-size:12px;overflow:hidden">
+
+  <header style="display:flex;align-items:center;gap:10px;height:46px;flex:0 0 auto;padding:0 14px;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(10,10,11,.9)">
+    <span style="color:#d4a84b;font-size:15px">&#9672;</span>
+    <span style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:18px;letter-spacing:.01em;white-space:nowrap">Linead Studio</span>
+    <span style="font-size:9px;color:#908e87;letter-spacing:.14em">V2 &#183; IMAGE &#8594; GEOMETRY &#8594; LINEAD</span>
+    <div style="margin-left:auto;display:flex;gap:6px;align-items:center">
+      <select value="{{format}}" onChange="{{onFormat}}" aria-label="Plate format" style="background:#1a1a1d;border:1px solid rgba(255,255,255,.12);color:#edeae3;padding:7px 8px;border-radius:6px;font-family:inherit;font-size:11px;max-width:190px">
+        <option value="source">Source aspect</option>
+        <option value="square">Plate &#8212; 1000&#215;1000</option>
+        <option value="card">Card &#8212; 700&#215;1200</option>
+        <option value="wide">Poster wide &#8212; 1600&#215;1000</option>
+        <option value="exh">Exhibition 16:9 &#8212; 1920&#215;1080</option>
+        <option value="ultra">Exhibition 21:9 &#8212; 2560&#215;1080</option>
+      </select>
+      <button onClick="{{startTour}}" style="background:transparent;border:1px solid rgba(212,168,75,.5);border-radius:6px;color:#d4a84b;padding:7px 11px;font-family:inherit;font-size:11px;cursor:pointer" style-hover="background:rgba(212,168,75,.1)">&#9654; Tour &#183; T</button>
+      <button onClick="{{onUpload}}" style="background:#d4a84b;color:#141210;border:none;border-radius:6px;padding:7px 12px;font-family:inherit;font-weight:700;font-size:11px;cursor:pointer" style-hover="filter:brightness(1.08)" style-active="filter:brightness(.94);transform:translateY(1px)">&#11014; Upload drawing &#183; U</button>
+      <button onClick="{{exportSVG}}" style="background:transparent;border:1px solid rgba(255,255,255,.16);border-radius:6px;color:#edeae3;padding:7px 11px;font-family:inherit;font-size:11px;cursor:pointer;transition:border-color 180ms var(--ease-warm-in)" style-hover="border-color:#d4a84b;color:#d4a84b">SVG &#183; S</button>
+      <button onClick="{{exportPNG}}" style="background:transparent;border:1px solid rgba(255,255,255,.16);border-radius:6px;color:#edeae3;padding:7px 11px;font-family:inherit;font-size:11px;cursor:pointer;transition:border-color 180ms var(--ease-warm-in)" style-hover="border-color:#d4a84b;color:#d4a84b">{{exportLabel}}</button>
+      <button onClick="{{onKbd}}" title="Keyboard map" style="background:transparent;border:1px solid rgba(255,255,255,.16);border-radius:6px;color:#908e87;width:30px;height:30px;font-family:inherit;font-size:12px;cursor:pointer" style-hover="border-color:#d4a84b;color:#d4a84b">?</button>
+    </div>
+  </header>
+
+  <div style="flex:1;display:flex;min-height:0">
+    <aside data-screen-label="Controls" style="width:330px;flex:0 0 auto;border-right:1px solid rgba(255,255,255,.08);background:#121214;overflow-y:auto;padding:12px 12px 40px;display:flex;flex-direction:column;gap:8px">
+
+      <div style="border:1px solid rgba(255,255,255,.07);border-radius:10px;background:rgba(255,255,255,.015)">
+        <button onClick="{{t1}}" style="display:flex;align-items:center;gap:8px;width:100%;background:transparent;border:none;padding:10px 12px;cursor:pointer;font-family:inherit;color:#edeae3" style-hover="color:#d4a84b">
+          <span style="width:17px;height:17px;border-radius:4px;background:rgba(212,168,75,.16);color:#d4a84b;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 auto">1</span>
+          <span style="flex:1;text-align:left;font-size:10px;letter-spacing:.13em">LAYERS &#183; SLIDE CONSTRUCTIONS</span>
+          <span style="color:#5a574f;font-size:9px">&#8679;1</span>
+          <span style="color:#908e87;font-size:10px">{{c1}}</span>
+        </button>
+        <sc-if value="{{o1}}" hint-placeholder-val="{{true}}">
+        <div style="padding:2px 12px 14px">
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <sc-for list="{{layerCards}}" as="lc" hint-placeholder-count="2">
+            <div onClick="{{lc.onSel}}" style="{{lc.style}}">
+              <div style="min-width:0;flex:1">
+                <div style="font-weight:700;font-size:11px">{{lc.name}} <span style="color:#d4a84b">{{lc.dot}}</span></div>
+                <div style="font-size:9.5px;color:#908e87;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{lc.sub}}</div>
+              </div>
+              <div style="display:flex;gap:2px;flex:0 0 auto">
+                <button onClick="{{lc.onEye}}" title="Show / hide" style="background:transparent;border:none;color:#908e87;cursor:pointer;font-size:11px;padding:3px 4px" style-hover="color:#edeae3">{{lc.eye}}</button>
+                <button onClick="{{lc.onUp}}" title="Bring forward" style="background:transparent;border:none;color:#908e87;cursor:pointer;font-size:10px;padding:3px 4px" style-hover="color:#edeae3">&#9650;</button>
+                <button onClick="{{lc.onDn}}" title="Send back" style="background:transparent;border:none;color:#908e87;cursor:pointer;font-size:10px;padding:3px 4px" style-hover="color:#edeae3">&#9660;</button>
+                <button onClick="{{lc.onDup}}" title="Duplicate + move" style="background:transparent;border:none;color:#908e87;cursor:pointer;font-size:11px;padding:3px 4px" style-hover="color:#d4a84b">&#10697;</button>
+                <button onClick="{{lc.onDel}}" title="Delete" style="background:transparent;border:none;color:#908e87;cursor:pointer;font-size:11px;padding:3px 4px" style-hover="color:#e87258">&#10005;</button>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <button onClick="{{dupActive}}" style="width:100%;margin-top:8px;min-height:34px;background:transparent;border:1px dashed rgba(255,255,255,.16);border-radius:7px;color:#908e87;font-family:inherit;font-size:11px;cursor:pointer" style-hover="border-color:#d4a84b;color:#edeae3;border-style:solid">+ Duplicate &amp; move &#183; A</button>
+        <button onClick="{{addGeome}}" style="width:100%;margin-top:6px;min-height:34px;background:transparent;border:1px dashed rgba(255,255,255,.16);border-radius:7px;color:#908e87;font-family:inherit;font-size:11px;cursor:pointer" style-hover="border-color:#d4a84b;color:#edeae3;border-style:solid">+ Geome layer &#183; seeded construction</button>
+        <div style="font-size:9.5px;color:#908e87;line-height:1.6;margin-top:6px">Digits 1&#8211;9 select a layer. Duplicates slide the same geometry &#8212; offset, rotate, rescale, then let the overlap re-cut its colour.</div>
+        </div>
+        </sc-if>
+      </div>
+
+      <div style="border:1px solid rgba(255,255,255,.07);border-radius:10px;background:rgba(255,255,255,.015)">
+        <button onClick="{{t2}}" style="display:flex;align-items:center;gap:8px;width:100%;background:transparent;border:none;padding:10px 12px;cursor:pointer;font-family:inherit;color:#edeae3" style-hover="color:#d4a84b">
+          <span style="width:17px;height:17px;border-radius:4px;background:rgba(212,168,75,.16);color:#d4a84b;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 auto">2</span>
+          <span style="flex:1;text-align:left;font-size:10px;letter-spacing:.13em">FORM &#183; FOURIER / SEED</span>
+          <span style="color:#5a574f;font-size:9px">&#8679;2</span>
+          <span style="color:#908e87;font-size:10px">{{c2}}</span>
+        </button>
+        <sc-if value="{{o2}}" hint-placeholder-val="{{false}}">
+        <div style="padding:2px 12px 14px">
+        <sc-if value="{{isImage}}" hint-placeholder-val="{{true}}">
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87"><span>radical</span><span style="color:#d4a84b">{{vHarmLabel}}</span><span>faithful</span></div>
+          <input type="range" min="0" max="64" step="1" value="{{vHarm}}" onChange="{{onHarm}}" aria-label="Fourier harmonics" style="width:100%">
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:6px"><span>simplify &#949;</span><span style="color:#d4a84b">{{vEps}}</span></div>
+          <input type="range" min="0" max="6" step="0.2" value="{{vEps}}" onChange="{{onEps}}" aria-label="Simplify" style="width:100%">
+          <div style="font-size:9.5px;color:#908e87;line-height:1.6;margin-top:6px">Each traced contour is resynthesised from its truncated Fourier series &#8212; 2 harmonics &#8776; ellipse, 64 &#8776; the drawing itself. 0 = raw trace. Keys [ ].</div>
+        </sc-if>
+        <sc-if value="{{isGeome}}" hint-placeholder-val="{{false}}">
+          <select value="{{vSymbol}}" onChange="{{onSymbol}}" aria-label="Symbol" style="width:100%;background:#1a1a1d;border:1px solid rgba(255,255,255,.12);color:#edeae3;padding:8px 9px;border-radius:7px;font-family:inherit;font-size:11px;margin-bottom:8px">
+            <option value="custom">Custom &#8212; hand-built recipe</option>
+            <optgroup label="Jungian archetypes">
+              <sc-for list="{{jungOpts}}" as="s" hint-placeholder-count="5"><option value="{{s.key}}">{{s.name}}</option></sc-for>
+            </optgroup>
+            <optgroup label="Hermetic majors">
+              <sc-for list="{{hermOpts}}" as="s" hint-placeholder-count="4"><option value="{{s.key}}">{{s.name}}</option></sc-for>
+            </optgroup>
+          </select>
+          <div style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:12.5px;color:#c9c2b2;margin:0 0 10px;line-height:1.5">{{symbolMeaning}}</div>
+          <div style="display:flex;gap:6px">
+            <input type="number" value="{{vSeed}}" onChange="{{onSeed}}" aria-label="Seed" style="flex:1;min-width:0;background:#1a1a1d;border:1px solid rgba(255,255,255,.12);border-radius:7px;color:#edeae3;padding:8px 10px;font-family:inherit;font-size:13px;text-align:center">
+            <button onClick="{{randSeed}}" title="Random construction &#183; N" style="width:38px;background:#1a1a1d;border:1px solid rgba(255,255,255,.12);border-radius:7px;color:#edeae3;cursor:pointer;font-family:inherit;font-size:13px" style-hover="border-color:#d4a84b;color:#d4a84b">&#8635;</button>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:6px">
+            <button onClick="{{prevSeed}}" style="flex:1;min-height:32px;background:#d4a84b;color:#141210;border:none;border-radius:7px;font-family:inherit;font-weight:700;font-size:11px;cursor:pointer" style-hover="filter:brightness(1.08)" style-active="filter:brightness(.94)">&#8592; Prev &#183; Z</button>
+            <button onClick="{{nextSeed}}" style="flex:1;min-height:32px;background:#d4a84b;color:#141210;border:none;border-radius:7px;font-family:inherit;font-weight:700;font-size:11px;cursor:pointer" style-hover="filter:brightness(1.08)" style-active="filter:brightness(.94)">Next &#8594; &#183; X</button>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:10px"><span>{{vOrderLabel}}</span><span style="color:#d4a84b">{{vOrder}}</span></div>
+          <input type="range" min="3" max="16" step="1" value="{{vOrder}}" onChange="{{onOrder}}" aria-label="Symmetry order" style="width:100%">
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:6px"><span>{{vRingsLabel}}</span><span style="color:#d4a84b">{{vRings}}</span></div>
+          <input type="range" min="2" max="9" step="1" value="{{vRings}}" onChange="{{onRings}}" aria-label="Rings" style="width:100%">
+          <div style="font-size:9.5px;color:#908e87;line-height:1.6;margin-top:6px">A seeded construction &#8212; the seed is the form&#8217;s address: same seed, same construction, always. Z X N step and randomise.</div>
+        </sc-if>
+        </div>
+        </sc-if>
+      </div>
+
+      <div style="border:1px solid rgba(255,255,255,.07);border-radius:10px;background:rgba(255,255,255,.015)">
+        <button onClick="{{t3}}" style="display:flex;align-items:center;gap:8px;width:100%;background:transparent;border:none;padding:10px 12px;cursor:pointer;font-family:inherit;color:#edeae3" style-hover="color:#d4a84b">
+          <span style="width:17px;height:17px;border-radius:4px;background:rgba(212,168,75,.16);color:#d4a84b;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 auto">3</span>
+          <span style="flex:1;text-align:left;font-size:10px;letter-spacing:.13em">TONE PLATES</span>
+          <span style="color:#5a574f;font-size:9px">&#8679;3</span>
+          <span style="color:#908e87;font-size:10px">{{c3}}</span>
+        </button>
+        <sc-if value="{{o3}}" hint-placeholder-val="{{false}}">
+        <div style="padding:2px 12px 14px">
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87"><span>tone plates &#183; , .</span><span style="color:#d4a84b">{{vLevels}}</span></div>
+        <input type="range" min="2" max="8" step="1" value="{{vLevels}}" onChange="{{onLevels}}" aria-label="Tone plates" style="width:100%">
+        <sc-if value="{{isImage}}" hint-placeholder-val="{{true}}">
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:6px"><span>speck filter &#183; remove</span><span style="color:#d4a84b">{{vMinArea}}</span></div>
+          <input type="range" min="0" max="600" step="10" value="{{vMinArea}}" onChange="{{onMinArea}}" aria-label="Speck filter" style="width:100%">
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:6px"><span>tone spacing &#8212; even steps &#8596; equal mass</span><span style="color:#d4a84b">{{vAdapt}}</span></div>
+          <input type="range" min="0" max="1" step="0.05" value="{{vAdapt}}" onChange="{{onAdapt}}" aria-label="Adaptive tone spacing" style="width:100%">
+          <div style="font-size:9.5px;color:#908e87;line-height:1.5;margin-top:4px">Even steps suit flat posterised sources. Equal mass re-spaces the thresholds by histogram &#8212; each plate gets the same pixel share, which decomposes dark photographs.</div>
+          <label style="display:flex;align-items:center;gap:8px;margin-top:8px;font-size:11px;color:#a9a396;cursor:pointer">
+            <input type="checkbox" checked="{{vInvert}}" onChange="{{onInvert}}" style="accent-color:#d4a84b"> invert &#183; extract the lights &#183; I
+          </label>
+        </sc-if>
+        <div style="font-size:10px;color:#908e87;margin:10px 0 5px">plates &#8212; click: distill &#183; shift: stencil window &#183; alt: pin colour</div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px">
+          <sc-for list="{{bandChips}}" as="bc" hint-placeholder-count="3">
+            <button onClick="{{bc.onClick}}" title="{{bc.tip}}" style="{{bc.style}}">{{bc.label}}</button>
+          </sc-for>
+        </div>
+        </div>
+        </sc-if>
+      </div>
+
+      <div style="border:1px solid rgba(255,255,255,.07);border-radius:10px;background:rgba(255,255,255,.015)">
+        <button onClick="{{t4}}" style="display:flex;align-items:center;gap:8px;width:100%;background:transparent;border:none;padding:10px 12px;cursor:pointer;font-family:inherit;color:#edeae3" style-hover="color:#d4a84b">
+          <span style="width:17px;height:17px;border-radius:4px;background:rgba(212,168,75,.16);color:#d4a84b;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 auto">4</span>
+          <span style="flex:1;text-align:left;font-size:10px;letter-spacing:.13em">ELEMENTS &#183; PIECES</span>
+          <span style="color:#5a574f;font-size:9px">&#8679;4</span>
+          <span style="color:#908e87;font-size:10px">{{c4}}</span>
+        </button>
+        <sc-if value="{{o4}}" hint-placeholder-val="{{false}}">
+        <div style="padding:2px 12px 14px">
+        <sc-if value="{{isGeome}}" hint-placeholder-val="{{false}}">
+          <div style="font-size:10px;color:#908e87;margin:0 0 6px">subunits per ring &#8212; click: choose its piece &#183; shift: pin tone plate &#183; alt: overlap law</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <sc-for list="{{suCards}}" as="su" hint-placeholder-count="4">
+              <button onClick="{{su.onClick}}" title="{{su.tip}}" style="width:58px;background:#1a1a1d;border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:4px 3px;cursor:pointer;color:#908e87;font-family:inherit" style-hover="border-color:#d4a84b;color:#edeae3">
+                {{su.thumb}}
+                <span style="display:block;font-size:8.5px;line-height:1.2;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{su.name}}</span>
+              </button>
+            </sc-for>
+          </div>
+          <button onClick="{{randRecipe}}" style="width:100%;margin-top:8px;min-height:30px;background:transparent;border:1px dashed rgba(255,255,255,.16);border-radius:7px;color:#908e87;font-family:inherit;font-size:10.5px;cursor:pointer" style-hover="border-color:#d4a84b;color:#edeae3;border-style:solid">&#8635; Random subunit set</button>
+          <button onClick="{{openFoundryBtn}}" style="width:100%;margin-top:6px;min-height:30px;background:transparent;border:1px dashed rgba(255,255,255,.16);border-radius:7px;color:#908e87;font-family:inherit;font-size:10.5px;cursor:pointer" style-hover="border-color:#d4a84b;color:#edeae3;border-style:solid">&#9874; Foundry &#8212; forge a piece &#183; F</button>
+          <button onClick="{{exportPieces}}" style="width:100%;margin-top:6px;min-height:30px;background:transparent;border:1px solid rgba(255,255,255,.16);border-radius:7px;color:#edeae3;font-family:inherit;font-size:10.5px;cursor:pointer;transition:border-color 180ms var(--ease-warm-in)" style-hover="border-color:#d4a84b;color:#d4a84b">&#11015; Export subunit elements &#183; SVG set</button>
+          <div style="font-size:9.5px;color:#908e87;line-height:1.6;margin-top:6px">The vocabulary &#8212; piece menu on K, Foundry on F. Forged pieces travel in the session and join the SVG export.</div>
+        </sc-if>
+        <sc-if value="{{isImage}}" hint-placeholder-val="{{true}}">
+          <div style="font-size:9.5px;color:#908e87;line-height:1.7">The drawing&#8217;s own extracted forms are this layer&#8217;s vocabulary. Under a scatter armature (&#8679;5) they detach and re-place under the chosen law; each tone plate exports as its own SVG piece from &#8679;9.</div>
+        </sc-if>
+        </div>
+        </sc-if>
+      </div>
+
+      <div style="border:1px solid rgba(255,255,255,.07);border-radius:10px;background:rgba(255,255,255,.015)">
+        <button onClick="{{t5}}" style="display:flex;align-items:center;gap:8px;width:100%;background:transparent;border:none;padding:10px 12px;cursor:pointer;font-family:inherit;color:#edeae3" style-hover="color:#d4a84b">
+          <span style="width:17px;height:17px;border-radius:4px;background:rgba(212,168,75,.16);color:#d4a84b;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 auto">5</span>
+          <span style="flex:1;text-align:left;font-size:10px;letter-spacing:.13em">ARMATURE &#183; PLACEMENT &#183; C</span>
+          <span style="color:#5a574f;font-size:9px">&#8679;5</span>
+          <span style="color:#908e87;font-size:10px">{{c5}}</span>
+        </button>
+        <sc-if value="{{o5}}" hint-placeholder-val="{{false}}">
+        <div style="padding:2px 12px 14px">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:8px">
+          <sc-for list="{{compSeg}}" as="sg" hint-placeholder-count="6"><button onClick="{{sg.onClick}}" style="{{sg.style}}">{{sg.label}}</button></sc-for>
+        </div>
+        <div style="font-size:9.5px;color:#908e87;line-height:1.5;margin:0 0 8px">{{compNote}}</div>
+        <sc-if value="{{showDials}}" hint-placeholder-val="{{false}}">
+          <sc-if value="{{isScatter}}" hint-placeholder-val="{{false}}">
+            <div style="display:flex;gap:6px;margin-bottom:6px">
+              <input type="number" value="{{vSeed}}" onChange="{{onSeed}}" aria-label="Scatter seed" style="flex:1;min-width:0;background:#1a1a1d;border:1px solid rgba(255,255,255,.12);border-radius:7px;color:#edeae3;padding:8px 10px;font-family:inherit;font-size:13px;text-align:center">
+              <button onClick="{{randSeed}}" title="Random placement" style="width:38px;background:#1a1a1d;border:1px solid rgba(255,255,255,.12);border-radius:7px;color:#edeae3;cursor:pointer;font-family:inherit;font-size:13px" style-hover="border-color:#d4a84b;color:#d4a84b">&#8635;</button>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87"><span>count per register</span><span style="color:#d4a84b">{{vOrder}}</span></div>
+            <input type="range" min="3" max="16" step="1" value="{{vOrder}}" onChange="{{onOrder}}" aria-label="Count per register" style="width:100%">
+          </sc-if>
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87"><span>form scale</span><span style="color:#d4a84b">{{vAScale}}</span></div>
+          <input type="range" min="0.4" max="2" step="0.05" value="{{vAScale}}" onChange="{{onAScale}}" aria-label="Form scale" style="width:100%">
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:6px"><span>{{spreadLabel}}</span><span style="color:#d4a84b">{{vASpread}}</span></div>
+          <input type="range" min="0" max="1" step="0.05" value="{{vASpread}}" onChange="{{onASpread}}" aria-label="Spread" style="width:100%">
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:6px"><span>{{staggerLabel}}</span><span style="color:#d4a84b">{{vAStagger}}</span></div>
+          <input type="range" min="0" max="1" step="0.05" value="{{vAStagger}}" onChange="{{onAStagger}}" aria-label="Stagger" style="width:100%">
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:6px"><span>{{axisLabel}}</span><span style="color:#d4a84b">{{vAAxis}}</span></div>
+          <input type="range" min="-90" max="90" step="5" value="{{vAAxis}}" onChange="{{onAAxis}}" aria-label="Axis" style="width:100%">
+          <button onClick="{{resetDials}}" style="width:100%;margin:6px 0 8px;min-height:26px;background:transparent;border:1px dashed rgba(255,255,255,.16);border-radius:7px;color:#908e87;font-family:inherit;font-size:10px;cursor:pointer" style-hover="border-color:#d4a84b;color:#edeae3;border-style:solid">Reset dials to neutral</button>
+          <sc-if value="{{isFreeComp}}" hint-placeholder-val="{{false}}">
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87"><span>drift &#8212; regular &#8596; loosened</span><span style="color:#d4a84b">{{vJitter}}</span></div>
+            <input type="range" min="0" max="1" step="0.05" value="{{vJitter}}" onChange="{{onJitter}}" aria-label="Drift" style="width:100%">
+            <div style="font-size:10px;color:#908e87;margin:6px 0 5px">angle family &#8212; shared axes keep the field coherent</div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:8px">
+              <sc-for list="{{angleSeg}}" as="sg" hint-placeholder-count="4"><button onClick="{{sg.onClick}}" style="{{sg.style}}">{{sg.label}}</button></sc-for>
+            </div>
+          </sc-if>
+        </sc-if>
+        </div>
+        </sc-if>
+      </div>
+
+      <div style="border:1px solid rgba(255,255,255,.07);border-radius:10px;background:rgba(255,255,255,.015)">
+        <button onClick="{{t6}}" style="display:flex;align-items:center;gap:8px;width:100%;background:transparent;border:none;padding:10px 12px;cursor:pointer;font-family:inherit;color:#edeae3" style-hover="color:#d4a84b">
+          <span style="width:17px;height:17px;border-radius:4px;background:rgba(212,168,75,.16);color:#d4a84b;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 auto">6</span>
+          <span style="flex:1;text-align:left;font-size:10px;letter-spacing:.13em">PLACE &#183; DUPLICATE-MOVE</span>
+          <span style="color:#5a574f;font-size:9px">&#8679;6</span>
+          <span style="color:#908e87;font-size:10px">{{c6}}</span>
+        </button>
+        <sc-if value="{{o6}}" hint-placeholder-val="{{false}}">
+        <div style="padding:2px 12px 14px">
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87"><span>offset &#8596;</span><span style="color:#d4a84b">{{vDx}}</span></div>
+        <input type="range" min="-0.5" max="0.5" step="0.01" value="{{vDx}}" onChange="{{onDx}}" aria-label="Offset X" style="width:100%">
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:6px"><span>offset &#8597;</span><span style="color:#d4a84b">{{vDy}}</span></div>
+        <input type="range" min="-0.5" max="0.5" step="0.01" value="{{vDy}}" onChange="{{onDy}}" aria-label="Offset Y" style="width:100%">
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:6px"><span>rotation &#176;</span><span style="color:#d4a84b">{{vRot}}</span></div>
+        <input type="range" min="-180" max="180" step="1" value="{{vRot}}" onChange="{{onRot}}" aria-label="Rotation" style="width:100%">
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:6px"><span>scale</span><span style="color:#d4a84b">{{vScale}}</span></div>
+        <input type="range" min="0.2" max="2.5" step="0.02" value="{{vScale}}" onChange="{{onScale}}" aria-label="Scale" style="width:100%">
+        <div style="font-size:9.5px;color:#908e87;line-height:1.6;margin-top:6px">Arrows nudge (&#8679; coarse) &#183; Q E rotate &#183; &#8722; = scale.</div>
+        </div>
+        </sc-if>
+      </div>
+
+      <div style="border:1px solid rgba(255,255,255,.07);border-radius:10px;background:rgba(255,255,255,.015)">
+        <button onClick="{{t7}}" style="display:flex;align-items:center;gap:8px;width:100%;background:transparent;border:none;padding:10px 12px;cursor:pointer;font-family:inherit;color:#edeae3" style-hover="color:#d4a84b">
+          <span style="width:17px;height:17px;border-radius:4px;background:rgba(212,168,75,.16);color:#d4a84b;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 auto">7</span>
+          <span style="flex:1;text-align:left;font-size:10px;letter-spacing:.13em">RENDER &#183; OVERLAP RE-CUT</span>
+          <span style="color:#5a574f;font-size:9px">&#8679;7</span>
+          <span style="color:#908e87;font-size:10px">{{c7}}</span>
+        </button>
+        <sc-if value="{{o7}}" hint-placeholder-val="{{false}}">
+        <div style="padding:2px 12px 14px">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px">
+          <sc-for list="{{modeSeg}}" as="sg" hint-placeholder-count="3"><button onClick="{{sg.onClick}}" style="{{sg.style}}">{{sg.label}}</button></sc-for>
+        </div>
+        <div style="font-size:10px;color:#908e87;margin:10px 0 5px">layer blend &#8212; depth against everything behind</div>
+        <select value="{{vBlend}}" onChange="{{onBlend}}" aria-label="Layer blend" style="width:100%;background:#1a1a1d;border:1px solid rgba(255,255,255,.12);color:#edeae3;padding:8px 9px;border-radius:7px;font-family:inherit;font-size:11px">
+          <option value="normal">Normal</option>
+          <option value="multiply">Multiply</option>
+          <option value="darken">Darken</option>
+          <option value="color-burn">Color burn</option>
+          <option value="screen">Screen</option>
+          <option value="lighten">Lighten</option>
+          <option value="color-dodge">Color dodge</option>
+          <option value="overlay">Overlay</option>
+          <option value="soft-light">Soft light</option>
+          <option value="hard-light">Hard light</option>
+          <option value="difference">Difference</option>
+          <option value="exclusion">Exclusion</option>
+          <option value="hue">Hue</option>
+          <option value="saturation">Saturation</option>
+          <option value="color">Color</option>
+          <option value="luminosity">Luminosity</option>
+        </select>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:10px"><span>opacity</span><span style="color:#d4a84b">{{vOpacity}}</span></div>
+        <input type="range" min="0.15" max="1" step="0.05" value="{{vOpacity}}" onChange="{{onOpacity}}" aria-label="Layer opacity" style="width:100%">
+        <div style="font-size:10px;color:#908e87;margin:10px 0 5px">where this geometry crosses geometry behind &#8212; B</div>
+        <select value="{{vPb}}" onChange="{{onPb}}" aria-label="Overlap blend" style="width:100%;background:#1a1a1d;border:1px solid rgba(255,255,255,.12);color:#edeae3;padding:8px 9px;border-radius:7px;font-family:inherit;font-size:11px">
+          <option value="off">Transparency only &#8212; no re-cut</option>
+          <option value="cycle1">Overlap &#8594; cycle palette +1</option>
+          <option value="cycle2">Overlap &#8594; cycle palette +2</option>
+          <option value="complement">Overlap &#8594; palette complement</option>
+        </select>
+        <div style="display:flex;gap:5px;margin-top:8px;align-items:center">
+          <span style="font-size:10px;color:#908e87">palette roll</span>
+          <button onClick="{{rollL}}" style="width:30px;height:26px;background:#1a1a1d;border:1px solid rgba(255,255,255,.12);border-radius:6px;color:#edeae3;cursor:pointer;font-family:inherit" style-hover="border-color:#d4a84b">&#9664;</button>
+          <button onClick="{{rollR}}" style="width:30px;height:26px;background:#1a1a1d;border:1px solid rgba(255,255,255,.12);border-radius:6px;color:#edeae3;cursor:pointer;font-family:inherit" style-hover="border-color:#d4a84b">&#9654;</button>
+          <span style="color:#d4a84b;font-size:10px">{{vRoll}}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:10px"><span>ghost of the source &#183; G</span><span style="color:#d4a84b">{{vGhost}}</span></div>
+        <input type="range" min="0" max="0.8" step="0.05" value="{{vGhost}}" onChange="{{onGhost}}" aria-label="Ghost" style="width:100%">
+        <div style="font-size:9.5px;color:#908e87;line-height:1.6;margin-top:6px">The intersection is re-cut as a new flat colour from the palette &#8212; opaque plate logic, never a wash. Nothing off-palette can sound.</div>
+        </div>
+        </sc-if>
+      </div>
+
+      <div style="border:1px solid rgba(255,255,255,.07);border-radius:10px;background:rgba(255,255,255,.015)">
+        <button onClick="{{t8}}" style="display:flex;align-items:center;gap:8px;width:100%;background:transparent;border:none;padding:10px 12px;cursor:pointer;font-family:inherit;color:#edeae3" style-hover="color:#d4a84b">
+          <span style="width:17px;height:17px;border-radius:4px;background:rgba(212,168,75,.16);color:#d4a84b;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 auto">8</span>
+          <span style="flex:1;text-align:left;font-size:10px;letter-spacing:.13em">PALETTE &#183; LINEAD</span>
+          <span style="color:#5a574f;font-size:9px">&#8679;8</span>
+          <span style="color:#908e87;font-size:10px">{{c8}}</span>
+        </button>
+        <sc-if value="{{o8}}" hint-placeholder-val="{{false}}">
+        <div style="padding:2px 12px 14px">
+        <select value="{{palKey}}" onChange="{{onPal}}" aria-label="Palette" style="width:100%;background:#1a1a1d;border:1px solid rgba(255,255,255,.12);color:#edeae3;padding:8px 9px;border-radius:7px;font-family:inherit;font-size:11px">
+          <sc-for list="{{palOpts}}" as="p" hint-placeholder-count="6"><option value="{{p.key}}">{{p.name}}</option></sc-for>
+        </select>
+        <div style="display:flex;gap:4px;margin-top:8px">
+          <sc-for list="{{palDots}}" as="d" hint-placeholder-count="6"><span title="{{d.hex}}" style="{{d.style}}"></span></sc-for>
+        </div>
+        <button onClick="{{palFromSource}}" style="width:100%;margin-top:8px;min-height:30px;background:transparent;border:1px dashed rgba(255,255,255,.16);border-radius:7px;color:#908e87;font-family:inherit;font-size:10.5px;cursor:pointer" style-hover="border-color:#d4a84b;color:#edeae3;border-style:solid">&#10047; Palette from the source image</button>
+        <div style="font-size:10px;color:#908e87;margin:12px 0 5px">Wada dictionary &#8212; 348 combinations, <i style="font-family:'Fraunces',serif;font-weight:300">A Dictionary of Color Combinations</i></div>
+        <input type="text" value="{{wadaQ}}" onChange="{{onWadaQ}}" placeholder="search &#8212; rose, cobalt, 42&#8230;" aria-label="Search Wada combinations" style="width:100%;box-sizing:border-box;background:#1a1a1d;border:1px solid rgba(255,255,255,.12);border-radius:7px;color:#edeae3;padding:8px 10px;font-family:inherit;font-size:11px">
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:6px">
+          <sc-for list="{{wadaSizeSeg}}" as="sg" hint-placeholder-count="4"><button onClick="{{sg.onClick}}" style="{{sg.style}}">{{sg.label}}</button></sc-for>
+        </div>
+        <div style="max-height:216px;overflow-y:auto;display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:6px;padding-right:2px">
+          <sc-for list="{{wadaChips}}" as="wc" hint-placeholder-count="6">
+            <button onClick="{{wc.onClick}}" title="{{wc.tip}}" style="{{wc.style}}">
+              <span style="display:flex;height:15px;border-radius:3px;overflow:hidden">
+                <sc-for list="{{wc.sw}}" as="s" hint-placeholder-count="5"><span style="{{s.style}}"></span></sc-for>
+              </span>
+              <span style="display:block;font-size:8.5px;line-height:1.3;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left"><b style="color:#d4a84b">{{wc.num}}</b> {{wc.label}}</span>
+            </button>
+          </sc-for>
+        </div>
+        <div style="font-size:9.5px;color:#908e87;text-align:center;margin-top:5px">{{wadaCount}}</div>
+        <div style="font-size:10px;color:#908e87;margin:12px 0 5px">linead &#183; W &#8212; the linear pole referred over the areal geome</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px">
+          <sc-for list="{{lineadSeg}}" as="sg" hint-placeholder-count="4"><button onClick="{{sg.onClick}}" style="{{sg.style}}">{{sg.label}}</button></sc-for>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:8px"><span>linead weight</span><span style="color:#d4a84b">{{vLineadW}}</span></div>
+        <input type="range" min="0.6" max="4" step="0.2" value="{{vLineadW}}" onChange="{{onLineadW}}" aria-label="Linead weight" style="width:100%">
+        <label style="display:flex;align-items:center;gap:8px;margin-top:8px;font-size:11px;color:#a9a396;cursor:pointer">
+          <input type="checkbox" checked="{{ground}}" onChange="{{onGround}}" style="accent-color:#d4a84b"> ground &#8212; off = transparent export
+        </label>
+        </div>
+        </sc-if>
+      </div>
+
+      <div style="border:1px solid rgba(255,255,255,.07);border-radius:10px;background:rgba(255,255,255,.015)">
+        <button onClick="{{t9}}" style="display:flex;align-items:center;gap:8px;width:100%;background:transparent;border:none;padding:10px 12px;cursor:pointer;font-family:inherit;color:#edeae3" style-hover="color:#d4a84b">
+          <span style="width:17px;height:17px;border-radius:4px;background:rgba(212,168,75,.16);color:#d4a84b;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:0 0 auto">9</span>
+          <span style="flex:1;text-align:left;font-size:10px;letter-spacing:.13em">OUTPUT &#183; SESSION &amp; PRINT</span>
+          <span style="color:#5a574f;font-size:9px">&#8679;9</span>
+          <span style="color:#908e87;font-size:10px">{{c9}}</span>
+        </button>
+        <sc-if value="{{o9}}" hint-placeholder-val="{{false}}">
+        <div style="padding:2px 12px 14px">
+        <div style="display:flex;gap:6px">
+          <button onClick="{{saveSession}}" style="flex:1;min-height:32px;background:transparent;border:1px solid rgba(255,255,255,.16);border-radius:7px;color:#edeae3;font-family:inherit;font-size:11px;cursor:pointer;transition:border-color 180ms var(--ease-warm-in)" style-hover="border-color:#d4a84b;color:#d4a84b">&#11015; Save &#183; .linead.json</button>
+          <button onClick="{{loadSessionBtn}}" style="flex:1;min-height:32px;background:transparent;border:1px solid rgba(255,255,255,.16);border-radius:7px;color:#edeae3;font-family:inherit;font-size:11px;cursor:pointer;transition:border-color 180ms var(--ease-warm-in)" style-hover="border-color:#d4a84b;color:#d4a84b">&#11014; Load</button>
+        </div>
+        <div style="font-size:9.5px;color:#908e87;line-height:1.6;margin-top:6px">Autosaves as you work &#8212; reload to resume. The .json travels whole: sources, layers, pins, forged pieces, palette.</div>
+        <div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:12px">
+          <sc-for list="{{inchPresets}}" as="ip" hint-placeholder-count="5"><button onClick="{{ip.onClick}}" style="{{ip.style}}">{{ip.label}}</button></sc-for>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:8px"><span>long edge &#8243;</span><span style="color:#d4a84b">{{vInches}}</span></div>
+        <input type="range" min="4" max="48" step="0.25" value="{{vInches}}" onChange="{{onInches}}" aria-label="Long edge inches" style="width:100%">
+        <select value="{{vDpi}}" onChange="{{onDpi}}" aria-label="DPI" style="width:100%;margin-top:8px;background:#1a1a1d;border:1px solid rgba(255,255,255,.12);color:#edeae3;padding:8px 9px;border-radius:7px;font-family:inherit;font-size:11px">
+          <option value="300">300 DPI &#8212; offset / poster house</option>
+          <option value="450">450 DPI &#8212; fine art, canvas</option>
+          <option value="600">600 DPI &#8212; gicl&#233;e, line-heavy plates</option>
+          <option value="900">900 DPI &#8212; 2&#215; archival &#183; gallery large-format</option>
+        </select>
+        <div style="font-size:10px;color:#908e87;line-height:1.7;margin-top:8px">{{prnInfo}}</div>
+        <button onClick="{{exportPNG}}" style="width:100%;margin-top:8px;min-height:36px;background:#d4a84b;color:#141210;border:none;border-radius:7px;font-family:inherit;font-weight:700;font-size:12px;cursor:pointer" style-hover="filter:brightness(1.08)" style-active="filter:brightness(.94)">{{exportLabelLong}}</button>
+        <div style="font-size:9.5px;color:#908e87;line-height:1.6;margin-top:6px">Tiled straight off the vector &#8212; every tile rasterised 1:1 at print resolution; the pHYs chunk carries the true physical size.</div>
+        <button onClick="{{exportPieces}}" style="width:100%;margin-top:8px;min-height:32px;background:transparent;border:1px solid rgba(255,255,255,.16);border-radius:7px;color:#edeae3;font-family:inherit;font-size:11px;cursor:pointer;transition:border-color 180ms var(--ease-warm-in)" style-hover="border-color:#d4a84b;color:#d4a84b">&#11015; Export pieces of active layer &#183; SVG set</button>
+        <div style="font-size:9.5px;color:#908e87;line-height:1.6;margin-top:6px">Geome layer &#8594; one SVG per subunit ring. Image layer &#8594; one SVG per tone plate, transparent ground &#8212; reusable pieces.</div>
+        </div>
+        </sc-if>
+      </div>
+    </aside>
+
+    <main data-screen-label="Plate" onDrop="{{onDrop}}" onDragOver="{{onDragOver}}" style="flex:1;min-width:0;overflow:auto;display:flex;align-items:center;justify-content:center;padding:26px;background:#0a0a0b">
+      <figure style="{{plateShellStyle}}">{{plateEl}}</figure>
+    </main>
+  </div>
+
+  <footer style="flex:0 0 auto;display:flex;gap:10px;align-items:center;padding:0 14px;height:28px;border-top:1px solid rgba(255,255,255,.08);font-size:10.5px;color:#908e87;white-space:nowrap;overflow:hidden">
+    <span style="overflow:hidden;text-overflow:ellipsis">{{statusLine}}</span>
+    <span style="margin-left:auto;flex:0 0 auto"><b style="color:#d4a84b">&#8679;1&#8211;&#8679;9</b> menus &#183; <b style="color:#d4a84b">?</b> keyboard map &#183; drop an image anywhere on the plate</span>
+  </footer>
+
+  <sc-if value="{{tourOn}}" hint-placeholder-val="{{false}}">
+    <div style="position:fixed;right:18px;bottom:44px;z-index:700;width:344px;background:#121214;border:1px solid rgba(212,168,75,.6);border-radius:12px;padding:16px 18px;box-shadow:0 30px 80px -20px rgba(0,0,0,.85)">
+      <div style="display:flex;align-items:center;gap:8px;font-size:9px;letter-spacing:.16em;color:#908e87">VALUE TOUR &#183; {{tourN}}<button onClick="{{tourClose}}" style="margin-left:auto;background:transparent;border:none;color:#908e87;cursor:pointer;font-family:inherit;font-size:12px;padding:2px" style-hover="color:#edeae3">&#10005;</button></div>
+      <div style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:17px;color:#edeae3;margin:8px 0 6px;line-height:1.3">{{tourTitle}}</div>
+      <div style="font-size:11px;color:#a9a396;line-height:1.65">{{tourBody}}</div>
+      <div style="font-size:11px;color:#d4a84b;line-height:1.6;margin-top:8px;font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:12.5px">{{tourValue}}</div>
+      <div style="display:flex;gap:6px;margin-top:12px">
+        <button onClick="{{tourPrev}}" style="min-height:32px;background:transparent;border:1px solid rgba(255,255,255,.16);border-radius:7px;color:#908e87;font-family:inherit;font-size:11px;cursor:pointer;padding:0 12px" style-hover="color:#edeae3;border-color:#d4a84b">&#8592; Prev</button>
+        <button onClick="{{tourNext}}" style="flex:1;min-height:32px;background:#d4a84b;color:#141210;border:none;border-radius:7px;font-family:inherit;font-weight:700;font-size:11px;cursor:pointer" style-hover="filter:brightness(1.08)">{{tourNextLabel}}</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{menu}}" hint-placeholder-val="{{false}}">
+    <div onClick="{{closeMenu}}" style="position:fixed;inset:0;background:rgba(5,5,6,.55);z-index:800;display:flex;align-items:center;justify-content:center">
+      <div onClick="{{eatClick}}" style="background:#121214;border:1px solid rgba(255,255,255,.16);border-radius:12px;width:min(400px,94vw);max-height:86vh;display:flex;flex-direction:column;overflow:hidden;font-size:11.5px;box-shadow:0 30px 80px -20px rgba(0,0,0,.8)">
+        <div style="display:flex;align-items:center;gap:8px;padding:14px 16px 10px;flex:0 0 auto">
+          <span style="font-weight:700;letter-spacing:.1em;font-size:11px">PIECE MENU</span>
+          <div style="margin-left:auto;display:flex;align-items:center;gap:6px">
+            <button onClick="{{menuPrevRing}}" title="Previous ring" style="width:26px;height:24px;background:#1a1a1d;border:1px solid rgba(255,255,255,.12);border-radius:6px;color:#edeae3;cursor:pointer;font-family:inherit;font-size:10px" style-hover="border-color:#d4a84b">&#9664;</button>
+            <span style="color:#d4a84b;font-weight:700;min-width:92px;text-align:center;font-size:11px">{{menuRingLabel}}</span>
+            <button onClick="{{menuNextRing}}" title="Next ring" style="width:26px;height:24px;background:#1a1a1d;border:1px solid rgba(255,255,255,.12);border-radius:6px;color:#edeae3;cursor:pointer;font-family:inherit;font-size:10px" style-hover="border-color:#d4a84b">&#9654;</button>
+          </div>
+        </div>
+        <div style="padding:0 16px 6px;display:grid;grid-template-columns:1fr 1fr;gap:5px;flex:0 0 auto">
+          <sc-for list="{{menuOverSeg}}" as="sg" hint-placeholder-count="2"><button onClick="{{sg.onClick}}" style="{{sg.style}}">{{sg.label}}</button></sc-for>
+        </div>
+        <div style="padding:0 16px 8px;font-size:9.5px;color:#908e87;line-height:1.5;flex:0 0 auto">Overlap law of this ring &#8212; weave cuts where its pieces cross; merge keeps crossings filled.</div>
+        <div style="padding:0 16px 8px;flex:0 0 auto"><input ref="{{menuInputRef}}" type="text" value="{{menuQ}}" onChange="{{onMenuQ}}" placeholder="filter pieces&#8230;" aria-label="Filter pieces" style="width:100%;box-sizing:border-box;background:#1a1a1d;border:1px solid rgba(255,255,255,.12);border-radius:7px;color:#edeae3;padding:8px 10px;font-family:inherit;font-size:11px"></div>
+        <div ref="{{menuListRef}}" style="overflow-y:auto;padding:0 12px 12px;position:relative;min-height:0">
+          <sc-for list="{{menuGroups}}" as="mg" hint-placeholder-count="2">
+            <div style="font-size:9px;letter-spacing:.14em;color:#908e87;padding:8px 4px 2px">{{mg.label}}</div>
+            <sc-for list="{{mg.items}}" as="it" hint-placeholder-count="4">
+              <button data-sel="{{it.sel}}" onClick="{{it.onClick}}" style="{{it.style}}">
+                <span style="width:34px;flex:0 0 auto">{{it.thumb}}</span>
+                <span style="min-width:0;flex:1;text-align:left">
+                  <span style="display:block;font-size:11px;font-weight:700">{{it.name}} <span style="color:#d4a84b">{{it.cur}}</span></span>
+                  <span style="display:block;font-size:9.5px;color:#908e87;font-family:'Fraunces',serif;font-style:italic;font-weight:300;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{it.orphic}}</span>
+                </span>
+                {{it.edit}}
+              </button>
+            </sc-for>
+          </sc-for>
+        </div>
+        <div style="padding:9px 16px;border-top:1px solid rgba(255,255,255,.08);font-size:9.5px;color:#908e87;flex:0 0 auto">&#8593;&#8595; piece &#183; &#8592;&#8594; ring &#183; &#9166; set &#183; Tab overlap law &#183; Esc done</div>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{foundryOpen}}" hint-placeholder-val="{{false}}">
+    <div onClick="{{closeFoundry}}" style="position:fixed;inset:0;background:rgba(5,5,6,.65);z-index:850;display:flex;align-items:center;justify-content:center">
+      <div onClick="{{eatClick}}" style="background:#121214;border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:18px 20px;width:min(430px,94vw);max-height:88vh;overflow-y:auto;font-size:11.5px;box-shadow:0 30px 80px -20px rgba(0,0,0,.8)">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+          <span style="font-weight:700;letter-spacing:.1em;font-size:11px">{{fTitle}}</span>
+          <span style="margin-left:auto;font-size:9.5px;color:#908e87">Esc cancels</span>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start">
+          <div style="width:110px;flex:0 0 auto;background:#0a0a0b;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:8px">{{fThumb}}</div>
+          <div style="flex:1;min-width:0">
+            <input type="text" value="{{fName}}" onChange="{{onFName}}" aria-label="Piece name" placeholder="name the piece" style="width:100%;box-sizing:border-box;background:#1a1a1d;border:1px solid rgba(255,255,255,.12);border-radius:7px;color:#edeae3;padding:8px 10px;font-family:inherit;font-size:12px">
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:8px">
+              <sc-for list="{{fFormSeg}}" as="sg" hint-placeholder-count="4"><button onClick="{{sg.onClick}}" style="{{sg.style}}">{{sg.label}}</button></sc-for>
+            </div>
+            <div style="font-size:9.5px;color:#908e87;line-height:1.5;margin-top:8px">Poly &#8212; regular n-gon &#183; Star &#8212; n points, inner ratio &#183; Ellipse &#8212; oriented oval &#183; Arc &#8212; band along the ring.</div>
+          </div>
+        </div>
+        <sc-if value="{{fShowSides}}" hint-placeholder-val="{{false}}">
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:10px"><span>sides / points</span><span style="color:#d4a84b">{{fSides}}</span></div>
+          <input type="range" min="3" max="14" step="1" value="{{fSides}}" onChange="{{onFSides}}" aria-label="Sides" style="width:100%">
+        </sc-if>
+        <sc-if value="{{fShowInner}}" hint-placeholder-val="{{false}}">
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:6px"><span>inner ratio &#8212; spikiness</span><span style="color:#d4a84b">{{fInner}}</span></div>
+          <input type="range" min="0.1" max="0.9" step="0.05" value="{{fInner}}" onChange="{{onFInner}}" aria-label="Inner ratio" style="width:100%">
+        </sc-if>
+        <sc-if value="{{fShowAspect}}" hint-placeholder-val="{{false}}">
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:6px"><span>aspect &#8212; squash</span><span style="color:#d4a84b">{{fAspect}}</span></div>
+          <input type="range" min="0.15" max="1" step="0.05" value="{{fAspect}}" onChange="{{onFAspect}}" aria-label="Aspect" style="width:100%">
+        </sc-if>
+        <sc-if value="{{fShowSpan}}" hint-placeholder-val="{{false}}">
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:6px"><span>arc span</span><span style="color:#d4a84b">{{fSpan}}</span></div>
+          <input type="range" min="0.5" max="4" step="0.25" value="{{fSpan}}" onChange="{{onFSpan}}" aria-label="Arc span" style="width:100%">
+        </sc-if>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:6px"><span>size</span><span style="color:#d4a84b">{{fSize}}</span></div>
+        <input type="range" min="0.3" max="1.8" step="0.05" value="{{fSize}}" onChange="{{onFSize}}" aria-label="Size" style="width:100%">
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:6px"><span>rotation &#176;</span><span style="color:#d4a84b">{{fRot}}</span></div>
+        <input type="range" min="0" max="180" step="5" value="{{fRot}}" onChange="{{onFRot}}" aria-label="Rotation" style="width:100%">
+        <div style="font-size:9.5px;color:#908e87;line-height:1.6;margin-top:8px">The forged piece joins the vocabulary &#8212; assignable to any ring from the piece menu, exported with the SVG set, carried whole in the session.</div>
+        <div style="display:flex;gap:6px;margin-top:12px">
+          <button onClick="{{saveFoundry}}" style="flex:1;min-height:34px;background:#d4a84b;color:#141210;border:none;border-radius:7px;font-family:inherit;font-weight:700;font-size:11.5px;cursor:pointer" style-hover="filter:brightness(1.08)" style-active="filter:brightness(.94)">&#9874; Save piece</button>
+          <sc-if value="{{fCanDel}}" hint-placeholder-val="{{false}}"><button onClick="{{delFoundry}}" style="min-height:34px;background:transparent;border:1px solid rgba(232,114,88,.5);border-radius:7px;color:#e87258;font-family:inherit;font-size:11px;cursor:pointer;padding:0 12px" style-hover="border-color:#e87258">Delete</button></sc-if>
+          <button onClick="{{closeFoundry}}" style="min-height:34px;background:transparent;border:1px solid rgba(255,255,255,.16);border-radius:7px;color:#908e87;font-family:inherit;font-size:11px;cursor:pointer;padding:0 12px" style-hover="color:#edeae3">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{kbd}}" hint-placeholder-val="{{false}}">
+    <div onClick="{{onKbd}}" style="position:fixed;inset:0;background:rgba(5,5,6,.7);z-index:900;display:flex;align-items:center;justify-content:center">
+      <div style="background:#121214;border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:22px 26px;width:min(560px,92vw);max-height:84vh;overflow-y:auto;font-size:11.5px;line-height:2">
+        <div style="font-weight:700;font-size:13px;letter-spacing:.1em;margin-bottom:8px">KEYBOARD MAP</div>
+        <sc-for list="{{kbdRows}}" as="kr" hint-placeholder-count="8">
+          <div style="display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(255,255,255,.06);padding:2px 0"><span>{{kr.what}}</span><span style="color:#d4a84b">{{kr.keys}}</span></div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;workingRes&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[800,1000,1400],&quot;default&quot;:1000,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Engine&quot;},&quot;plateShadow&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Stage&quot;}}">
+class Component extends DCLogic {
+  state = {
+    ready:false, plate:'', W:1000, H:1240,
+    sources:[], layers:[], active:0,
+    palKey:'spectraPaper', customPal:null, wadaQ:'', wadaSize:'all',
+    ground:true, linead:'web', lineadW:1.6, ghost:0, format:'source',
+    inches:11.7, dpi:900, exporting:'', kbd:false, stats:{plates:0,pts:0},
+    customKinds:[], menu:false, menuQ:'', menuIx:0, menuRing:0, foundry:null,
+    sec:1, tour:-1
+  };
+  _lumas=[]; _cache={}; _rq=0; _ckv=0; menuListRef=React.createRef(); menuInputRef=React.createRef();
+
+  TOUR=[
+    {sec:1, title:'One pipeline, nine menus', body:'Image \u2192 geometry \u2192 linead. Nine numbered menus, top to bottom, in the order the work actually flows. \u21E71\u2013\u21E79 opens any menu from the keyboard; plain digits still select layers.', value:'The process is the product \u2014 every step is law, so every result is teachable and repeatable.'},
+    {sec:1, title:'\u21E71 \u2014 Layers', body:'Duplicate the active layer (A), slide it, and the overlap re-cuts its own colour. Add geome layers for seeded constructions alongside your drawings.', value:'One drawing becomes a family of works \u2014 the edition scales without new source material.'},
+    {sec:2, title:'\u21E72 \u2014 Form: Fourier & seed', body:'Image layers resynthesise each contour from a truncated Fourier series ([ ]) \u2014 the abstraction dial. Geome layers grow from a seed number (Z X N).', value:'A seed is perfect repeatability: same seed, same construction \u2014 any day, any machine, any student.'},
+    {sec:3, title:'\u21E73 \u2014 Tone plates', body:'The source decomposes into flat opaque plates (, .). Equal-mass spacing opens dark photographs. Chips distill, stencil-cut, or pin the colour of each plate.', value:'Plates are the unit of edition \u2014 each exports as its own SVG, ready for print separations.'},
+    {sec:4, title:'\u21E74 \u2014 Elements: the vocabulary', body:'Every ring carries a piece from the vocabulary \u2014 the piece menu is on K. Forge your own in the Foundry (F); it joins the session and the SVG export.', value:'A studio vocabulary compounds: a piece made once serves every future work.'},
+    {sec:5, title:'\u21E75 \u2014 Armature: law of placement', body:'Six laws (C) \u2014 radial, mirror, field, strata, grid, cascade \u2014 each reinterpreting four dials. Image layers can scatter their own forms under any law.', value:'Scalability by law: one composition re-set six ways with zero rework downstream.'},
+    {sec:6, title:'\u21E76 \u2014 Place', body:'Offset, rotate, scale the active layer \u2014 arrows nudge (\u21E7 coarse), Q E rotate, \u2212 = scale.', value:'Placement is numeric \u2014 a layout can be quoted, taught, and reproduced exactly.'},
+    {sec:7, title:'\u21E77 \u2014 Render: overlap re-cut', body:'Where geometry crosses geometry, the intersection is re-cut as a new palette colour (B) \u2014 opaque plate logic, never a wash. Blend and opacity set depth.', value:'Nothing off-palette can sound \u2014 the colour law holds at any complexity.'},
+    {sec:8, title:'\u21E78 \u2014 Palette, last', body:'Studio palettes, all 348 Wada combinations, or a palette distilled from your source. Colour arrives at the end because it obeys everything before it.', value:'Recolouring an edition is one click \u2014 same geometry, new plate, no redraw.'},
+    {sec:9, title:'\u21E79 \u2014 Output: repeat & scale', body:'The .linead.json session carries everything \u2014 sources, layers, pins, forged pieces. SVG is infinite resolution; print PNG up to 900 DPI with true physical size.', value:'Repeatability lives in the session file. Scalability lives in the vector law. The work survives the tool.'}
+  ];
+  tourGo(i){
+    if(i<0||i>=this.TOUR.length){ this.setState({tour:-1}); return; }
+    this.setState({tour:i, sec:this.TOUR[i].sec, kbd:false});
+  }
+
+  async componentDidMount(){
+    this.E = await import(new URL('linead-engine.js', document.baseURI).href);
+    if(!window.GEOME_WADA_LIST){
+      await new Promise(res=>{ const sc=document.createElement('script'); sc.src='./geome-wada.js'; sc.onload=res; sc.onerror=res; document.head.appendChild(sc); });
+    }
+    this._json=document.createElement('input');
+    this._json.type='file'; this._json.accept='.json,application/json'; this._json.style.display='none';
+    document.body.appendChild(this._json);
+    this._json.addEventListener('change',()=>{
+      const f=this._json.files&&this._json.files[0]; if(!f)return;
+      const r=new FileReader();
+      r.onload=()=>{ try{ this.restoreSession(JSON.parse(r.result),false); }catch(e){ alert('Not a .linead.json session.'); } this._json.value=''; };
+      r.readAsText(f);
+    });
+    this._file=document.createElement('input');
+    this._file.type='file'; this._file.accept='image/*'; this._file.style.display='none';
+    document.body.appendChild(this._file);
+    this._file.addEventListener('change',()=>{
+      const f=this._file.files&&this._file.files[0]; if(!f)return;
+      const r=new FileReader();
+      r.onload=()=>{ this.addSource(r.result, f.name); this._file.value=''; };
+      r.readAsDataURL(f);
+    });
+    this._onKey=(e)=>this.handleKey(e);
+    window.addEventListener('keydown',this._onKey);
+    let saved=null;
+    try{ saved=JSON.parse(localStorage.getItem('lineadStudio.session')||'null'); }catch(e){}
+    if(saved && await this.restoreSession(saved,true)) return;
+    const demo=this.E.demoDrawing();
+    const src=await this.E.loadImageLuma(demo, this.props.workingRes ?? 1000);
+    this._lumas=[src];
+    const L0=this.mkLayer(0,'Layer 1');
+    const L1=Object.assign(this.mkLayer(0,'Layer 2'),{dx:0.1,dy:-0.07,rot:22,harm:10,pb:'cycle1'});
+    const long=1200, W=src.w>=src.h?long:Math.round(long*src.w/src.h), H=src.h>src.w?long:Math.round(long*src.h/src.w);
+    this.setState({ready:true, sources:[{name:'demo drawing',href:demo,w:src.w,h:src.h}], layers:[L0,L1], active:1, W, H},()=>this.recompute());
+    setTimeout(()=>this.recompute(),120);
+  }
+  componentDidUpdate(){
+    if(this.state.menu&&!this._menuWas&&this.menuInputRef.current){ this._menuWas=true; this.menuInputRef.current.focus(); }
+    if(!this.state.menu)this._menuWas=false;
+    if(this.state.menu&&this.menuListRef.current){
+      const c=this.menuListRef.current, el=c.querySelector('[data-sel="1"]');
+      if(el){ if(el.offsetTop<c.scrollTop+6) c.scrollTop=el.offsetTop-8;
+        else if(el.offsetTop+el.offsetHeight>c.scrollTop+c.clientHeight-6) c.scrollTop=el.offsetTop+el.offsetHeight-c.clientHeight+8; }
+    }
+    if(this.E && this.state.ready && this.state.layers.length && !this.state.plate && !this._kicked){
+      this._kicked=true; this.recompute();
+    }
+  }
+  componentWillUnmount(){ window.removeEventListener('keydown',this._onKey); if(this._file)this._file.remove(); if(this._json)this._json.remove(); }
+
+  mkLayer(src,name){ return {kind:'image', src, name, levels:4, minArea:80, invert:false, eps:1.2, harm:16, adapt:0, place:'trace',
+    mode:'fills', opacity:1, palRoll:0, pb:'off', blend:'normal', dx:0, dy:0, rot:0, scale:1,
+    visible:true, bandsOff:{}, bandsCut:{}, bandColors:{}, ringRanks:{}, ringOver:{}, seed:1927, order:8, rings:5, symbol:'custom', recipe:null,
+    comp:'radial', jitter:0.35, angleQ:45, aScale:1, aSpread:0.5, aStagger:0.5, aAxis:0}; }
+
+  pal(){
+    const s=this.state, E=this.E;
+    if(!E)return {ramp:['#888'],ground:'#111',ink:'#eee',label:''};
+    if(s.palKey==='custom'&&s.customPal)return s.customPal;
+    if(s.palKey&&s.palKey.indexOf('wada:')===0&&window.GEOME_WADA&&window.GEOME_WADA[s.palKey])return E.wadaToPalette(window.GEOME_WADA[s.palKey]);
+    return E.PALETTES[s.palKey]||E.PALETTES.spectraPaper;
+  }
+
+  serializeSession(){
+    const s=this.state;
+    const deduped=this.E&&this.E.dedupeSessionSources?this.E.dedupeSessionSources(s.sources,s.layers):{sources:s.sources,layers:s.layers};
+    return {v:2, palKey:s.palKey, customPal:s.customPal, ground:s.ground, linead:s.linead, lineadW:s.lineadW,
+      ghost:s.ghost, format:s.format, inches:s.inches, dpi:s.dpi, active:s.active, layers:deduped.layers, sources:deduped.sources,
+      customKinds:s.customKinds};
+  }
+  async restoreSession(d,silent){
+    try{
+      if(!d||d.v!==2||!Array.isArray(d.sources)||!Array.isArray(d.layers)||!d.layers.length)return false;
+      const deduped=this.E&&this.E.dedupeSessionSources?this.E.dedupeSessionSources(d.sources,d.layers):{sources:d.sources,layers:d.layers};
+      const lumas=[], compactSources=[];
+      for(const src of deduped.sources){
+        lumas.push(await this.E.loadImageLuma(src.href, this.props.workingRes ?? 1000));
+        const href=this.E.compressSourceDataURL?await this.E.compressSourceDataURL(src.href,1400):src.href;
+        compactSources.push(Object.assign({},src,{href}));
+      }
+      this._lumas=lumas; this._cache={};
+      this.E.setCustomKinds(d.customKinds||[]); this._ckv++;
+      this.setState({ready:true, sources:compactSources, layers:deduped.layers, active:Math.min(d.active||0,deduped.layers.length-1),
+        customKinds:d.customKinds||[],
+        palKey:d.palKey||'spectraPaper', customPal:d.customPal||null, ground:d.ground!==false,
+        linead:d.linead||'web', lineadW:d.lineadW||1.6, ghost:d.ghost||0, format:d.format||'source',
+        inches:d.inches||11.7, dpi:d.dpi||900},()=>this.recompute());
+      setTimeout(()=>this.recompute(),120);
+      return true;
+    }catch(e){ if(!silent)alert('Could not restore that session.'); return false; }
+  }
+  addGeome(){
+    const s=this.state; if(s.layers.length>=9)return;
+    const sym=this.E.SYMBOLS[0];
+    const L=Object.assign(this.mkLayer(0,'Geome '+(s.layers.length+1)),
+      {kind:'geome', seed:Math.floor(Math.random()*99999)+1, levels:5,
+       symbol:sym.key, recipe:sym.recipe.slice(), order:sym.order});
+    this.setState({layers:s.layers.concat([L]), active:s.layers.length},()=>this.recompute());
+  }
+  dims(){
+    const s=this.state, F={square:[1000,1000],card:[700,1200],wide:[1600,1000],exh:[1920,1080],ultra:[2560,1080]}[s.format];
+    if(F)return {W:F[0],H:F[1]};
+    const src=s.sources[0]; if(!src)return {W:1000,H:1240};
+    const long=1200;
+    return src.w>=src.h?{W:long,H:Math.round(long*src.h/src.w)}:{W:Math.round(long*src.w/src.h),H:long};
+  }
+  exportPieces(){
+    const a=this.act(), E=this.E, pal=this.pal();
+    if(a.kind==='geome'){
+      const rec=(a.recipe&&a.recipe.length)?a.recipe:['annulus','disc','petal'];
+      Array.from({length:a.rings},(_,i)=>rec[i%rec.length]).forEach((kind,i)=>
+        setTimeout(()=>this.download('subunit-R'+(i+1)+'-'+kind+'.svg',
+          new Blob([E.subunitSVG(kind,{order:a.order,ink:pal.ink})],{type:'image/svg+xml'})),i*350));
+    } else {
+      const bands=this.bandsFor(a), src=this._lumas[a.src];
+      bands.filter(b=>!a.bandsOff[b.rank]).forEach((b,i)=>setTimeout(()=>{
+        const col=E.rampColor(pal,b.rank,a.levels,a.palRoll);
+        const svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+src.w+' '+src.h+'"><path d="'+b.d+'" fill="'+col+'" fill-rule="evenodd"/></svg>';
+        this.download('plate-P'+(b.rank+1)+'.svg', new Blob([svg],{type:'image/svg+xml'}));
+      },i*350));
+    }
+  }
+
+  async addSource(dataURL,name){
+    try{
+      const src=await this.E.loadImageLuma(dataURL, this.props.workingRes ?? 1000);
+      const compactHref=this.E.compressSourceDataURL?await this.E.compressSourceDataURL(dataURL,1400):dataURL;
+      const newHash=this.E.fastHash?this.E.fastHash(compactHref):null;
+      let srcIdx=newHash?this.state.sources.findIndex(s=>(this.E.fastHash&&this.E.fastHash(s.href))===newHash):-1;
+      let sources=this.state.sources;
+      if(srcIdx<0){
+        srcIdx=sources.length;
+        sources=sources.concat([{name:name||('upload '+(sources.length+1)),href:compactHref,w:src.w,h:src.h}]);
+        this._lumas.push(src);
+      }
+      const layers=this.state.layers.concat([this.mkLayer(srcIdx,'Layer '+(this.state.layers.length+1))]);
+      const first=this.state.layers.length===0;
+      const long=1200, W=src.w>=src.h?long:Math.round(long*src.w/src.h), H=src.h>src.w?long:Math.round(long*src.h/src.w);
+      this.setState(Object.assign({sources,layers,active:layers.length-1}, first?{W,H}:{}),()=>this.recompute());
+    }catch(e){ alert('Could not read that image.'); }
+  }
+
+  bandsFor(ly){
+    if(ly.kind==='geome'){
+      const rov=ly.ringOver||{};
+      const rrk=Object.keys(ly.ringRanks||{}).map(k=>k+':'+ly.ringRanks[k]).join(',');
+      const rok=Object.keys(rov).map(k=>k+':'+rov[k]).join(',');
+      const cmp=ly.comp||'radial', jit=ly.jitter==null?0.35:ly.jitter, aq=ly.angleQ==null?45:ly.angleQ;
+      const armP={scale:ly.aScale==null?1:ly.aScale, spread:ly.aSpread==null?0.5:ly.aSpread,
+        stagger:ly.aStagger==null?0.5:ly.aStagger, axis:ly.aAxis||0};
+      const gk=['g',this._ckv,ly.seed,ly.order,ly.rings,ly.levels,(ly.recipe||[]).join(','),rrk,rok,cmp,jit,aq,
+        armP.scale,armP.spread,armP.stagger,armP.axis].join('|');
+      if(!this._cache[gk]) this._cache[gk]=this.E.geomeBands(ly.seed,{order:ly.order,rings:ly.rings,levels:ly.levels,recipe:ly.recipe,ringRanks:ly.ringRanks||null,
+        ringOver:Array.from({length:ly.rings},(_,i)=>rov[i]||null), comp:cmp, jitter:jit, angleQ:aq, armP});
+      return this._cache[gk];
+    }
+    const exOpts={levels:ly.levels,minArea:ly.minArea,invert:ly.invert,eps:ly.eps,harmonics:ly.harm,adapt:ly.adapt||0};
+    const plc=ly.place||'trace';
+    if(plc!=='trace'){
+      const armP={scale:ly.aScale==null?1:ly.aScale, spread:ly.aSpread==null?0.5:ly.aSpread,
+        stagger:ly.aStagger==null?0.5:ly.aStagger, axis:ly.aAxis||0};
+      const jit=ly.jitter==null?0.35:ly.jitter, aq=ly.angleQ==null?45:ly.angleQ;
+      const sk=['s',this._ckv,ly.src,ly.levels,ly.minArea,ly.invert?1:0,ly.eps,ly.harm,ly.adapt||0,
+        plc,ly.seed,ly.order,jit,aq,armP.scale,armP.spread,armP.stagger,armP.axis].join('|');
+      if(!this._cache[sk]) this._cache[sk]=this.E.scatterBands(this._lumas[ly.src],exOpts,
+        {seed:ly.seed,comp:plc,order:ly.order,jitter:jit,angleQ:aq,armP});
+      return this._cache[sk];
+    }
+    const key=[ly.src,ly.levels,ly.minArea,ly.invert?1:0,ly.eps,ly.harm,ly.adapt||0].join('|');
+    if(!this._cache[key]) this._cache[key]=this.E.extractBands(this._lumas[ly.src],exOpts);
+    return this._cache[key];
+  }
+  recompute(){
+    clearTimeout(this._rq);
+    this._rq=setTimeout(()=>{
+      if(!this.E||!this.state.layers.length){ this.setState({plate:''}); return; }
+      const s=this.state, pal=this.pal();
+      let plates=0, pts=0;
+      const layers=s.layers.map(ly=>{
+        const bands=this.bandsFor(ly);
+        plates+=bands.length; pts+=bands.reduce((n,b)=>n+b.pts,0);
+        const src=ly.kind==='geome'?{w:1000,h:1000}:this._lumas[ly.src];
+        return {bands, srcW:src.w, srcH:src.h, tx:{dx:ly.dx,dy:ly.dy,rot:ly.rot,scale:ly.scale},
+          opacity:ly.opacity, mode:ly.mode, palRoll:ly.palRoll, pb:ly.pb, blend:ly.blend, levels:ly.levels,
+          lineW:2, bandsOff:ly.bandsOff, bandsCut:ly.bandsCut, bandColors:ly.bandColors, visible:ly.visible};
+      });
+      const ghostSrc=s.layers[0]?s.sources[s.layers[0].src]:null;
+      const {W,H}=this.dims();
+      const plate=this.E.buildPlate({W,H,pal,ground:s.ground,layers,
+        linead:s.linead,lineadW:s.lineadW,
+        ghost:(s.ghost>0&&ghostSrc)?{href:ghostSrc.href,opacity:s.ghost}:null});
+      this.setState({plate, stats:{plates,pts}, W:this.dims().W, H:this.dims().H});
+      clearTimeout(this._as);
+      this._as=setTimeout(()=>{ try{ localStorage.setItem('lineadStudio.session', JSON.stringify(this.serializeSession())); }catch(e){} },900);
+    },50);
+  }
+
+  setL(patch){
+    const layers=this.state.layers.map((l,i)=>i===this.state.active?Object.assign({},l,patch):l);
+    this.setState({layers},()=>this.recompute());
+  }
+  setG(patch){ this.setState(patch,()=>this.recompute()); }
+  act(){ return this.state.layers[this.state.active]||this.mkLayer(0,''); }
+
+  dup(i){
+    const s=this.state; if(s.layers.length>=9)return;
+    const src=s.layers[i]; if(!src)return;
+    const c=Object.assign({},src,{name:'Layer '+(s.layers.length+1),
+      dx:src.dx+0.06, dy:src.dy-0.05, rot:src.rot+15, pb:src.pb==='off'?'cycle1':src.pb,
+      bandsOff:Object.assign({},src.bandsOff)});
+    const layers=s.layers.slice(); layers.splice(i+1,0,c);
+    this.setState({layers,active:i+1},()=>this.recompute());
+  }
+  del(i){
+    const s=this.state; if(s.layers.length<=1)return;
+    const layers=s.layers.filter((_,k)=>k!==i);
+    this.setState({layers,active:Math.min(s.active>=i?s.active-1:s.active,layers.length-1)},()=>this.recompute());
+  }
+  move(i,dir){
+    const s=this.state, j=i+dir; if(j<0||j>=s.layers.length)return;
+    const layers=s.layers.slice(); const t=layers[i]; layers[i]=layers[j]; layers[j]=t;
+    this.setState({layers,active:s.active===i?j:(s.active===j?i:s.active)},()=>this.recompute());
+  }
+
+  buildFilename(ext){ return 'linead-'+String(this.state.palKey).replace(':','-')+'-'+this.state.layers.length+'L.'+ext; }
+  download(name,blob){ const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),2000); }
+
+  async doPrint(){
+    const s=this.state; if(!s.plate||s.exporting)return;
+    const longPx=Math.round(s.inches*s.dpi);
+    try{
+      const blob=await this.E.renderPrintPNG(s.plate,s.W,s.H,longPx,s.dpi,
+        (n,t)=>this.setState({exporting:'Rendering '+n+'/'+t+'\u2026'}));
+      this.download('linead-'+s.inches+'in-'+s.dpi+'dpi.png',blob);
+    }catch(e){ alert('Print render failed at '+longPx+'px long edge \u2014 lower the size or DPI.\n'+(e&&e.message||e)); }
+    this.setState({exporting:''});
+  }
+
+  menuFlat(){
+    const E=this.E; if(!E)return [];
+    const q=(this.state.menuQ||'').trim().toLowerCase();
+    return E.allKinds().filter(k=>!q||k.name.toLowerCase().indexOf(q)>=0||(k.orphic||'').toLowerCase().indexOf(q)>=0);
+  }
+  ringKind(a,i){ const rec=(a.recipe&&a.recipe.length)?a.recipe:['annulus','disc','petal']; return rec[i%rec.length]; }
+  openMenu(i){
+    const a=this.act(); if(!a||a.kind!=='geome')return;
+    i=Math.max(0,Math.min(a.rings-1,i|0));
+    const ix=this.E.allKinds().findIndex(k=>k.key===this.ringKind(a,i));
+    this.setState({menu:true, menuRing:i, menuQ:'', menuIx:Math.max(0,ix)});
+  }
+  assignPiece(key){
+    const a=this.act(), i=this.state.menuRing;
+    const full=Array.from({length:a.rings},(_,j)=>this.ringKind(a,j));
+    full[i]=key;
+    this.setL({recipe:full, symbol:'custom'});
+  }
+  toggleOver(i){
+    const a=this.act(), ro=Object.assign({},a.ringOver||{});
+    if(ro[i]==='merge')delete ro[i]; else ro[i]='merge';
+    this.setL({ringOver:ro});
+  }
+  menuKey(e){
+    const k=e.key, s=this.state, a=this.act();
+    if(k==='Escape'){ e.preventDefault(); this.setState({menu:false}); return; }
+    if(k==='ArrowDown'||k==='ArrowUp'){ e.preventDefault();
+      const n=this.menuFlat().length; if(!n)return;
+      this.setState({menuIx:((s.menuIx+(k==='ArrowDown'?1:-1))%n+n)%n}); return; }
+    if(k==='ArrowLeft'||k==='ArrowRight'){ e.preventDefault();
+      const R=Math.max(1,a.rings);
+      this.setState({menuRing:((s.menuRing+(k==='ArrowRight'?1:-1))%R+R)%R}); return; }
+    if(k==='Enter'){ e.preventDefault();
+      const flat=this.menuFlat(), it=flat[Math.min(s.menuIx,flat.length-1)];
+      if(it)this.assignPiece(it.key); return; }
+    if(k==='Tab'){ e.preventDefault(); this.toggleOver(s.menuRing); return; }
+  }
+  openFoundry(def){
+    const f=def?Object.assign({},def):{key:'c:'+Date.now().toString(36), name:'Forged '+(this.state.customKinds.length+1),
+      form:'star', sides:5, size:1, inner:0.45, aspect:0.55, rot:0, span:2};
+    this.setState({foundry:f});
+  }
+  setF(p){ this.setState({foundry:Object.assign({},this.state.foundry,p)}); }
+  applyKinds(list,extra){
+    this.E.setCustomKinds(list); this._ckv++; this._cache={};
+    this.setState(Object.assign({customKinds:list},extra||{}),()=>this.recompute());
+  }
+  saveFoundry(){
+    const f=this.state.foundry; if(!f)return;
+    const def={key:f.key, name:(f.name||'').trim()||'Forged piece', form:f.form, sides:f.sides|0,
+      size:+f.size, inner:+f.inner, aspect:+f.aspect, rot:+f.rot, span:+f.span};
+    this.applyKinds(this.state.customKinds.filter(c=>c.key!==f.key).concat([def]),{foundry:null});
+  }
+  delFoundry(){
+    const f=this.state.foundry; if(!f)return;
+    const layers=this.state.layers.map(l=>(l.recipe&&l.recipe.indexOf(f.key)>=0)?Object.assign({},l,{recipe:l.recipe.map(k=>k===f.key?'disc':k)}):l);
+    this.applyKinds(this.state.customKinds.filter(c=>c.key!==f.key),{foundry:null, layers});
+  }
+
+  handleKey(e){
+    if(this.state.foundry){ if(e.key==='Escape'){ e.preventDefault(); this.setState({foundry:null}); } return; }
+    if(this.state.menu){ this.menuKey(e); return; }
+    if(/input|textarea|select/i.test(document.activeElement.tagName))return;
+    const k=e.key, a=this.act(), st=(p)=>this.setL(p);
+    if(e.shiftKey && /^Digit[1-9]$/.test(e.code)){
+      const i=+e.code.slice(5);
+      this.setState({sec:this.state.sec===i?0:i, kbd:false}); return;
+    }
+    if(k==='t'||k==='T'){ this.tourGo(this.state.tour<0?0:-1); return; }
+    if(this.state.tour>=0){
+      if(k==='Enter'){ e.preventDefault(); this.tourGo(this.state.tour+1); return; }
+      if(k==='Backspace'){ e.preventDefault(); this.tourGo(this.state.tour-1); return; }
+      if(k==='Escape'){ this.setState({tour:-1}); return; }
+    }
+    if(k==='?'){ this.setState({kbd:!this.state.kbd}); return; }
+    if(k==='Escape'){ this.setState({kbd:false}); return; }
+    if(/^[1-9]$/.test(k)){ const i=+k-1; if(this.state.layers[i])this.setState({active:i}); return; }
+    const coarse=e.shiftKey?0.05:0.01;
+    switch(k){
+      case 'u': case 'U': this._file.click(); break;
+      case 'z': case 'Z': if(a.kind==='geome')st({seed:Math.max(1,a.seed-1)}); break;
+      case 'x': case 'X': if(a.kind==='geome')st({seed:a.seed+1}); break;
+      case 'n': case 'N': if(a.kind==='geome')st({seed:Math.floor(Math.random()*99999)+1}); break;
+      case 'a': case 'A': this.dup(this.state.active); break;
+      case '[': st({harm:Math.max(0,a.harm-2)}); break;
+      case ']': st({harm:Math.min(64,a.harm+2)}); break;
+      case ',': st({levels:Math.max(2,a.levels-1)}); break;
+      case '.': st({levels:Math.min(8,a.levels+1)}); break;
+      case 'i': case 'I': st({invert:!a.invert}); break;
+      case 'v': case 'V': st({visible:!a.visible}); break;
+      case 'm': case 'M': st({mode:a.mode==='fills'?'lines':a.mode==='lines'?'both':'fills'}); break;
+      case 'b': case 'B': st({pb:a.pb==='off'?'cycle1':a.pb==='cycle1'?'cycle2':a.pb==='cycle2'?'complement':'off'}); break;
+      case 'c': case 'C':
+        if(a.kind==='geome'){ const cs=['radial','mirror','field','strata','grid','cascade']; st({comp:cs[(cs.indexOf(a.comp||'radial')+1)%cs.length]}); }
+        else { const ps=['trace','radial','mirror','field','strata','grid','cascade']; st({place:ps[(ps.indexOf(a.place||'trace')+1)%ps.length]}); }
+        break;
+      case 'k': case 'K': this.openMenu(this.state.menuRing); break;
+      case 'f': case 'F': if(a.kind==='geome')this.openFoundry(); break;
+      case 'w': case 'W': this.setG({linead:{none:'web',web:'dense',dense:'gesture',gesture:'none'}[this.state.linead]||'web'}); break;
+      case 'g': case 'G': this.setG({ghost:this.state.ghost>0?0:0.35}); break;
+      case 'q': case 'Q': st({rot:a.rot-(e.shiftKey?15:3)}); break;
+      case 'e': case 'E': st({rot:a.rot+(e.shiftKey?15:3)}); break;
+      case '-': case '_': st({scale:Math.max(0.2,+(a.scale-0.05).toFixed(2))}); break;
+      case '=': case '+': st({scale:Math.min(2.5,+(a.scale+0.05).toFixed(2))}); break;
+      case 'ArrowLeft': e.preventDefault(); st({dx:+(a.dx-coarse).toFixed(3)}); break;
+      case 'ArrowRight': e.preventDefault(); st({dx:+(a.dx+coarse).toFixed(3)}); break;
+      case 'ArrowUp': e.preventDefault(); st({dy:+(a.dy-coarse).toFixed(3)}); break;
+      case 'ArrowDown': e.preventDefault(); st({dy:+(a.dy+coarse).toFixed(3)}); break;
+      case 's': case 'S': this.download(this.buildFilename('svg'), new Blob([this.state.plate],{type:'image/svg+xml'})); break;
+      case 'p': case 'P': this.doPrint(); break;
+    }
+  }
+
+  renderVals(){
+    const s=this.state, a=this.act(), E=this.E;
+    const pal=this.pal();
+    const sv=(fn)=>(e)=>fn(parseFloat(e.target.value));
+    const seg=(items,cur,on)=>items.map(([v,label])=>({label,onClick:()=>on(v),
+      style:{background:v===cur?'rgba(212,168,75,.18)':'#1a1a1d',border:'1px solid '+(v===cur?'#d4a84b':'rgba(255,255,255,.12)'),
+        borderRadius:'7px',padding:'7px 4px',font:'inherit',fontSize:'10.5px',color:v===cur?'#d4a84b':'#908e87',cursor:'pointer'}}));
+    const secVals={};
+    for(let i=1;i<=9;i++){ const n=i;
+      secVals['o'+n]=s.sec===n;
+      secVals['t'+n]=()=>this.setState({sec:this.state.sec===n?0:n});
+      secVals['c'+n]=s.sec===n?'\u25BE':'\u25B8';
+    }
+    const layerCards=s.layers.map((l,i)=>({key:i,
+      name:l.name, dot:i===s.active?'\u25CF':'',
+      sub:(l.kind==='geome'?('seed '+l.seed+' \u00B7 '+((l.comp&&l.comp!=='radial')?l.comp+' \u00B7 ':'')+'D'+l.order+' \u00B7 '+l.rings+'R'):((s.sources[l.src]?s.sources[l.src].name:'')+' \u00B7 H'+l.harm+((l.place&&l.place!=='trace')?' \u00B7 '+l.place:'')))+' \u00B7 '+l.levels+'L \u00B7 '+l.mode+(l.pb!=='off'?' \u00B7 \u25E7 '+l.pb:'')+(l.blend&&l.blend!=='normal'?' \u00B7 '+l.blend:'')+(Object.keys(l.bandsCut||{}).length?' \u00B7 \u2298 cut':'')+(l.visible?'':' \u00B7 hidden'),
+      eye:l.visible?'\uD83D\uDC41':'\uD83D\uDEAB',
+      onSel:()=>this.setState({active:i}),
+      onEye:(e)=>{e.stopPropagation(); const layers=s.layers.map((x,k)=>k===i?Object.assign({},x,{visible:!x.visible}):x); this.setState({layers},()=>this.recompute());},
+      onUp:(e)=>{e.stopPropagation(); this.move(i,1);},
+      onDn:(e)=>{e.stopPropagation(); this.move(i,-1);},
+      onDup:(e)=>{e.stopPropagation(); this.dup(i);},
+      onDel:(e)=>{e.stopPropagation(); this.del(i);},
+      style:{display:'flex',alignItems:'center',gap:'8px',padding:'8px 10px',borderRadius:'8px',cursor:'pointer',
+        background:'#1a1a1d',border:'1.5px solid '+(i===s.active?'#d4a84b':'rgba(255,255,255,.08)'),
+        boxShadow:i===s.active?'0 0 0 2px rgba(212,168,75,.18)':'none',opacity:l.visible?1:0.55}
+    })).reverse();
+    const bands=(E&&s.ready&&(a.kind==='geome'||this._lumas[a.src]))?this.bandsFor(a):[];
+    const bandChips=bands.map(b=>{
+      const off=!!a.bandsOff[b.rank], cut=!!a.bandsCut[b.rank];
+      const m=pal.ramp.length||1;
+      const pin=a.bandColors&&a.bandColors[b.rank]!=null;
+      const col=pin?pal.ramp[((a.bandColors[b.rank]%m)+m)%m]:(E?E.rampColor(pal,b.rank,a.levels,a.palRoll):'#888');
+      return {label:'P'+(b.rank+1)+(cut?' \u2298':'')+(pin?' \u2726':''),
+        tip:b.loops+' forms \u00B7 '+b.pts+' pts \u00B7 click: distill \u00B7 shift: stencil window \u00B7 alt: pin colour (cycles the ramp)',
+        onClick:(e)=>{
+          if(e.altKey){ e.preventDefault();
+            const base=((Math.round(b.rank*(m-1)/Math.max(1,a.levels-2))+(a.palRoll||0))%m+m)%m;
+            const bcs=Object.assign({},a.bandColors);
+            const cur=bcs[b.rank]==null?base:bcs[b.rank];
+            const nxt=((cur+1)%m+m)%m;
+            if(nxt===base)delete bcs[b.rank]; else bcs[b.rank]=nxt;
+            this.setL({bandColors:bcs}); }
+          else if(e.shiftKey){ const bc=Object.assign({},a.bandsCut); if(cut)delete bc[b.rank]; else bc[b.rank]=1; this.setL({bandsCut:bc}); }
+          else { const bo=Object.assign({},a.bandsOff); if(off)delete bo[b.rank]; else bo[b.rank]=1; this.setL({bandsOff:bo}); } },
+        style:{display:'inline-flex',alignItems:'center',gap:'6px',padding:'5px 10px',borderRadius:'999px',cursor:'pointer',font:'inherit',fontSize:'10px',
+          background:off?'transparent':(cut?'rgba(212,168,75,.14)':'#1a1a1d'),
+          color:off?'#5a574f':(cut?'#d4a84b':'#edeae3'),
+          border:off?'1px dashed rgba(255,255,255,.2)':(cut?'1px dashed #d4a84b':'1px solid rgba(255,255,255,.12)'),
+          textDecoration:off?'line-through':'none',
+          boxShadow:(off||cut)?'none':('inset 0 0 0 2px '+col)}};
+    });
+    let suCards=[], jungOpts=[], hermOpts=[], symbolMeaning='';
+    if(E){
+      jungOpts=E.SYMBOLS.filter(x=>x.group==='Jungian').map(x=>({key:x.key,name:x.name}));
+      hermOpts=E.SYMBOLS.filter(x=>x.group==='Hermetic').map(x=>({key:x.key,name:x.name}));
+      const sym=E.SYMBOLS.find(x=>x.key===a.symbol);
+      symbolMeaning=sym?sym.meaning:'Hand-built recipe \u2014 cycle the cards below.';
+      if(a.kind==='geome'){
+        const AK=E.allKinds();
+        suCards=Array.from({length:a.rings},(_,i)=>{
+          const kind=this.ringKind(a,i);
+          const K=AK.find(k=>k.key===kind)||AK[0];
+          const pinT=a.ringRanks&&a.ringRanks[i]!=null;
+          const merge=(a.ringOver||{})[i]==='merge';
+          return {key:i, name:'R'+(i+1)+' '+K.name+(pinT?' \u00B7T'+(a.ringRanks[i]+1):'')+(merge?' \u222A':''),
+            tip:K.orphic+' \u00B7 click: choose the piece \u00B7 shift: pin its tone plate \u00B7 alt: weave / merge overlap',
+            thumb:React.createElement('span',{style:{display:'block',width:'100%'},dangerouslySetInnerHTML:{__html:E.subunitThumb(kind)}}),
+            onClick:(e)=>{
+              if(e.shiftKey){
+                const NR=Math.max(1,a.levels-1);
+                const rr=Object.assign({},a.ringRanks);
+                const nxt=(rr[i]==null?-1:rr[i])+1;
+                if(nxt>=NR)delete rr[i]; else rr[i]=nxt;
+                this.setL({ringRanks:rr});
+                return;
+              }
+              if(e.altKey){ e.preventDefault(); this.toggleOver(i); return; }
+              this.openMenu(i);
+            }};
+        });
+      }
+    }
+    const wadaList=(typeof window!=='undefined'&&window.GEOME_WADA_LIST)||[];
+    const wq=(s.wadaQ||'').trim().toLowerCase();
+    const wshown=wadaList.filter(p=>{
+      if(s.wadaSize!=='all'&&p.size!==+s.wadaSize)return false;
+      if(!wq)return true;
+      if(String(p.id.split(':')[1]).indexOf(wq)===0)return true;
+      if(p.label.toLowerCase().indexOf(wq)>=0)return true;
+      return (p.names||[]).some(n=>n.toLowerCase().indexOf(wq)>=0);
+    });
+    const wadaChips=wshown.slice(0,48).map(p=>({key:p.id, num:p.id.split(':')[1], label:p.label,
+      tip:p.label+' \u00B7 '+p.size+' colours \u00B7 Wada '+p.id.split(':')[1],
+      sw:[p.bg,p.disc,p.fA,p.fB,p.accent].map(hx=>({style:{flex:1,background:hx}})),
+      onClick:()=>this.setG({palKey:p.id}),
+      style:{background:p.id===s.palKey?'rgba(212,168,75,.14)':'#1a1a1d',
+        border:'1px solid '+(p.id===s.palKey?'#d4a84b':'rgba(255,255,255,.12)'),
+        borderRadius:'7px',padding:'5px',cursor:'pointer',font:'inherit',color:'#908e87',textAlign:'left',minWidth:0}}));
+    const wadaCount=wadaList.length?(wshown.length+' of '+wadaList.length+' combinations'+(wshown.length>48?' \u00B7 showing 48':'')):'dictionary loading\u2026';
+    const plateHtml=s.plate?s.plate.replace('<svg ','<svg style="display:block;width:100%;height:auto" '):'';
+    let menuGroups=[], menuRingLabel='', menuOverSeg=[];
+    if(E&&s.menu&&a.kind==='geome'){
+      const flat=this.menuFlat(), curKey=this.ringKind(a,Math.min(s.menuRing,a.rings-1));
+      const groupOf=(k)=>k.custom?'FORGED \u2014 YOUR PIECES':((k.key==='triangle'||k.key==='square')?'PRIMARY GEOMETRY':'CORE VOCABULARY');
+      const order=['CORE VOCABULARY','PRIMARY GEOMETRY','FORGED \u2014 YOUR PIECES'], gm={};
+      flat.forEach((k,ix)=>{
+        (gm[groupOf(k)]=gm[groupOf(k)]||[]).push({
+          sel:ix===s.menuIx?'1':'', cur:k.key===curKey?'\u25CF':'',
+          name:k.name, orphic:k.orphic,
+          thumb:React.createElement('span',{style:{display:'block',width:'100%'},dangerouslySetInnerHTML:{__html:E.subunitThumb(k.key)}}),
+          edit:k.custom?React.createElement('span',{title:'Edit in the foundry',
+            onClick:(ev)=>{ev.stopPropagation(); this.openFoundry(this.state.customKinds.find(c=>c.key===k.key));},
+            style:{flex:'0 0 auto',color:'#908e87',padding:'2px 6px',fontSize:'12px',cursor:'pointer'}},'\u270E'):null,
+          onClick:()=>{ this.setState({menuIx:ix}); this.assignPiece(k.key); },
+          style:{display:'flex',alignItems:'center',gap:'10px',width:'100%',boxSizing:'border-box',padding:'6px 8px',marginTop:'4px',
+            borderRadius:'8px',cursor:'pointer',font:'inherit',color:'#edeae3',textAlign:'left',
+            background:ix===s.menuIx?'rgba(212,168,75,.14)':'#1a1a1d',
+            border:'1px solid '+(ix===s.menuIx?'#d4a84b':'rgba(255,255,255,.1)')}});
+      });
+      menuGroups=order.filter(g=>gm[g]).map(g=>({label:g,items:gm[g]}));
+      const KN=E.allKinds().find(k=>k.key===curKey);
+      menuRingLabel='R'+(s.menuRing+1)+' \u00B7 '+(KN?KN.name:curKey);
+      const over=(a.ringOver||{})[s.menuRing]==='merge'?'merge':'weave';
+      menuOverSeg=seg([['weave','Weave \u22C8 cut'],['merge','Merge \u222A fill']],over,v=>{
+        const ro=Object.assign({},a.ringOver||{});
+        if(v==='merge')ro[s.menuRing]='merge'; else delete ro[s.menuRing];
+        this.setL({ringOver:ro});
+      });
+    }
+    const f=s.foundry||{};
+    const fThumb=(E&&s.foundry)?React.createElement('span',{style:{display:'block',width:'100%'},dangerouslySetInnerHTML:{__html:E.subunitThumb(f)}}):null;
+    const effComp=a.kind==='geome'?(a.comp||'radial'):(a.place||'trace');
+    const longPx=Math.round(s.inches*s.dpi);
+    const scl=longPx/Math.max(s.W,s.H);
+    const pw=Math.round(s.W*scl), ph=Math.round(s.H*scl), MP=pw*ph/1e6;
+    const T=this.TOUR, ti=s.tour;
+    return Object.assign(secVals, {
+      ready:s.ready, kbd:s.kbd, palKey:s.palKey, ground:s.ground,
+      tourOn:ti>=0,
+      tourN:(ti+1)+' / '+T.length,
+      tourTitle:ti>=0?T[ti].title:'', tourBody:ti>=0?T[ti].body:'', tourValue:ti>=0?T[ti].value:'',
+      tourPrev:()=>this.tourGo(ti-1), tourNext:()=>this.tourGo(ti+1),
+      tourNextLabel:ti>=T.length-1?'Done':'Next \u23CE',
+      tourClose:()=>this.setState({tour:-1}),
+      startTour:()=>this.tourGo(ti<0?0:-1),
+      plateEl: React.createElement('div',{key:'plate',style:{width:'100%'},dangerouslySetInnerHTML:{__html:plateHtml}}),
+      plateShellStyle:{margin:0,width:'min(100%, '+(s.W>=s.H?'760px':'560px')+')',
+        boxShadow:(this.props.plateShadow??true)?'0 0 0 1px rgba(255,255,255,.08), 0 34px 90px -24px rgba(0,0,0,.85)':'none'},
+      layerCards, bandChips,
+      modeSeg:seg([['fills','Plates'],['lines','Lines'],['both','Both']],a.mode,v=>this.setL({mode:v})),
+      lineadSeg:seg([['none','None'],['web','Web'],['dense','Dense'],['gesture','Gesture']],s.linead,v=>this.setG({linead:v})),
+      wadaSizeSeg:seg([['all','All'],['2','2'],['3','3'],['4','4']],s.wadaSize,v=>this.setState({wadaSize:v})),
+      inchPresets:[['8.27','A4'],['11.7','A3'],['16.5','A2'],['24','24\u2033'],['36','36\u2033']].map(([v,label])=>({label,
+        onClick:()=>this.setState({inches:parseFloat(v)}),
+        style:{background:Math.abs(s.inches-parseFloat(v))<0.01?'rgba(212,168,75,.18)':'transparent',
+          border:'1px '+(Math.abs(s.inches-parseFloat(v))<0.01?'solid #d4a84b':'dashed rgba(255,255,255,.16)'),
+          borderRadius:'6px',padding:'5px 9px',font:'inherit',fontSize:'10px',color:Math.abs(s.inches-parseFloat(v))<0.01?'#d4a84b':'#908e87',cursor:'pointer'}})),
+      palOpts:(E?Object.keys(E.PALETTES).map(k=>({key:k,name:E.PALETTES[k].label})):[]).concat(
+        (s.palKey==='custom'&&s.customPal)?[{key:'custom',name:'\u2726 '+s.customPal.label}]:
+        (s.palKey.indexOf('wada:')===0)?[{key:s.palKey,name:pal.label}]:[]),
+      palDots:[pal.ground,pal.ink].concat(pal.ramp).map(hex=>({hex,style:{width:'18px',height:'18px',borderRadius:'50%',background:hex,display:'inline-block',boxShadow:'inset 0 0 0 1px rgba(255,255,255,.2)'}})),
+      isGeome:a.kind==='geome', isImage:a.kind!=='geome',
+      format:s.format, vSymbol:a.symbol||'custom', symbolMeaning, jungOpts, hermOpts, suCards,
+      compSeg:a.kind==='geome'
+        ?seg([['radial','Radial'],['mirror','Mirror'],['field','Field'],['strata','Strata'],['grid','Grid'],['cascade','Cascade']],a.comp||'radial',v=>this.setL({comp:v}))
+        :seg([['trace','Traced'],['radial','Radial'],['mirror','Mirror'],['field','Field'],['strata','Strata'],['grid','Grid'],['cascade','Cascade']],a.place||'trace',v=>this.setL({place:v})),
+      compNote:{trace:'Traced \u2014 forms stay where the image put them. Any armature detaches the extracted forms and re-sets them: the image\u2019s own shapes become the vocabulary; registers = tone plates, so the palette law is untouched.',
+        radial:a.kind==='geome'?'Dihedral ring system \u2014 the mandala pole. Order sets the symmetry.':'The image\u2019s forms set in dihedral rings \u2014 the mandala pole.',
+        mirror:'One bilateral axis \u2014 constellation reflected left \u2194 right, no rotation law.',
+        field:'Free constellation \u2014 low-discrepancy coverage, few large forms over many small. Asymmetric equilibrium.',
+        strata:'Horizontal registers \u2014 stacked bands of forms, staggered phase.',
+        grid:'Lattice with breath \u2014 seeded dropout and drift keep it from mechanical.',
+        cascade:'Diagonal trajectories \u2014 forms marching across the plate with scale progression.'}[effComp],
+      isScatter:a.kind!=='geome'&&effComp!=='trace',
+      showDials:a.kind==='geome'||effComp!=='trace',
+      isFreeComp:effComp!=='radial'&&effComp!=='trace',
+      vJitter:a.jitter==null?0.35:a.jitter, onJitter:sv(v=>this.setL({jitter:v})),
+      angleSeg:seg([[90,'90\u00B0'],[45,'45\u00B0'],[30,'30\u00B0'],[0,'Free']],a.angleQ==null?45:a.angleQ,v=>this.setL({angleQ:v})),
+      vAScale:a.aScale==null?1:a.aScale, onAScale:sv(v=>this.setL({aScale:v})),
+      vASpread:a.aSpread==null?0.5:a.aSpread, onASpread:sv(v=>this.setL({aSpread:v})),
+      vAStagger:a.aStagger==null?0.5:a.aStagger, onAStagger:sv(v=>this.setL({aStagger:v})),
+      vAAxis:a.aAxis||0, onAAxis:sv(v=>this.setL({aAxis:v})),
+      resetDials:()=>this.setL({aScale:1,aSpread:0.5,aStagger:0.5,aAxis:0}),
+      spreadLabel:effComp==='radial'?'spread \u2014 ring spacing curve':'spread \u2014 gather \u2194 extend',
+      staggerLabel:{trace:'',radial:'stagger \u2014 alternate-ring phase',mirror:'hierarchy \u2014 size contrast',field:'hierarchy \u2014 size contrast',
+        strata:'stagger \u2014 brick offset',grid:'stagger \u2014 brick offset',cascade:'progression \u2014 shrink rate'}[effComp],
+      axisLabel:effComp==='radial'?'axis \u00B0 \u2014 phase of the rings':'axis \u00B0 \u2014 rotate the whole field',
+      vOrderLabel:(a.comp||'radial')==='radial'?'symmetry order \u00B7 Dn':(a.comp==='grid'?'columns':'count per register'),
+      vRingsLabel:(a.comp||'radial')==='radial'?'rings':(a.comp==='grid'?'rows':(a.comp==='strata'?'strata':'registers')),
+      vSeed:a.seed, vOrder:a.order, vRings:a.rings, vBlend:a.blend||'normal',
+      vLevels:a.levels, vMinArea:a.minArea, vInvert:a.invert, vEps:a.eps, vHarm:a.harm,
+      vHarmLabel:a.harm===0?'raw trace':a.harm+' harmonics',
+      vDx:a.dx, vDy:a.dy, vRot:a.rot, vScale:a.scale, vOpacity:a.opacity, vPb:a.pb, vRoll:a.palRoll,
+      vLineadW:s.lineadW, vGhost:s.ghost, vInches:s.inches, vDpi:String(s.dpi),
+      vAdapt:a.adapt||0, onAdapt:sv(v=>this.setL({adapt:v})),
+      onLevels:sv(v=>this.setL({levels:v})), onMinArea:sv(v=>this.setL({minArea:v})),
+      onInvert:()=>this.setL({invert:!a.invert}),
+      onEps:sv(v=>this.setL({eps:v})), onHarm:sv(v=>this.setL({harm:v})),
+      onDx:sv(v=>this.setL({dx:v})), onDy:sv(v=>this.setL({dy:v})),
+      onRot:sv(v=>this.setL({rot:v})), onScale:sv(v=>this.setL({scale:v})),
+      onOpacity:sv(v=>this.setL({opacity:v})),
+      onPb:(e)=>this.setL({pb:e.target.value}),
+      onBlend:(e)=>this.setL({blend:e.target.value}),
+      onSeed:(e)=>this.setL({seed:Math.max(1,parseInt(e.target.value)||1)}),
+      prevSeed:()=>this.setL({seed:Math.max(1,a.seed-1)}),
+      nextSeed:()=>this.setL({seed:a.seed+1}),
+      randSeed:()=>this.setL({seed:Math.floor(Math.random()*99999)+1}),
+      onOrder:sv(v=>this.setL({order:v})), onRings:sv(v=>this.setL({rings:v})),
+      addGeome:()=>this.addGeome(),
+      dupActive:()=>this.dup(this.state.active),
+      onFormat:(e)=>this.setState({format:e.target.value},()=>this.recompute()),
+      exportPieces:()=>this.exportPieces(),
+      randRecipe:()=>{ const AK2=E.allKinds(); this.setL({recipe:Array.from({length:a.rings},()=>AK2[Math.floor(Math.random()*AK2.length)].key), symbol:'custom'}); },
+      onSymbol:(e)=>{ const v=e.target.value;
+        if(v==='custom'){ this.setL({symbol:'custom'}); return; }
+        const sym=E.SYMBOLS.find(x=>x.key===v);
+        if(sym)this.setL({symbol:v, recipe:sym.recipe.slice(), order:sym.order}); },
+      rollL:()=>this.setL({palRoll:a.palRoll-1}), rollR:()=>this.setL({palRoll:a.palRoll+1}),
+      onPal:(e)=>this.setG({palKey:e.target.value}),
+      wadaQ:s.wadaQ, onWadaQ:(e)=>this.setState({wadaQ:e.target.value}),
+      wadaChips, wadaCount,
+      palFromSource:()=>{
+        const ly=this.act(), src=this._lumas[ly.kind==='geome'?0:ly.src]||this._lumas[0];
+        const cp=src?E.paletteFromSource(src):null;
+        if(cp)this.setG({customPal:cp, palKey:'custom'}); else alert('Upload a source image first.');
+      },
+      saveSession:()=>this.download('session-'+Date.now().toString(36)+'.linead.json', new Blob([JSON.stringify(this.serializeSession())],{type:'application/json'})),
+      loadSessionBtn:()=>this._json&&this._json.click(),
+      onGround:()=>this.setG({ground:!s.ground}),
+      onLineadW:sv(v=>this.setG({lineadW:v})), onGhost:sv(v=>this.setG({ghost:v})),
+      onInches:sv(v=>this.setState({inches:v})), onDpi:(e)=>this.setState({dpi:+e.target.value}),
+      onUpload:()=>this._file&&this._file.click(),
+      onKbd:()=>this.setState({kbd:!s.kbd}),
+      onDragOver:(e)=>e.preventDefault(),
+      onDrop:(e)=>{ e.preventDefault();
+        const f2=e.dataTransfer&&e.dataTransfer.files&&e.dataTransfer.files[0];
+        if(f2&&/^image\//.test(f2.type)){ const r=new FileReader(); r.onload=()=>this.addSource(r.result,f2.name); r.readAsDataURL(f2); } },
+      exportSVG:()=>this.download(this.buildFilename('svg'), new Blob([s.plate],{type:'image/svg+xml'})),
+      exportPNG:()=>this.doPrint(),
+      exportLabel:s.exporting||('\u2B07 '+s.dpi+' DPI \u00B7 P'),
+      exportLabelLong:s.exporting||('\u2B07 Export print PNG \u00B7 '+s.dpi+' DPI'),
+      prnInfo:pw+' \u00D7 '+ph+' px \u00B7 '+(s.W>=s.H?s.inches:+(s.inches*s.W/s.H).toFixed(1))+'\u2033 \u00D7 '+(s.H>s.W?s.inches:+(s.inches*s.H/s.W).toFixed(1))+'\u2033 @ '+s.dpi+' DPI \u00B7 '+MP.toFixed(0)+' MP'+(MP>200?' \u00B7 \u26A0 very large \u2014 30\u201390 s':''),
+      statusLine:s.ready?('linead \u00B7 '+pal.label+' \u00B7 '+s.layers.length+' layer'+(s.layers.length>1?'s':'')+' \u00B7 '+s.stats.plates+' plates \u00B7 '+s.stats.pts+' vector points \u00B7 active: '+(s.layers[s.active]?s.layers[s.active].name:'\u2014')):'loading engine\u2026',
+      menu:s.menu, menuGroups, menuRingLabel, menuOverSeg, menuQ:s.menuQ,
+      menuListRef:this.menuListRef, menuInputRef:this.menuInputRef,
+      onMenuQ:(e)=>this.setState({menuQ:e.target.value, menuIx:0}),
+      closeMenu:()=>this.setState({menu:false}),
+      eatClick:(e)=>e.stopPropagation(),
+      menuPrevRing:()=>this.setState({menuRing:((s.menuRing-1)%a.rings+a.rings)%a.rings}),
+      menuNextRing:()=>this.setState({menuRing:(s.menuRing+1)%a.rings}),
+      openFoundryBtn:()=>this.openFoundry(),
+      foundryOpen:!!s.foundry,
+      fTitle:this.state.customKinds.some(c=>c.key===f.key)?'FOUNDRY \u00B7 EDIT PIECE':'FOUNDRY \u00B7 FORGE A PIECE',
+      fThumb, fName:f.name||'', onFName:(e)=>this.setF({name:e.target.value}),
+      fFormSeg:s.foundry?seg([['poly','Poly'],['star','Star'],['ellipse','Ellipse'],['arc','Arc']],f.form,v=>this.setF({form:v})):[],
+      fShowSides:f.form==='poly'||f.form==='star', fShowInner:f.form==='star',
+      fShowAspect:f.form==='ellipse', fShowSpan:f.form==='arc',
+      fSides:f.sides, fSize:f.size, fInner:f.inner, fAspect:f.aspect, fRot:f.rot, fSpan:f.span,
+      onFSides:sv(v=>this.setF({sides:v})), onFSize:sv(v=>this.setF({size:v})),
+      onFInner:sv(v=>this.setF({inner:v})), onFAspect:sv(v=>this.setF({aspect:v})),
+      onFRot:sv(v=>this.setF({rot:v})), onFSpan:sv(v=>this.setF({span:v})),
+      fCanDel:this.state.customKinds.some(c=>c.key===f.key),
+      saveFoundry:()=>this.saveFoundry(), delFoundry:()=>this.delFoundry(),
+      closeFoundry:()=>this.setState({foundry:null}),
+      kbdRows:[
+        {what:'Open section menu 1\u20139 \u00B7 accordion',keys:'\u21E71\u2013\u21E79'},
+        {what:'Value tour \u00B7 next \u00B7 prev',keys:'T \u23CE \u232B'},
+        {what:'Select layer',keys:'1\u20139'},{what:'Duplicate & move (slide construction)',keys:'A'},
+        {what:'Nudge active layer \u00B7 \u21E7 coarse',keys:'\u2190\u2192\u2191\u2193'},
+        {what:'Rotate \u00B7 \u21E7 coarse',keys:'Q E'},{what:'Scale',keys:'\u2212 ='},
+        {what:'Fourier harmonics \u2212 / +',keys:'[ ]'},{what:'Tone plates \u2212 / +',keys:', .'},
+        {what:'Invert \u2014 extract the lights',keys:'I'},{what:'Show / hide active layer',keys:'V'},
+        {what:'Cycle plates / lines / both',keys:'M'},{what:'Cycle overlap re-cut blend',keys:'B'},
+        {what:'Geome seed prev / next / random',keys:'Z X N'},
+        {what:'Stencil-cut a plate window',keys:'\u21E7 + click chip'},
+        {what:'Pin a plate colour \u2014 cycles the ramp',keys:'\u2325 + click chip'},
+        {what:'Pin a ring\u2019s tone plate',keys:'\u21E7 + click card'},
+        {what:'Cycle armature \u2014 geome laws / image traced+scatter',keys:'C'},
+        {what:'Piece menu \u2014 assign subunits to rings',keys:'K / click card'},
+        {what:'Menu: piece \u00B7 ring \u00B7 set \u00B7 overlap law',keys:'\u2191\u2193 \u2190\u2192 \u23CE Tab'},
+        {what:'Foundry \u2014 forge a custom piece',keys:'F'},
+        {what:'Ring overlap law \u2014 weave / merge',keys:'\u2325 + click card'},
+        {what:'Cycle linead \u2014 web / dense / gesture',keys:'W'},{what:'Ghost of the source',keys:'G'},
+        {what:'Upload a drawing',keys:'U'},{what:'Export SVG \u2014 infinite resolution',keys:'S'},
+        {what:'Export print PNG at chosen DPI',keys:'P'},{what:'This map',keys:'? Esc'}
+      ]
+    });
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/ceti-design-system-cd9ddfb8-95af-48a0-95e2-1ba029594df0/colors_and_type.css">
+  <link rel="stylesheet" href="_ds/ceti-design-system-cd9ddfb8-95af-48a0-95e2-1ba029594df0/motion.css">
+  <script src="_ds/ceti-design-system-cd9ddfb8-95af-48a0-95e2-1ba029594df0/_ds_bundle.js"></script>
+  <style>
+    body { margin:0; background:#0a0a0b; scroll-behavior:smooth; }
+    a { color:#d4a84b; } a:hover { color:#e0b85c; }
+    input[type="range"] { accent-color:#d4a84b; height:18px; width:100%; }
+    ::-webkit-scrollbar { width:9px; } ::-webkit-scrollbar-thumb { background:rgba(255,255,255,.13); border-radius:5px; }
+  </style>
+</helmet>
+<div style="min-height:100vh;background:#0a0a0b;color:#edeae3;font-family:'Space Mono',monospace;font-size:12px">
+  <header style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;min-height:46px;padding:6px 18px;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(10,10,11,.85);position:sticky;top:0;z-index:5;backdrop-filter:blur(12px)">
+    <span style="color:#d4a84b;font-size:15px">&#9672;</span>
+    <span style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:18px;white-space:nowrap">Orpheum Atlas</span>
+    <nav style="display:flex;gap:12px;flex-wrap:wrap;font-size:10px;letter-spacing:.08em">
+      <a href="#atoms" style="color:#908e87;text-decoration:none" style-hover="color:#d4a84b">ATOMS</a>
+      <a href="#walk" style="color:#908e87;text-decoration:none" style-hover="color:#d4a84b">STEPS</a>
+      <a href="#operad" style="color:#908e87;text-decoration:none" style-hover="color:#d4a84b">&#947;</a>
+      <a href="#series" style="color:#908e87;text-decoration:none" style-hover="color:#d4a84b">&#8721;</a>
+      <a href="#phi" style="color:#908e87;text-decoration:none" style-hover="color:#d4a84b">&#966;</a>
+      <a href="#assoc" style="color:#908e87;text-decoration:none" style-hover="color:#d4a84b">K&#8345;</a>
+      <a href="#colour" style="color:#908e87;text-decoration:none" style-hover="color:#d4a84b">&#8855; &#8497;</a>
+      <a href="#depth" style="color:#908e87;text-decoration:none" style-hover="color:#d4a84b">DEPTH</a>
+      <a href="#ingest" style="color:#908e87;text-decoration:none" style-hover="color:#d4a84b">INGEST</a>
+      <a href="#kreturn" style="color:#908e87;text-decoration:none" style-hover="color:#d4a84b">k-SPACE</a>
+      <a href="#formats" style="color:#908e87;text-decoration:none" style-hover="color:#d4a84b">FORMATS</a>
+      <a href="#surface" style="color:#908e87;text-decoration:none" style-hover="color:#d4a84b">SURFACE</a>
+      <a href="#range" style="color:#908e87;text-decoration:none" style-hover="color:#d4a84b">RANGE</a>
+      <a href="#palettes" style="color:#908e87;text-decoration:none" style-hover="color:#d4a84b">PALETTES</a>
+      <a href="#file" style="color:#908e87;text-decoration:none" style-hover="color:#d4a84b">FILE</a>
+      <a href="#tr" style="color:#908e87;text-decoration:none" style-hover="color:#d4a84b">REALISM</a>
+      <a href="#glossary" style="color:#908e87;text-decoration:none" style-hover="color:#d4a84b">GLOSSARY</a>
+    </nav>
+    <div style="margin-left:auto;display:flex;gap:14px;align-items:center;font-size:10px">
+      <a href="docs/ORPHEUM-INDEX.md" style="color:#908e87;text-decoration:none" style-hover="color:#d4a84b">docs</a>
+      <a href="Orpheum v3.dc.html" style="color:#908e87;text-decoration:none" style-hover="color:#d4a84b">Orpheum v3 &#8594;</a>
+    </div>
+  </header>
+
+  <section data-screen-label="Hero" style="padding:56px 24px 24px;max-width:1240px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(280px,1fr);gap:28px;align-items:center">
+    <div>
+      <div style="font-size:10px;letter-spacing:.2em;color:#d4a84b;margin-bottom:14px">ORPHEUM &#183; AN ATLAS OF THE COMPOSITION</div>
+      <h1 style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:clamp(34px,5vw,60px);letter-spacing:-.02em;line-height:1.05;margin:0 0 18px;text-wrap:pretty">Every form on the plate is a <span style="color:#d4a84b">composition</span> &#8212; and the ways of composing have a shape of their own.</h1>
+      <p style="font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;color:#c9c2b2;margin:0;text-wrap:pretty">Three atoms, a dozen operations, one colour law. This atlas shows each piece as a symbol, as a live diagram you can move, and as a reason &#8212; why it serves an image that is a field rather than a picture. Text-only versions live in <a href="docs/ORPHEUM-INDEX.md">docs/</a>.</p>
+    </div>
+    <div style="border:1px solid rgba(212,168,75,.3);border-radius:14px;background:#141210;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.02),0 0 32px -10px rgba(212,168,75,.3)">
+      <svg viewBox="{{heroVB}}" style="width:100%;display:block;aspect-ratio:1">
+        <defs><sc-for list="{{heroClips}}" as="c" hint-placeholder-count="0"><clipPath id="{{c.id}}"><path d="{{c.d}}"></path></clipPath></sc-for></defs>
+        <sc-for list="{{heroItems}}" as="s" hint-placeholder-count="4"><path d="{{s.d}}" fill="{{s.fill}}" fill-opacity="{{s.op}}" style="{{s.style}}"></path></sc-for>
+        <sc-for list="{{heroOvers}}" as="o" hint-placeholder-count="0"><path d="{{o.d}}" fill="{{o.fill}}" clip-path="{{o.clip}}"></path></sc-for>
+      </svg>
+      <div style="display:flex;justify-content:space-between;padding:8px 12px;font-size:9.5px;color:#908e87;border-top:1px solid rgba(255,255,255,.06)"><span>a plate from rules alone &#183; {{heroCount}}</span><button onClick="{{reseed}}" style="background:transparent;border:none;color:#d4a84b;font-family:inherit;font-size:9.5px;cursor:pointer;padding:0" style-hover="color:#e0b85c">another &#8635;</button></div>
+    </div>
+  </section>
+
+  <section data-screen-label="Pipeline" style="padding:0 24px 20px;max-width:1240px;margin:0 auto">
+    <div style="border:1px solid rgba(255,255,255,.08);border-radius:14px;background:#121214;padding:18px 24px 20px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px"><span style="font-size:10px;letter-spacing:.18em;color:#d4a84b">THE PIPELINE &#183; STRUCTURE ON THE LEFT, RENDER ON THE RIGHT</span><span style="font-size:9.5px;color:#908e87">what the file stores vs what is derived</span></div>
+      <svg viewBox="0 0 1180 150" style="width:100%;display:block">
+        <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#908e87"></path></marker></defs>
+        <g font-family="Space Mono" font-size="11" text-anchor="middle">
+          <rect x="10" y="30" width="150" height="46" rx="8" fill="#1a1a1d" stroke="rgba(212,168,75,.5)"></rect><text x="85" y="49" fill="#d4a84b">atoms</text><text x="85" y="66" fill="#908e87" font-size="9.5">circle &#183; square &#183; triangle</text>
+          <rect x="10" y="92" width="150" height="46" rx="8" fill="#1a1a1d" stroke="rgba(212,168,75,.5)"></rect><text x="85" y="111" fill="#d4a84b">source image</text><text x="85" y="128" fill="#908e87" font-size="9.5">ingest &#8594; poly atoms</text>
+          <rect x="220" y="30" width="170" height="46" rx="8" fill="#1a1a1d" stroke="rgba(212,168,75,.5)"></rect><text x="305" y="49" fill="#d4a84b">operators</text><text x="305" y="66" fill="#908e87" font-size="9.5">n units in &#183; one out</text>
+          <rect x="450" y="61" width="170" height="46" rx="8" fill="rgba(212,168,75,.12)" stroke="#d4a84b"></rect><text x="535" y="80" fill="#edeae3">composition tree</text><text x="535" y="97" fill="#908e87" font-size="9.5">.orpheum.json</text>
+          <rect x="680" y="61" width="140" height="46" rx="8" fill="#1a1a1d" stroke="rgba(255,255,255,.25)"></rect><text x="750" y="80" fill="#edeae3">evaluate</text><text x="750" y="97" fill="#908e87" font-size="9.5">forms (pts, rank, mode)</text>
+          <rect x="880" y="61" width="130" height="46" rx="8" fill="#1a1a1d" stroke="rgba(255,255,255,.25)"></rect><text x="945" y="80" fill="#edeae3">buildPlate</text><text x="945" y="97" fill="#908e87" font-size="9.5">sort &#183; glue &#183; veils</text>
+          <rect x="1050" y="14" width="120" height="34" rx="8" fill="#1a1a1d" stroke="rgba(255,255,255,.25)"></rect><text x="1110" y="36" fill="#edeae3">SVG</text>
+          <rect x="1050" y="58" width="120" height="34" rx="8" fill="#1a1a1d" stroke="rgba(255,255,255,.25)"></rect><text x="1110" y="80" fill="#edeae3">PNG 900 dpi</text>
+          <rect x="1050" y="102" width="120" height="34" rx="8" fill="#1a1a1d" stroke="rgba(255,255,255,.25)"></rect><text x="1110" y="124" fill="#edeae3">k-space &#946; D</text>
+        </g>
+        <g stroke="#908e87" stroke-width="1.2" fill="none" marker-end="url(#arr)">
+          <path d="M160 53 L220 53"></path><path d="M160 115 C190 115 200 84 220 84 L220 76"></path><path d="M390 53 C420 53 430 84 450 84"></path><path d="M620 84 L680 84"></path><path d="M820 84 L880 84"></path>
+          <path d="M1010 84 C1030 84 1030 31 1050 31"></path><path d="M1010 84 L1050 75"></path><path d="M1010 84 C1030 84 1030 119 1050 119"></path>
+        </g>
+        <line x1="640" y1="8" x2="640" y2="146" stroke="rgba(212,168,75,.35)" stroke-dasharray="4 4"></line>
+        <text x="630" y="12" fill="#d4a84b" font-family="Space Mono" font-size="9" text-anchor="end">STRUCTURE &#183; saved</text><text x="650" y="12" fill="#908e87" font-family="Space Mono" font-size="9">DERIVED &#183; recomputed</text>
+      </svg>
+    </div>
+  </section>
+
+  <section data-screen-label="Panels" style="padding:0 24px 72px;max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:14px;align-items:start">
+
+    <div id="atoms" style="border:1px solid rgba(255,255,255,.08);border-radius:14px;background:#121214;padding:22px 24px;display:flex;flex-direction:column;gap:14px;scroll-margin-top:70px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font-size:10px;letter-spacing:.18em;color:#d4a84b">&#9679; &#9632; &#9650; &#183; THE ATOMS</span><span style="font-size:9.5px;color:#908e87">generators</span></div>
+      <h2 style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:26px;letter-spacing:-.02em;margin:0;line-height:1.15">Three forms, and <span style="color:#d4a84b">nothing</span> that is not made of them</h2>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+        <div style="text-align:center"><svg viewBox="0 0 100 100" style="width:100%;display:block;background:#141210;border-radius:8px"><circle cx="50" cy="50" r="34" fill="#f4ede0"></circle></svg><div style="font-size:11px;margin-top:6px">Circle</div><div style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:11.5px;color:#908e87">the Point of Origin, extended</div></div>
+        <div style="text-align:center"><svg viewBox="0 0 100 100" style="width:100%;display:block;background:#141210;border-radius:8px"><rect x="18" y="18" width="64" height="64" fill="#d4a84b"></rect></svg><div style="font-size:11px;margin-top:6px">Square</div><div style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:11.5px;color:#908e87">the Ground &#8212; four directions held</div></div>
+        <div style="text-align:center"><svg viewBox="0 0 100 100" style="width:100%;display:block;background:#141210;border-radius:8px"><path d="M50 14 L86 78 L14 78 Z" fill="#d97a3c"></path></svg><div style="font-size:11px;margin-top:6px">Triangle</div><div style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:11.5px;color:#908e87">the Ascent &#8212; three as one</div></div>
+      </div>
+      <p style="font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;color:#c9c2b2;margin:0;text-wrap:pretty">An atom is a unit outline of 96 points with a position, scale, turn, and a <em>rank</em> &#8212; an index into the palette, not a colour. A traced drawing enters as a fourth kind, <em>poly</em>, which is just an atom whose outline is its own. The readings in italics are names you may choose; the instrument never applies them for you.</p>
+    </div>
+
+    <div id="walk" style="border:1px solid rgba(255,255,255,.08);border-radius:14px;background:#121214;padding:22px 24px;display:flex;flex-direction:column;gap:14px;grid-column:1 / -1;scroll-margin-top:70px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font-size:10px;letter-spacing:.18em;color:#d4a84b">A PLATE, STEP BY STEP &#183; THE TREE GROWS</span><span style="font-size:9.5px;color:#908e87">same three atoms throughout</span></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px">
+        <sc-for list="{{stages}}" as="s" hint-placeholder-count="5">
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <svg viewBox="{{s.vb}}" style="width:100%;display:block;aspect-ratio:1;border-radius:8px;border:1px solid rgba(255,255,255,.06)">
+              <defs><sc-for list="{{s.clips}}" as="c" hint-placeholder-count="0"><clipPath id="{{c.id}}"><path d="{{c.d}}"></path></clipPath></sc-for></defs>
+              <sc-for list="{{s.items}}" as="i" hint-placeholder-count="3"><path d="{{i.d}}" fill="{{i.fill}}" fill-opacity="{{i.op}}" style="{{i.style}}"></path></sc-for>
+              <sc-for list="{{s.overs}}" as="o" hint-placeholder-count="0"><path d="{{o.d}}" fill="{{o.fill}}" clip-path="{{o.clip}}"></path></sc-for>
+            </svg>
+            <div style="font-size:10px;color:#d4a84b">{{s.step}}</div>
+            <div style="font-size:10px;color:#edeae3;line-height:1.4;font-family:'Space Mono',monospace;white-space:pre-wrap">{{s.tree}}</div>
+            <div style="font-family:'DM Sans',sans-serif;font-size:12.5px;color:#908e87;line-height:1.5">{{s.note}}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div id="operad" style="border:1px solid rgba(255,255,255,.08);border-radius:14px;background:#121214;padding:22px 24px;display:flex;flex-direction:column;gap:14px;scroll-margin-top:70px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font-size:10px;letter-spacing:.18em;color:#d4a84b">&#947; &#183; THE OPERAD</span><span style="font-size:9.5px;color:#908e87">n in, one out</span></div>
+      <h2 style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:26px;letter-spacing:-.02em;margin:0;line-height:1.15">An operation takes <span style="color:#d4a84b">n</span> units and returns one</h2>
+      <svg viewBox="0 0 320 170" style="width:100%;display:block">
+        <g stroke="rgba(255,255,255,.35)" stroke-width="1" fill="none"><path d="M40 30 L110 80 M80 30 L110 80 M120 30 L110 80 M110 80 L160 120 M200 60 L160 120 M250 20 L200 60 M300 20 L200 60 M160 120 L160 160"></path></g>
+        <g fill="#1a1a1d" stroke="#d4a84b" stroke-width="1.5"><circle cx="110" cy="80" r="14"></circle><circle cx="160" cy="120" r="14"></circle><circle cx="200" cy="60" r="14"></circle></g>
+        <g fill="#d4a84b" font-family="Space Mono" font-size="11" text-anchor="middle"><text x="110" y="84">g&#8321;</text><text x="160" y="124">f</text><text x="200" y="64">g&#8322;</text></g>
+        <g fill="#edeae3" font-family="Space Mono" font-size="10" text-anchor="middle"><text x="40" y="22">a</text><text x="80" y="22">b</text><text x="120" y="22">c</text><text x="250" y="14">d</text><text x="300" y="14">e</text></g>
+        <text x="160" y="168" fill="#908e87" font-family="Space Mono" font-size="9" text-anchor="middle">&#947;(f; g&#8321;, g&#8322;)(a,b,c,d,e)</text>
+      </svg>
+      <p style="font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;color:#c9c2b2;margin:0;text-wrap:pretty">Plugging g into an input of f is the composition &#947;. A unit is a tree; evaluating from the leaves up is the algebra. Move a leaf and every ancestor re-derives &#8212; and because an unchanged subtree returns the same value, only the branch you touched is recomputed. <em>Flatten</em> forgets the tree and keeps its value; <em>Ungroup</em> peels one level.</p>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:11px;line-height:1.5;border-top:1px solid rgba(255,255,255,.08);padding-top:12px">
+        <span style="color:#d4a84b">colours</span><span style="color:#c9c2b2">shape-sets &#8212; what the wires carry</span>
+        <span style="color:#d4a84b">arity</span><span style="color:#c9c2b2">how many units an operator binds (most take any n; Associate needs &#8805; 2)</span>
+        <span style="color:#d4a84b">unit</span><span style="color:#c9c2b2">the identity of arity one &#8212; an atom alone</span>
+        <span style="color:#d4a84b">algebra</span><span style="color:#c9c2b2">the evaluation &#8212; tree &#8594; forms on the plate</span>
+      </div>
+    </div>
+
+    <div id="series" style="border:1px solid rgba(255,255,255,.08);border-radius:14px;background:#121214;padding:22px 24px;display:flex;flex-direction:column;gap:14px;scroll-margin-top:70px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font-size:10px;letter-spacing:.18em;color:#d4a84b">1 &#189; &#8531; &#183; THE HARMONIC SERIES</span><span style="font-size:9.5px;color:#908e87">live</span></div>
+      <h2 style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:26px;letter-spacing:-.02em;margin:0;line-height:1.15">One form, sounding at every <span style="color:#d4a84b">integer</span> division</h2>
+      <div style="display:flex;gap:5px;flex-wrap:wrap"><sc-for list="{{hModeBtns}}" as="b" hint-placeholder-count="4"><button onClick="{{b.onClick}}" style="{{b.style}}" style-hover="border-color:#d4a84b">{{b.label}}</button></sc-for></div>
+      <div style="display:flex;gap:5px;flex-wrap:wrap"><sc-for list="{{hLawBtns}}" as="b" hint-placeholder-count="4"><button onClick="{{b.onClick}}" style="{{b.style}}" style-hover="border-color:#d4a84b">{{b.label}}</button></sc-for></div>
+      <svg viewBox="{{harmVB}}" style="width:100%;display:block;background:#141210;border-radius:8px;border:1px solid rgba(255,255,255,.06);aspect-ratio:1.6">
+        <defs><sc-for list="{{harmClips}}" as="c" hint-placeholder-count="0"><clipPath id="{{c.id}}"><path d="{{c.d}}"></path></clipPath></sc-for></defs>
+        <sc-for list="{{harmItems}}" as="s" hint-placeholder-count="4"><path d="{{s.d}}" fill="{{s.fill}}"></path></sc-for>
+        <sc-for list="{{harmOvers}}" as="o" hint-placeholder-count="0"><path d="{{o.d}}" fill="{{o.fill}}" clip-path="{{o.clip}}"></path></sc-for>
+      </svg>
+      <div><div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87"><span>partials</span><span style="color:#d4a84b">{{hN}}</span></div><input type="range" min="1" max="8" step="1" value="{{hN}}" onChange="{{onHN}}" aria-label="Partials"></div>
+      <div style="display:flex;align-items:flex-end;gap:4px;height:40px"><sc-for list="{{harmBars}}" as="h" hint-placeholder-count="8"><div title="{{h.title}}" style="{{h.style}}"></div></sc-for><span style="font-size:9.5px;color:#908e87;margin-left:8px;align-self:center">{{hLawLabel}}</span></div>
+      <p style="font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;color:#c9c2b2;margin:0;text-wrap:pretty">The k-th copy is scaled by the amplitude law and its rank is shifted by k &#8212; the colour operad acting alongside the geometry. <em>Nested</em> is a chord; <em>ring</em> and <em>spiral</em> spread the partials in space; <em>row</em> lays them out as an overtone series you can read left to right.</p>
+    </div>
+
+    <div id="fourier" style="border:1px solid rgba(255,255,255,.08);border-radius:14px;background:#121214;padding:22px 24px;display:flex;flex-direction:column;gap:14px;scroll-margin-top:70px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font-size:10px;letter-spacing:.18em;color:#d4a84b">&#8721; e&#8305;&#7503;&#7615; &#183; THE FOURIER RECUT</span><span style="font-size:9.5px;color:#908e87">truncation = abstraction</span></div>
+      <h2 style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:26px;letter-spacing:-.02em;margin:0;line-height:1.15">A form is the sum of its <span style="color:#d4a84b">partials</span></h2>
+      <div style="display:flex;gap:5px;flex-wrap:wrap"><sc-for list="{{ladBtns}}" as="b" hint-placeholder-count="4"><button onClick="{{b.onClick}}" style="{{b.style}}" style-hover="border-color:#d4a84b">{{b.label}}</button></sc-for></div>
+      <div style="display:flex;gap:5px"><sc-for list="{{fShapeBtns}}" as="b" hint-placeholder-count="3"><button onClick="{{b.onClick}}" style="{{b.style}}" style-hover="border-color:#d4a84b">{{b.label}}</button></sc-for></div>
+      <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px">
+        <sc-for list="{{fourierRow}}" as="f" hint-placeholder-count="6"><div style="text-align:center"><svg viewBox="0 0 300 300" style="width:100%;display:block;background:#141210;border-radius:6px"><path d="{{f.d}}" fill="#d4a84b"></path></svg><div style="font-size:9.5px;color:#908e87;margin-top:4px">K = {{f.k}}</div></div></sc-for>
+      </div>
+      <div><div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87"><span>bloom &#8212; golden-phased partials injected</span><span style="color:#d4a84b">{{fBloom}}</span></div><input type="range" min="0" max="1" step="0.05" value="{{fBloomV}}" onChange="{{onBloom}}" aria-label="Bloom"></div>
+      <p style="font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;color:#c9c2b2;margin:0;text-wrap:pretty">Trace the outline as a periodic signal, keep K terms, resynthesise. Few terms: the square forgets its corners and becomes a disc with a memory. Which terms you keep is a <em>ladder</em> &#8212; all integers, odd only (the square-wave ladder), Fibonacci, or &#966;: 1&#183;2&#183;4&#183;7&#183;11&#183;18, which never closes on itself. This is the dial from likeness to primary.</p>
+    </div>
+
+    <div id="phi" style="border:1px solid rgba(255,255,255,.08);border-radius:14px;background:#121214;padding:22px 24px;display:flex;flex-direction:column;gap:14px;scroll-margin-top:70px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font-size:10px;letter-spacing:.18em;color:#d4a84b">137.5&#176; &#183; THE &#966; ECHO</span><span style="font-size:9.5px;color:#908e87">360&#176; / &#966;&#178;</span></div>
+      <h2 style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:26px;letter-spacing:-.02em;margin:0;line-height:1.15">The form returns smaller, turned, <span style="color:#d4a84b">never</span> repeating</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:center">
+        <svg viewBox="{{echoVB}}" style="width:100%;display:block;background:#141210;border-radius:8px;border:1px solid rgba(255,255,255,.06);aspect-ratio:1">
+          <defs><sc-for list="{{echoClips}}" as="c" hint-placeholder-count="0"><clipPath id="{{c.id}}"><path d="{{c.d}}"></path></clipPath></sc-for></defs>
+          <sc-for list="{{echoItems}}" as="s" hint-placeholder-count="4"><path d="{{s.d}}" fill="{{s.fill}}"></path></sc-for>
+          <sc-for list="{{echoOvers}}" as="o" hint-placeholder-count="0"><path d="{{o.d}}" fill="{{o.fill}}" clip-path="{{o.clip}}"></path></sc-for>
+        </svg>
+        <svg viewBox="-110 -110 220 220" style="width:100%;display:block;background:#0e0e10;border-radius:8px;border:1px solid rgba(255,255,255,.06);aspect-ratio:1">
+          <circle r="100" fill="none" stroke="rgba(255,255,255,.15)"></circle>
+          <sc-for list="{{seeds}}" as="p" hint-placeholder-count="12"><circle cx="{{p.x}}" cy="{{p.y}}" r="{{p.r}}" fill="{{p.fill}}"></circle></sc-for>
+          <text x="0" y="104" fill="#908e87" font-family="Space Mono" font-size="8" text-anchor="middle">n &#183; 137.507&#176; &#183; &#8730;n</text>
+        </svg>
+      </div>
+      <div><div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87"><span>echoes &#183; about {{echoAbout}}</span><span style="color:#d4a84b">{{eN}}</span></div><input type="range" min="1" max="8" step="1" value="{{eN}}" onChange="{{onEN}}" aria-label="Echoes"></div>
+      <div style="display:flex;gap:5px"><sc-for list="{{eAboutBtns}}" as="b" hint-placeholder-count="2"><button onClick="{{b.onClick}}" style="{{b.style}}" style-hover="border-color:#d4a84b">{{b.label}}</button></sc-for></div>
+      <p style="font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;color:#c9c2b2;margin:0;text-wrap:pretty">Each echo is scaled by 1/&#966; and turned by the golden angle. Because 137.5&#176; is the most irrational turn there is, successive copies never align &#8212; the same reason seeds pack evenly on a sunflower (right). <em>About self</em> makes the form its own centre; <em>about plate</em> makes the plate the centre.</p>
+    </div>
+
+    <div id="affine" style="border:1px solid rgba(255,255,255,.08);border-radius:14px;background:#121214;padding:22px 24px;display:flex;flex-direction:column;gap:14px;scroll-margin-top:70px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font-size:10px;letter-spacing:.18em;color:#d4a84b">T&#8319; &#183; THE AFFINE SERIES</span><span style="font-size:9.5px;color:#908e87">live</span></div>
+      <h2 style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:26px;letter-spacing:-.02em;margin:0;line-height:1.15">The same gesture, <span style="color:#d4a84b">iterated</span> by ratio</h2>
+      <svg viewBox="{{affVB}}" style="width:100%;display:block;background:#141210;border-radius:8px;border:1px solid rgba(255,255,255,.06);aspect-ratio:1.6">
+        <defs><sc-for list="{{affClips}}" as="c" hint-placeholder-count="0"><clipPath id="{{c.id}}"><path d="{{c.d}}"></path></clipPath></sc-for></defs>
+        <sc-for list="{{affItems}}" as="s" hint-placeholder-count="4"><path d="{{s.d}}" fill="{{s.fill}}"></path></sc-for>
+        <sc-for list="{{affOvers}}" as="o" hint-placeholder-count="0"><path d="{{o.d}}" fill="{{o.fill}}" clip-path="{{o.clip}}"></path></sc-for>
+      </svg>
+      <div><div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87"><span>scale ratio per step</span><span style="color:#d4a84b">{{affS}}</span></div><input type="range" min="0.5" max="1.2" step="0.01" value="{{affSV}}" onChange="{{onAffS}}" aria-label="Scale ratio"></div>
+      <div><div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87"><span>turn per step &#176;</span><span style="color:#d4a84b">{{affR}}</span></div><input type="range" min="-90" max="90" step="1" value="{{affR}}" onChange="{{onAffR}}" aria-label="Turn"></div>
+      <div><div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87"><span>iterations</span><span style="color:#d4a84b">{{affN}}</span></div><input type="range" min="0" max="10" step="1" value="{{affN}}" onChange="{{onAffN}}" aria-label="Iterations"></div>
+      <p style="font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;color:#c9c2b2;margin:0;text-wrap:pretty">Scale, turn, step &#8212; applied again to the result each time, so the copies trace a spiral, a fan, or a ladder depending on the ratios. Where the harmonic series divides, the affine series multiplies. Each step shifts rank by one.</p>
+    </div>
+
+    <div id="assoc" style="border:1px solid rgba(212,168,75,.45);border-radius:14px;background:#121214;padding:22px 24px;display:flex;flex-direction:column;gap:14px;box-shadow:0 0 0 1px rgba(255,255,255,.02),0 0 32px -10px rgba(212,168,75,.3);scroll-margin-top:70px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font-size:10px;letter-spacing:.18em;color:#d4a84b">K&#8345; &#183; THE ASSOCIAHEDRON</span><span style="font-size:9.5px;color:#908e87">{{kStat}}</span></div>
+      <h2 style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:26px;letter-spacing:-.02em;margin:0;line-height:1.15">The same forms, every way of <span style="color:#d4a84b">binding</span> them</h2>
+      <div style="display:flex;gap:5px"><sc-for list="{{nBtns}}" as="b" hint-placeholder-count="3"><button onClick="{{b.onClick}}" style="{{b.style}}" style-hover="border-color:#d4a84b">{{b.label}}</button></sc-for></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:center">
+        <svg viewBox="0 0 240 200" style="width:100%;display:block;background:#0e0e10;border-radius:8px;border:1px solid rgba(255,255,255,.06)">
+          <sc-for list="{{kEdges}}" as="e" hint-placeholder-count="5"><line x1="{{e.x1}}" y1="{{e.y1}}" x2="{{e.x2}}" y2="{{e.y2}}" stroke="{{e.stroke}}" stroke-width="{{e.w}}"></line></sc-for>
+          <sc-for list="{{kVerts}}" as="v" hint-placeholder-count="5"><circle cx="{{v.cx}}" cy="{{v.cy}}" r="{{v.r}}" fill="{{v.fill}}" stroke="{{v.stroke}}" stroke-width="1.5" onClick="{{v.onClick}}" style="cursor:pointer"><title>{{v.label}}</title></circle></sc-for>
+        </svg>
+        <svg viewBox="{{formVB}}" style="width:100%;display:block;background:#141210;border-radius:8px;border:1px solid rgba(255,255,255,.06)">
+          <sc-for list="{{formItems}}" as="s" hint-placeholder-count="3"><path d="{{s.d}}" fill="{{s.fill}}"></path></sc-for>
+        </svg>
+      </div>
+      <div style="text-align:center;font-size:13px;letter-spacing:.04em">{{kLabel}}</div>
+      <div><div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87"><span>walk toward {{kTo}}</span><span style="color:#d4a84b">{{kWalk}}</span></div><input type="range" min="0" max="1" step="0.01" value="{{walk}}" onChange="{{onWalk}}" aria-label="Walk the edge"></div>
+      <p style="font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;color:#c9c2b2;margin:0;text-wrap:pretty">Bind n forms two at a time with a law that is <em>not</em> associative &#8212; (ab)c and a(bc) differ &#8212; and the bracketings become points. Each vertex is a full bracketing; each edge is one re-association. For four forms the map is a pentagon; for five, a solid with fourteen vertices. The slider moves along an edge: a straight-line path between two bracketings, every frame a valid plate.</p>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;border-top:1px solid rgba(255,255,255,.08);padding-top:12px">
+        <sc-for list="{{catalan}}" as="c" hint-placeholder-count="5"><div style="text-align:center"><div style="font-size:9px;color:#908e87;letter-spacing:.1em">K{{c.n}}</div><div style="font-size:16px;color:#d4a84b">{{c.v}}</div><div style="font-size:9px;color:#908e87">{{c.shape}}</div></div></sc-for>
+      </div>
+    </div>
+
+    <div id="colour" style="border:1px solid rgba(255,255,255,.08);border-radius:14px;background:#121214;padding:22px 24px;display:flex;flex-direction:column;gap:14px;scroll-margin-top:70px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font-size:10px;letter-spacing:.18em;color:#d4a84b">&#8855; &#8497; &#183; THE DOUBLE, AND THE SHEAF</span><span style="font-size:9.5px;color:#908e87">(shape, rank, mode)</span></div>
+      <h2 style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:26px;letter-spacing:-.02em;margin:0;line-height:1.15">Colour belongs to the <span style="color:#d4a84b">field</span>, not the form</h2>
+      <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+        <sc-for list="{{swA}}" as="d" hint-placeholder-count="6"><button onClick="{{d.onClick}}" aria-label="{{d.title}}" style="{{d.style}}"></button></sc-for>
+        <span style="color:#908e87;margin:0 4px">+</span>
+        <sc-for list="{{swB}}" as="d" hint-placeholder-count="6"><button onClick="{{d.onClick}}" aria-label="{{d.title}}" style="{{d.style}}"></button></sc-for>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div style="background:#0e0e10;border-radius:8px;padding:10px;border:1px solid rgba(255,255,255,.06)">
+          <div style="font-size:9px;letter-spacing:.12em;color:#d4a84b;margin-bottom:6px">SOLID &#8743; SOLID &#8594; GLUE</div>
+          <svg viewBox="0 0 160 110" style="width:100%;display:block"><circle cx="60" cy="55" r="44" fill="{{gluA}}"></circle><circle cx="100" cy="55" r="44" fill="{{gluB}}"></circle><clipPath id="atlasLens"><circle cx="60" cy="55" r="44"></circle></clipPath><circle cx="100" cy="55" r="44" fill="{{gluC}}" clip-path="url(#atlasLens)"></circle></svg>
+          <div style="font-size:12px;color:#d4a84b;text-align:center;margin-top:4px">{{gluEq}}</div>
+        </div>
+        <div style="background:#0e0e10;border-radius:8px;padding:10px;border:1px solid rgba(255,255,255,.06)">
+          <div style="font-size:9px;letter-spacing:.12em;color:#d4a84b;margin-bottom:6px">VEIL OVER SOLID &#8594; BLEND</div>
+          <svg viewBox="0 0 160 110" style="width:100%;display:block"><circle cx="60" cy="55" r="44" fill="{{gluA}}"></circle><circle cx="100" cy="55" r="44" fill="{{gluB}}" fill-opacity="0.55" style="mix-blend-mode:multiply"></circle></svg>
+          <div style="font-size:12px;color:#908e87;text-align:center;margin-top:4px">&#945; 0.55 &#183; multiply</div>
+        </div>
+      </div>
+      <p style="font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;color:#c9c2b2;margin:0;text-wrap:pretty">A form carries a rank, and every geometric operation carries a rank action &#8212; two operads acting on the pair (shape, rank). That is the <em>double</em>. Where two solids meet, the intersection is re-cut to glue(a,b) = (a+b+1) mod m &#8212; symmetric, so draw order cannot matter and nothing off-palette can appear. That is the <em>sheaf</em>: colour is a section over the plate, decided by what is stacked at each point. A <em>veil</em> is the one declared exception: a translucent layer above every solid, never re-cut.</p>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:11px;line-height:1.5;border-top:1px solid rgba(255,255,255,.08);padding-top:12px">
+        <span style="color:#d4a84b">stalk</span><span style="color:#c9c2b2">the ranks present at one point</span>
+        <span style="color:#d4a84b">section</span><span style="color:#c9c2b2">a consistent colouring of a region</span>
+        <span style="color:#d4a84b">closure</span><span style="color:#c9c2b2">every fill &#8712; ramp &#8746; {ground, ink}; m = {{gluM}} here</span>
+        <span style="color:#d4a84b">honest note</span><span style="color:#c9c2b2">gluing is pairwise today; triple overlaps are on the ledger</span>
+      </div>
+    </div>
+
+    <div id="veil" style="border:1px solid rgba(255,255,255,.08);border-radius:14px;background:#121214;padding:22px 24px;display:flex;flex-direction:column;gap:14px;scroll-margin-top:70px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font-size:10px;letter-spacing:.18em;color:#d4a84b">&#945; &#183; THE VEIL</span><span style="font-size:9.5px;color:#908e87">solid vs transparent</span></div>
+      <h2 style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:26px;letter-spacing:-.02em;margin:0;line-height:1.15">What is beneath <span style="color:#d4a84b">shows through</span>, un-recut</h2>
+      <div style="display:flex;gap:5px"><sc-for list="{{vBlendBtns}}" as="b" hint-placeholder-count="3"><button onClick="{{b.onClick}}" style="{{b.style}}" style-hover="border-color:#d4a84b">{{b.label}}</button></sc-for></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div style="background:#0e0e10;border-radius:8px;padding:10px;border:1px solid rgba(255,255,255,.06)"><div style="font-size:9px;letter-spacing:.12em;color:#d4a84b;margin-bottom:6px">AS SOLIDS &#8212; GLUED</div>
+          <svg viewBox="{{vSolidVB}}" style="width:100%;display:block;aspect-ratio:1;background:#141210;border-radius:6px"><defs><sc-for list="{{vSolidClips}}" as="c" hint-placeholder-count="0"><clipPath id="{{c.id}}"><path d="{{c.d}}"></path></clipPath></sc-for></defs><sc-for list="{{vSolidItems}}" as="s" hint-placeholder-count="3"><path d="{{s.d}}" fill="{{s.fill}}"></path></sc-for><sc-for list="{{vSolidOvers}}" as="o" hint-placeholder-count="0"><path d="{{o.d}}" fill="{{o.fill}}" clip-path="{{o.clip}}"></path></sc-for></svg></div>
+        <div style="background:#0e0e10;border-radius:8px;padding:10px;border:1px solid rgba(255,255,255,.06)"><div style="font-size:9px;letter-spacing:.12em;color:#d4a84b;margin-bottom:6px">TRIANGLE AS VEIL &#8212; BLENDED</div>
+          <svg viewBox="{{vVeilVB}}" style="width:100%;display:block;aspect-ratio:1;background:#141210;border-radius:6px"><defs><sc-for list="{{vVeilClips}}" as="c" hint-placeholder-count="0"><clipPath id="{{c.id}}"><path d="{{c.d}}"></path></clipPath></sc-for></defs><sc-for list="{{vVeilItems}}" as="s" hint-placeholder-count="3"><path d="{{s.d}}" fill="{{s.fill}}" fill-opacity="{{s.op}}" style="{{s.style}}"></path></sc-for><sc-for list="{{vVeilOvers}}" as="o" hint-placeholder-count="0"><path d="{{o.d}}" fill="{{o.fill}}" clip-path="{{o.clip}}"></path></sc-for></svg></div>
+      </div>
+      <div><div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87"><span>opacity &#945;</span><span style="color:#d4a84b">{{vAlpha}}</span></div><input type="range" min="0.05" max="1" step="0.05" value="{{vAlphaV}}" onChange="{{onVAlpha}}" aria-label="Veil opacity"></div>
+      <p style="font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;color:#c9c2b2;margin:0;text-wrap:pretty">The same three forms. Left, all solid: each overlap is re-cut to a palette member. Right, the triangle is a <em>veil</em>: it floats above every solid and tints what it crosses. <em>Multiply</em> darkens like a glaze, <em>screen</em> lightens like a projection, <em>normal</em> simply fades. Palette closure is relaxed on veils by declaration &#8212; they are a different section, the field's luminance.</p>
+    </div>
+
+    <div id="depth" style="border:1px solid rgba(255,255,255,.08);border-radius:14px;background:#121214;padding:22px 24px;display:flex;flex-direction:column;gap:14px;scroll-margin-top:70px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font-size:10px;letter-spacing:.18em;color:#d4a84b">&#9649; &#183; DEPTH</span><span style="font-size:9.5px;color:#908e87">flat colour, stacked</span></div>
+      <h2 style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:26px;letter-spacing:-.02em;margin:0;line-height:1.15">A third dimension without a <span style="color:#d4a84b">rendered</span> light</h2>
+      <div style="display:flex;gap:5px"><sc-for list="{{dShadeBtns}}" as="b" hint-placeholder-count="3"><button onClick="{{b.onClick}}" style="{{b.style}}" style-hover="border-color:#d4a84b">{{b.label}}</button></sc-for></div>
+      <svg viewBox="{{depthVB}}" style="width:100%;display:block;background:#141210;border-radius:8px;border:1px solid rgba(255,255,255,.06);aspect-ratio:1.6">
+        <sc-for list="{{depthItems}}" as="s" hint-placeholder-count="6"><path d="{{s.d}}" fill="{{s.fill}}" fill-opacity="{{s.op}}" style="{{s.style}}"></path></sc-for>
+      </svg>
+      <div><div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87"><span>light from &#176;</span><span style="color:#d4a84b">{{dAngle}}</span></div><input type="range" min="0" max="360" step="5" value="{{dAngle}}" onChange="{{onDAngle}}" aria-label="Light angle"></div>
+      <p style="font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;color:#c9c2b2;margin:0;text-wrap:pretty">Depth is a unit offset along a light angle in flat layers. <em>Ink</em> shade is a translucent tone chosen by the ground's luminance &#8212; dark multiplied on a light plate, light screened on a dark one &#8212; fading with distance; <em>ground</em> is the same tone at a constant opacity; <em>rank</em> shade is a solid extrusion stepping through the palette &#8212; the strict option, since every fill stays a palette member. A plate-wide <em>relief</em> in Tweaks does the same for every solid at once.</p>
+    </div>
+
+    <div id="ingest" style="border:1px solid rgba(255,255,255,.08);border-radius:14px;background:#121214;padding:22px 24px;display:flex;flex-direction:column;gap:14px;scroll-margin-top:70px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font-size:10px;letter-spacing:.18em;color:#d4a84b">&#8682; &#183; INGEST AND DECOMPOSITION</span><span style="font-size:9.5px;color:#908e87">source &#8594; generators</span></div>
+      <h2 style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:26px;letter-spacing:-.02em;margin:0;line-height:1.15">A drawing enters as <span style="color:#d4a84b">parts</span>, not as a picture</h2>
+      <svg viewBox="0 0 560 150" style="width:100%;display:block">
+        <defs><marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#908e87"></path></marker></defs>
+        <g font-family="Space Mono" font-size="9.5" text-anchor="middle" fill="#908e87">
+          <rect x="6" y="20" width="96" height="76" rx="6" fill="#1a1a1d" stroke="rgba(255,255,255,.2)"></rect><rect x="22" y="34" width="64" height="48" fill="#3a3a40"></rect><circle cx="48" cy="58" r="16" fill="#8a8a92"></circle><rect x="60" y="40" width="20" height="36" fill="#c9c2b2"></rect><text x="54" y="118" fill="#edeae3">luma</text><text x="54" y="131">&#8804; 400 px grid</text>
+          <rect x="146" y="20" width="96" height="76" rx="6" fill="#1a1a1d" stroke="rgba(255,255,255,.2)"></rect><rect x="162" y="34" width="64" height="48" fill="#2a2a2e"></rect><circle cx="188" cy="58" r="16" fill="#55555d"></circle><rect x="200" y="40" width="20" height="36" fill="#8a8a92"></rect><rect x="162" y="34" width="64" height="48" fill="none" stroke="#d4a84b" stroke-dasharray="3 2"></rect><text x="194" y="118" fill="#edeae3">bands</text><text x="194" y="131">L levels &#183; adaptive</text>
+          <rect x="286" y="20" width="96" height="76" rx="6" fill="#1a1a1d" stroke="rgba(255,255,255,.2)"></rect><circle cx="328" cy="58" r="16" fill="none" stroke="#d4a84b" stroke-width="1.5"></circle><rect x="340" y="40" width="20" height="36" fill="none" stroke="#d4a84b" stroke-width="1.5"></rect><text x="334" y="118" fill="#edeae3">trace</text><text x="334" y="131">marching squares &#183; &#949;</text>
+          <rect x="426" y="20" width="128" height="76" rx="6" fill="#1a1a1d" stroke="rgba(212,168,75,.5)"></rect><circle cx="462" cy="58" r="16" fill="#d4a84b"></circle><rect x="488" y="40" width="20" height="36" fill="#d97a3c"></rect><rect x="514" y="40" width="20" height="36" fill="#8c2f1e"></rect><text x="490" y="118" fill="#edeae3">Ingest unit</text><text x="490" y="131">band groups of poly atoms</text>
+        </g>
+        <g stroke="#908e87" stroke-width="1.2" fill="none" marker-end="url(#arr2)"><path d="M102 58 L146 58"></path><path d="M242 58 L286 58"></path><path d="M382 58 L426 58"></path></g>
+      </svg>
+      <p style="font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;color:#c9c2b2;margin:0;text-wrap:pretty">Upload a drawing or photograph and it is traced into polygons by tone band, each band a group, the whole under one <em>Ingest</em> unit whose sliders re-trace live. Then decompose: <em>Convexity split</em> cuts each form at its hollows into near-convex parts &#8212; limbs named without a name; <em>Fourier split</em> keeps a low-K solid body and lays the full form over it as a veil, so a likeness becomes a tint on a primary. From there every operator applies.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start">
+        <div style="background:#0e0e10;border-radius:8px;padding:10px;border:1px solid rgba(255,255,255,.06)"><div style="font-size:9px;letter-spacing:.12em;color:#d4a84b;margin-bottom:6px">SOURCE &#183; a synthetic drawing</div><div role="img" aria-label="synthetic source drawing" style="{{inSrcStyle}}"></div></div>
+        <div style="background:#0e0e10;border-radius:8px;padding:10px;border:1px solid rgba(255,255,255,.06)"><div style="font-size:9px;letter-spacing:.12em;color:#d4a84b;margin-bottom:6px">TRACED &#183; {{inCount}}</div>
+          <svg viewBox="{{inVB}}" style="width:100%;display:block;aspect-ratio:1.3;background:#141210;border-radius:6px"><sc-for list="{{inItems}}" as="s" hint-placeholder-count="4"><path d="{{s.d}}" fill="{{s.fill}}" stroke="#141210" stroke-width="2"></path></sc-for></svg></div>
+      </div>
+      <div><div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87"><span>tone levels &#183; re-traces live</span><span style="color:#d4a84b">{{inLevels}}</span></div><input type="range" min="2" max="8" step="1" value="{{inLevels}}" onChange="{{onInLevels}}" aria-label="Tone levels"></div>
+      <div><div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87"><span>simplify &#949;</span><span style="color:#d4a84b">{{inEps}}</span></div><input type="range" min="0" max="8" step="0.5" value="{{inEpsV}}" onChange="{{onInEps}}" aria-label="Simplify"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div style="background:#0e0e10;border-radius:8px;padding:10px;border:1px solid rgba(255,255,255,.06)"><div style="font-size:9px;letter-spacing:.12em;color:#d4a84b;margin-bottom:6px">CONVEXITY SPLIT</div>
+          <svg viewBox="{{cvxVB}}" style="width:100%;display:block;aspect-ratio:1.4"><sc-for list="{{cvxItems}}" as="s" hint-placeholder-count="3"><path d="{{s.d}}" fill="{{s.fill}}" stroke="#141210" stroke-width="3"></path></sc-for></svg></div>
+        <div style="background:#0e0e10;border-radius:8px;padding:10px;border:1px solid rgba(255,255,255,.06)"><div style="font-size:9px;letter-spacing:.12em;color:#d4a84b;margin-bottom:6px">FOURIER SPLIT &#183; BODY + VEIL</div>
+          <svg viewBox="{{fsVB}}" style="width:100%;display:block;aspect-ratio:1.4"><sc-for list="{{fsItems}}" as="s" hint-placeholder-count="2"><path d="{{s.d}}" fill="{{s.fill}}" fill-opacity="{{s.op}}" style="{{s.style}}"></path></sc-for></svg></div>
+      </div>
+    </div>
+
+    <div id="kreturn" style="border:1px solid rgba(255,255,255,.08);border-radius:14px;background:#121214;padding:22px 24px;display:flex;flex-direction:column;gap:14px;scroll-margin-top:70px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font-size:10px;letter-spacing:.18em;color:#d4a84b">&#8497;&#8315;&#185; &#183; THE k-SPACE RETURN</span><span style="font-size:9.5px;color:#908e87">live &#183; 128&#178; grid</span></div>
+      <h2 style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:26px;letter-spacing:-.02em;margin:0;line-height:1.15">Out of vector space and <span style="color:#d4a84b">back</span></h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div style="background:#0e0e10;border-radius:8px;padding:10px;border:1px solid rgba(255,255,255,.06)"><div style="font-size:9px;letter-spacing:.12em;color:#d4a84b;margin-bottom:6px">BEFORE &#183; a harmonic ring</div>
+          <svg viewBox="{{krInVB}}" style="width:100%;display:block;aspect-ratio:1;background:#141210;border-radius:6px"><sc-for list="{{krInItems}}" as="s" hint-placeholder-count="4"><path d="{{s.d}}" fill="{{s.fill}}"></path></sc-for></svg></div>
+        <div style="background:#0e0e10;border-radius:8px;padding:10px;border:1px solid rgba(255,255,255,.06)"><div style="font-size:9px;letter-spacing:.12em;color:#d4a84b;margin-bottom:6px">AFTER &#183; {{krCount}}</div>
+          <svg viewBox="{{krInVB}}" style="width:100%;display:block;aspect-ratio:1;background:#141210;border-radius:6px"><sc-for list="{{krOutItems}}" as="s" hint-placeholder-count="4"><path d="{{s.d}}" fill="{{s.fill}}"></path></sc-for></svg></div>
+      </div>
+      <div><div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87"><span>spectral slope &#946; (negative sharpens, positive smooths)</span><span style="color:#d4a84b">{{krBeta}}</span></div><input type="range" min="-1.5" max="2.5" step="0.1" value="{{krBetaV}}" onChange="{{onKrBeta}}" aria-label="Spectral slope"></div>
+      <div><div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87"><span>sector comb N (dihedral symmetry imposed in k-space)</span><span style="color:#d4a84b">{{krSector}}</span></div><input type="range" min="0" max="12" step="1" value="{{krSector}}" onChange="{{onKrSector}}" aria-label="Sector comb"></div>
+      <div><div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87"><span>trace levels</span><span style="color:#d4a84b">{{krLevels}}</span></div><input type="range" min="2" max="6" step="1" value="{{krLevels}}" onChange="{{onKrLevels}}" aria-label="Trace levels"></div>
+      <p style="font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;color:#c9c2b2;margin:0;text-wrap:pretty">The unit is rasterised, transformed, its spectrum reshaped &#8212; a slope tilts energy between coarse and fine, a sector comb keeps only N-fold symmetric frequencies &#8212; then inverted, thresholded into tone levels, and traced back to closed polygons. The result is vector again and takes every other operator. It is the one place geometry and the k-space lab are the same instrument.</p>
+    </div>
+
+    <div id="kspace" style="border:1px solid rgba(255,255,255,.08);border-radius:14px;background:#121214;padding:22px 24px;display:flex;flex-direction:column;gap:14px;scroll-margin-top:70px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font-size:10px;letter-spacing:.18em;color:#d4a84b">&#8497;&#8315;&#185; &#183; k-SPACE</span><span style="font-size:9.5px;color:#908e87">the plate's spectrum</span></div>
+      <h2 style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:26px;letter-spacing:-.02em;margin:0;line-height:1.15">Geometry that has passed through its own <span style="color:#d4a84b">spectrum</span></h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start">
+        <div><div style="aspect-ratio:1;border:1px solid rgba(212,168,75,.3);border-radius:8px;background:#0e0e10;overflow:hidden"><canvas ref="{{specRef}}" style="width:100%;height:100%;display:block;image-rendering:pixelated"></canvas></div><div style="font-size:9.5px;color:#908e87;margin-top:6px;text-align:center">|F(k)| of the hero plate &#183; log magnitude</div></div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="border:1px solid rgba(255,255,255,.08);border-radius:7px;padding:8px 10px"><div style="font-size:9px;color:#908e87;letter-spacing:.1em">&#946; &#183; radial slope</div><div style="font-size:20px;color:#d4a84b">{{kBeta}}</div></div>
+          <div style="border:1px solid rgba(255,255,255,.08);border-radius:7px;padding:8px 10px"><div style="font-size:9px;color:#908e87;letter-spacing:.1em">D &#183; (8&#8722;&#946;)/2</div><div style="font-size:20px;color:#d4a84b">{{kD}}</div></div>
+          <div style="font-size:10px;color:#908e87;line-height:1.5">&#946; &#8776; 1 rough &#183; &#8776; 2 smooth. Most plates read well between 1.0 and 1.6.</div>
+        </div>
+      </div>
+      <p style="font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;color:#c9c2b2;margin:0;text-wrap:pretty">The 2-D Fourier transform of the whole plate. Its radial power falls as 1/f<sup>&#946;</sup>; &#946; is a texture number and D the matching fractal dimension. We measure it to keep plates in a legible band &#8212; and use it as an operator: rasterise a unit, filter its spectrum (slope, sector combs, &#966;-rings, echoes), trace the result back to vectors. The <em>k-space return</em> is the one operation that leaves vector space and comes back.</p>
+    </div>
+
+    <div id="formats" style="border:1px solid rgba(255,255,255,.08);border-radius:14px;background:#121214;padding:22px 24px;display:flex;flex-direction:column;gap:14px;grid-column:1 / -1;scroll-margin-top:70px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font-size:10px;letter-spacing:.18em;color:#d4a84b">THE PLATE IS A FRAME &#183; SIX FORMATS</span><span style="font-size:9.5px;color:#908e87">one composition re-fitted about centre</span></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;align-items:end">
+        <sc-for list="{{fmtThumbs}}" as="f" hint-placeholder-count="6">
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center">
+            <svg viewBox="{{f.vb}}" style="{{f.style}}">
+              <rect x="0" y="0" width="{{f.W}}" height="{{f.H}}" fill="{{f.ground}}"></rect>
+              <g transform="{{f.tf}}">
+                <sc-for list="{{heroItems}}" as="i" hint-placeholder-count="3"><path d="{{i.d}}" fill="{{i.fill}}" fill-opacity="{{i.op}}"></path></sc-for>
+                <sc-for list="{{heroOvers}}" as="o" hint-placeholder-count="0"><path d="{{o.d}}" fill="{{o.fill}}" clip-path="{{o.clip}}"></path></sc-for>
+              </g>
+            </svg>
+            <div style="font-size:10px;color:#edeae3">{{f.name}}</div><div style="font-size:9.5px;color:#908e87">{{f.px}}</div>
+          </div>
+        </sc-for>
+      </div>
+      <p style="font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;color:#c9c2b2;margin:0;text-wrap:pretty">Atoms keep their plate coordinates; changing the format changes the frame and re-fits the tree so the old inscribed square sits inside the new one. The spectrum letter-boxes every format into the same square grid, so &#946; and D are comparable across a suite. Print sizes are at 900 dpi on an 8-inch long side.</p>
+    </div>
+
+    <div id="surface" style="border:1px solid rgba(255,255,255,.08);border-radius:14px;background:#121214;padding:22px 24px;display:flex;flex-direction:column;gap:14px;grid-column:1 / -1;scroll-margin-top:70px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font-size:10px;letter-spacing:.18em;color:#d4a84b">THE WORKING SURFACE &#183; TREE, PLATE, INSPECTOR</span><span style="font-size:9.5px;color:#908e87">how the instrument is laid out</span></div>
+      <div style="display:grid;grid-template-columns:minmax(200px,1fr) minmax(220px,1.4fr) minmax(200px,1fr);gap:12px">
+        <div style="background:#0e0e10;border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:3px">
+          <div style="font-size:9px;letter-spacing:.12em;color:#d4a84b;margin-bottom:4px">TREE &#183; the composition</div>
+          <sc-for list="{{surfTree}}" as="r" hint-placeholder-count="6"><div style="{{r.style}}"><span style="width:30px;flex:0 0 auto;font-size:9px;color:#d4a84b">{{r.glyph}}</span><span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{r.name}}</span><span style="{{r.dot}}"></span></div></sc-for>
+          <div style="font-size:9.5px;color:#908e87;line-height:1.5;margin-top:6px">Click selects; shift adds; alt reaches an atom inside a unit; alt on a unit row folds it.</div>
+        </div>
+        <div style="background:#0e0e10;border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:10px">
+          <div style="font-size:9px;letter-spacing:.12em;color:#d4a84b;margin-bottom:4px">PLATE &#183; selection = unit bbox</div>
+          <svg viewBox="{{heroVB}}" style="width:100%;display:block;aspect-ratio:1;border-radius:6px">
+            <sc-for list="{{heroItems}}" as="i" hint-placeholder-count="3"><path d="{{i.d}}" fill="{{i.fill}}" fill-opacity="{{i.op}}"></path></sc-for>
+            <sc-for list="{{heroOvers}}" as="o" hint-placeholder-count="0"><path d="{{o.d}}" fill="{{o.fill}}" clip-path="{{o.clip}}"></path></sc-for>
+            <rect x="{{surfSel.x}}" y="{{surfSel.y}}" width="{{surfSel.w}}" height="{{surfSel.h}}" fill="none" stroke="#d4a84b" stroke-width="3" stroke-dasharray="12 10"></rect>
+          </svg>
+          <div style="font-size:9.5px;color:#908e87;line-height:1.5;margin-top:6px">Drag moves the whole unit; the ancestors re-derive as you move. Status line: forms &#183; glued &#183; clips &#183; eval ms.</div>
+        </div>
+        <div style="background:#0e0e10;border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:6px">
+          <div style="font-size:9px;letter-spacing:.12em;color:#d4a84b;margin-bottom:4px">INSPECTOR &#183; {{surfInspTitle}}</div>
+          <sc-for list="{{surfInsp}}" as="f" hint-placeholder-count="4"><div><div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87"><span>{{f.label}}</span><span style="color:#d4a84b">{{f.value}}</span></div><div style="height:4px;border-radius:2px;background:rgba(255,255,255,.1);margin-top:4px;position:relative"><div style="{{f.bar}}"></div></div></div></sc-for>
+          <div style="font-size:9.5px;color:#908e87;line-height:1.5;margin-top:4px">Every operator exposes its parameters here; Associate adds the associahedron; Ingest adds re-trace and palette-from-source.</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 18px;font-size:11px;line-height:1.6;color:#c9c2b2;border-top:1px solid rgba(255,255,255,.08);padding-top:12px">
+        <div><span style="color:#d4a84b">1 2 3</span> add atoms &#183; <span style="color:#d4a84b">U</span> upload drawing</div>
+        <div><span style="color:#d4a84b">&#8984;S / &#8984;O</span> save / open .orpheum.json</div>
+        <div><span style="color:#d4a84b">&#8984;Z &#183; &#8984;D &#183; &#8984;A</span> undo &#183; duplicate &#183; select all</div>
+        <div><span style="color:#d4a84b">Flatten &#183; Ungroup</span> forget the tree &#183; peel one level</div>
+        <div><span style="color:#d4a84b">Swatch click</span> set an atom's rank</div>
+        <div><span style="color:#d4a84b">k-space</span> measure &#946;, D; return the plate as a unit</div>
+      </div>
+    </div>
+
+    <div id="range" style="border:1px solid rgba(255,255,255,.08);border-radius:14px;background:#121214;padding:22px 24px;display:flex;flex-direction:column;gap:14px;grid-column:1 / -1;scroll-margin-top:70px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font-size:10px;letter-spacing:.18em;color:#d4a84b">RANGE &#183; THE SAME RULES, SIX PALETTES</span><button onClick="{{reseed}}" style="background:transparent;border:none;color:#d4a84b;font-family:inherit;font-size:9.5px;cursor:pointer;padding:0" style-hover="color:#e0b85c">another set &#8635;</button></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px">
+        <sc-for list="{{gallery}}" as="g" hint-placeholder-count="6">
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <svg viewBox="{{g.vb}}" style="width:100%;display:block;aspect-ratio:1;border-radius:8px;border:1px solid rgba(255,255,255,.06)">
+              <defs><sc-for list="{{g.clips}}" as="c" hint-placeholder-count="0"><clipPath id="{{c.id}}"><path d="{{c.d}}"></path></clipPath></sc-for></defs>
+              <sc-for list="{{g.items}}" as="i" hint-placeholder-count="3"><path d="{{i.d}}" fill="{{i.fill}}" fill-opacity="{{i.op}}" style="{{i.style}}"></path></sc-for>
+              <sc-for list="{{g.overs}}" as="o" hint-placeholder-count="0"><path d="{{o.d}}" fill="{{o.fill}}" clip-path="{{o.clip}}"></path></sc-for>
+            </svg>
+            <div style="display:flex;justify-content:space-between;font-size:9.5px"><span style="color:#edeae3">{{g.pal}}</span><span style="color:#908e87">{{g.recipe}}</span></div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div id="palettes" style="border:1px solid rgba(255,255,255,.08);border-radius:14px;background:#121214;padding:22px 24px;display:flex;flex-direction:column;gap:14px;grid-column:1 / -1;scroll-margin-top:70px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font-size:10px;letter-spacing:.18em;color:#d4a84b">THE PALETTES &#183; CLOSED SETS</span><span style="font-size:9.5px;color:#908e87">ground &#183; ramp 0&#8230;m&#8722;1 &#183; rank 0 nearest the ink</span></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px">
+        <sc-for list="{{palRows}}" as="p" hint-placeholder-count="6">
+          <div style="display:flex;flex-direction:column;gap:6px;background:#0e0e10;border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:10px">
+            <div style="display:flex;justify-content:space-between;font-size:10px"><span style="color:#edeae3">{{p.label}}</span><span style="color:#908e87">{{p.m}}</span></div>
+            <div style="display:flex;gap:4px;align-items:center"><span title="ground" style="{{p.gstyle}}"></span><sc-for list="{{p.sw}}" as="s" hint-placeholder-count="6"><span title="{{s.hex}}" style="{{s.style}}"></span></sc-for></div>
+          </div>
+        </sc-for>
+      </div>
+      <p style="font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;color:#c9c2b2;margin:0;text-wrap:pretty">Eleven of the Linead ramps are drawn from Sanzo Wada's <em>Dictionary of Color Combinations</em>; the instrument also lists all 348 Wada combinations and can draw a ramp from any image. Whatever the source, the rule is the same: pick a set, use only the set, let the glue decide the overlaps.</p>
+    </div>
+
+    <div id="file" style="border:1px solid rgba(255,255,255,.08);border-radius:14px;background:#121214;padding:22px 24px;display:flex;flex-direction:column;gap:14px;grid-column:1 / -1;scroll-margin-top:70px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font-size:10px;letter-spacing:.18em;color:#d4a84b">EXPORT AND THE COMPOSITION FILE</span><span style="font-size:9.5px;color:#908e87">structure saved &#183; render derived</span></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px">
+        <div style="background:#0e0e10;border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:12px">
+          <div style="font-size:9px;letter-spacing:.12em;color:#d4a84b;margin-bottom:8px">PRINT SIZES &#183; long side</div>
+          <div style="display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:4px 12px;font-size:11px;line-height:1.7">
+            <span style="color:#908e87"></span><span style="color:#d4a84b">300 dpi</span><span style="color:#d4a84b">600 dpi</span><span style="color:#d4a84b">900 dpi</span>
+            <sc-for list="{{printRows}}" as="r" hint-placeholder-count="3"><span style="color:#edeae3">{{r.inch}}</span><span style="color:#c9c2b2">{{r.a}}</span><span style="color:#c9c2b2">{{r.b}}</span><span style="color:#c9c2b2">{{r.c}}</span></sc-for>
+          </div>
+          <div style="font-size:9.5px;color:#908e87;line-height:1.5;margin-top:8px">Streamed as 256-px strips: peak memory is one strip, not the image. Long side clamps at 16 000 px and the effective dpi is reported. SVG is exact; PNG carries pHYs dpi metadata.</div>
+        </div>
+        <div style="background:#0e0e10;border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:12px">
+          <div style="font-size:9px;letter-spacing:.12em;color:#d4a84b;margin-bottom:8px">.ORPHEUM.JSON &#183; what reopens</div>
+          <pre style="margin:0;font-family:'Space Mono',monospace;font-size:10px;line-height:1.55;color:#c9c2b2;white-space:pre-wrap">{{fileSnippet}}</pre>
+        </div>
+        <div style="background:#0e0e10;border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:12px">
+          <div style="font-size:9px;letter-spacing:.12em;color:#d4a84b;margin-bottom:8px">THIS HERO PLATE &#183; live</div>
+          <div style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:11px;line-height:1.7">
+            <sc-for list="{{heroStats}}" as="s" hint-placeholder-count="5"><span style="color:#908e87">{{s.k}}</span><span style="color:#edeae3">{{s.v}}</span></sc-for>
+          </div>
+          <div style="font-size:9.5px;color:#908e87;line-height:1.5;margin-top:8px">Autosave goes to the browser's database ~1.5 s after each change; <em>Restore session</em> appears on load when one exists.</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="tr" style="border:1px solid rgba(255,255,255,.08);border-radius:14px;background:#141210;padding:22px 24px;display:flex;flex-direction:column;gap:14px;grid-column:1 / -1;scroll-margin-top:70px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font-size:10px;letter-spacing:.18em;color:#d4a84b">TRANSCENDENTAL REALISM &#183; WHY THESE SYMBOLS</span><span style="font-size:9.5px;color:#908e87">after Adi Da Samraj</span></div>
+      <h2 style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:clamp(24px,3vw,34px);letter-spacing:-.02em;margin:0;line-height:1.15;max-width:820px;text-wrap:pretty">The image is not a picture of something. It is a <span style="color:#d4a84b">condition</span> the viewer enters.</h2>
+      <p style="font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.6;color:#c9c2b2;margin:0;max-width:820px;text-wrap:pretty">Adi Da named his late image-art Transcendental Realism and described its working principles as <em>Geome</em> &#8212; primary geometric form, replicated and composed &#8212; and <em>Linead</em>, the free line as its balancing pole. His words for what the images are: aperspectival, anegoic, aniconic. The mathematics here is chosen because it describes what such plates already do, not to decorate them. Orpheum generates its own plates from rules; it reproduces none of his.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px">
+        <div style="border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:14px 16px;background:#121214"><div style="font-size:10px;letter-spacing:.14em;color:#d4a84b;margin-bottom:6px">&#947; &#8594; NO PART STANDS ALONE</div><div style="font-family:'DM Sans',sans-serif;font-size:13.5px;line-height:1.55;color:#c9c2b2">Every form is the output of a composition. There is no atom on the plate that is not already a relation.</div></div>
+        <div style="border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:14px 16px;background:#121214"><div style="font-size:10px;letter-spacing:.14em;color:#d4a84b;margin-bottom:6px">&#8497; &#8594; COLOUR BELONGS TO THE WHOLE</div><div style="font-family:'DM Sans',sans-serif;font-size:13.5px;line-height:1.55;color:#c9c2b2">A form does not own its colour; the field decides it where forms meet. The palette is a law, not a choice made shape by shape.</div></div>
+        <div style="border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:14px 16px;background:#121214"><div style="font-size:10px;letter-spacing:.14em;color:#d4a84b;margin-bottom:6px">K&#8345; &#8594; THE POINT OF VIEW IS NOT FIXED</div><div style="font-family:'DM Sans',sans-serif;font-size:13.5px;line-height:1.55;color:#c9c2b2">The same elements, every way of binding them, held as one space. A single plate is one vertex; the suite is the polytope. Aperspectival, literally.</div></div>
+        <div style="border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:14px 16px;background:#121214"><div style="font-size:10px;letter-spacing:.14em;color:#d4a84b;margin-bottom:6px">&#8721; &#8594; ABSTRACTION IS TRUNCATION</div><div style="font-family:'DM Sans',sans-serif;font-size:13.5px;line-height:1.55;color:#c9c2b2">Dropping partials is how a form moves from likeness to primary. Aniconic by construction: the dial from faithful to radical is how many terms you keep.</div></div>
+        <div style="border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:14px 16px;background:#121214"><div style="font-size:10px;letter-spacing:.14em;color:#d4a84b;margin-bottom:6px">RULES &#8594; ANEGOIC</div><div style="font-family:'DM Sans',sans-serif;font-size:13.5px;line-height:1.55;color:#c9c2b2">Forms are placed by ratio and the composition is edited as a tree. The hand chooses the law; the law places the form. The gesture is not the subject.</div></div>
+        <div style="border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:14px 16px;background:#121214"><div style="font-size:10px;letter-spacing:.14em;color:#d4a84b;margin-bottom:6px">900 DPI &#8594; MONUMENTAL</div><div style="font-family:'DM Sans',sans-serif;font-size:13.5px;line-height:1.55;color:#c9c2b2">Vector first, printed at archival resolution in six formats up to 21:9. The plate is meant to be stood in front of.</div></div>
+      </div>
+    </div>
+
+    <div id="uses" style="border:1px solid rgba(255,255,255,.08);border-radius:14px;background:#121214;padding:22px 24px;display:flex;flex-direction:column;gap:12px;grid-column:1 / -1;scroll-margin-top:70px">
+      <div style="font-size:10px;letter-spacing:.18em;color:#d4a84b">USES &#183; WHAT THE STRUCTURE MAKES POSSIBLE</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px 18px;font-family:'DM Sans',sans-serif;font-size:13.5px;line-height:1.55;color:#c9c2b2">
+        <div><span style="color:#edeae3;font-weight:600">Editions.</span> Walk every vertex of K<sub>n</sub> and print the suite &#8212; one composition, fourteen plates, each a different bracketing.</div>
+        <div><span style="color:#edeae3;font-weight:600">Motion.</span> An edge walk is a sequence of valid plates; a path around the pentagon is a loop. Frames come free.</div>
+        <div><span style="color:#edeae3;font-weight:600">Spectral return.</span> Raster the plate, filter in k-space, trace back to vectors: geometry that has passed through its own spectrum.</div>
+        <div><span style="color:#edeae3;font-weight:600">From life.</span> Ingest a drawing, split it into parts, and let the parts take the operators &#8212; a figure becomes a chord of primaries.</div>
+        <div><span style="color:#edeae3;font-weight:600">Sound.</span> Ranks are already indices; the harmonic operator is already an overtone row. A plate can be played as it is drawn.</div>
+        <div><span style="color:#edeae3;font-weight:600">Teaching.</span> Catalan numbers, Fourier truncation, sheaf axioms &#8212; each shown by a form you can drag, not a formula you must trust.</div>
+        <div><span style="color:#edeae3;font-weight:600">Portability.</span> The tree saves as one <code style="font-family:'Space Mono',monospace;font-size:12px">.orpheum.json</code> &#8212; structure, palette, sources &#8212; and reopens as it was.</div>
+        <div><span style="color:#edeae3;font-weight:600">Open on the ledger.</span> True triple gluing, workers for the heavy ops, transform-only drag &#8212; see <a href="docs/Orpheum Review Ledger.md">the review ledger</a>.</div>
+      </div>
+    </div>
+
+    <div id="glossary" style="border:1px solid rgba(255,255,255,.08);border-radius:14px;background:#121214;padding:22px 24px;display:flex;flex-direction:column;gap:12px;grid-column:1 / -1;scroll-margin-top:70px">
+      <div style="font-size:10px;letter-spacing:.18em;color:#d4a84b">GLOSSARY</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:6px 18px;font-size:11.5px;line-height:1.55">
+        <sc-for list="{{glossary}}" as="g" hint-placeholder-count="12"><div><span style="color:#d4a84b">{{g.k}}</span> <span style="color:#c9c2b2;font-family:'DM Sans',sans-serif;font-size:13px">{{g.v}}</span></div></sc-for>
+      </div>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state={n:4, vi:0, walk:0, toward:-1, ladder:'fib', fShape:'square', bloom:0.25, ga:1, gb:2, hN:4, hMode:'nested', hLaw:'1/k', eN:4, eAbout:'self', dShade:'ink', dAngle:135, seed:3, affS:0.82, affR:24, affN:6, vAlpha:0.55, vBlend:'multiply', krBeta:0.6, krSector:0, krLevels:3, inLevels:4, inEps:1.5, ready:false};
+  E=null; specRef=React.createRef(); _specKey=''; inSrc=''; inNode=null; krNode=null; stageNodes=null;
+  async componentDidMount(){ const E=this.E=await import('./orpheum-engine-v3.js?v=3.2');
+    // persistent nodes so the k-space caches hold across renders
+    const ring=E.makeOp('harmonic',[E.makeAtom('circle',500,500,1,110)],{n:4,mode:'ring',law:'1/k'}); this.krUnit=ring; this.krNode=E.makeOp('kfilter',[ring],{N:128,beta:0.6,levels:3});
+    const a=E.makeAtom('circle',470,430,1,150), b=E.makeAtom('square',700,300,2,100), c=E.makeAtom('triangle',300,300,3,100);
+    const A=E.makeOp('assoc',[a,b,c],{law:'1/φ',vertex:1}); const Ec=E.makeOp('echo',[A],{n:2,about:'plate'}); const Hm=E.makeOp('harmonic',[E.makeAtom('circle',330,720,4,80)],{n:3,mode:'ring',law:'1/φ^k'});
+    this.stageNodes=[{items:[a,b,c],step:'1 · three atoms',tree:'circle r1\nsquare r2\ntriangle r3',note:'Placed by hand, once. Everything after is a rule.'},{items:[A],step:'2 · Associate',tree:'assoc 1/φ\n ├ circle\n ├ square\n └ triangle',note:'Bound two at a time; vertex (a(bc)) of K₃.'},{items:[Ec],step:'3 · φ echo about plate',tree:'echo ×2 · plate\n └ assoc\n    ├ ○ ├ □ └ △',note:'The unit returns twice, smaller and turned, around the plate centre.'},{items:[Ec,Hm],step:'4 · + harmonic ring',tree:'echo … \nharmonic 1/φ^k · ring\n └ circle r4',note:'A second unit; overlaps glue to a third colour.'},{items:[E.makeOp('kfilter',[Ec,Hm],{N:128,beta:0.8,levels:3})],step:'5 · k-space return',tree:'ℱ⁻¹ β 0.8 · 3 levels\n ├ echo …\n └ harmonic …',note:'Both units rasterised, filtered, traced back — the plate as one unit.'}];
+    // synthetic source for the ingest demo: a soft "drawing" with three tones
+    const cv=document.createElement('canvas'); cv.width=390; cv.height=300; const x=cv.getContext('2d'); x.fillStyle='#f1ebdf'; x.fillRect(0,0,390,300);
+    const gr=x.createRadialGradient(140,150,10,140,150,120); gr.addColorStop(0,'#2a2622'); gr.addColorStop(0.55,'#6a5f52'); gr.addColorStop(1,'#f1ebdf'); x.fillStyle=gr; x.beginPath(); x.ellipse(140,150,110,90,0.3,0,7); x.fill();
+    x.fillStyle='#8f8372'; x.beginPath(); x.moveTo(230,250); x.lineTo(300,60); x.lineTo(370,250); x.closePath(); x.fill(); x.fillStyle='#3a342d'; x.fillRect(250,180,70,60); x.fillStyle='#c9bfae'; x.beginPath(); x.arc(320,110,34,0,7); x.fill();
+    this.inSrc=cv.toDataURL('image/jpeg',0.85);
+    try{ const r=await E.ingestImage(this.inSrc,Object.assign({},E.OPS.ingest.defaults,{levels:4,eps:1.5,nest:0,minArea:0.3}),'synthetic'); this.inNode=r.node; }catch(err){}
+    this.setState({ready:true}); }
+  setIn(k,v){ const n=this.inNode; if(!n)return; n.p[k]=v; this.E.retrace(n); this.E.invalidate(n); this.setState({['in'+k[0].toUpperCase()+k.slice(1)]:v}); }
+  setKr(k,v){ const n=this.krNode; n.p[k]=v; const key={beta:'krBeta',sectorN:'krSector',levels:'krLevels'}[k]; if(k==='sectorN')n.p.sectorStr=v>0?0.85:0; this.setState({[key]:v}); }
+  componentDidUpdate(){ const cv=this.specRef.current; if(cv&&this._spec&&cv._key!==this._spec.key){ cv._key=this._spec.key; this.E.paintSpec(cv,this._spec.spec,this._spec.N); } }
+  frag(S,pal,pre,opts){ const E=this.E; const P=E.buildPlate(S,pal,opts||{}); const bb=E.bboxOf(S)||{x0:0,y0:0,x1:1000,y1:1000}; const pad=Math.max(bb.x1-bb.x0,bb.y1-bb.y0)*0.08;
+    return {vb:`${(bb.x0-pad).toFixed(1)} ${(bb.y0-pad).toFixed(1)} ${(bb.x1-bb.x0+2*pad).toFixed(1)} ${(bb.y1-bb.y0+2*pad).toFixed(1)}`, items:P.items.map(it=>({d:it.d,fill:it.fill,op:it.op,style:(it.veil||it.shadow)?`mix-blend-mode:${it.blend}`:''})), clips:P.clips.map(c=>({id:pre+c.id,d:c.d})), overs:P.overs.map(o=>({d:o.d,fill:o.fill,clip:o.clip.replace('url(#','url(#'+pre)})), P}; }
+  renderVals(){
+    const E=this.E; if(!E)return {inSrcStyle:'width:100%;border-radius:6px;aspect-ratio:1.3;background:#1a1a1d',hN:4,kStat:'',kLabel:'',kTo:'',kWalk:'',walk:0,gluEq:'',gluM:'',gluA:'#000',gluB:'#000',gluC:'#000',fileSnippet:'',krBeta:'',krBetaV:0,krSector:0,krLevels:3,krCount:'',hLawLabel:'',eN:4,echoAbout:'',fBloom:'',fBloomV:0,dAngle:135,heroCount:'',kBeta:'—',kD:'—',affS:'',affSV:0.8,affR:0,affN:0,vAlpha:'',vAlphaV:0.5,inCount:'',inLevels:4,inEps:'',inEpsV:0,surfInspTitle:'',stages:[],affItems:[],affClips:[],affOvers:[],vBlendBtns:[],vSolidItems:[],vSolidClips:[],vSolidOvers:[],vVeilItems:[],vVeilClips:[],vVeilOvers:[],inItems:[],krInItems:[],krOutItems:[],fmtThumbs:[],surfTree:[],surfInsp:[],surfSel:{x:0,y:0,w:0,h:0},gallery:[],printRows:[],heroStats:[],affVB:'0 0 1000 1000',vSolidVB:'0 0 1000 1000',vVeilVB:'0 0 1000 1000',inVB:'0 0 1000 1000',krInVB:'0 0 1000 1000',kVerts:[],kEdges:[],formItems:[],nBtns:[],catalan:[],swA:[],swB:[],ladBtns:[],fShapeBtns:[],fourierRow:[],harmBars:[],hModeBtns:[],hLawBtns:[],harmItems:[],harmClips:[],harmOvers:[],echoItems:[],echoClips:[],echoOvers:[],seeds:[],eAboutBtns:[],dShadeBtns:[],depthItems:[],heroItems:[],heroClips:[],heroOvers:[],cvxItems:[],fsItems:[],palRows:[],glossary:[],heroVB:'0 0 1000 1000',harmVB:'0 0 1000 1000',echoVB:'0 0 1000 1000',depthVB:'0 0 1000 1000',formVB:'0 0 1000 1000',cvxVB:'0 0 1000 1000',fsVB:'0 0 1000 1000'};
+    const st=this.state, pal=E.PALETTES.orpheum, m=pal.ramp.length, col=r=>pal.ramp[((r%m)+m)%m];
+    const btn=(on,label,click)=>({label,onClick:click,style:`padding:6px 10px;background:${on?'rgba(212,168,75,.16)':'#1a1a1d'};border:1px solid ${on?'#d4a84b':'rgba(255,255,255,.12)'};border-radius:6px;color:${on?'#d4a84b':'#edeae3'};font-family:inherit;font-size:10.5px;cursor:pointer`});
+    // hero: a plate from rules, seeded
+    const rnd=(()=>{ let s=st.seed*9301+49297; return ()=>{ s=(s*9301+49297)%233280; return s/233280; }; })();
+    const hc=E.makeAtom('circle',420+rnd()*160,420+rnd()*160,1,150), hs=E.makeAtom('square',300+rnd()*400,250+rnd()*150,2,90), ht=E.makeAtom('triangle',300+rnd()*400,650+rnd()*150,3,100);
+    const heroRoot={id:'root',children:[E.makeOp('echo',[E.makeOp('assoc',[hc,hs,ht],{law:'1/φ',vertex:Math.floor(rnd()*2)})],{n:2+Math.floor(rnd()*3),about:'plate'}), E.makeOp('harmonic',[E.makeAtom('circle',200+rnd()*600,200+rnd()*600,4,60)],{n:3,mode:['ring','spiral','row'][Math.floor(rnd()*3)],law:'1/φ^k'})]};
+    const heroS=E.evaluateRoot(heroRoot); const hero=this.frag(heroS,pal,'h'); 
+    const heroVB=`0 0 ${E.plate.W} ${E.plate.H}`; const heroItems=[{d:`M0 0H${E.plate.W}V${E.plate.H}H0Z`,fill:pal.ground,op:1,style:''}].concat(hero.items);
+    const specKey='hero'+st.seed; if(this._specKey!==specKey){ this._specKey=specKey; const k=E.plateSpectrum(heroS,pal,128); k.key=specKey; this._spec=k; }
+    // harmonic
+    const hAtom=E.makeAtom('circle',500,500,1,120); const harmS=E.evaluate(E.makeOp('harmonic',[hAtom],{n:st.hN,mode:st.hMode,law:st.hLaw,phase:0})); const harm=this.frag(harmS,pal,'hm');
+    const lawF=k=>st.hLaw==='1/φ^k'?Math.pow(E.PHI,1-k):st.hLaw==='1/√k'?1/Math.sqrt(k):st.hLaw==='1/k²'?1/(k*k):1/k;
+    const harmBars=[1,2,3,4,5,6,7,8].map(k=>({title:st.hLaw+' · k='+k,style:`width:14px;height:${Math.round(34*lawF(k))+2}px;background:${k<=st.hN?'#d4a84b':'rgba(212,168,75,.3)'};border-radius:2px 2px 0 0`}));
+    // echo + sunflower
+    const eAtom=E.makeAtom('triangle',500,500,1,120); const echoS=E.evaluate(E.makeOp('echo',[eAtom],{n:st.eN,about:st.eAbout,gain:1})); const echo=this.frag(echoS,pal,'ec');
+    const seeds=[]; for(let i=1;i<=60;i++){ const a=i*E.GOLDEN_ANGLE, r=12.5*Math.sqrt(i); seeds.push({x:(r*Math.cos(a)).toFixed(1),y:(r*Math.sin(a)).toFixed(1),r:i<=st.eN?5:3,fill:i<=st.eN?'#d4a84b':'rgba(212,168,75,.35)'}); }
+    // assoc
+    const K=E.associahedron(st.n); const vi=Math.min(K.verts.length-1,st.vi), V=K.verts[vi]; const to=(st.toward>=0&&V.nb.includes(st.toward))?st.toward:V.nb[0];
+    let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9; K.verts.forEach(v=>{x0=Math.min(x0,v.x);x1=Math.max(x1,v.x);y0=Math.min(y0,v.y);y1=Math.max(y1,v.y);});
+    const sc=Math.min(200/Math.max(1e-6,x1-x0),160/Math.max(1e-6,y1-y0)), ox=120-(x0+x1)/2*sc, oy=100-(y0+y1)/2*sc, px=v=>({x:v.x*sc+ox,y:v.y*sc+oy});
+    const kEdges=K.edges.map(([a,b])=>{ const A=px(K.verts[a]),B=px(K.verts[b]); const act=(a===vi&&b===to)||(b===vi&&a===to); return {x1:A.x,y1:A.y,x2:B.x,y2:B.y,stroke:act?'#d4a84b':'rgba(255,255,255,.2)',w:act?2:1}; });
+    const kVerts=K.verts.map(v=>{ const p=px(v), cur=v.i===vi, nb=V.nb.includes(v.i); return {cx:p.x,cy:p.y,r:cur?7:nb?5:4,fill:cur?'#d4a84b':nb?'rgba(212,168,75,.35)':'#1a1a1d',stroke:cur||nb?'#d4a84b':'rgba(255,255,255,.3)',label:v.label,onClick:()=>this.setState({vi:v.i,walk:0,toward:-1})}; });
+    const shapes=['circle','square','triangle','circle','square'], atoms=[]; for(let i=0;i<st.n;i++)atoms.push(E.makeAtom(shapes[i],500,500,i+1,140));
+    const aS=E.evaluate(E.makeOp('assoc',atoms,{law:'1/φ',vertex:vi,walk:st.walk,toward:to})); const bb=E.bboxOf(aS)||{x0:0,y0:0,x1:1000,y1:1000}; const side=Math.max(bb.x1-bb.x0,bb.y1-bb.y0)*1.15, cx=(bb.x0+bb.x1)/2, cy=(bb.y0+bb.y1)/2;
+    const formVB=`${(cx-side/2).toFixed(1)} ${(cy-side/2).toFixed(1)} ${side.toFixed(1)} ${side.toFixed(1)}`; const formItems=aS.map(s=>({d:E.pathD(s.pts),fill:col(s.rank)}));
+    const catalan=[{n:2,v:1,shape:'point'},{n:3,v:2,shape:'segment'},{n:4,v:5,shape:'pentagon'},{n:5,v:14,shape:'3-polytope'},{n:6,v:42,shape:'4-polytope'}];
+    // glue
+    const sw=which=>pal.ramp.map((hex,i)=>({title:'rank '+i,onClick:()=>this.setState(which==='a'?{ga:i}:{gb:i}),style:`width:22px;height:22px;border-radius:50%;background:${hex};border:2px solid ${(which==='a'?st.ga:st.gb)===i?'#d4a84b':'rgba(255,255,255,.14)'};cursor:pointer;padding:0`}));
+    const g=E.glue(st.ga,st.gb,m);
+    // fourier row
+    const base=E.evaluate(E.makeAtom(st.fShape,150,150,0,100))[0].pts; const Ks=st.ladder==='fib'?[1,2,3,5,8,13]:st.ladder==='phi'?[1,2,4,7,11,18]:st.ladder==='odd'?[1,3,5,7,9,11]:[1,2,3,4,6,10];
+    const fourierRow=Ks.map(k=>({k,d:E.pathD(E.fourierTrunc(base,k,st.ladder,st.bloom))}));
+    // depth
+    const dS=E.evaluate(E.makeOp('extrude',[E.makeAtom('square',440,500,1,110),E.makeAtom('circle',620,520,2,90)],{depth:34,angle:st.dAngle,steps:6,shade:st.dShade,alpha:0.32,rankStep:1})); const depth=this.frag(dS,pal,'dp',{recut:false});
+    // decomposition demos: an L-shaped poly
+    const L=[[0,0],[2,0],[2,1],[1,1],[1,3],[0,3]].map(p=>[p[0]-1,p[1]-1.5]); const Lnorm=L.map(p=>[p[0]/1.8,p[1]/1.8]); const lp=[]; for(let i=0;i<L.length;i++){ const a=Lnorm[i],b=Lnorm[(i+1)%L.length]; for(let j=0;j<16;j++){ const f=j/16; lp.push([a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f]); } }
+    const polyAtom={id:'L',kind:'atom',shape:'poly',pts:lp,t:{x:500,y:500,s:1,r:0},size:150,rank:1,children:[]};
+    const cvxS=E.evaluate(E.makeOp('convex',[polyAtom],{eps:2.5,maxParts:6,rankStep:1})); const cvx=this.frag(cvxS,pal,'cv',{recut:false});
+    const fsS=E.evaluate(E.makeOp('fsplit',[polyAtom],{K:2,basis:'all',alpha:0.5,blend:'multiply',rankStep:1})); const fs=this.frag(fsS,pal,'fs',{recut:false});
+    // walkthrough stages
+    const stages=(this.stageNodes||[]).map((s,i)=>{ const S=s.items.flatMap(n=>E.evaluate(n)); const f=this.frag(S,pal,'st'+i); return {vb:heroVB,clips:f.clips,overs:f.overs,items:[{d:`M0 0H${E.plate.W}V${E.plate.H}H0Z`,fill:pal.ground,op:1,style:''}].concat(f.items),step:s.step,tree:s.tree,note:s.note}; });
+    // affine
+    const affS_=E.evaluate(E.makeOp('affine',[E.makeAtom('triangle',380,560,1,110)],{copies:st.affN,s:st.affS,r:st.affR,dx:70,dy:-30,rankStep:1})); const aff=this.frag(affS_,pal,'af');
+    // veil: same three forms, solid vs veil
+    const vA=()=>[E.makeAtom('square',460,500,1,120),E.makeAtom('circle',600,520,2,110),E.makeAtom('triangle',530,430,3,120)];
+    const vSolid=this.frag(E.evaluateRoot({id:'root',children:vA()}),pal,'vs'); const va=vA(); const vVeil=this.frag(E.evaluateRoot({id:'root',children:[va[0],va[1],E.makeOp('veil',[va[2]],{alpha:st.vAlpha,blend:st.vBlend})]}),pal,'vv');
+    // ingest demo
+    const inS=this.inNode?E.evaluate(this.inNode):[]; const inF=inS.length?this.frag(inS,pal,'in',{recut:false}):{vb:'0 0 1000 1000',items:[]};
+    // k-return demo
+    const krIn=E.evaluate(this.krUnit); const krOut=E.evaluate(this.krNode); const krBB=E.bboxOf(krIn); const krPad=60; const krInVB=krBB?`${krBB.x0-krPad} ${krBB.y0-krPad} ${krBB.x1-krBB.x0+2*krPad} ${krBB.y1-krBB.y0+2*krPad}`:heroVB;
+    // formats
+    const fmtThumbs=E.FORMATS.map(F=>{ const f=Math.min(F.W,F.H)/1000; const tf=`translate(${(F.W-1000*f)/2} ${(F.H-1000*f)/2}) scale(${f})`; const long=Math.max(F.W,F.H); const px=Math.round(7200*Math.min(F.W,F.H)/long); return {vb:`0 0 ${F.W} ${F.H}`,W:F.W,H:F.H,ground:pal.ground,tf,name:F.name.split(' — ')[0],px:F.W+'×'+F.H+' · '+(F.W>=F.H?'7200×'+px:px+'×7200')+' px',style:`width:${Math.round(150*F.W/long)}px;max-width:100%;display:block;border:1px solid rgba(255,255,255,.1);border-radius:4px`}; });
+    // working surface: real tree rows of the hero + inspector of its echo op
+    const surfTree=[]; E.walk(heroRoot,(n,depth,p)=>{ if(n.id==='root')return; const d=n.kind==='op'?E.OPS[n.op]:null; const a=n.kind==='atom'?E.ATOMS.find(x=>x.key===n.shape):null; const sel=n===heroRoot.children[0]; surfTree.push({glyph:d?d.glyph:'·',name:d?d.name+' ('+n.children.length+')':(a?a.name:'Form')+' · r'+n.rank,dot:`width:9px;height:9px;border-radius:50%;flex:0 0 auto;background:${col(n.rank)};border:1px solid rgba(255,255,255,.25)`,style:`display:flex;align-items:center;gap:6px;padding:4px 7px 4px ${7+(depth-1)*12}px;border-radius:6px;font-size:10px;background:${sel?'rgba(212,168,75,.14)':'transparent'};border:1px solid ${sel?'rgba(212,168,75,.5)':'transparent'};color:${sel?'#edeae3':'#c9c2b2'}`}); });
+    const selNode=heroRoot.children[0]; const sb=E.bboxOf(E.evaluate(selNode))||{x0:0,y0:0,x1:0,y1:0}; const surfSel={x:sb.x0-6,y:sb.y0-6,w:sb.x1-sb.x0+12,h:sb.y1-sb.y0+12};
+    const sd=E.OPS[selNode.op]; const surfInsp=sd.schema.map(f=>{ const v=selNode.p[f.k]; const pct=f.opts?((f.opts.indexOf(v)+1)/f.opts.length*100):((v-f.min)/(f.max-f.min)*100); return {label:f.label,value:String(v),bar:`position:absolute;left:0;top:0;height:4px;border-radius:2px;background:#d4a84b;width:${Math.max(4,Math.min(100,pct))}%`}; });
+    // gallery across palettes
+    const palKeys=Object.keys(E.PALETTES); const gallery=[]; for(let gi=0;gi<6;gi++){ const gp=E.PALETTES[palKeys[(gi*2+st.seed)%palKeys.length]]; const gr2=(()=>{ let s=(st.seed*17+gi*131)*9301+49297; return ()=>{ s=(s*9301+49297)%233280; return s/233280; }; })();
+      const recipe=['assoc › echo','harmonic ring','affine spiral','assoc › depth','fourier recut','echo › harmonic'][gi]; let kids;
+      const c1=E.makeAtom('circle',380+gr2()*240,380+gr2()*240,1,140), s1=E.makeAtom('square',300+gr2()*400,250+gr2()*200,2,95), t1=E.makeAtom('triangle',300+gr2()*400,620+gr2()*160,3,105);
+      if(gi===0)kids=[E.makeOp('echo',[E.makeOp('assoc',[c1,s1,t1],{vertex:Math.floor(gr2()*2)})],{n:3,about:'plate'})];
+      else if(gi===1)kids=[E.makeOp('harmonic',[c1],{n:5,mode:'ring',law:'1/k'}),s1];
+      else if(gi===2)kids=[E.makeOp('affine',[t1],{copies:7,s:0.85,r:30,dx:50,dy:-20}),c1];
+      else if(gi===3)kids=[E.makeOp('extrude',[E.makeOp('assoc',[s1,c1],{})],{depth:30,angle:135,steps:5,shade:'rank'}),t1];
+      else if(gi===4)kids=[E.makeOp('fourier',[E.makeOp('harmonic',[s1],{n:3,mode:'nested'})],{K:3,basis:'odd',bloom:0.5}),E.makeOp('fourier',[t1],{K:2,bloom:0.7})];
+      else kids=[E.makeOp('harmonic',[E.makeOp('echo',[t1],{n:2})],{n:3,mode:'spiral',law:'1/φ^k'}),c1];
+      const S=E.evaluateRoot({id:'root',children:kids}); const f=this.frag(S,gp,'g'+gi,{recut:true}); gallery.push({vb:heroVB,clips:f.clips,overs:f.overs,items:[{d:`M0 0H${E.plate.W}V${E.plate.H}H0Z`,fill:gp.ground,op:1,style:''}].concat(f.items),pal:gp.label,recipe}); }
+    // file / export
+    const printRows=[8,16,24].map(i=>({inch:i+' in',a:(300*i).toLocaleString()+' px',b:(600*i).toLocaleString()+' px',c:(900*i).toLocaleString()+' px'}));
+    const fileSnippet='{ "kind": "orpheum", "version": 3,\n  "plate": {"W": 1000, "H": 1000}, "format": "square",\n  "palKey": "lin:orpheum", "imgPals": [],\n  "root": { "children": [\n    { "kind": "op", "op": "echo", "p": {"n": 2, "about": "plate"},\n      "children": [ { "kind": "op", "op": "assoc", … } ] } ] },\n  "svg": "<svg …>" }';
+    const heroStats=[{k:'units',v:heroRoot.children.length},{k:'forms',v:heroS.length},{k:'glued overlaps',v:hero.P.overs.length},{k:'clip defs',v:hero.P.clips.length},{k:'eval',v:E.perf.lastMs.toFixed(1)+' ms'},{k:'β · D',v:this._spec?this._spec.beta.toFixed(2)+' · '+this._spec.D.toFixed(2):'—'}];
+    // palettes
+    const palRows=Object.keys(E.PALETTES).map(k=>{ const p=E.PALETTES[k]; return {label:p.label,m:'m = '+p.ramp.length,gstyle:`width:22px;height:22px;border-radius:4px;background:${p.ground};border:1px solid rgba(255,255,255,.25);display:inline-block;margin-right:4px`,sw:p.ramp.map(h=>({hex:h,style:`width:18px;height:18px;border-radius:50%;background:${h};border:1px solid rgba(255,255,255,.14);display:inline-block`}))}; });
+    const glossary=[{k:'atom',v:'a generator: circle, square, triangle, or a traced poly'},{k:'unit',v:'a subtree — an operator and its children'},{k:'operator',v:'n units in, one out; carries a rank action'},{k:'rank',v:'index into the palette ramp; the colour operad acts on it'},{k:'glue',v:'(a+b+1) mod m — the colour where two solids meet'},{k:'veil',v:'a translucent layer above all solids, never re-cut'},{k:'flatten',v:'evaluate a unit and keep only poly atoms (the forgetful map)'},{k:'ladder',v:'which Fourier terms are kept: all, odd, fib, φ'},{k:'bloom',v:'golden-phased partials injected into a recut'},{k:'echo',v:'copies scaled 1/φ and turned 137.5° each step'},{k:'bracketing',v:'one way of binding n forms two at a time — a vertex of Kₙ'},{k:'walk',v:'straight-line path between two bracketings along an edge'},{k:'β',v:'radial spectral slope of the plate; D = (8−β)/2'},{k:'return',v:'raster → k-space filter → vector trace'},{k:'ingest',v:'a source image traced into band groups of poly atoms'},{k:'relief',v:'a plate-wide shadow on every solid (Tweaks)'},{k:'format',v:'the frame: square, portrait, card, wide, 16:9, 21:9'},{k:'aperspectival · anegoic · aniconic',v:'no viewpoint · no ego-gesture as subject · no icon'}];
+    return {heroVB,heroItems,heroClips:hero.clips,heroOvers:hero.overs,heroCount:heroS.length+' forms · '+hero.P.overs.length+' glued',reseed:()=>this.setState({seed:st.seed+1}),
+      hModeBtns:['nested','ring','row','spiral'].map(x=>btn(st.hMode===x,x,()=>this.setState({hMode:x}))),hLawBtns:['1/k','1/φ^k','1/√k','1/k²'].map(x=>btn(st.hLaw===x,x,()=>this.setState({hLaw:x}))),harmVB:harm.vb,harmItems:harm.items,harmClips:harm.clips,harmOvers:harm.overs,hN:st.hN,onHN:e=>this.setState({hN:+e.target.value}),harmBars,hLawLabel:'amplitude '+st.hLaw,
+      ladBtns:['all','odd','fib','phi'].map(l=>btn(st.ladder===l,l==='phi'?'φ ladder':l,()=>this.setState({ladder:l}))),fShapeBtns:['square','triangle','circle'].map(s=>btn(st.fShape===s,s,()=>this.setState({fShape:s}))),fourierRow,fBloom:st.bloom.toFixed(2),fBloomV:st.bloom,onBloom:e=>this.setState({bloom:+e.target.value}),
+      echoVB:echo.vb,echoItems:echo.items,echoClips:echo.clips,echoOvers:echo.overs,seeds,eN:st.eN,onEN:e=>this.setState({eN:+e.target.value}),echoAbout:st.eAbout,eAboutBtns:['self','plate'].map(x=>btn(st.eAbout===x,'about '+x,()=>this.setState({eAbout:x}))),
+      kStat:K.verts.length+' bracketings · '+K.edges.length+' moves',nBtns:[3,4,5].map(n=>btn(st.n===n,n+' forms',()=>this.setState({n,vi:0,walk:0,toward:-1}))),kEdges,kVerts,formVB,formItems,kLabel:V.label,kTo:to!=null?K.verts[to].label:'—',kWalk:st.walk.toFixed(2),walk:st.walk,onWalk:e=>this.setState({walk:+e.target.value}),catalan,
+      swA:sw('a'),swB:sw('b'),gluA:col(st.ga),gluB:col(st.gb),gluC:col(g),gluEq:`${st.ga} ∧ ${st.gb} = ${g}`,gluM:m,
+      dShadeBtns:['ink','ground','rank'].map(x=>btn(st.dShade===x,x+' shade',()=>this.setState({dShade:x}))),depthVB:depth.vb,depthItems:depth.items,dAngle:st.dAngle,onDAngle:e=>this.setState({dAngle:+e.target.value}),
+      cvxVB:cvx.vb,cvxItems:cvx.items,fsVB:fs.vb,fsItems:fs.items,
+      specRef:this.specRef,kBeta:this._spec?this._spec.beta.toFixed(2):'—',kD:this._spec?this._spec.D.toFixed(2):'—',
+      palRows,glossary,stages,
+      affVB:aff.vb,affItems:aff.items,affClips:aff.clips,affOvers:aff.overs,affS:st.affS.toFixed(2),affSV:st.affS,onAffS:e=>this.setState({affS:+e.target.value}),affR:st.affR,onAffR:e=>this.setState({affR:+e.target.value}),affN:st.affN,onAffN:e=>this.setState({affN:+e.target.value}),
+      vBlendBtns:['multiply','screen','normal'].map(x=>btn(st.vBlend===x,x,()=>this.setState({vBlend:x}))),vSolidVB:vSolid.vb,vSolidItems:vSolid.items,vSolidClips:vSolid.clips,vSolidOvers:vSolid.overs,vVeilVB:vSolid.vb,vVeilItems:vVeil.items,vVeilClips:vVeil.clips,vVeilOvers:vVeil.overs,vAlpha:st.vAlpha.toFixed(2),vAlphaV:st.vAlpha,onVAlpha:e=>this.setState({vAlpha:+e.target.value}),
+      inSrcStyle:`width:100%;border-radius:6px;aspect-ratio:1.3;background:#1a1a1d${this.inSrc?` center/cover url(${this.inSrc})`:''}`,inVB:inF.vb,inItems:inF.items,inCount:inS.length+' forms',inLevels:st.inLevels,onInLevels:e=>this.setIn('levels',+e.target.value),inEps:st.inEps.toFixed(1),inEpsV:st.inEps,onInEps:e=>this.setIn('eps',+e.target.value),
+      krInVB,krInItems:krIn.map(s=>({d:E.pathD(s.pts),fill:col(s.rank)})),krOutItems:krOut.map(s=>({d:E.pathD(s.pts),fill:col(s.rank)})),krCount:krOut.length+' traced forms',krBeta:st.krBeta.toFixed(1),krBetaV:st.krBeta,onKrBeta:e=>this.setKr('beta',+e.target.value),krSector:st.krSector,onKrSector:e=>this.setKr('sectorN',+e.target.value),krLevels:st.krLevels,onKrLevels:e=>this.setKr('levels',+e.target.value),
+      fmtThumbs,surfTree,surfInsp,surfInspTitle:sd.name,surfSel,gallery,printRows,fileSnippet,heroStats};
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+{
+  "id": "ceti-night",
+  "note": "Milton dark leather studio (#1C1A15): warm parchment ink, luminous cobalt, vermilion, sunflower, forest, and plum accents.",
+  "roles": {
+    "ground": "#14181F",
+    "panel": "#1C222D",
+    "elev": "#242C3A",
+    "shadow": "#0B0E13",
+    "rim": "#384459",
+    "grid": "#2A3342",
+    "ink": "#F0EBDD",
+    "muted": "#A39E93",
+    "line": "#D8D2C5",
+    "actor-a": "#6F90D1",
+    "actor-a-tint": "#23324D",
+    "actor-a-deep": "#4564A3",
+    "actor-b": "#F0C34A",
+    "actor-b-tint": "#3D341B",
+    "actor-b-deep": "#B88E1F",
+    "accent": "#EA5E40",
+    "accent-tint": "#42231D",
+    "accent-deep": "#B03B22",
+    "sunflower": "#F0C34A",
+    "sunflower-tint": "#3E3419",
+    "forest": "#79AC8A",
+    "forest-tint": "#1F3528",
+    "plum": "#B58FB7",
+    "plum-tint": "#332535",
+    "soft": "#28303E"
+  },
+  "fonts": {
+    "display": "Fraunces, Georgia, serif",
+    "body": "'DM Sans', system-ui, sans-serif",
+    "hand": "Caveat, 'Comic Sans MS', cursive",
+    "mono": "'JetBrains Mono', ui-monospace, monospace"
+  },
+  "type": {
+    "title": [30, 600],
+    "sub": [15, 400],
+    "caption": [14.5, 500],
+    "tick": [12.5, 500],
+    "hand": [20, 500],
+    "num": [15.5, 400],
+    "edge": [18, 500]
+  },
+  "stroke": {
+    "glyph": 2.1,
+    "edge": 2.0,
+    "frame": 1.35,
+    "hair": 0.9
+  },
+  "jitter": 0.55,
+  "radius": 10,
+  "edge_label_font": "hand",
+  "caption_font": "body"
+}

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/ceti-design-system-cd9ddfb8-95af-48a0-95e2-1ba029594df0/colors_and_type.css">
+  <link rel="stylesheet" href="_ds/ceti-design-system-cd9ddfb8-95af-48a0-95e2-1ba029594df0/motion.css">
+  <script src="_ds/ceti-design-system-cd9ddfb8-95af-48a0-95e2-1ba029594df0/_ds_bundle.js"></script>
+  <style>
+    body { margin: 0; }
+    a { color: hsl(var(--support-foreground)); text-decoration: underline; text-underline-offset: 3px; }
+    a:hover { color: hsl(var(--foreground)); }
+    input, select, button { font-family: inherit; }
+    select option, select optgroup { background: hsl(var(--card)); color: hsl(var(--foreground)); }
+    input[type="range"] { accent-color: hsl(var(--primary-edge)); }
+  </style>
+</helmet>
+<div ref="{{rootRef}}" class="palette-boardwalk dark" style="min-height:100vh;background:var(--bg);color:var(--ink);font-family:var(--font-sans);display:flex;flex-direction:column">
+
+  <header style="position:sticky;top:0;z-index:50;background:hsl(var(--background)/.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule)">
+    <div style="max-width:1280px;margin:0 auto;padding:10px var(--gutter);display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+      <div>
+        <div class="ceti-eyebrow">Transcendental art engine</div>
+        <div class="display-italic" style="font-size:22px;line-height:1.15">Geome Maker <span style="color:var(--gold)">v3</span></div>
+      </div>
+      <nav style="margin-left:auto;display:flex;gap:2px;flex-wrap:wrap" data-screen-label="Tabs">
+        <sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
+          <button onClick="{{t.onClick}}" style="{{t.style}}">{{t.label}}</button>
+        </sc-for>
+      </nav>
+    </div>
+  </header>
+
+  <sc-if value="{{isMaker}}" hint-placeholder-val="{{true}}">
+    <section data-screen-label="Maker" style="flex:1;max-width:1280px;width:100%;margin:0 auto;padding:28px var(--gutter) 56px;display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:28px;align-items:start">
+      <div style="min-width:0">
+        <sc-if value="{{isSingle}}" hint-placeholder-val="{{true}}">
+          <figure style="margin:0;border:1px solid var(--rule)">
+            <svg ref="{{svgRef}}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" style="display:block;width:100%;height:auto">
+              <rect x="0" y="0" width="1000" height="1000" fill="{{groundHex}}"></rect>
+              <defs>
+                <sc-for list="{{workClips}}" as="c" hint-placeholder-count="1">
+                  <clipPath id="{{c.id}}"><path d="{{c.d}}"></path></clipPath>
+                </sc-for>
+              </defs>
+              <sc-for list="{{workOps}}" as="o" hint-placeholder-count="4">
+                <path d="{{o.d}}" fill="{{o.fill}}" clip-path="{{o.clip}}"></path>
+              </sc-for>
+            </svg>
+          </figure>
+          <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;margin-top:14px">
+            <div class="display-italic" style="font-size:26px">{{workTitle}}</div>
+            <div class="ceti-meta">{{workMeta}}</div>
+          </div>
+        </sc-if>
+        <sc-if value="{{isSuite}}" hint-placeholder-val="{{false}}">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+            <sc-for list="{{suite}}" as="w" hint-placeholder-count="6">
+              <figure style="margin:0;border:1px solid var(--rule)">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" style="display:block;width:100%;height:auto">
+                  <rect x="0" y="0" width="1000" height="1000" fill="{{groundHex}}"></rect>
+                  <defs>
+                    <sc-for list="{{w.clips}}" as="c" hint-placeholder-count="1">
+                      <clipPath id="{{c.id}}"><path d="{{c.d}}"></path></clipPath>
+                    </sc-for>
+                  </defs>
+                  <sc-for list="{{w.ops}}" as="o" hint-placeholder-count="4">
+                    <path d="{{o.d}}" fill="{{o.fill}}" clip-path="{{o.clip}}"></path>
+                  </sc-for>
+                </svg>
+                <figcaption class="ceti-meta" style="padding:6px 10px;border-top:1px solid var(--rule)">{{w.cap}}</figcaption>
+              </figure>
+            </sc-for>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;margin-top:14px">
+            <div class="display-italic" style="font-size:26px">{{suiteTitle}}</div>
+            <div class="ceti-meta">one term, six voicings</div>
+          </div>
+        </sc-if>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">
+          <sc-for list="{{checks}}" as="ck" hint-placeholder-count="4">
+            <span style="{{ck.style}}">{{ck.label}}</span>
+          </sc-for>
+        </div>
+        <sc-if value="{{showTerm}}" hint-placeholder-val="{{true}}">
+          <div class="ceti-eyebrow" style="margin-top:18px;margin-bottom:6px">The term — this work as one composition</div>
+          <pre style="margin:0;background:var(--term-bg);color:var(--term-fg);border:1px solid var(--rule);padding:14px 16px;font-family:var(--font-mono);font-size:11.5px;line-height:1.6;white-space:pre-wrap;word-break:break-word;max-height:170px;overflow:auto">{{workTerm}}</pre>
+        </sc-if>
+      </div>
+
+      <aside style="background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius-lg);padding:20px 22px;display:flex;flex-direction:column;gap:18px" data-screen-label="Controls">
+        <div>
+          <div class="ceti-eyebrow" style="margin-bottom:8px">Work</div>
+          <div style="display:flex;gap:8px">
+            <input type="number" value="{{seed}}" onChange="{{onSeed}}" aria-label="Seed" style="width:104px;background:var(--raised);border:1px solid var(--rule);border-radius:var(--radius-sm);color:var(--ink);padding:8px 10px;font-family:var(--font-mono);font-size:13px">
+            <button onClick="{{reroll}}" style="flex:1;min-height:38px;background:var(--accent-fill);color:var(--accent-ink);border:1px solid hsl(var(--accent-edge)/.5);border-radius:var(--radius);font-weight:600;font-size:14px;cursor:pointer;transition:filter 220ms var(--ease-warm-in)" style-hover="filter:brightness(1.06)" style-active="filter:brightness(.94)">New work</button>
+          </div>
+        </div>
+        <div>
+          <div class="ceti-eyebrow" style="margin-bottom:8px">Symbol</div>
+          <select value="{{symbolKey}}" onChange="{{onSymbol}}" aria-label="Symbol" style="width:100%;background:var(--raised);border:1px solid var(--rule);color:var(--ink);padding:9px 10px;border-radius:var(--radius-sm);font-size:14px">
+            <optgroup label="Jungian archetypes">
+              <sc-for list="{{jungOpts}}" as="s" hint-placeholder-count="5"><option value="{{s.key}}">{{s.name}}</option></sc-for>
+            </optgroup>
+            <optgroup label="Hermetic majors">
+              <sc-for list="{{hermOpts}}" as="s" hint-placeholder-count="5"><option value="{{s.key}}">{{s.name}}</option></sc-for>
+            </optgroup>
+          </select>
+          <div class="ceti-meta" style="margin-top:8px;line-height:1.5">{{symbolMeaning}}</div>
+        </div>
+        <div>
+          <div class="ceti-eyebrow" style="margin-bottom:8px">Composition</div>
+          <div style="display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:11px;color:var(--muted-ink)"><span>depth</span><span>{{depth}}</span></div>
+          <input type="range" min="1" max="4" step="1" value="{{depth}}" onChange="{{onDepth}}" aria-label="Depth" style="width:100%">
+          <div style="display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:11px;color:var(--muted-ink);margin-top:8px"><span>density</span><span>{{densityPct}}</span></div>
+          <input type="range" min="0" max="1" step="0.05" value="{{density}}" onChange="{{onDensity}}" aria-label="Density" style="width:100%">
+        </div>
+        <div>
+          <div class="ceti-eyebrow" style="margin-bottom:8px">The lyre — core palette</div>
+          <select value="{{lyreKey}}" onChange="{{onLyre}}" aria-label="Palette" style="width:100%;background:var(--raised);border:1px solid var(--rule);color:var(--ink);padding:9px 10px;border-radius:var(--radius-sm);font-size:14px">
+            <sc-for list="{{lyreOpts}}" as="l" hint-placeholder-count="5"><option value="{{l.key}}">{{l.name}}</option></sc-for>
+          </select>
+          <div style="display:flex;gap:6px;margin-top:10px">
+            <sc-for list="{{stringDots}}" as="s" hint-placeholder-count="7"><span title="{{s.title}}" style="{{s.style}}"></span></sc-for>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:12px">
+            <sc-for list="{{groundOpts}}" as="g" hint-placeholder-count="2"><button onClick="{{g.onClick}}" style="{{g.style}}">{{g.label}}</button></sc-for>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:8px">
+            <sc-for list="{{unityOpts}}" as="u" hint-placeholder-count="2"><button onClick="{{u.onClick}}" style="{{u.style}}">{{u.label}}</button></sc-for>
+          </div>
+          <div class="ceti-meta" style="margin-top:8px;line-height:1.5">{{unityNote}}</div>
+        </div>
+        <div>
+          <div class="ceti-eyebrow" style="margin-bottom:8px">Presentation</div>
+          <div style="display:flex;gap:6px">
+            <sc-for list="{{modeOpts}}" as="m" hint-placeholder-count="2"><button onClick="{{m.onClick}}" style="{{m.style}}">{{m.label}}</button></sc-for>
+          </div>
+        </div>
+        <sc-if value="{{isSingle}}" hint-placeholder-val="{{true}}">
+          <div>
+            <div class="ceti-eyebrow" style="margin-bottom:8px">Export</div>
+            <div style="display:flex;gap:8px">
+              <button onClick="{{exportSVG}}" style="flex:1;min-height:36px;background:var(--raised);color:var(--ink);border:1px solid var(--rule);border-radius:var(--radius);font-weight:600;font-size:13px;cursor:pointer;transition:border-color 180ms var(--ease-warm-in)" style-hover="border-color:hsl(var(--primary-edge)/.7)">SVG</button>
+              <button onClick="{{exportPNG}}" style="flex:1;min-height:36px;background:var(--raised);color:var(--ink);border:1px solid var(--rule);border-radius:var(--radius);font-weight:600;font-size:13px;cursor:pointer;transition:border-color 180ms var(--ease-warm-in)" style-hover="border-color:hsl(var(--primary-edge)/.7)">PNG</button>
+            </div>
+          </div>
+        </sc-if>
+      </aside>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{isLyre}}" hint-placeholder-val="{{false}}">
+    <section data-screen-label="Lyre" style="flex:1;max-width:1000px;width:100%;margin:0 auto;padding:36px var(--gutter) 64px">
+      <div class="ceti-eyebrow">The lyre</div>
+      <h2 class="ceti-h2" style="margin-top:6px">Fixed strings, <span style="color:var(--gold)">closed</span> chords</h2>
+      <p class="ceti-lede" style="margin:0 0 28px">Blending is chording — combining by law and rule. When two colors overlap, the overlap is painted with their chord: the string of the lyre nearest their perceptual midpoint. Every chord is a string. Nothing off-palette can sound.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;margin-bottom:32px">
+        <sc-for list="{{stringCards}}" as="s" hint-placeholder-count="7">
+          <div style="display:flex;align-items:center;gap:10px;border:1px solid var(--rule);border-radius:var(--radius);padding:10px 14px;background:var(--surface)">
+            <span style="{{s.style}}"></span>
+            <div>
+              <div style="font-weight:600;font-size:14px">{{s.name}}</div>
+              <div class="ceti-meta">{{s.hex}}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div class="ceti-eyebrow" style="margin-bottom:10px">Chord table — every pair resolves to a string</div>
+      <div style="overflow-x:auto;padding-bottom:8px">
+        <div style="{{chordGridStyle}}">
+          <sc-for list="{{chordCells}}" as="c" hint-placeholder-count="8"><span title="{{c.title}}" style="{{c.style}}"></span></sc-for>
+        </div>
+      </div>
+      <p style="max-width:56ch;color:var(--muted-ink);font-size:14px;margin-top:20px">This table is the whole blending law. It is derived from the strings themselves — swap the lyre and the chords re-derive. The previous maker composited overlaps in raw RGB and drifted off palette; here closure holds by construction and is verified on every render.</p>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{isSym}}" hint-placeholder-val="{{false}}">
+    <section data-screen-label="Symbolarium" style="flex:1;max-width:1280px;width:100%;margin:0 auto;padding:36px var(--gutter) 64px">
+      <div class="ceti-eyebrow">Symbolarium</div>
+      <h2 class="ceti-h2" style="margin-top:6px">A symbol space from <span style="color:var(--gold)">three</span> primaries</h2>
+      <p class="ceti-lede" style="margin:0 0 28px">Jungian archetypes and hermetic majors, each written as a composition of circle, rectangle, and triangle — never a new primitive. Select one to compose with it.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:16px">
+        <sc-for list="{{symbolCards}}" as="m" hint-placeholder-count="8">
+          <div role="button" onClick="{{m.onCompose}}" style="border:1px solid var(--rule);border-radius:var(--radius-lg);background:var(--surface);overflow:hidden;cursor:pointer;transition:border-color 200ms var(--ease-warm-in)" style-hover="border-color:hsl(var(--primary-edge)/.7)">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" style="display:block;width:100%;height:auto">
+              <rect x="0" y="0" width="1000" height="1000" fill="{{groundHex}}"></rect>
+              <defs>
+                <sc-for list="{{m.clips}}" as="c" hint-placeholder-count="1">
+                  <clipPath id="{{c.id}}"><path d="{{c.d}}"></path></clipPath>
+                </sc-for>
+              </defs>
+              <sc-for list="{{m.ops}}" as="o" hint-placeholder-count="3">
+                <path d="{{o.d}}" fill="{{o.fill}}" clip-path="{{o.clip}}"></path>
+              </sc-for>
+            </svg>
+            <div style="padding:12px 14px 14px;border-top:1px solid var(--rule)">
+              <div class="ceti-eyebrow">{{m.trad}}</div>
+              <div class="display-italic" style="font-size:18px;margin:4px 0 4px">{{m.name}}</div>
+              <div style="font-size:12.5px;color:var(--muted-ink);line-height:1.5">{{m.meaning}}</div>
+              <div style="font-family:var(--font-mono);font-size:11px;color:var(--gold);margin-top:8px">Compose &#8594;</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{isMethod}}" hint-placeholder-val="{{false}}">
+    <section data-screen-label="Method" style="flex:1;max-width:1100px;width:100%;margin:0 auto;padding:36px var(--gutter) 64px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:44px;align-items:start">
+        <div>
+          <div class="ceti-eyebrow">The method</div>
+          <h2 class="ceti-h2" style="margin-top:6px">From form to <span style="color:var(--gold)">geome</span></h2>
+          <p style="color:var(--muted-ink);font-size:15px;line-height:1.65;max-width:58ch">In his late image-art, Adi Da Samraj worked with named principles of abstraction. The <em>geome</em>: primary geometries — rectangle, circle, triangle — structure indicated by line and color. The <em>linead</em>: the free hand-drawn line, composed into the image. Beyond both, a final stage he called the <em>orphic font</em>. The images are aperspectival — made from no located point of view — and aniconic: nothing represented, everything presented. Their stated purpose: to draw the viewer out of egoic separateness toward prior unity.</p>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:18px">
+            <div style="border:1px solid var(--rule);border-radius:var(--radius);padding:14px 16px;background:var(--surface);display:flex;justify-content:space-between;gap:12px;align-items:baseline">
+              <div><span class="display-italic" style="font-size:17px">Geome</span><span style="font-size:13px;color:var(--muted-ink)"> — primary geometries, flat fields</span></div>
+              <span class="ceti-meta" style="color:var(--gold)">this build</span>
+            </div>
+            <div style="border:1px solid var(--rule);border-radius:var(--radius);padding:14px 16px;background:var(--surface);display:flex;justify-content:space-between;gap:12px;align-items:baseline">
+              <div><span class="display-italic" style="font-size:17px">Linead</span><span style="font-size:13px;color:var(--muted-ink)"> — the free line, hand-quality</span></div>
+              <span class="ceti-meta">orphic maker</span>
+            </div>
+            <div style="border:1px solid var(--rule);border-radius:var(--radius);padding:14px 16px;background:var(--surface);display:flex;justify-content:space-between;gap:12px;align-items:baseline">
+              <div><span class="display-italic" style="font-size:17px">Orphic font</span><span style="font-size:13px;color:var(--muted-ink)"> — term resolved to repeatable sign</span></div>
+              <span class="ceti-meta">orphic maker</span>
+            </div>
+          </div>
+          <div class="ceti-eyebrow" style="margin-top:32px;margin-bottom:10px">What the myth gives the machine</div>
+          <div style="display:flex;flex-direction:column;gap:8px;font-size:14px;line-height:1.55">
+            <div style="display:grid;grid-template-columns:150px 1fr;gap:12px"><span style="font-family:var(--font-mono);font-size:11.5px;color:var(--gold);padding-top:2px">seven strings</span><span style="color:var(--muted-ink)">The core palette. Seven fixed tones; nothing else may sound.</span></div>
+            <div style="display:grid;grid-template-columns:150px 1fr;gap:12px"><span style="font-family:var(--font-mono);font-size:11.5px;color:var(--gold);padding-top:2px">chording</span><span style="color:var(--muted-ink)">Combining by law and rule — the blend algebra. Two strings overlap; a string results.</span></div>
+            <div style="display:grid;grid-template-columns:150px 1fr;gap:12px"><span style="font-family:var(--font-mono);font-size:11.5px;color:var(--gold);padding-top:2px">the descent</span><span style="color:var(--muted-ink)">The abstraction ladder: figure, then line, then geometry.</span></div>
+            <div style="display:grid;grid-template-columns:150px 1fr;gap:12px"><span style="font-family:var(--font-mono);font-size:11.5px;color:var(--gold);padding-top:2px">the look back</span><span style="color:var(--muted-ink)">Eurydice is lost the moment the singer turns. Abstraction is one-way: no stage may reach back for the source.</span></div>
+            <div style="display:grid;grid-template-columns:150px 1fr;gap:12px"><span style="font-family:var(--font-mono);font-size:11.5px;color:var(--gold);padding-top:2px">the singing head</span><span style="color:var(--muted-ink)">What survives dismemberment: the essential form. The work is what still sings.</span></div>
+            <div style="display:grid;grid-template-columns:150px 1fr;gap:12px"><span style="font-family:var(--font-mono);font-size:11.5px;color:var(--gold);padding-top:2px">one, then triads</span><span style="color:var(--muted-ink)">The One, then Being–Life–Intellect, then seven orders: one root term, typed combinators, composed levels.</span></div>
+          </div>
+          <div style="border:1px solid hsl(var(--primary-edge)/.4);border-radius:var(--radius-lg);padding:16px 18px;margin-top:28px;background:var(--surface)">
+            <div class="ceti-eyebrow" style="margin-bottom:6px">The intention</div>
+            <p style="margin:0;font-size:14px;color:var(--muted-ink);line-height:1.6">Orphic art transcends the ego; Narcissistic art reflects it. Adi Da: &#8220;Narcissus (or the ego-&#8216;I&#8217;) must die. Orpheus&#8230; must win.&#8221; This instrument takes a side — <a href="https://www.adidafoundation.org/essays/the-eternal-war-between-orpheus-and-narcissus" target="_blank" rel="noopener">the essay</a>.</p>
+          </div>
+        </div>
+        <div>
+          <div class="ceti-eyebrow" style="margin-bottom:10px">Resolved from v2</div>
+          <div style="display:flex;flex-direction:column;gap:8px;font-size:14px;line-height:1.55;color:var(--muted-ink)">
+            <div>Blends escaped the palette — alpha compositing produced arbitrary RGB. Overlaps are now painted as chords, palette members by construction, verified live on the canvas.</div>
+            <div>Blending was raster and lossy. It is now vector clip-intersection; exports stay crisp at any scale.</div>
+            <div>Works were not reproducible. The engine is pure and seed-deterministic; every work prints as a term.</div>
+            <div>The symbol space was thin. Twenty typed recipes — ten Jungian, ten hermetic — over three primaries.</div>
+            <div>Now reconciled with the real v2 source: the authentic core palettes — Spectra prism, the Hermetic deck, and the Sanzo Wada combinations (Jewel, Antique, Indigo, Pastel) — are lyres here, and every one of them chords closed. v2's layer blend modes (multiply, screen) are exactly where color escaped; the chord law replaces them.</div>
+          </div>
+          <div class="ceti-eyebrow" style="margin-top:32px;margin-bottom:10px">The orphic maker — the road</div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="display:grid;grid-template-columns:34px 1fr;gap:10px"><span style="font-family:var(--font-mono);font-size:12px;color:var(--gold)">01</span><div><b style="font-size:14px">Source &amp; descent</b><div style="font-size:13px;color:var(--muted-ink);line-height:1.5">Drop a figurative image; strata extracted by luminance. No source pixels reach the output.</div></div></div>
+            <div style="display:grid;grid-template-columns:34px 1fr;gap:10px"><span style="font-family:var(--font-mono);font-size:12px;color:var(--gold)">02</span><div><b style="font-size:14px">Song</b><div style="font-size:13px;color:var(--muted-ink);line-height:1.5">Contours traced to lineads — free lines with hand quality, simplification as a control.</div></div></div>
+            <div style="display:grid;grid-template-columns:34px 1fr;gap:10px"><span style="font-family:var(--font-mono);font-size:12px;color:var(--gold)">03</span><div><b style="font-size:14px">The law of not looking back</b><div style="font-size:13px;color:var(--muted-ink);line-height:1.5">Staged abstraction: figure &#8594; linead &#8594; geome. Each stage one-way, by design.</div></div></div>
+            <div style="display:grid;grid-template-columns:34px 1fr;gap:10px"><span style="font-family:var(--font-mono);font-size:12px;color:var(--gold)">04</span><div><b style="font-size:14px">Chorded color</b><div style="font-size:13px;color:var(--muted-ink);line-height:1.5">This lyre algebra, unchanged. Closure checks stay green.</div></div></div>
+            <div style="display:grid;grid-template-columns:34px 1fr;gap:10px"><span style="font-family:var(--font-mono);font-size:12px;color:var(--gold)">05</span><div><b style="font-size:14px">Suite composer</b><div style="font-size:13px;color:var(--muted-ink);line-height:1.5">Abstract narrative in parts — sets of six, per-part voicings, batch export.</div></div></div>
+            <div style="display:grid;grid-template-columns:34px 1fr;gap:10px"><span style="font-family:var(--font-mono);font-size:12px;color:var(--gold)">06</span><div><b style="font-size:14px">Orphic font</b><div style="font-size:13px;color:var(--muted-ink);line-height:1.5">Terms resolved to repeatable signs; symbol registry aligned with the TAROT-HERMETICO corpus once it is readable here.</div></div></div>
+            <div style="display:grid;grid-template-columns:34px 1fr;gap:10px"><span style="font-family:var(--font-mono);font-size:12px;color:var(--gold)">07</span><div><b style="font-size:14px">Deploy</b><div style="font-size:13px;color:var(--muted-ink);line-height:1.5">Single-file bundle; any static host. This app already runs client-only.</div></div></div>
+          </div>
+          <p class="ceti-meta" style="margin-top:24px;line-height:1.6">Working notes live in /docs — craft constitution, meta-prompt, plan, compounding map.</p>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <footer style="border-top:1px solid var(--rule);padding:14px var(--gutter)">
+    <div style="max-width:1280px;margin:0 auto" class="ceti-meta">Geome Maker v3 &#183; deterministic &#183; palette-closed &#183; term-printable &#183; CETI</div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showTermConsole&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Console&quot;},&quot;maxOps&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:900,&quot;min&quot;:200,&quot;max&quot;:1600,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Engine&quot;},&quot;chromeGround&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;dark&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Chrome&quot;}}">
+class Component extends DCLogic {
+  state = { view: 'maker', seed: 1927, symbol: 'self', depth: 2, density: 0.55, lyre: 'spectra', ground: 'deep', unity: true, mode: 'single' };
+  svgRef = React.createRef();
+  rootRef = React.createRef();
+  _memo = {};
+
+  componentDidMount() { this.applyChrome(); }
+  componentDidUpdate() { this.applyChrome(); }
+  applyChrome() {
+    const n = this.rootRef.current; if (!n) return;
+    const light = (this.props.chromeGround ?? 'dark') === 'light';
+    n.classList.toggle('light', light); n.classList.toggle('dark', !light);
+  }
+
+  engine() {
+    if (this._E) return this._E;
+    const TAU = Math.PI * 2;
+    const mul32 = seed => { let a = (seed >>> 0) || 1; return () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; };
+    const hsl2rgb = (h, s, l) => { s /= 100; l /= 100; const c = (1 - Math.abs(2 * l - 1)) * s, x = c * (1 - Math.abs(((h / 60) % 2) - 1)), m = l - c / 2; let r, g, b; if (h < 60) { r = c; g = x; b = 0; } else if (h < 120) { r = x; g = c; b = 0; } else if (h < 180) { r = 0; g = c; b = x; } else if (h < 240) { r = 0; g = x; b = c; } else if (h < 300) { r = x; g = 0; b = c; } else { r = c; g = 0; b = x; } return [r + m, g + m, b + m]; };
+    const hex2rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255);
+    const rgb2hex = rgb => '#' + rgb.map(v => Math.round(Math.max(0, Math.min(1, v)) * 255).toString(16).padStart(2, '0')).join('');
+    const H = (h, s, l) => rgb2hex(hsl2rgb(h, s, l));
+    const oklab = rgb => { const f = c => c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); const r = f(rgb[0]), g = f(rgb[1]), b = f(rgb[2]); const l = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b), m = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b), s = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b); return [0.2104542553 * l + 0.7936177850 * m - 0.0040720468 * s, 1.9779984951 * l - 2.4285922050 * m + 0.4505937099 * s, 0.0259040371 * l + 0.7827717662 * m - 0.8086757660 * s]; };
+    const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
+
+    const RAW = {
+      whale: { name: 'Whale-streak', strings: [['Copper', '#A67756'], ['Sage', '#7A9171'], ['Peach', '#D88B5C'], ['Slate', '#324555'], ['Rust', '#8C4A2E'], ['Mist', '#95A8B0'], ['Driftwood', '#5C5447']], deep: '#1A1F2E', bright: '#F5EFE3' },
+      boardwalk: { name: 'Boardwalk', strings: [['Lavender', H(265, 45, 78)], ['Seafoam', H(150, 35, 72)], ['Coral', H(10, 62, 76)], ['Harbor', H(212, 40, 67)], ['Violet', H(265, 45, 52)], ['Brick', H(10, 62, 43)], ['Pine', H(150, 40, 32)]], deep: H(268, 16, 11), bright: H(44, 58, 92) },
+      coastal: { name: 'Coastal', strings: [['Tide', H(166, 36, 72)], ['Shell', H(14, 55, 82)], ['Sky', H(205, 52, 78)], ['Clay', H(0, 24, 72)], ['Kelp', H(166, 50, 42)], ['Channel', H(205, 60, 48)], ['Ember', H(14, 65, 52)]], deep: H(192, 14, 10), bright: H(48, 30, 91) },
+      greenhouse: { name: 'Greenhouse', strings: [['Moss', H(80, 26, 52)], ['Terracotta', H(14, 42, 59)], ['Fern', H(148, 20, 52)], ['Stone', H(30, 12, 67)], ['Olive', H(80, 40, 32)], ['Cedar', H(148, 38, 30)], ['Rootbark', H(14, 56, 36)]], deep: H(72, 14, 7), bright: H(44, 30, 91) },
+      neosage: { name: 'Neo Sage', strings: [['Iris', H(265, 32, 65)], ['Chartreuse', H(68, 54, 54)], ['Amber', H(36, 70, 66)], ['Ash', H(28, 6, 63)], ['Ultraviolet', H(265, 46, 38)], ['Bronze', H(36, 80, 31)], ['Acid', H(68, 72, 25)]], deep: H(260, 16, 8), bright: H(48, 24, 95) },
+      spectra: { name: 'Spectra (v2 Prism)', strings: [['Red', '#e0241b'], ['Orange', '#ef6a1e'], ['Gold', '#f4b50d'], ['Green', '#3a9b3f'], ['Teal', '#1aa6b8'], ['Cobalt', '#1f4fd0'], ['Violet', '#6a2fb6'], ['Magenta', '#c01f7a']], deep: '#0a0a0e', bright: '#f1ece2' },
+      hermetic: { name: 'Hermetic deck (v2)', strings: [['Vermilion', '#b03a2e'], ['Cobalt', '#1a4fd0'], ['Ochre', '#d99e00'], ['Ink', '#2c2824'], ['Rose ash', '#e2c3b4']], deep: '#0a0a0e', bright: '#f1ece2' },
+      wadaJewel: { name: 'Wada · Jewel (v2)', strings: [['Crimson', '#e31f26'], ['Saffron', '#fcb315'], ['Emerald', '#1a7444'], ['Jade', '#00b49b'], ['Peacock', '#0093a5'], ['Amethyst', '#6450a1'], ['Carmine', '#cc1236'], ['Turquoise', '#62c6bf']], deep: '#12354e', bright: '#f3e6c2' },
+      wadaAntique: { name: 'Wada · Antique (v2)', strings: [['Carmine', '#cc1236'], ['Amber', '#bb7125'], ['Brass', '#d6b43e'], ['Olive', '#6b7140'], ['Celadon', '#648f7b'], ['Marine', '#005b8d'], ['Rose', '#d46d7a'], ['Sienna', '#762c19']], deep: '#051230', bright: '#f3e6c2' },
+      wadaIndigo: { name: 'Wada · Indigo (v2)', strings: [['Marine', '#005b8d'], ['Steel', '#5a82b3'], ['Amethyst', '#6450a1'], ['Mulberry', '#4e1d4c'], ['Turquoise', '#62c6bf'], ['Sky', '#78cdd0'], ['Cobalt', '#1c4286'], ['Violet', '#4f4086']], deep: '#051230', bright: '#fdf4e1' },
+      wadaPastel: { name: 'Wada · Pastel (v2)', strings: [['Blossom', '#f9c1ce'], ['Apricot', '#fdc57e'], ['Willow', '#c1c494'], ['Mint', '#b5decc'], ['Haze', '#97acc8'], ['Lilac', '#b5b1d8'], ['Mauve', '#ca92a8'], ['Spring', '#96d1aa']], deep: '#12354e', bright: '#fdf4e1' }
+    };
+    const lyres = {};
+    for (const key in RAW) {
+      const r = RAW[key];
+      const strings = r.strings.map(([name, hex]) => ({ name, hex, lab: oklab(hex2rgb(hex)) }));
+      const n = strings.length, chord = [];
+      for (let i = 0; i < n; i++) { chord[i] = []; for (let j = 0; j < n; j++) { if (i === j) { chord[i][j] = i; continue; } const mid = [0, 1, 2].map(k => (strings[i].lab[k] + strings[j].lab[k]) / 2); let best = 0, bs = 1e9; for (let k = 0; k < n; k++) { const s = dist(strings[k].lab, mid) + ((k === i || k === j) ? 0.045 : 0); if (s < bs) { bs = s; best = k; } } chord[i][j] = best; } }
+      lyres[key] = { key, name: r.name, strings, chord, deep: r.deep, bright: r.bright };
+    }
+
+    const P = (kind, size, o) => Object.assign({ t: 'p', kind, size }, o || {});
+    const O = (...k) => ({ t: 'o', k });
+    const T = (tone, k) => ({ t: 't', tone, k });
+    const R = (n, r, k, orient) => ({ t: 'r', n, r, k, orient: orient !== false });
+    const N = (n, ratio, k) => ({ t: 'n', n, ratio, k });
+    const L = (n, dy, ratio, k) => ({ t: 'l', n, dy, ratio, k });
+    const M = (dx, k) => ({ t: 'm', dx, k });
+    const S = (dx, dy, k) => ({ t: 's', dx, dy, k });
+    const Ro = (a, k) => ({ t: 'ro', a, k });
+    const Sc = (f, k) => ({ t: 'sc', f, k });
+    const Sp = (n, r0, dr, da, f, k) => ({ t: 'sp', n, r0, dr, da, f, k });
+
+    const evalT = (t, ctx, out) => {
+      switch (t.t) {
+        case 'p': out.push({ kind: t.kind, cx: ctx.x, cy: ctx.y, s: ctx.s * t.size, rot: ctx.rot + (t.rot || 0), tone: t.tone != null ? t.tone : ctx.tone, th: t.th, ar: t.ar }); break;
+        case 'o': t.k.forEach(c => evalT(c, ctx, out)); break;
+        case 't': evalT(t.k, Object.assign({}, ctx, { tone: t.tone }), out); break;
+        case 'r': for (let i = 0; i < t.n; i++) { const a = ctx.rot - TAU / 4 + i * TAU / t.n; evalT(t.k, Object.assign({}, ctx, { x: ctx.x + Math.cos(a) * t.r * ctx.s, y: ctx.y + Math.sin(a) * t.r * ctx.s, rot: t.orient ? a + TAU / 4 : ctx.rot }), out); } break;
+        case 'n': for (let i = 0; i < t.n; i++) evalT(t.k, Object.assign({}, ctx, { s: ctx.s * Math.pow(t.ratio, i) }), out); break;
+        case 'l': { const y0 = -((t.n - 1) / 2) * t.dy; for (let i = 0; i < t.n; i++) evalT(t.k, Object.assign({}, ctx, { y: ctx.y + (y0 + i * t.dy) * ctx.s, s: ctx.s * Math.pow(t.ratio, i) }), out); } break;
+        case 'm': evalT(t.k, Object.assign({}, ctx, { x: ctx.x - t.dx * ctx.s }), out); evalT(t.k, Object.assign({}, ctx, { x: ctx.x + t.dx * ctx.s }), out); break;
+        case 's': { const a = ctx.rot, dx = (t.dx * Math.cos(a) - t.dy * Math.sin(a)) * ctx.s, dy = (t.dx * Math.sin(a) + t.dy * Math.cos(a)) * ctx.s; evalT(t.k, Object.assign({}, ctx, { x: ctx.x + dx, y: ctx.y + dy }), out); } break;
+        case 'ro': evalT(t.k, Object.assign({}, ctx, { rot: ctx.rot + t.a }), out); break;
+        case 'sc': evalT(t.k, Object.assign({}, ctx, { s: ctx.s * t.f }), out); break;
+        case 'sp': for (let i = 0; i < t.n; i++) { const a = ctx.rot + i * t.da - TAU / 4, rr = (t.r0 + i * t.dr) * ctx.s; evalT(t.k, Object.assign({}, ctx, { x: ctx.x + Math.cos(a) * rr, y: ctx.y + Math.sin(a) * rr, s: ctx.s * Math.pow(t.f, i), rot: a + TAU / 4 }), out); } break;
+      }
+    };
+
+    const pr = t => { switch (t.t) { case 'p': return '(' + t.kind + ' ' + t.size + (t.tone != null ? ' ~' + t.tone : '') + ')'; case 'o': return '(over ' + t.k.map(pr).join(' ') + ')'; case 't': return '(tone ' + t.tone + ' ' + pr(t.k) + ')'; case 'r': return '(radiate ' + t.n + ' r=' + t.r + ' ' + pr(t.k) + ')'; case 'n': return '(nest ' + t.n + ' x' + t.ratio + ' ' + pr(t.k) + ')'; case 'l': return '(ladder ' + t.n + ' ' + pr(t.k) + ')'; case 'm': return '(mirror ' + t.dx + ' ' + pr(t.k) + ')'; case 's': return '(shift ' + t.dx + ',' + t.dy + ' ' + pr(t.k) + ')'; case 'ro': return '(rot ' + t.a.toFixed(2) + ' ' + pr(t.k) + ')'; case 'sc': return '(scale ' + t.f + ' ' + pr(t.k) + ')'; case 'sp': return '(spiral ' + t.n + ' ' + pr(t.k) + ')'; default: return '?'; } };
+
+    const f1 = v => Math.round(v * 10) / 10;
+    const circ = (cx, cy, r, ccw) => { const sw = ccw ? 0 : 1; return 'M ' + f1(cx - r) + ' ' + f1(cy) + ' a ' + f1(r) + ' ' + f1(r) + ' 0 1 ' + sw + ' ' + f1(2 * r) + ' 0 a ' + f1(r) + ' ' + f1(r) + ' 0 1 ' + sw + ' ' + f1(-2 * r) + ' 0 Z'; };
+    const poly = pts => 'M ' + pts.map(p => f1(p[0]) + ' ' + f1(p[1])).join(' L ') + ' Z';
+    const rotP = (x, y, a) => [x * Math.cos(a) - y * Math.sin(a), x * Math.sin(a) + y * Math.cos(a)];
+    const toPath = sh => {
+      const { cx, cy, s, rot } = sh;
+      switch (sh.kind) {
+        case 'disc': case 'dot': return circ(cx, cy, s, false);
+        case 'ring': return circ(cx, cy, s, false) + ' ' + circ(cx, cy, s * (1 - (sh.th || 0.35)), true);
+        case 'quad': return poly([[-s, -s], [s, -s], [s, s], [-s, s]].map(p => { const q = rotP(p[0], p[1], rot); return [cx + q[0], cy + q[1]]; }));
+        case 'bar': { const hw = s * (sh.ar || 0.16); return poly([[-hw, -s], [hw, -s], [hw, s], [-hw, s]].map(p => { const q = rotP(p[0], p[1], rot); return [cx + q[0], cy + q[1]]; })); }
+        case 'tri': { const pts = [-TAU / 4, -TAU / 4 + TAU / 3, -TAU / 4 + 2 * TAU / 3].map(a => { const q = rotP(Math.cos(a) * s, Math.sin(a) * s, rot); return [cx + q[0], cy + q[1]]; }); return poly(pts); }
+        case 'vesica': { const R2 = s, h = Math.sqrt(R2 * R2 - 0.25 * R2 * R2) * 1.155; const t = rotP(0, -h * 0.75, rot), b = rotP(0, h * 0.75, rot); const tp = [cx + t[0], cy + t[1]], bp = [cx + b[0], cy + b[1]]; return 'M ' + f1(tp[0]) + ' ' + f1(tp[1]) + ' A ' + f1(R2) + ' ' + f1(R2) + ' 0 0 1 ' + f1(bp[0]) + ' ' + f1(bp[1]) + ' A ' + f1(R2) + ' ' + f1(R2) + ' 0 0 1 ' + f1(tp[0]) + ' ' + f1(tp[1]) + ' Z'; }
+        default: return circ(cx, cy, s, false);
+      }
+    };
+    const radius = sh => sh.kind === 'quad' ? sh.s * 1.45 : sh.kind === 'bar' ? sh.s : sh.s * 1.05;
+
+    const SYMBOLS = [
+      { key: 'self', trad: 'Jungian', name: 'The Self', meaning: 'Mandala of wholeness — the center that is also the circumference.', make: (r, q) => O(T(3, P('ring', 0.95, { th: 0.05 })), N(2 + Math.round(q * 2), 0.62, T(0, P('ring', 0.88, { th: 0.16 }))), R(6 + Math.round(q * 6), 0.56, T(1, P('tri', 0.11))), R(4, 0.27, T(2, P('quad', 0.08))), T(4, P('disc', 0.1))) },
+      { key: 'syzygy', trad: 'Jungian', name: 'Syzygy', meaning: 'Paired opposites conjoined — sun and moon as one field.', make: (r, q) => O(S(-0.26, 0, T(0, P('disc', 0.36))), S(0.26, 0, T(1, P('disc', 0.36))), T(2, P('vesica', 0.3)), S(0, -0.62, T(3, P('tri', 0.09))), S(0, 0.62, Ro(Math.PI, T(3, P('tri', 0.09)))), R(2, 0.78, T(4, P('dot', 0.045)), false)) },
+      { key: 'shadow', trad: 'Jungian', name: 'Shadow', meaning: 'The disowned twin beneath the same light.', make: (r, q) => O(S(0.12, 0.14, T(3, P('disc', 0.34))), S(-0.1, -0.12, T(0, P('disc', 0.34))), S(-0.1, -0.12, T(2, P('ring', 0.34, { th: 0.1 }))), L(3, 0.24, 0.82, S(0.45, 0.2, T(1, P('dot', 0.05))))) },
+      { key: 'anima', trad: 'Jungian', name: 'Anima / Animus', meaning: 'The inner other — mirrored, facing, never merged.', make: (r, q) => O(M(0.3, T(0, P('bar', 0.52, { ar: 0.14 }))), M(0.3, S(0, -0.42, T(2, P('tri', 0.13)))), M(0.3, S(0, 0.4, T(1, P('disc', 0.11)))), T(4, P('vesica', 0.2))) },
+      { key: 'quaternity', trad: 'Jungian', name: 'Quaternity', meaning: 'Fourfold order of the whole — the cross within the circle.', make: (r, q) => O(T(3, P('ring', 0.86, { th: 0.05 })), R(4, 0.52, T(0, P('quad', 0.15))), Ro(TAU / 8, R(4, 0.52, T(1, P('dot', 0.05)))), T(2, P('disc', 0.13))) },
+      { key: 'axis', trad: 'Jungian', name: 'Axis Mundi', meaning: 'The world-pillar joining deep and bright.', make: (r, q) => O(T(3, P('bar', 0.82, { ar: 0.09 })), S(0, -0.7, T(2, P('tri', 0.14))), S(0, 0.7, T(1, P('quad', 0.11))), L(3 + Math.round(q * 2), 0.3, 0.94, T(0, P('ring', 0.16, { th: 0.3 })))) },
+      { key: 'ouroboros', trad: 'Jungian', name: 'Ouroboros', meaning: 'The circuit that feeds on itself and renews.', make: (r, q) => O(T(0, P('ring', 0.74, { th: 0.13 })), R(10 + Math.round(q * 6), 0.74, T(1, P('dot', 0.038))), S(0, -0.74, T(2, P('quad', 0.1))), T(3, P('disc', 0.12))) },
+      { key: 'vesica', trad: 'Jungian', name: 'Vesica', meaning: 'The threshold where two worlds overlap — the almond of passage.', make: (r, q) => O(S(-0.2, 0, T(0, P('disc', 0.4))), S(0.2, 0, T(1, P('disc', 0.4))), T(2, P('vesica', 0.26)), S(0, -0.66, T(3, P('dot', 0.05))), S(0, 0.66, T(3, P('dot', 0.05)))) },
+      { key: 'spiral', trad: 'Jungian', name: 'Spiral', meaning: 'Individuation — return, at a higher turn.', make: (r, q) => O(Sp(8 + Math.round(q * 4), 0.1, 0.085, 2.4, 0.97, T(0, P('disc', 0.11))), Sp(8 + Math.round(q * 4), 0.1, 0.085, 2.4, 0.97, T(2, P('ring', 0.11, { th: 0.28 }))), T(3, P('dot', 0.06))) },
+      { key: 'descent', trad: 'Jungian', name: 'Nekyia', meaning: 'The descent for what was lost — the road of Orpheus, downward.', make: (r, q) => O(S(0, 0.44, T(3, P('disc', 0.42))), L(6, 0.26, 0.85, T(0, P('tri', 0.12, { rot: Math.PI }))), S(0, -0.82, T(2, P('dot', 0.05))), S(0, 0.44, T(1, P('ring', 0.2, { th: 0.22 })))) },
+      { key: 'magus', trad: 'Hermetic', name: 'I · The Magician', meaning: 'As above, so below — the raised line between.', make: (r, q) => O(T(0, P('bar', 0.72, { ar: 0.08 })), S(0, -0.82, T(2, P('dot', 0.07))), S(0, 0.78, T(1, P('quad', 0.13))), R(2, 0.4, T(3, P('dot', 0.04)), false)) },
+      { key: 'priestess', trad: 'Hermetic', name: 'II · The Priestess', meaning: 'Two pillars, and the veil between them.', make: (r, q) => O(M(0.44, T(3, P('bar', 0.62, { ar: 0.12 }))), T(0, P('vesica', 0.34)), S(0, -0.58, T(2, P('disc', 0.09))), S(0, 0.6, T(1, P('dot', 0.05)))) },
+      { key: 'empress', trad: 'Hermetic', name: 'III · The Empress', meaning: 'The generative triangle in a ripening field.', make: (r, q) => O(T(1, P('tri', 0.5)), N(2, 0.62, T(2, P('ring', 0.78, { th: 0.07 }))), R(6 + Math.round(q * 4), 0.64, T(0, P('dot', 0.05)))) },
+      { key: 'wheel', trad: 'Hermetic', name: 'X · The Wheel', meaning: 'Rota — the turning law.', make: (r, q) => O(T(3, P('ring', 0.8, { th: 0.1 })), R(8, 0.44, T(0, P('bar', 0.3, { ar: 0.1 }))), T(2, P('disc', 0.15)), R(8, 0.8, T(1, P('dot', 0.04)))) },
+      { key: 'temperance', trad: 'Hermetic', name: 'XIV · Temperance', meaning: 'Two vessels; one measured stream.', make: (r, q) => O(S(-0.3, -0.28, T(0, P('disc', 0.2))), S(0.3, 0.24, T(1, P('disc', 0.2))), Ro(-0.72, T(2, P('bar', 0.5, { ar: 0.06 }))), S(0, 0.66, T(3, P('tri', 0.13)))) },
+      { key: 'tower', trad: 'Hermetic', name: 'XVI · The Tower', meaning: 'The struck pillar — sudden clarity.', make: (r, q) => O(T(3, P('bar', 0.68, { ar: 0.2 })), S(0, -0.78, T(2, P('disc', 0.13))), S(-0.4, -0.34, Ro(0.6, T(0, P('tri', 0.1)))), S(0.44, -0.12, Ro(-0.8, T(1, P('tri', 0.09)))), S(-0.3, 0.3, Ro(2.4, T(0, P('tri', 0.07))))) },
+      { key: 'star', trad: 'Hermetic', name: 'XVII · The Star', meaning: 'Seven rays over still water.', make: (r, q) => O(R(7, 0.52, T(0, P('tri', 0.13))), T(2, P('disc', 0.13)), R(7, 0.76, T(1, P('dot', 0.04))), S(0, 0.82, Ro(TAU / 4, T(3, P('bar', 0.5, { ar: 0.05 }))))) },
+      { key: 'moon', trad: 'Hermetic', name: 'XVIII · The Moon', meaning: 'The gate of reflection — the dark road between towers.', make: (r, q) => O(M(0.52, T(3, P('bar', 0.5, { ar: 0.14 }))), S(0, -0.3, T(0, P('vesica', 0.3, { rot: TAU / 4 }))), L(4, 0.17, 0.85, S(0, 0.42, T(1, P('dot', 0.045)))), S(0, -0.3, T(2, P('dot', 0.06)))) },
+      { key: 'sun', trad: 'Hermetic', name: 'XIX · The Sun', meaning: 'Unqualified radiance — the bright ground itself.', make: (r, q) => O(T(2, P('disc', 0.32)), R(12, 0.56, T(0, P('tri', 0.1))), Ro(TAU / 24, R(12, 0.5, T(1, P('bar', 0.12, { ar: 0.14 })))), R(6, 0.84, T(3, P('dot', 0.04)))) },
+      { key: 'world', trad: 'Hermetic', name: 'XXI · The World', meaning: 'The danced mandorla — completion.', make: (r, q) => O(T(0, P('vesica', 0.56)), Ro(TAU / 8, R(4, 0.82, T(1, P('quad', 0.1)))), T(2, P('ring', 0.3, { th: 0.12 })), T(3, P('dot', 0.07))) }
+    ];
+
+    const enrich = (base, depth, rng, q) => {
+      if (depth <= 1) return Sc(0.94, base);
+      if (depth === 2) return base;
+      const halo = R(10 + Math.round(q * 8), 0.94, T(5, P('dot', 0.026)));
+      if (depth === 3) return O(base, halo);
+      return O(base, halo, Sc(0.4, Ro(TAU / (4 + Math.floor(rng() * 4)), base)));
+    };
+
+    const shuffle = (arr, rng) => { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; } return a; };
+    const roman = n => { const V = [[36, ''], [10, 'X'], [9, 'IX'], [5, 'V'], [4, 'IV'], [1, 'I']]; let s = '', x = n; for (const [v, r] of [[10, 'X'], [9, 'IX'], [5, 'V'], [4, 'IV'], [1, 'I']]) { while (x >= v) { s += r; x -= v; } } return s || 'I'; };
+    const NUM = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
+
+    const generate = (opts) => {
+      const { seed, symbolKey, depth, density, lyreKey, ground, unity, maxOps, prefix } = opts;
+      const lyre = lyres[lyreKey];
+      const si = SYMBOLS.findIndex(s => s.key === symbolKey);
+      const sym = SYMBOLS[si < 0 ? 0 : si];
+      const rng = mul32((seed * 2654435761) ^ ((si + 1) * 40503));
+      const voicing = shuffle(lyre.strings.map((_, i) => i), rng);
+      const term = enrich(sym.make(rng, density), depth, rng, density);
+      const shapes = [];
+      evalT(term, { x: 500, y: 500, s: 430, rot: 0, tone: 0 }, shapes);
+      const capped = shapes.slice(0, Math.min(shapes.length, 240));
+      const vn = voicing.length;
+      capped.forEach(sh => { sh.tone = voicing[((sh.tone % vn) + vn) % vn]; sh.d = toPath(sh); sh.fill = lyre.strings[sh.tone].hex; });
+      const ops = capped.map(sh => ({ d: sh.d, fill: sh.fill }));
+      const clips = []; let chords = 0;
+      if (unity) {
+        outer: for (let i = 0; i < capped.length; i++) {
+          for (let j = i + 1; j < capped.length; j++) {
+            const a = capped[i], b = capped[j];
+            if (a.tone === b.tone) continue;
+            const ra = radius(a), rb = radius(b), dx = a.cx - b.cx, dy = a.cy - b.cy;
+            if (dx * dx + dy * dy > (ra + rb) * (ra + rb) * 0.72) continue;
+            const cid = prefix + 'c' + clips.length;
+            clips.push({ id: cid, d: a.d });
+            ops.push({ d: b.d, fill: lyre.strings[lyre.chord[a.tone][b.tone]].hex, clip: 'url(#' + cid + ')' });
+            chords++;
+            if (ops.length >= maxOps) break outer;
+          }
+        }
+      }
+      const groundHex = ground === 'deep' ? lyre.deep : lyre.bright;
+      const stringSet = new Set(lyre.strings.map(s => s.hex));
+      const closed = ops.every(o => stringSet.has(o.fill));
+      const kinds = new Set(capped.map(s => s.kind));
+      const primary = [...kinds].every(k => ['disc', 'dot', 'ring', 'quad', 'bar', 'tri', 'vesica'].includes(k));
+      const termStr = pr(term);
+      return { ops, clips, chords, groundHex, closed, primary, termStr, sym, voicing, lyre };
+    };
+
+    this._E = { lyres, SYMBOLS, generate, roman, NUM, mul32 };
+    return this._E;
+  }
+
+  gen(over) {
+    const E = this.engine();
+    const st = this.state;
+    const maxOps = this.props.maxOps ?? 900;
+    const o = Object.assign({ seed: st.seed, symbolKey: st.symbol, depth: st.depth, density: st.density, lyreKey: st.lyre, ground: st.ground, unity: st.unity, maxOps, prefix: 'w' }, over || {});
+    const key = JSON.stringify([o.seed, o.symbolKey, o.depth, o.density, o.lyreKey, o.ground, o.unity, o.maxOps, o.prefix]);
+    if (!this._memo[key]) { if (Object.keys(this._memo).length > 160) this._memo = {}; this._memo[key] = E.generate(o); }
+    return this._memo[key];
+  }
+
+  download(name, blob) { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
+  svgText() { const n = this.svgRef.current; return n ? new XMLSerializer().serializeToString(n) : null; }
+
+  renderVals() {
+    const E = this.engine();
+    const st = this.state;
+    const set = p => () => this.setState(p);
+    const styles = {
+      tab: on => ({ minHeight: '36px', padding: '8px 14px', background: 'transparent', border: 'none', borderBottom: on ? '2px solid var(--gold)' : '2px solid transparent', color: on ? 'var(--ink)' : 'var(--muted-ink)', fontSize: '14px', fontWeight: 600, cursor: 'pointer', transition: 'color 180ms var(--ease-warm-in)' }),
+      seg: on => ({ flex: 1, minHeight: '34px', padding: '6px 8px', borderRadius: 'var(--radius-sm)', border: on ? '1px solid hsl(var(--primary-edge)/.7)' : '1px solid var(--rule)', background: on ? 'var(--primary-fill)' : 'transparent', color: on ? 'var(--primary-ink)' : 'var(--muted-ink)', fontSize: '13px', fontWeight: 600, cursor: 'pointer', transition: 'all 180ms var(--ease-warm-in)' }),
+      dot: hex => ({ width: '26px', height: '26px', borderRadius: '999px', background: hex, border: '1px solid hsl(var(--foreground)/.25)', flex: '0 0 auto' }),
+      chip: ok => ({ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '.06em', padding: '4px 10px', border: '1px solid var(--rule)', borderRadius: '999px', color: ok ? 'hsl(var(--secondary-foreground))' : 'hsl(var(--destructive))' })
+    };
+    const tabs = [['maker', 'Maker'], ['lyre', 'The lyre'], ['symbols', 'Symbolarium'], ['method', 'Method & road']].map(([k, label]) => ({ label, style: styles.tab(st.view === k), onClick: set({ view: k }) }));
+
+    const work = this.gen();
+    const lyre = work.lyre;
+    const groundHex = work.groundHex;
+    const checks = [
+      { label: (work.closed ? '\u2713' : '\u2717') + ' palette.closed', style: styles.chip(work.closed) },
+      { label: (work.primary ? '\u2713' : '\u2717') + ' geome.primary', style: styles.chip(work.primary) },
+      { label: '\u2713 ground.single', style: styles.chip(true) },
+      { label: '\u2713 term.printable', style: styles.chip(work.termStr.length > 0) }
+    ];
+    const voicingStr = work.voicing.slice(0, 3).map(i => E.NUM[i]).join('\u00B7');
+    const workTitle = work.sym.name + ' \u2014 ' + E.roman(1 + (st.seed % 24));
+    const workMeta = 'seed ' + st.seed + ' \u00B7 ' + lyre.name + ' lyre \u00B7 voicing ' + voicingStr + ' \u00B7 ' + work.chords + ' chords \u00B7 ' + st.ground + ' ground';
+
+    let suite = [];
+    if (st.mode === 'suite') suite = [0, 1, 2, 3, 4, 5].map(k => { const w = this.gen({ seed: st.seed + k, prefix: 's' + k }); return { ops: w.ops, clips: w.clips, cap: E.roman(1 + ((st.seed + k) % 24)) + ' \u00B7 seed ' + (st.seed + k) }; });
+
+    let symbolCards = [];
+    if (st.view === 'symbols') symbolCards = E.SYMBOLS.map((s, i) => { const w = this.gen({ seed: 11, depth: 2, density: 0.5, symbolKey: s.key, maxOps: 150, prefix: 'm' + i }); return { name: s.name, trad: s.trad === 'Jungian' ? 'Jungian archetype' : 'Hermetic major', meaning: s.meaning, ops: w.ops, clips: w.clips, onCompose: set({ symbol: s.key, view: 'maker' }) }; });
+
+    let stringCards = [], chordCells = [], chordGridStyle = {};
+    if (st.view === 'lyre') {
+      stringCards = lyre.strings.map((s, i) => ({ name: E.NUM[i] + ' \u00B7 ' + s.name, hex: s.hex, style: styles.dot(s.hex) }));
+      const cell = (hex, title, hdr) => ({ title, style: { width: '42px', height: '42px', borderRadius: hdr ? '999px' : 'var(--radius-sm)', background: hex, border: '1px solid hsl(var(--foreground)/.2)', margin: hdr ? '5px' : 0 } });
+      chordCells.push({ title: '', style: { width: '42px', height: '42px' } });
+      lyre.strings.forEach(s => chordCells.push(cell(s.hex, s.name, true)));
+      lyre.strings.forEach((a, i) => {
+        chordCells.push(cell(a.hex, a.name, true));
+        lyre.strings.forEach((b, j) => { const c = lyre.strings[lyre.chord[i][j]]; chordCells.push(cell(c.hex, a.name + ' \u00D7 ' + b.name + ' \u2192 ' + c.name, false)); });
+      });
+      chordGridStyle = { display: 'inline-grid', gridTemplateColumns: 'repeat(' + (lyre.strings.length + 1) + ', 46px)', gap: '4px' };
+    }
+
+    const sym = work.sym;
+    return {
+      rootRef: this.rootRef, svgRef: this.svgRef, tabs,
+      isMaker: st.view === 'maker', isLyre: st.view === 'lyre', isSym: st.view === 'symbols', isMethod: st.view === 'method',
+      isSingle: st.mode === 'single', isSuite: st.mode === 'suite',
+      seed: st.seed, depth: st.depth, density: st.density, densityPct: Math.round(st.density * 100) + '%',
+      symbolKey: st.symbol, symbolMeaning: sym.meaning, lyreKey: st.lyre,
+      groundHex, workOps: work.ops, workClips: work.clips, workTitle, workMeta, workTerm: work.termStr.length > 900 ? work.termStr.slice(0, 900) + ' \u2026' : work.termStr,
+      checks, suite, suiteTitle: sym.name + ' \u2014 Suite ' + E.roman(1 + (st.seed % 24)),
+      symbolCards, stringCards, chordCells, chordGridStyle,
+      jungOpts: E.SYMBOLS.filter(s => s.trad === 'Jungian').map(s => ({ key: s.key, name: s.name })),
+      hermOpts: E.SYMBOLS.filter(s => s.trad === 'Hermetic').map(s => ({ key: s.key, name: s.name })),
+      lyreOpts: Object.values(E.lyres).map(l => ({ key: l.key, name: l.name })),
+      stringDots: lyre.strings.map((s, i) => ({ title: E.NUM[i] + ' \u00B7 ' + s.name + ' ' + s.hex, style: styles.dot(s.hex) })),
+      groundOpts: [['deep', 'Deep ground'], ['bright', 'Bright ground']].map(([k, label]) => ({ label, style: styles.seg(st.ground === k), onClick: set({ ground: k }) })),
+      unityOpts: [[true, 'Prior unity'], [false, 'Occlusion']].map(([v, label]) => ({ label, style: styles.seg(st.unity === v), onClick: set({ unity: v }) })),
+      modeOpts: [['single', 'Single'], ['suite', 'Suite of six']].map(([k, label]) => ({ label, style: styles.seg(st.mode === k), onClick: set({ mode: k }) })),
+      unityNote: st.unity ? 'Overlaps sound as chords \u2014 two strings meet, a third string of the same lyre results.' : 'Overlaps occlude \u2014 forms remain separate; the upper form covers the lower.',
+      onSeed: e => this.setState({ seed: Math.max(1, Math.floor(+e.target.value || 1)) }),
+      reroll: () => this.setState({ seed: 1 + Math.floor(Math.random() * 99989) }),
+      onSymbol: e => this.setState({ symbol: e.target.value }),
+      onDepth: e => this.setState({ depth: +e.target.value }),
+      onDensity: e => this.setState({ density: +e.target.value }),
+      onLyre: e => this.setState({ lyre: e.target.value }),
+      exportSVG: () => { const t = this.svgText(); if (t) this.download(workTitle.replace(/[^\w\u00C0-\uFFFF -]+/g, '') + '.svg', new Blob([t], { type: 'image/svg+xml' })); },
+      exportPNG: () => { const t = this.svgText(); if (!t) return; const img = new Image(); const url = URL.createObjectURL(new Blob([t], { type: 'image/svg+xml' })); img.onload = () => { const c = document.createElement('canvas'); c.width = 2000; c.height = 2000; const g = c.getContext('2d'); g.drawImage(img, 0, 0, 2000, 2000); URL.revokeObjectURL(url); c.toBlob(b => b && this.download(workTitle.replace(/[^\w\u00C0-\uFFFF -]+/g, '') + '.png', b)); }; img.src = url; },
+      showTerm: (this.props.showTermConsole ?? true) && st.mode === 'single'
+    };
+  }
+}
+</script>
+</body>
+</html>

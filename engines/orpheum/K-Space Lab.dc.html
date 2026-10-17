@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/ceti-design-system-cd9ddfb8-95af-48a0-95e2-1ba029594df0/colors_and_type.css">
+  <link rel="stylesheet" href="_ds/ceti-design-system-cd9ddfb8-95af-48a0-95e2-1ba029594df0/motion.css">
+  <script src="_ds/ceti-design-system-cd9ddfb8-95af-48a0-95e2-1ba029594df0/_ds_bundle.js"></script>
+  <style>
+    body { margin:0; background:#0a0a0b; }
+    a { color:#d4a84b; } a:hover { color:#e0b85c; }
+    select option { background:#121214; color:#edeae3; }
+    input[type="range"] { accent-color:#d4a84b; height:18px; width:100%; }
+    ::-webkit-scrollbar { width:9px; } ::-webkit-scrollbar-thumb { background:rgba(255,255,255,.13); border-radius:5px; }
+  </style>
+</helmet>
+<div style="height:100vh;display:flex;flex-direction:column;background:#0a0a0b;color:#edeae3;font-family:'Space Mono',monospace;font-size:12px;overflow:hidden">
+  <header style="display:flex;align-items:center;gap:10px;height:46px;flex:0 0 auto;padding:0 14px;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(10,10,11,.9)">
+    <span style="color:#d4a84b;font-size:15px">&#9672;</span>
+    <span style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:18px;white-space:nowrap">K-Space Lab</span>
+    <span style="font-size:9px;color:#d4a84b;letter-spacing:.14em">&#966; &#183; IMAGE &#8594; 2D FOURIER &#8594; SELF-SIMILAR FILTER &#8594; PLATE</span>
+    <div style="margin-left:auto;display:flex;gap:6px;align-items:center">
+      <a href="Linead Studio Phi.dc.html" style="font-size:10px;color:#908e87;text-decoration:none;margin-right:6px" style-hover="color:#d4a84b">&#8592; Linead Studio</a>
+      <button onClick="{{onUpload}}" style="background:#d4a84b;color:#141210;border:none;border-radius:6px;padding:7px 12px;font-family:inherit;font-weight:700;font-size:11px;cursor:pointer" style-hover="filter:brightness(1.08)" style-active="filter:brightness(.94);transform:translateY(1px)">&#11014; Upload image</button>
+      <div style="position:relative">
+        <button onClick="{{toggleExport}}" style="{{exportBtnStyle}}" style-hover="border-color:#d4a84b;color:#d4a84b">&#8595; Export</button>
+        <sc-if value="{{exportOpen}}" hint-placeholder-val="{{false}}">
+          <div style="position:absolute;right:0;top:calc(100% + 6px);z-index:50;width:min(560px, calc(100vw - 28px));background:#121214;border:1px solid rgba(212,168,75,.35);border-radius:10px;padding:12px;box-shadow:0 0 0 1px rgba(255,255,255,.04),0 24px 60px -20px rgba(0,0,0,.9);display:flex;flex-direction:column;gap:10px">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px">
+              <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+                <div style="aspect-ratio:1;border:1px solid rgba(212,168,75,.3);border-radius:7px;background:#0e0e10;overflow:hidden;display:flex;align-items:center;justify-content:center"><canvas ref="{{tSpec}}" style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated"></canvas></div>
+                <div style="font-size:9.5px;letter-spacing:.13em;color:#d4a84b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">k-SPACE &#183; log|F|</div>
+                <button onClick="{{exportSpecHQ}}" style="min-height:32px;background:#d4a84b;border:none;border-radius:6px;color:#141210;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap" style-hover="filter:brightness(1.08)">PNG &#183; {{hqLabel}}</button>
+                <button onClick="{{exportSpec}}" style="min-height:28px;background:#1a1a1d;border:1px solid rgba(255,255,255,.12);border-radius:6px;color:#edeae3;font-family:inherit;font-size:10.5px;cursor:pointer;white-space:nowrap" style-hover="border-color:#d4a84b;color:#d4a84b">PNG &#183; 1:1</button>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+                <div style="aspect-ratio:1;border:1px solid rgba(255,255,255,.1);border-radius:7px;background:#0e0e10;overflow:hidden;display:flex;align-items:center;justify-content:center"><canvas ref="{{tOut}}" style="width:100%;height:100%;object-fit:contain"></canvas></div>
+                <div style="font-size:9.5px;letter-spacing:.13em;color:#d4a84b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">RETURN &#183; inverse</div>
+                <button onClick="{{exportReturnHQ}}" style="min-height:32px;background:#d4a84b;border:none;border-radius:6px;color:#141210;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap" style-hover="filter:brightness(1.08)">PNG &#183; {{hqLabel}}</button>
+                <button onClick="{{exportReturn}}" style="min-height:28px;background:#1a1a1d;border:1px solid rgba(255,255,255,.12);border-radius:6px;color:#edeae3;font-family:inherit;font-size:10.5px;cursor:pointer;white-space:nowrap" style-hover="border-color:#d4a84b;color:#d4a84b">PNG &#183; 1:1</button>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+                <div style="aspect-ratio:1;border:1px solid rgba(255,255,255,.1);border-radius:7px;background:#0e0e10;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:6px">{{plateThumb}}</div>
+                <div style="font-size:9.5px;letter-spacing:.13em;color:#d4a84b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">PLATE &#183; traced</div>
+                <button onClick="{{exportPlateHQ}}" style="min-height:32px;background:#d4a84b;border:none;border-radius:6px;color:#141210;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap" style-hover="filter:brightness(1.08)">PNG &#183; {{hqLabel}}</button>
+                <button onClick="{{exportSVG}}" style="min-height:28px;background:#1a1a1d;border:1px solid rgba(255,255,255,.12);border-radius:6px;color:#edeae3;font-family:inherit;font-size:10.5px;cursor:pointer;white-space:nowrap" style-hover="border-color:#d4a84b;color:#d4a84b">SVG vector</button>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+                <div style="aspect-ratio:1;border:1px solid rgba(255,255,255,.1);border-radius:7px;background:#0e0e10;overflow:hidden;display:flex;align-items:center;justify-content:center">{{graphThumb}}</div>
+                <div style="font-size:9.5px;letter-spacing:.13em;color:#d4a84b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">SPECTRAL GRAPH</div>
+                <button onClick="{{exportGraphHQ}}" style="min-height:32px;background:#d4a84b;border:none;border-radius:6px;color:#141210;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap" style-hover="filter:brightness(1.08)">PNG &#183; {{hqLabel}}</button>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">
+                  <button onClick="{{exportGraphSVG}}" style="min-height:28px;background:#1a1a1d;border:1px solid rgba(255,255,255,.12);border-radius:6px;color:#edeae3;font-family:inherit;font-size:10.5px;cursor:pointer;white-space:nowrap" style-hover="border-color:#d4a84b;color:#d4a84b">SVG</button>
+                  <button onClick="{{exportGraphCSV}}" style="min-height:28px;background:#1a1a1d;border:1px solid rgba(255,255,255,.12);border-radius:6px;color:#edeae3;font-family:inherit;font-size:10.5px;cursor:pointer;white-space:nowrap" style-hover="border-color:#d4a84b;color:#d4a84b">CSV</button>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;border-top:1px solid rgba(255,255,255,.08);padding-top:10px">
+              <div style="font-size:9.5px;color:#908e87;line-height:1.55;min-width:0">HQ = {{hqDesc}}. Set DPI and width in Tweaks.</div>
+              <button onClick="{{exportAllHQ}}" style="min-height:32px;padding:0 12px;background:transparent;border:1px solid #d4a84b;border-radius:6px;color:#d4a84b;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;flex:0 0 auto" style-hover="background:rgba(212,168,75,.12)">All four &#183; {{hqLabel}}</button>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </header>
+
+  <div style="flex:1;display:flex;min-height:0">
+    <aside data-screen-label="Controls" style="width:310px;flex:0 0 auto;border-right:1px solid rgba(255,255,255,.08);background:#121214;overflow-y:auto;padding:12px 12px 40px;display:flex;flex-direction:column;gap:8px">
+
+      <div style="border:1px solid rgba(255,255,255,.07);border-radius:10px;background:rgba(255,255,255,.015);padding:10px 12px 12px">
+        <div style="font-size:10px;letter-spacing:.13em;color:#d4a84b;margin-bottom:8px">PROBES &#183; RESEARCH PRESETS</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">
+          <sc-for list="{{presetSeg}}" as="sg" hint-placeholder-count="6"><button onClick="{{sg.onClick}}" style="{{sg.style}}">{{sg.label}}</button></sc-for>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:8px">
+          <sc-for list="{{gridSeg}}" as="sg" hint-placeholder-count="3"><button onClick="{{sg.onClick}}" style="{{sg.style}}">{{sg.label}}</button></sc-for>
+        </div>
+        <div style="font-size:9.5px;color:#908e87;line-height:1.6;margin-top:6px">Grid = the k-space sample count. 128 is live-fast; 512 resolves fine partials but each move costs a moment.</div>
+      </div>
+
+      <div style="border:1px solid rgba(255,255,255,.07);border-radius:10px;background:rgba(255,255,255,.015);padding:10px 12px 12px">
+        <div style="font-size:10px;letter-spacing:.13em;color:#d4a84b;margin-bottom:6px">1 &#183; SPECTRAL SLOPE &#8212; 1/f<sup>&#946;</sup></div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87"><span>whiten &#8596; fractalise</span><span style="color:#d4a84b">&#946; {{vBeta}}</span></div>
+        <input type="range" min="-2" max="3" step="0.1" value="{{vBeta}}" onChange="{{onBeta}}" aria-label="Spectral slope">
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:6px"><span>measured slope of the result</span><span style="color:#edeae3">&#946;&#772; {{measBeta}} &#183; D &#8776; {{measD}}</span></div>
+        <div style="font-size:9.5px;color:#908e87;line-height:1.6;margin-top:6px">Every partial is re-weighted by |k|<sup>&#8722;&#946;</sup>. Natural scenes sit near &#946;&#8776;2; pushing past it pours the drawing into cloud-like fractal mass; negative &#946; strips it to edges. D is the fractal dimension of the luma surface, (8&#8722;&#946;)/2.</div>
+      </div>
+
+      <div style="border:1px solid rgba(255,255,255,.07);border-radius:10px;background:rgba(255,255,255,.015);padding:10px 12px 12px">
+        <div style="font-size:10px;letter-spacing:.13em;color:#d4a84b;margin-bottom:6px">2 &#183; &#966;-LADDER RINGS</div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87"><span>ring gate strength</span><span style="color:#d4a84b">{{vRingStr}}</span></div>
+        <input type="range" min="0" max="1" step="0.05" value="{{vRingStr}}" onChange="{{onRingStr}}" aria-label="Ring strength">
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:6px"><span>ring width &#183; log-&#966; units</span><span style="color:#d4a84b">{{vRingWidth}}</span></div>
+        <input type="range" min="0.04" max="0.5" step="0.02" value="{{vRingWidth}}" onChange="{{onRingWidth}}" aria-label="Ring width">
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:6px"><span>base radius k&#8320;</span><span style="color:#d4a84b">{{vRingK0}}</span></div>
+        <input type="range" min="0.02" max="0.3" step="0.01" value="{{vRingK0}}" onChange="{{onRingK0}}" aria-label="Base radius">
+        <div style="font-size:9.5px;color:#908e87;line-height:1.6;margin-top:6px">Only frequencies near |k| = k&#8320;&#183;&#966;<sup>n</sup> pass &#8212; a comb whose teeth are golden-spaced. The image keeps one texture per octave-of-&#966;, self-similar across scale.</div>
+      </div>
+
+      <div style="border:1px solid rgba(255,255,255,.07);border-radius:10px;background:rgba(255,255,255,.015);padding:10px 12px 12px">
+        <div style="font-size:10px;letter-spacing:.13em;color:#d4a84b;margin-bottom:6px">3 &#183; DIHEDRAL SECTOR COMB</div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87"><span>angular order</span><span style="color:#d4a84b">{{vSectorLabel}}</span></div>
+        <input type="range" min="0" max="16" step="1" value="{{vSectorN}}" onChange="{{onSectorN}}" aria-label="Sector order">
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:6px"><span>gate strength</span><span style="color:#d4a84b">{{vSectorStr}}</span></div>
+        <input type="range" min="0" max="1" step="0.05" value="{{vSectorStr}}" onChange="{{onSectorStr}}" aria-label="Sector strength">
+        <div style="font-size:9.5px;color:#908e87;line-height:1.6;margin-top:6px">An N-fold angular gate in k-space. The image inherits N directions of grain &#8212; the geome&#8217;s symmetry order, imposed on texture instead of on form.</div>
+      </div>
+
+      <div style="border:1px solid rgba(255,255,255,.07);border-radius:10px;background:rgba(255,255,255,.015);padding:10px 12px 12px">
+        <div style="font-size:10px;letter-spacing:.13em;color:#d4a84b;margin-bottom:6px">4 &#183; SPECTRAL ECHOES</div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87"><span>echoes &#183; &#966;-scaled copies</span><span style="color:#d4a84b">{{vEchoes}}</span></div>
+        <input type="range" min="0" max="6" step="1" value="{{vEchoes}}" onChange="{{onEchoes}}" aria-label="Echoes">
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:6px"><span>echo gain per step</span><span style="color:#d4a84b">{{vEchoGain}}</span></div>
+        <input type="range" min="0.3" max="1.4" step="0.05" value="{{vEchoGain}}" onChange="{{onEchoGain}}" aria-label="Echo gain">
+        <label style="display:flex;align-items:center;gap:8px;margin-top:8px;font-size:11px;color:#a9a396;cursor:pointer">
+          <input type="checkbox" checked="{{vEchoRot}}" onChange="{{onEchoRot}}" style="accent-color:#d4a84b"> rotate each echo 137.5&#176;
+        </label>
+        <div style="font-size:9.5px;color:#908e87;line-height:1.6;margin-top:6px">F&#8242;(k) = F(k) + &#931; g<sup>n</sup>&#183;F(R<sup>&#8722;n</sup>k/&#966;<sup>n</sup>). Adding the spectrum to its own &#966;-scaled, golden-rotated copies is the studio&#8217;s echo law done in k-space &#8212; the copies interfere instead of stacking, so new forms appear where partials agree.</div>
+      </div>
+
+      <div style="border:1px solid rgba(255,255,255,.07);border-radius:10px;background:rgba(255,255,255,.015);padding:10px 12px 12px">
+        <div style="font-size:10px;letter-spacing:.13em;color:#d4a84b;margin-bottom:6px">5 &#183; PHASE GEOMETRY</div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87"><span>phase quantise</span><span style="color:#d4a84b">{{vPhaseLabel}}</span></div>
+        <input type="range" min="0" max="12" step="1" value="{{vPhaseQ}}" onChange="{{onPhaseQ}}" aria-label="Phase quantise">
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:6px"><span>magnitude whitening</span><span style="color:#d4a84b">{{vWhiten}}</span></div>
+        <input type="range" min="0" max="1" step="0.05" value="{{vWhiten}}" onChange="{{onWhiten}}" aria-label="Whiten">
+        <div style="font-size:9.5px;color:#908e87;line-height:1.6;margin-top:6px">Phase carries the drawing&#8217;s placement; magnitude carries its weight. Quantising phase to Q angles crystallises the field; whitening keeps phase and flattens magnitude &#8212; the phase-only image, all structure and no mass.</div>
+      </div>
+
+      <div style="border:1px solid rgba(255,255,255,.07);border-radius:10px;background:rgba(255,255,255,.015);padding:10px 12px 12px">
+        <div style="font-size:10px;letter-spacing:.13em;color:#d4a84b;margin-bottom:6px">6 &#183; BAND</div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87"><span>cut below |k|</span><span style="color:#d4a84b">{{vLo}}</span></div>
+        <input type="range" min="0" max="0.5" step="0.01" value="{{vLo}}" onChange="{{onLo}}" aria-label="Low cut">
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:6px"><span>cut above |k|</span><span style="color:#d4a84b">{{vHi}}</span></div>
+        <input type="range" min="0.05" max="1" step="0.01" value="{{vHi}}" onChange="{{onHi}}" aria-label="High cut">
+      </div>
+
+      <div style="border:1px solid rgba(255,255,255,.07);border-radius:10px;background:rgba(255,255,255,.015);padding:10px 12px 12px">
+        <div style="font-size:10px;letter-spacing:.13em;color:#d4a84b;margin-bottom:6px">7 &#183; RETURN TO THE PLATE</div>
+        <select value="{{palKey}}" onChange="{{onPal}}" aria-label="Palette" style="width:100%;background:#1a1a1d;border:1px solid rgba(255,255,255,.12);color:#edeae3;padding:8px 9px;border-radius:7px;font-family:inherit;font-size:11px">
+          <sc-for list="{{palOpts}}" as="p" hint-placeholder-count="6"><option value="{{p.key}}">{{p.name}}</option></sc-for>
+        </select>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:8px"><span>tone plates</span><span style="color:#d4a84b">{{vLevels}}</span></div>
+        <input type="range" min="2" max="8" step="1" value="{{vLevels}}" onChange="{{onLevels}}" aria-label="Tone plates">
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:6px"><span>simplify &#949;</span><span style="color:#d4a84b">{{vEps}}</span></div>
+        <input type="range" min="0" max="6" step="0.2" value="{{vEps}}" onChange="{{onEps}}" aria-label="Simplify">
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:6px"><span>speck filter</span><span style="color:#d4a84b">{{vMinArea}}</span></div>
+        <input type="range" min="0" max="600" step="10" value="{{vMinArea}}" onChange="{{onMinArea}}" aria-label="Speck filter">
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:#908e87;margin-top:6px"><span>contour harmonics &#183; 0 = raw</span><span style="color:#d4a84b">{{vHarm}}</span></div>
+        <input type="range" min="0" max="64" step="1" value="{{vHarm}}" onChange="{{onHarm}}" aria-label="Contour harmonics">
+        <label style="display:flex;align-items:center;gap:8px;margin-top:8px;font-size:11px;color:#a9a396;cursor:pointer">
+          <input type="checkbox" checked="{{vInvert}}" onChange="{{onInvert}}" style="accent-color:#d4a84b"> invert &#183; extract the lights
+        </label>
+        <div style="font-size:10px;color:#908e87;margin:10px 0 5px">linead</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px">
+          <sc-for list="{{lineadSeg}}" as="sg" hint-placeholder-count="4"><button onClick="{{sg.onClick}}" style="{{sg.style}}">{{sg.label}}</button></sc-for>
+        </div>
+        <div style="font-size:9.5px;color:#908e87;line-height:1.6;margin-top:8px">The filtered field re-enters the studio law: traced into tone plates, every fill from the palette ramp. Nothing off-palette can sound.</div>
+      </div>
+    </aside>
+
+    <main data-screen-label="Stage" style="flex:1;min-width:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);grid-template-rows:minmax(0,1fr);gap:14px;padding:14px;overflow:hidden">
+      <div style="display:grid;grid-template-rows:minmax(0,1fr) minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr);gap:12px;min-height:0;min-width:0">
+        <div style="display:flex;flex-direction:column;min-height:0;min-width:0;gap:5px">
+          <div style="font-size:9.5px;letter-spacing:.13em;color:#908e87;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">SOURCE &#183; {{srcDims}}</div>
+          <div style="flex:1;min-height:0;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.08);border-radius:8px;background:#0e0e10;overflow:hidden">
+            <canvas ref="{{cSrc}}" style="max-width:100%;max-height:100%;object-fit:contain;image-rendering:auto"></canvas>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;min-height:0;min-width:0;gap:5px">
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:9.5px;letter-spacing:.13em;color:#908e87;white-space:nowrap;overflow:hidden"><span style="overflow:hidden;text-overflow:ellipsis;min-width:0">k-SPACE &#183; log|F| &#183; paint to edit live</span><span style="color:#d4a84b">{{gridLabel}}</span></div>
+          <div style="flex:1;min-height:0;display:flex;align-items:center;justify-content:center;border:1px solid rgba(212,168,75,.25);border-radius:8px;background:#0e0e10;overflow:hidden">
+            <canvas ref="{{cSpec}}" onPointerDown="{{onSpecDown}}" onPointerMove="{{onSpecMove}}" onPointerUp="{{onSpecUp}}" onPointerLeave="{{onSpecUp}}" style="{{specCanvasStyle}}"></canvas>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:5px;align-items:center;flex:0 0 auto;min-width:0">
+            <sc-for list="{{brushSeg}}" as="sg" hint-placeholder-count="3"><button onClick="{{sg.onClick}}" style="{{sg.style}}">{{sg.label}}</button></sc-for>
+            <input type="range" min="2" max="40" step="1" value="{{vBrush}}" onChange="{{onBrush}}" aria-label="Brush radius" style="flex:1 1 30px;min-width:0;height:14px">
+            <span style="font-size:9.5px;color:#d4a84b;white-space:nowrap">r {{vBrush}}</span>
+            <button onClick="{{clearMask}}" style="min-height:24px;background:transparent;border:1px solid rgba(255,255,255,.14);border-radius:5px;color:#908e87;font-family:inherit;font-size:9.5px;cursor:pointer;padding:0 7px;white-space:nowrap" style-hover="border-color:#d4a84b;color:#d4a84b">clear</button>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;min-height:0;min-width:0;gap:5px">
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:9.5px;letter-spacing:.13em;color:#908e87;white-space:nowrap;overflow:hidden"><span style="overflow:hidden;text-overflow:ellipsis;min-width:0">SPECTRAL GRAPH &#183; log P vs log |k|</span><span style="color:#d4a84b">&#946; {{measBeta}}</span></div>
+          <div style="flex:1;min-height:0;display:flex;align-items:center;justify-content:center;border:1px solid rgba(212,168,75,.25);border-radius:8px;background:#0e0e10;overflow:hidden">
+            <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center">{{graphEl}}</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;min-height:0;min-width:0;gap:5px">
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:9.5px;letter-spacing:.13em;color:#908e87;white-space:nowrap;overflow:hidden"><span style="overflow:hidden;text-overflow:ellipsis;min-width:0">RETURN &#183; inverse transform</span></div>
+          <div style="flex:1;min-height:0;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.08);border-radius:8px;background:#0e0e10;overflow:hidden">
+            <canvas ref="{{cOut}}" style="max-width:100%;max-height:100%;object-fit:contain"></canvas>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;min-height:0;min-width:0;gap:5px">
+        <div style="display:flex;justify-content:space-between;font-size:9.5px;letter-spacing:.13em;color:#908e87"><span>PLATE &#183; traced from the return</span><span>{{plateStats}}</span></div>
+        <div style="flex:1;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden">
+          <div style="{{plateShellStyle}}">{{plateEl}}</div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <input ref="{{fileRef}}" type="file" accept="image/*" onChange="{{onFile}}" style="display:none">
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;plateShadow&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Stage&quot;},&quot;exportDpi&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:900,&quot;options&quot;:[300,600,900],&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;HQ export&quot;},&quot;exportWidthIn&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:8,&quot;min&quot;:4,&quot;max&quot;:16,&quot;step&quot;:1,&quot;unit&quot;:&quot;in&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;HQ export&quot;}}">
+class Component extends DCLogic {
+  state = {
+    N:256, beta:0, ringStr:0, ringWidth:0.18, ringK0:0.08, sectorN:0, sectorStr:0.8,
+    echoes:0, echoGain:0.8, echoRot:true, phaseQ:0, whiten:0, lo:0, hi:1,
+    palKey:'orpheum', levels:4, eps:1.2, minArea:60, harm:0, invert:false, linead:'none',
+    preset:'', brush:'erase', brushR:12, src:null, plateHtml:'', stats:'', meas:0, W:1000, H:1000
+  };
+  cSrc=React.createRef(); cSpec=React.createRef(); cOut=React.createRef(); fileRef=React.createRef(); tSpec=React.createRef(); tOut=React.createRef();
+  componentDidUpdate(){ if(this.state.exportOpen)this.paintThumbs(); }
+  async componentDidMount(){
+    this.E = await import(new URL('linead-engine.js', document.baseURI).href);
+    this.K = await import(new URL('kspace-engine.js', document.baseURI).href);
+    const saved=localStorage.getItem('kspace-lab-params');
+    if(saved){ try{ this.setState(JSON.parse(saved)); }catch(e){} }
+    const src=await this.E.loadImageLuma(this.E.demoDrawing(),512);
+    this.setState({src},()=>this.schedule());
+  }
+  set(k,parse=parseFloat){ return e=>{ const v=e.target.type==='checkbox'?e.target.checked:parse(e.target.value); this.setState({[k]:v,preset:''},()=>this.schedule()); }; }
+  // k-space brush: paints a centred N×N mask; erase → 0, restore → 1, keep-only → paints 1 into a zeroed field
+  ensureMask(){ const N=this.state.N; if(!this.mask||this.mask.length!==N*N){ this.mask=new Float32Array(N*N).fill(this.state.brush==='keep'?0:1); } return this.mask; }
+  specPos(e){ const c=this.cSpec.current, r=c.getBoundingClientRect(), N=this.state.N; return {x:(e.clientX-r.left)/r.width*N,y:(e.clientY-r.top)/r.height*N}; }
+  daub(e){
+    const N=this.state.N, m=this.ensureMask(), {x,y}=this.specPos(e), R=this.state.brush==='erase'||this.state.brush==='keep'?this.state.brushR:this.state.brushR, val=this.state.brush==='erase'?0:1;
+    const h=N/2;
+    for(let yy=Math.max(0,y-R|0);yy<Math.min(N,y+R+1);yy++)for(let xx=Math.max(0,x-R|0);xx<Math.min(N,x+R+1);xx++){
+      const d=Math.hypot(xx-x,yy-y); if(d>R)continue; const soft=Math.min(1,(R-d)/Math.max(1,R*0.35));
+      const i=yy*N+xx, j=(N-1-yy)*N+(N-1-xx); // conjugate-symmetric partner
+      m[i]=val?Math.max(m[i],soft):Math.min(m[i],1-soft); m[j]=m[i];
+    }
+    this.masked=true; this.schedule();
+  }
+  clearMask(){ this.mask=null; this.masked=false; this.schedule(); }
+  schedule(){ if(this._t)cancelAnimationFrame(this._t); this._t=requestAnimationFrame(()=>this.run()); }
+  save(){ const s=this.state, o={}; ['N','beta','ringStr','ringWidth','ringK0','sectorN','sectorStr','echoes','echoGain','echoRot','phaseQ','whiten','lo','hi','palKey','levels','eps','minArea','harm','invert','linead','preset'].forEach(k=>o[k]=s[k]); localStorage.setItem('kspace-lab-params',JSON.stringify(o)); }
+  run(){
+    const s=this.state, E=this.E, K=this.K; if(!s.src||!E||!K)return;
+    this.save();
+    const res=K.kspacePass(s.src,s.N,{beta:s.beta,ringStr:s.ringStr,ringWidth:s.ringWidth,ringK0:s.ringK0,sectorN:s.sectorN,sectorStr:s.sectorStr,echoes:s.echoes,echoGain:s.echoGain,echoRot:s.echoRot,phaseQ:s.phaseQ,whiten:s.whiten,lo:s.lo,hi:s.hi,mask:this.masked&&this.mask&&this.mask.length===s.N*s.N?this.mask:null});
+    this.res=res;
+    this.rs=K.radialSpectrum(res.specAfter,s.N);
+    const graphSvg=K.spectrumGraphSVG(this.rs,{N:s.N});
+    const out=K.cropToSource(res);
+    const W=out.w>=out.h?1000:Math.round(1000*out.w/out.h), H=out.w>=out.h?Math.round(1000*out.h/out.w):1000;
+    const bands=E.extractBands(out,{levels:s.levels,invert:s.invert,minArea:s.minArea*(out.w*out.h)/(1000*1000),eps:s.eps,harmonics:s.harm,adapt:0});
+    const pal=E.PALETTES[s.palKey]||E.PALETTES.orpheum;
+    const plateHtml=E.buildPlate({W,H,pal,ground:true,linead:s.linead,lineadW:1.6,
+      layers:[{srcW:out.w,srcH:out.h,tx:{dx:0,dy:0,rot:0,scale:1},bands,bandsOff:{},levels:s.levels,mode:'fills',opacity:1}]});
+    const pts=bands.reduce((n,b)=>n+b.pts,0);
+    this.setState({plateHtml,graphSvg,W,H,meas:res.slope,stats:bands.length+' plates \u00B7 '+pts+' pts'},()=>this.paint());
+  }
+  paint(){
+    const K=this.K, r=this.res, s=this.state; if(!r)return;
+    if(this.cSrc.current){ const sq=K.toSquare(s.src,s.N).sq; K.paintField(this.cSrc.current,sq,s.N); }
+    if(this.cSpec.current) K.paintField(this.cSpec.current,r.specAfter,s.N,[212,168,75,14,14,16]);
+    if(this.cOut.current) K.paintField(this.cOut.current,r.luma,s.N);
+  }
+  applyPreset(key){
+    const P={
+      cloud:{beta:2.2,ringStr:0,sectorN:0,echoes:0,phaseQ:0,whiten:0,lo:0,hi:1},
+      comb:{beta:0.6,ringStr:1,ringWidth:0.1,ringK0:0.06,sectorN:0,echoes:0,phaseQ:0,whiten:0,lo:0,hi:1},
+      crystal:{beta:0.4,ringStr:0,sectorN:6,sectorStr:1,echoes:0,phaseQ:6,whiten:0.2,lo:0,hi:1},
+      echo:{beta:0.5,ringStr:0,sectorN:0,echoes:4,echoGain:0.9,echoRot:true,phaseQ:0,whiten:0,lo:0,hi:1},
+      phase:{beta:0,ringStr:0,sectorN:0,echoes:0,phaseQ:0,whiten:0.9,lo:0.02,hi:1},
+      none:{beta:0,ringStr:0,sectorN:0,echoes:0,phaseQ:0,whiten:0,lo:0,hi:1}
+    }[key];
+    this.setState(Object.assign({preset:key},P),()=>this.schedule());
+  }
+  seg(list,cur,on){ return list.map(([k,l])=>({label:l,onClick:()=>on(k),style:{minHeight:'28px',background:k===cur?'#d4a84b':'#1a1a1d',color:k===cur?'#141210':'#edeae3',border:'1px solid '+(k===cur?'#d4a84b':'rgba(255,255,255,.12)'),borderRadius:'6px',fontFamily:'inherit',fontSize:'10px',fontWeight:k===cur?700:400,cursor:'pointer',padding:'0 4px',whiteSpace:'nowrap'}})); }
+  exportField(field,name,tint){
+    const K=this.K, r=this.res, s=this.state; if(!r||!K)return;
+    const c=document.createElement('canvas'); K.paintField(c,field,s.N,tint);
+    const sc=Math.max(1,Math.round(2000/s.N)), o=document.createElement('canvas'); o.width=o.height=s.N*sc;
+    const x=o.getContext('2d'); x.imageSmoothingEnabled=false; x.drawImage(c,0,0,o.width,o.height);
+    o.toBlob(b=>this.download(name,b));
+  }
+  dpi(){ return this.props.exportDpi??900; }
+  inches(){ return this.props.exportWidthIn??8; }
+  // stamp a pHYs chunk so the PNG opens at the requested DPI
+  async stampDpi(blob,dpi){
+    const buf=new Uint8Array(await blob.arrayBuffer()); const ppm=Math.round(dpi/0.0254);
+    const T=new Int32Array(256); for(let n=0;n<256;n++){ let c=n; for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1; T[n]=c; }
+    const crc=a=>{ let c=-1; for(let i=0;i<a.length;i++)c=T[(c^a[i])&255]^(c>>>8); return (c^-1)>>>0; };
+    const ch=new Uint8Array(21); const dv=new DataView(ch.buffer); dv.setUint32(0,9); ch.set([112,72,89,115],4); dv.setUint32(8,ppm); dv.setUint32(12,ppm); ch[16]=1; dv.setUint32(17,crc(ch.subarray(4,17)));
+    const ihdrEnd=8+4+4+13+4; const out=new Uint8Array(buf.length+21); out.set(buf.subarray(0,ihdrEnd)); out.set(ch,ihdrEnd); out.set(buf.subarray(ihdrEnd),ihdrEnd+21);
+    return new Blob([out],{type:'image/png'});
+  }
+  hqCanvas(w,h){ const c=document.createElement('canvas'); c.width=Math.round(w); c.height=Math.round(h); return c; }
+  exportGraphHQ(){
+    const s=this.state; if(!s.graphSvg)return; const dpi=this.dpi(), W=this.inches()*dpi, H=W*560/900;
+    const im=new Image(), u=URL.createObjectURL(new Blob([s.graphSvg],{type:'image/svg+xml'}));
+    im.onload=async()=>{ const c=this.hqCanvas(W,H); c.getContext('2d').drawImage(im,0,0,c.width,c.height); c.toBlob(async b=>this.download('kspace-spectrum-graph-'+dpi+'dpi.png',await this.stampDpi(b,dpi))); URL.revokeObjectURL(u); }; im.src=u;
+  }
+  exportSpecHQ(){
+    const K=this.K, r=this.res, s=this.state; if(!r||!K)return; const dpi=this.dpi(), side=this.inches()*dpi;
+    const src=document.createElement('canvas'); K.paintField(src,r.specAfter,s.N,[212,168,75,14,14,16]);
+    const c=this.hqCanvas(side,side), x=c.getContext('2d'); x.imageSmoothingEnabled=true; x.imageSmoothingQuality='high'; x.drawImage(src,0,0,c.width,c.height);
+    c.toBlob(async b=>this.download('kspace-spectrum-'+dpi+'dpi.png',await this.stampDpi(b,dpi)));
+  }
+  exportPlateHQ(){
+    const s=this.state; if(!s.plateHtml)return; const dpi=this.dpi(), W=this.inches()*dpi, H=W*s.H/s.W;
+    const im=new Image(), u=URL.createObjectURL(new Blob([s.plateHtml],{type:'image/svg+xml'}));
+    im.onload=()=>{ const c=this.hqCanvas(W,H); c.getContext('2d').drawImage(im,0,0,c.width,c.height); c.toBlob(async b=>this.download('kspace-plate-'+dpi+'dpi.png',await this.stampDpi(b,dpi))); URL.revokeObjectURL(u); }; im.src=u;
+  }
+  exportAllHQ(){ this.exportSpecHQ(); setTimeout(()=>this.exportReturnHQ(),700); setTimeout(()=>this.exportPlateHQ(),1400); setTimeout(()=>this.exportGraphHQ(),2100); }
+  paintThumbs(){ const K=this.K, r=this.res, s=this.state; if(!r||!K)return; if(this.tSpec.current)K.paintField(this.tSpec.current,r.specAfter,s.N,[212,168,75,14,14,16]); if(this.tOut.current)K.paintField(this.tOut.current,r.luma,s.N); }
+  exportReturnHQ(){
+    const K=this.K, r=this.res, s=this.state; if(!r||!K)return; const dpi=this.dpi(), side=this.inches()*dpi;
+    const src=document.createElement('canvas'); K.paintField(src,r.luma,s.N);
+    const c=this.hqCanvas(side,side), x=c.getContext('2d'); x.imageSmoothingEnabled=true; x.imageSmoothingQuality='high'; x.drawImage(src,0,0,c.width,c.height);
+    c.toBlob(async b=>this.download('kspace-return-'+dpi+'dpi.png',await this.stampDpi(b,dpi)));
+  }
+  download(name,blob){ const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),2000); }
+  renderVals(){
+    const s=this.state, E=this.E;
+    const palOpts=E?Object.keys(E.PALETTES).map(k=>({key:k,name:E.PALETTES[k].label})):[{key:'orpheum',name:'Orpheum'}];
+    const D=((8-s.meas)/2);
+    return {
+      vBeta:s.beta.toFixed(1), onBeta:this.set('beta'),
+      measBeta:s.meas.toFixed(2), measD:(D<2?2:D>3?3:D).toFixed(2),
+      vRingStr:s.ringStr.toFixed(2), onRingStr:this.set('ringStr'),
+      vRingWidth:s.ringWidth.toFixed(2), onRingWidth:this.set('ringWidth'),
+      vRingK0:s.ringK0.toFixed(2), onRingK0:this.set('ringK0'),
+      vSectorN:s.sectorN, vSectorLabel:s.sectorN?'D'+s.sectorN:'off', onSectorN:this.set('sectorN',parseInt),
+      vSectorStr:s.sectorStr.toFixed(2), onSectorStr:this.set('sectorStr'),
+      vEchoes:s.echoes, onEchoes:this.set('echoes',parseInt),
+      vEchoGain:s.echoGain.toFixed(2), onEchoGain:this.set('echoGain'),
+      vEchoRot:s.echoRot, onEchoRot:this.set('echoRot'),
+      vPhaseQ:s.phaseQ, vPhaseLabel:s.phaseQ?'Q'+s.phaseQ:'continuous', onPhaseQ:this.set('phaseQ',parseInt),
+      vWhiten:s.whiten.toFixed(2), onWhiten:this.set('whiten'),
+      vLo:s.lo.toFixed(2), onLo:this.set('lo'), vHi:s.hi.toFixed(2), onHi:this.set('hi'),
+      palKey:s.palKey, palOpts, onPal:this.set('palKey',v=>v),
+      vLevels:s.levels, onLevels:this.set('levels',parseInt),
+      vEps:s.eps.toFixed(1), onEps:this.set('eps'),
+      vMinArea:s.minArea, onMinArea:this.set('minArea',parseInt),
+      vHarm:s.harm, onHarm:this.set('harm',parseInt),
+      vInvert:s.invert, onInvert:this.set('invert'),
+      lineadSeg:this.seg([['none','none'],['web','web'],['dense','dense'],['gesture','gesture']],s.linead,k=>this.setState({linead:k},()=>this.schedule())),
+      presetSeg:this.seg([['none','identity'],['cloud','fractal cloud'],['comb','\u03C6 comb'],['crystal','crystal D6'],['echo','echo field'],['phase','phase only']],s.preset,k=>this.applyPreset(k)),
+      gridSeg:this.seg([[128,'128'],[256,'256'],[512,'512']],s.N,k=>{ this.mask=null; this.masked=false; this.setState({N:k},()=>this.schedule()); }),
+      gridLabel:s.N+'\u00B2', srcDims:s.src?s.src.w+'\u00D7'+s.src.h:'\u2026',
+      plateStats:s.stats,
+      cSrc:this.cSrc, cSpec:this.cSpec, cOut:this.cOut, fileRef:this.fileRef,
+      onUpload:()=>{ const inp=this.fileRef.current||document.querySelector('input[type=file][accept="image/*"]'); if(inp)inp.click(); else console.error('file input not mounted'); },
+      onFile:async(e)=>{ const inp=e.target, f=inp.files&&inp.files[0]; if(!f)return;
+        const url=URL.createObjectURL(f);
+        try{ const src=await this.E.loadImageLuma(url,700); this.mask=null; this.masked=false; this.setState({src,preset:''},()=>this.schedule()); }
+        catch(err){ console.error('upload failed',err); alert('Could not read that image. Try a PNG or JPG.'); }
+        finally{ URL.revokeObjectURL(url); inp.value=''; } },
+      graphEl:React.createElement('div',{key:'graph',style:{width:'100%',height:'100%',display:'flex'},dangerouslySetInnerHTML:{__html:(s.graphSvg||'').replace(/width="\d+" height="\d+"/,'width="100%" height="100%" preserveAspectRatio="xMidYMid meet"')}}),
+      exportGraphSVG:()=>{ if(s.graphSvg)this.download('kspace-spectrum-graph-'+s.N+'.svg',new Blob([s.graphSvg],{type:'image/svg+xml'})); },
+      exportGraphPNG:()=>{ if(!s.graphSvg)return; const im=new Image(); const u=URL.createObjectURL(new Blob([s.graphSvg],{type:'image/svg+xml'}));
+        im.onload=()=>{ const c=document.createElement('canvas'); c.width=1800; c.height=1120; c.getContext('2d').drawImage(im,0,0,c.width,c.height); c.toBlob(b=>this.download('kspace-spectrum-graph-'+s.N+'.png',b)); URL.revokeObjectURL(u); }; im.src=u; },
+      exportGraphCSV:()=>{ if(!this.rs)return; const rows=['k_over_nyquist,log_k,log_power'].concat(this.rs.pts.map(p=>p.k.toFixed(5)+','+p.logK.toFixed(5)+','+p.logP.toFixed(5))); rows.push('# fit: log_power = '+this.rs.c.toFixed(4)+' - '+this.rs.beta.toFixed(4)+' * log_k'); this.download('kspace-radial-spectrum-'+s.N+'.csv',new Blob([rows.join('\n')],{type:'text/csv'})); },
+      specCanvasStyle:{maxWidth:'100%',maxHeight:'100%',objectFit:'contain',aspectRatio:'1',cursor:'crosshair',touchAction:'none'},
+      onSpecDown:e=>{ this._painting=true; e.currentTarget.setPointerCapture&&e.currentTarget.setPointerCapture(e.pointerId); this.daub(e); },
+      onSpecMove:e=>{ if(this._painting)this.daub(e); },
+      onSpecUp:()=>{ this._painting=false; },
+      brushSeg:this.seg([['erase','erase'],['restore','restore'],['keep','only']],s.brush,k=>{ if(k==='keep'&&!this.masked){ this.mask=new Float32Array(s.N*s.N); this.masked=true; } this.setState({brush:k},()=>this.schedule()); }),
+      vBrush:s.brushR, onBrush:e=>this.setState({brushR:parseInt(e.target.value)}),
+      clearMask:()=>this.clearMask(),
+      exportGraphHQ:()=>this.exportGraphHQ(), exportSpecHQ:()=>this.exportSpecHQ(), exportReturnHQ:()=>this.exportReturnHQ(), hqLabel:this.dpi()+'dpi',
+      hqDesc:this.inches()+'in wide at '+this.dpi()+'dpi ('+Math.round(this.inches()*this.dpi())+'px), DPI stamped in the file',
+      tSpec:this.tSpec, tOut:this.tOut, exportPlateHQ:()=>this.exportPlateHQ(), exportAllHQ:()=>this.exportAllHQ(),
+      plateThumb:React.createElement('div',{key:'pt',style:{width:'100%',height:'100%',display:'flex',alignItems:'center',justifyContent:'center'},dangerouslySetInnerHTML:{__html:s.plateHtml.replace(/<svg /,'<svg style="max-width:100%;max-height:100%" preserveAspectRatio="xMidYMid meet" ')}}),
+      graphThumb:React.createElement('div',{key:'gt',style:{width:'100%',height:'100%',display:'flex'},dangerouslySetInnerHTML:{__html:(s.graphSvg||'').replace(/width="\d+" height="\d+"/,'width="100%" height="100%" preserveAspectRatio="xMidYMid meet"')}}),
+      exportOpen:!!s.exportOpen, toggleExport:()=>this.setState({exportOpen:!s.exportOpen}),
+      exportBtnStyle:{background:s.exportOpen?'rgba(212,168,75,.12)':'transparent',border:'1px solid '+(s.exportOpen?'#d4a84b':'rgba(255,255,255,.16)'),borderRadius:'6px',color:s.exportOpen?'#d4a84b':'#edeae3',padding:'7px 12px',fontFamily:'inherit',fontSize:'11px',fontWeight:700,cursor:'pointer',whiteSpace:'nowrap',transition:'border-color 180ms var(--ease-warm-in)'},
+      exportSpec:()=>this.res&&this.exportField(this.res.specAfter,'kspace-spectrum-'+s.N+'.png',[212,168,75,14,14,16]),
+      exportReturn:()=>this.res&&this.exportField(this.res.luma,'kspace-return-'+s.N+'.png'),
+      exportSVG:()=>{ if(s.plateHtml)this.download('kspace-plate.svg',new Blob([s.plateHtml],{type:'image/svg+xml'})); },
+      exportPNG:()=>{ if(!s.plateHtml)return; const im=new Image(); const u=URL.createObjectURL(new Blob([s.plateHtml],{type:'image/svg+xml'}));
+        im.onload=()=>{ const sc=2000/Math.max(s.W,s.H), c=document.createElement('canvas'); c.width=Math.round(s.W*sc); c.height=Math.round(s.H*sc); c.getContext('2d').drawImage(im,0,0,c.width,c.height); c.toBlob(b=>this.download('kspace-plate.png',b)); URL.revokeObjectURL(u); }; im.src=u; },
+      plateEl:React.createElement('div',{key:'plate',style:{width:'100%'},dangerouslySetInnerHTML:{__html:s.plateHtml}}),
+      plateShellStyle:{width:s.W>=s.H?'min(100%, calc((100vh - 120px) * '+(s.W/s.H).toFixed(3)+'))':'min(100%, calc((100vh - 120px) * '+(s.W/s.H).toFixed(3)+'))',
+        boxShadow:(this.props.plateShadow??true)?'0 0 0 1px rgba(255,255,255,.08), 0 34px 90px -24px rgba(0,0,0,.85)':'none'}
+    };
+  }
+}
+</script>
+</body>
+</html>

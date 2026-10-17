@@ -1,0 +1,14 @@
+# macOS & OS files
+.DS_Store
+Thumbs.db
+
+# Node / temporary
+node_modules/
+*.log
+
+# Large archival zip bundles / temporary >100MB test sessions
+uploads/*.zip
+*.optimized.json
+*.optimized.json.gz
+uploads/
+.vercel

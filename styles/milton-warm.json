@@ -1,0 +1,56 @@
+{
+  "id": "milton-warm",
+  "note": "Milton Glaser 5-actor editorial studio: warm cream paper, vermilion boldness, cobalt doubt, sunflower surprise ('wow'), forest affection, and plum ambiguity.",
+  "roles": {
+    "ground": "#F5EEDF",
+    "panel": "#EFE5D0",
+    "elev": "#FAF7F2",
+    "shadow": "#D8C9B0",
+    "rim": "#FFFDF9",
+    "grid": "#E2D5BE",
+    "ink": "#1A1612",
+    "muted": "#5E554B",
+    "line": "#2B2520",
+    "actor-a": "#2D5BA9",
+    "actor-a-tint": "#CAD9F3",
+    "actor-a-deep": "#1B3B73",
+    "actor-b": "#D9822B",
+    "actor-b-tint": "#F5D9BC",
+    "actor-b-deep": "#9C5714",
+    "accent": "#C43028",
+    "accent-tint": "#F5C9C1",
+    "accent-deep": "#8E2615",
+    "sunflower": "#E8B53C",
+    "sunflower-tint": "#F9E7B8",
+    "forest": "#3B6E47",
+    "forest-tint": "#C8E0CE",
+    "plum": "#6B3F6E",
+    "plum-tint": "#DFCCE1",
+    "soft": "#E3D6BC"
+  },
+  "fonts": {
+    "display": "Fraunces, Georgia, serif",
+    "body": "'DM Sans', system-ui, sans-serif",
+    "hand": "Caveat, 'Comic Sans MS', cursive",
+    "mono": "'JetBrains Mono', ui-monospace, monospace"
+  },
+  "type": {
+    "title": [30, 600],
+    "sub": [15, 400],
+    "caption": [14.5, 500],
+    "tick": [12.5, 500],
+    "hand": [20, 500],
+    "num": [15.5, 400],
+    "edge": [18, 500]
+  },
+  "stroke": {
+    "glyph": 2.1,
+    "edge": 2.0,
+    "frame": 1.35,
+    "hair": 0.9
+  },
+  "jitter": 0.65,
+  "radius": 10,
+  "edge_label_font": "hand",
+  "caption_font": "body"
+}

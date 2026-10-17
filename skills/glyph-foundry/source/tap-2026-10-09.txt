@@ -1,0 +1,24 @@
+SOURCE: Wispr Flow meeting 5106b366-0e5e-4a5d-9c8a-34cc7e9b2ccd (2026-10-09, Teams, Victoria + Manu)
+NOTE: verbatim transcript excerpt. Diarization is unreliable: every turn is labelled "Victoria", including Manu's.
+
+Victoria: And I call it TAP, Talent Accelerator Program.
+Victoria: It's the TAP program, because you can tap into resources.
+Victoria: Here's how it works: a client picks 6 to 8 employees to put into the program for upskilling, and we may— depending on the client— we may or may not have some say in that also.
+Victoria: We pick 6 to 8 people. We match 50/50.
+Victoria: If they pick 6, we pick 6. If they pick 8, we pick 8, whatever.
+Victoria: We match 50/50, and we put new hires into this program with the client.
+Victoria: We come up with a set of prerequisite knowledge. Maybe it's that you have to have so many years as a Python programmer.
+Victoria: Our people are at the same level their people are at. We come up with the training.
+Victoria: So their people, our people, maybe we have 16 people in a group, in a cohort. We train them at no cost to the client.
+Victoria: When they come out of the training, the client has already signed a contract that they're going to keep our 8 people on staff at a billable rate per hour for a minimum of a year.
+Victoria: We get an hourly fee every hour times 8 people times 40 hours a week times 50 weeks a year for those people. That's where the money comes from.
+Victoria: After training, those people are deployed out on projects. We keep a coach available for support, for real-time support.
+Victoria: So once they're deployed on projects, that coach might be available an hour a day for 5 days a week, and then after a month they might be available 3 days a week an hour a day, and after another month they might be available 1 hour a day for a month. We slowly cut that coach back.
+Victoria: At the end of the year, the client can either— they have the right to hire them direct, and maybe there's a fee to that, maybe there isn't, or they can— that might be a point of negotiation— they can dismiss them and say we no longer need them, or they could continue with us at an hourly rate for those same people, only it's probably a higher hourly rate.
+Victoria: If we were making $25 per person per hour profit margin, just $25 times 40 hours a week, that's $1,000 a week per person, and we have 8 people in this cohort, that's $8,000 a week, and we're going to say they're probably billable 50 weeks a year— wait a minute, that's not right. Is that right?
+Victoria: Hold on. $25 per person times 40 hours times 8 people times 50 weeks. So that's about $400,000 profit in one cohort.
+Victoria: If we are running this one after the other after the other after the other at a client, we could run 10 cohorts in a year, right?
+Victoria: If all you do is get staffing from another company, they're not going to coach your people. And if all you do is buy training, you're only going to upgrade your own people.
+Victoria: You're not going to get new bodies. So by putting them together— by putting them together, we bring the whole team out together, accomplish together, coach them all together, and the outcome is that you end up with 16 FDEs in a short period of time at your company and your culture under your governance, and we're coaching them all.
+Victoria: No, I don't feel 16 is too many to train. I just feel like the ratio of eight to eight, like a one-to-one ratio, is too much.
+Victoria: But I think that we have to like start at a scale, or I believe that like two to four is the most effective in the short term if you're training like eight people. Okay.

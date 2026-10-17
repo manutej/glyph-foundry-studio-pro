@@ -1,0 +1,122 @@
+[
+ {
+  "check": "H6",
+  "severity": "error",
+  "anchor": "venn",
+  "msg": "only 3 drawn elements (need >= 12)"
+ },
+ {
+  "check": "H8",
+  "severity": "warn",
+  "anchor": "venn",
+  "msg": "only 1 depth plane(s) (need >= 3 for volumetric 2.5D hierarchy)"
+ },
+ {
+  "check": "H6",
+  "severity": "error",
+  "anchor": "client",
+  "msg": "only 9 drawn elements (need >= 18)"
+ },
+ {
+  "check": "H8",
+  "severity": "warn",
+  "anchor": "client",
+  "msg": "only 1 depth plane(s) (need >= 3 for volumetric 2.5D hierarchy)"
+ },
+ {
+  "check": "H6",
+  "severity": "error",
+  "anchor": "hires",
+  "msg": "only 9 drawn elements (need >= 18)"
+ },
+ {
+  "check": "H8",
+  "severity": "warn",
+  "anchor": "hires",
+  "msg": "only 1 depth plane(s) (need >= 3 for volumetric 2.5D hierarchy)"
+ },
+ {
+  "check": "H6",
+  "severity": "error",
+  "anchor": "gate",
+  "msg": "only 8 drawn elements (need >= 10)"
+ },
+ {
+  "check": "H8",
+  "severity": "warn",
+  "anchor": "gate",
+  "msg": "only 1 depth plane(s) (need >= 3 for volumetric 2.5D hierarchy)"
+ },
+ {
+  "check": "H6",
+  "severity": "error",
+  "anchor": "cohort",
+  "msg": "only 6 drawn elements (need >= 24)"
+ },
+ {
+  "check": "H8",
+  "severity": "warn",
+  "anchor": "cohort",
+  "msg": "only 1 depth plane(s) (need >= 3 for volumetric 2.5D hierarchy)"
+ },
+ {
+  "check": "H6",
+  "severity": "error",
+  "anchor": "contract",
+  "msg": "only 5 drawn elements (need >= 28)"
+ },
+ {
+  "check": "H8",
+  "severity": "warn",
+  "anchor": "contract",
+  "msg": "only 1 depth plane(s) (need >= 3 for volumetric 2.5D hierarchy)"
+ },
+ {
+  "check": "H6",
+  "severity": "error",
+  "anchor": "taper",
+  "msg": "only 5 drawn elements (need >= 16)"
+ },
+ {
+  "check": "H8",
+  "severity": "warn",
+  "anchor": "taper",
+  "msg": "only 1 depth plane(s) (need >= 3 for volumetric 2.5D hierarchy)"
+ },
+ {
+  "check": "H6",
+  "severity": "error",
+  "anchor": "fork",
+  "msg": "only 9 drawn elements (need >= 14)"
+ },
+ {
+  "check": "H8",
+  "severity": "warn",
+  "anchor": "fork",
+  "msg": "only 1 depth plane(s) (need >= 3 for volumetric 2.5D hierarchy)"
+ },
+ {
+  "check": "H6",
+  "severity": "error",
+  "anchor": "math",
+  "msg": "only 1 drawn elements (need >= 18)"
+ },
+ {
+  "check": "H8",
+  "severity": "warn",
+  "anchor": "math",
+  "msg": "only 1 depth plane(s) (need >= 3 for volumetric 2.5D hierarchy)"
+ },
+ {
+  "check": "H6",
+  "severity": "error",
+  "anchor": "ratio",
+  "msg": "only 7 drawn elements (need >= 24)"
+ },
+ {
+  "check": "H8",
+  "severity": "warn",
+  "anchor": "ratio",
+  "msg": "only 1 depth plane(s) (need >= 3 for volumetric 2.5D hierarchy)"
+ }
+]

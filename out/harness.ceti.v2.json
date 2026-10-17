@@ -1,0 +1,20 @@
+[
+ {
+  "check": "H4",
+  "severity": "warn",
+  "anchor": "gate",
+  "msg": "drawing spills 15px outside its layout box"
+ },
+ {
+  "check": "H4",
+  "severity": "warn",
+  "anchor": "math",
+  "msg": "drawing spills 16px outside its layout box"
+ },
+ {
+  "check": "H4",
+  "severity": "warn",
+  "anchor": "ratio",
+  "msg": "drawing spills 9px outside its layout box"
+ }
+]

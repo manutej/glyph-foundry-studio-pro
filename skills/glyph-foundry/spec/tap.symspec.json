@@ -1,0 +1,915 @@
+{
+ "symspec": "0.1",
+ "meta": {
+  "id": "tap-2026-10-09",
+  "title": "TAP — Talent Accelerator Program",
+  "intent": "Explain how the TAP staffing-plus-training model works, where the money comes from, and the open question about the ratio.",
+  "canvas": [
+   1280,
+   720
+  ],
+  "source": {
+   "kind": "wispr-flow",
+   "meeting_id": "5106b366-0e5e-4a5d-9c8a-34cc7e9b2ccd",
+   "file": "source/tap-2026-10-09.txt",
+   "speaker_reliable": false
+  }
+ },
+ "spans": [
+  {
+   "id": "S0",
+   "quote": "And I call it TAP, Talent Accelerator Program."
+  },
+  {
+   "id": "S1",
+   "quote": "a client picks 6 to 8 employees to put into the program for upskilling"
+  },
+  {
+   "id": "S2",
+   "quote": "We match 50/50, and we put new hires into this program with the client."
+  },
+  {
+   "id": "S3",
+   "quote": "We come up with a set of prerequisite knowledge."
+  },
+  {
+   "id": "S4",
+   "quote": "Our people are at the same level their people are at."
+  },
+  {
+   "id": "S5",
+   "quote": "maybe we have 16 people in a group, in a cohort. We train them at no cost to the client."
+  },
+  {
+   "id": "S6",
+   "quote": "keep our 8 people on staff at a billable rate per hour for a minimum of a year"
+  },
+  {
+   "id": "S7",
+   "quote": "times 8 people times 40 hours a week times 50 weeks a year"
+  },
+  {
+   "id": "S8",
+   "quote": "that coach might be available an hour a day for 5 days a week, and then after a month they might be available 3 days a week an hour a day, and after another month they might be available 1 hour a day for a month. We slowly cut that coach back."
+  },
+  {
+   "id": "S9",
+   "quote": "they have the right to hire them direct"
+  },
+  {
+   "id": "S10",
+   "quote": "they can dismiss them and say we no longer need them"
+  },
+  {
+   "id": "S11",
+   "quote": "they could continue with us at an hourly rate for those same people, only it's probably a higher hourly rate"
+  },
+  {
+   "id": "S12",
+   "quote": "$25 per person times 40 hours times 8 people times 50 weeks. So that's about $400,000 profit in one cohort."
+  },
+  {
+   "id": "S12b",
+   "quote": "If we were making $25 per person per hour profit margin"
+  },
+  {
+   "id": "S13",
+   "quote": "we could run 10 cohorts in a year"
+  },
+  {
+   "id": "S14",
+   "quote": "If all you do is get staffing from another company, they're not going to coach your people. And if all you do is buy training, you're only going to upgrade your own people."
+  },
+  {
+   "id": "S15",
+   "quote": "I just feel like the ratio of eight to eight, like a one-to-one ratio, is too much."
+  },
+  {
+   "id": "S16",
+   "quote": "I believe that like two to four is the most effective in the short term if you're training like eight people"
+  }
+ ],
+ "concepts": [
+  {
+   "id": "c_tap",
+   "kind": "process",
+   "label": "TAP",
+   "spans": [
+    "S0"
+   ]
+  },
+  {
+   "id": "c_staffing",
+   "kind": "object",
+   "label": "staffing alone",
+   "spans": [
+    "S14"
+   ]
+  },
+  {
+   "id": "c_training",
+   "kind": "object",
+   "label": "training alone",
+   "spans": [
+    "S14"
+   ]
+  },
+  {
+   "id": "c_client",
+   "kind": "actor",
+   "label": "client staff",
+   "value": "6–8",
+   "role": "actor-a",
+   "spans": [
+    "S1"
+   ]
+  },
+  {
+   "id": "c_hires",
+   "kind": "actor",
+   "label": "Pursuit new hires",
+   "value": "50/50",
+   "role": "actor-b",
+   "spans": [
+    "S2"
+   ]
+  },
+  {
+   "id": "c_prereq",
+   "kind": "object",
+   "label": "same prerequisites",
+   "spans": [
+    "S3",
+    "S4"
+   ]
+  },
+  {
+   "id": "c_cohort",
+   "kind": "object",
+   "label": "cohort",
+   "value": "16",
+   "spans": [
+    "S5"
+   ]
+  },
+  {
+   "id": "c_contract",
+   "kind": "object",
+   "label": "billable contract",
+   "spans": [
+    "S6",
+    "S7"
+   ]
+  },
+  {
+   "id": "c_coach",
+   "kind": "process",
+   "label": "coach taper",
+   "spans": [
+    "S8"
+   ]
+  },
+  {
+   "id": "c_hire",
+   "kind": "outcome",
+   "label": "hire direct",
+   "spans": [
+    "S9"
+   ]
+  },
+  {
+   "id": "c_dismiss",
+   "kind": "outcome",
+   "label": "dismiss",
+   "spans": [
+    "S10"
+   ]
+  },
+  {
+   "id": "c_extend",
+   "kind": "outcome",
+   "label": "extend at higher rate",
+   "spans": [
+    "S11"
+   ]
+  },
+  {
+   "id": "c_margin",
+   "kind": "quantity",
+   "label": "profit per cohort",
+   "value": "$400,000",
+   "spans": [
+    "S12b",
+    "S12"
+   ]
+  },
+  {
+   "id": "c_repeat",
+   "kind": "quantity",
+   "label": "cohorts per year",
+   "value": "10",
+   "spans": [
+    "S13"
+   ]
+  },
+  {
+   "id": "c_ratio",
+   "kind": "tension",
+   "label": "1:1 ratio",
+   "spans": [
+    "S15",
+    "S16"
+   ]
+  }
+ ],
+ "relations": [
+  {
+   "id": "r_union",
+   "type": "combine",
+   "from": [
+    "c_staffing",
+    "c_training"
+   ],
+   "to": "c_tap",
+   "spans": [
+    "S14"
+   ]
+  },
+  {
+   "id": "r_in_a",
+   "type": "flow",
+   "from": "c_client",
+   "to": "c_prereq",
+   "spans": [
+    "S1",
+    "S3"
+   ]
+  },
+  {
+   "id": "r_in_b",
+   "type": "flow",
+   "from": "c_hires",
+   "to": "c_prereq",
+   "spans": [
+    "S2",
+    "S4"
+   ]
+  },
+  {
+   "id": "r_train",
+   "type": "flow",
+   "from": "c_prereq",
+   "to": "c_cohort",
+   "spans": [
+    "S5"
+   ]
+  },
+  {
+   "id": "r_deploy",
+   "type": "flow",
+   "from": "c_cohort",
+   "to": "c_contract",
+   "spans": [
+    "S6"
+   ]
+  },
+  {
+   "id": "r_support",
+   "type": "accompany",
+   "from": "c_coach",
+   "to": "c_contract",
+   "spans": [
+    "S8"
+   ]
+  },
+  {
+   "id": "r_yearend",
+   "type": "branch",
+   "from": "c_contract",
+   "to": [
+    "c_hire",
+    "c_dismiss",
+    "c_extend"
+   ],
+   "spans": [
+    "S9",
+    "S10",
+    "S11"
+   ]
+  },
+  {
+   "id": "r_derive",
+   "type": "derive",
+   "from": "c_contract",
+   "to": "c_margin",
+   "spans": [
+    "S12b",
+    "S12"
+   ]
+  },
+  {
+   "id": "r_oppose",
+   "type": "oppose",
+   "from": "c_ratio",
+   "to": "c_hires",
+   "spans": [
+    "S15",
+    "S16"
+   ]
+  }
+ ],
+ "claims": [
+  {
+   "id": "k0",
+   "rhetoric": "union",
+   "priority": 3,
+   "statement": "TAP joins what staffing alone and training alone each miss.",
+   "relations": [
+    "r_union"
+   ]
+  },
+  {
+   "id": "k1",
+   "rhetoric": "mechanism",
+   "priority": 5,
+   "statement": "Two matched groups clear the same bar and train as one cohort at no cost to the client.",
+   "relations": [
+    "r_in_a",
+    "r_in_b",
+    "r_train"
+   ]
+  },
+  {
+   "id": "k2",
+   "rhetoric": "mechanism",
+   "priority": 5,
+   "statement": "Pursuit's hires stay billable for at least a year while the coach tapers off.",
+   "relations": [
+    "r_deploy",
+    "r_support"
+   ]
+  },
+  {
+   "id": "k3",
+   "rhetoric": "choice",
+   "priority": 4,
+   "statement": "At year end the client hires, dismisses, or extends at a higher rate.",
+   "relations": [
+    "r_yearend"
+   ]
+  },
+  {
+   "id": "k4",
+   "rhetoric": "derivation",
+   "priority": 4,
+   "statement": "The money is hourly margin times hours times people times weeks, repeated across cohorts.",
+   "relations": [
+    "r_derive"
+   ]
+  },
+  {
+   "id": "k5",
+   "rhetoric": "tension",
+   "priority": 3,
+   "statement": "A one-to-one ratio may be too much; two to four core people may work better early.",
+   "relations": [
+    "r_oppose"
+   ]
+  }
+ ],
+ "candidates": [
+  {
+   "claim": "k1",
+   "id": "k1.a",
+   "idiom": "two streams through one gate into one vessel",
+   "scores": {
+    "fidelity": 5,
+    "clarity": 5,
+    "novelty": 3,
+    "feasibility": 5
+   },
+   "selected": true
+  },
+  {
+   "claim": "k1",
+   "id": "k1.b",
+   "idiom": "two puzzle halves locking",
+   "scores": {
+    "fidelity": 3,
+    "clarity": 4,
+    "novelty": 4,
+    "feasibility": 4
+   },
+   "selected": false,
+   "reject": "hides the prerequisite bar and the cohort size"
+  },
+  {
+   "claim": "k1",
+   "id": "k1.c",
+   "idiom": "relay hand-off between two runners",
+   "scores": {
+    "fidelity": 2,
+    "clarity": 3,
+    "novelty": 4,
+    "feasibility": 3
+   },
+   "selected": false,
+   "reject": "implies sequence; the groups train together"
+  },
+  {
+   "claim": "k2",
+   "id": "k2.a",
+   "idiom": "contract plus stepping-down coach bars",
+   "scores": {
+    "fidelity": 5,
+    "clarity": 4,
+    "novelty": 3,
+    "feasibility": 5
+   },
+   "selected": true
+  },
+  {
+   "claim": "k2",
+   "id": "k2.b",
+   "idiom": "training wheels coming off a bicycle",
+   "scores": {
+    "fidelity": 3,
+    "clarity": 4,
+    "novelty": 5,
+    "feasibility": 3
+   },
+   "selected": false,
+   "reject": "loses the billable-year commitment"
+  },
+  {
+   "claim": "k3",
+   "id": "k3.a",
+   "idiom": "three-way fork in a path",
+   "scores": {
+    "fidelity": 5,
+    "clarity": 5,
+    "novelty": 2,
+    "feasibility": 5
+   },
+   "selected": true
+  },
+  {
+   "claim": "k5",
+   "id": "k5.a",
+   "idiom": "balance beam 8:8 beside a small pod",
+   "scores": {
+    "fidelity": 5,
+    "clarity": 4,
+    "novelty": 4,
+    "feasibility": 4
+   },
+   "selected": true
+  }
+ ],
+ "layout": {
+  "id": "root",
+  "dir": "col",
+  "pad": 36,
+  "gap": 18,
+  "children": [
+   {
+    "id": "head",
+    "dir": "row",
+    "h": 96,
+    "gap": 24,
+    "children": [
+     {
+      "id": "title",
+      "leaf": "title",
+      "flex": 1,
+      "concept": "c_tap",
+      "text": [
+       "TAP · Talent Accelerator Program",
+       "staffing and training as one cohort, from the Oct 9 call"
+      ]
+     },
+     {
+      "id": "venn",
+      "leaf": "glyph",
+      "w": 330,
+      "glyph": "venn",
+      "concept": "c_tap",
+      "params": {
+       "a": "staffing",
+       "b": "training",
+       "mid": "TAP"
+      },
+      "claim": "k0",
+      "cites": [
+       "c_staffing",
+       "c_training"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "body",
+    "dir": "row",
+    "flex": 1,
+    "gap": 34,
+    "edges": [
+     {
+      "id": "e_deploy",
+      "from": "cohort.right",
+      "to": "contract.left",
+      "relation": "r_deploy",
+      "kind": "flow",
+      "label": "deploy"
+     },
+     {
+      "id": "e_yearend",
+      "from": "contract.right",
+      "to": "fork.left",
+      "relation": "r_yearend",
+      "kind": "flow",
+      "label": "year end"
+     }
+    ],
+    "children": [
+     {
+      "id": "colA",
+      "dir": "col",
+      "flex": 1.15,
+      "gap": 26,
+      "edges": [
+       {
+        "id": "e_in_a",
+        "from": "client.bottom",
+        "to": "gate.topleft",
+        "relation": "r_in_a",
+        "kind": "flow"
+       },
+       {
+        "id": "e_in_b",
+        "from": "hires.bottom",
+        "to": "gate.topright",
+        "relation": "r_in_b",
+        "kind": "flow"
+       },
+       {
+        "id": "e_train",
+        "from": "gate.bottom",
+        "to": "cohort.top",
+        "relation": "r_train",
+        "kind": "flow"
+       }
+      ],
+      "children": [
+       {
+        "id": "streams",
+        "dir": "row",
+        "h": 128,
+        "gap": 16,
+        "children": [
+         {
+          "id": "client",
+          "leaf": "glyph",
+          "flex": 1,
+          "glyph": "crowd",
+          "concept": "c_client",
+          "params": {
+           "n": 8,
+           "roles": [
+            "actor-a"
+           ],
+           "solid": 6
+          },
+          "caption": "client picks 6–8",
+          "claim": "k1",
+          "caption_pos": "top"
+         },
+         {
+          "id": "hires",
+          "leaf": "glyph",
+          "flex": 1,
+          "glyph": "crowd",
+          "concept": "c_hires",
+          "params": {
+           "n": 8,
+           "roles": [
+            "actor-b"
+           ],
+           "solid": 6
+          },
+          "caption": "Pursuit matches 50/50",
+          "claim": "k1",
+          "caption_pos": "top"
+         }
+        ]
+       },
+       {
+        "id": "gate",
+        "leaf": "glyph",
+        "h": 70,
+        "glyph": "gate",
+        "concept": "c_prereq",
+        "claim": "k1",
+        "params": {
+         "label": "same prerequisites"
+        }
+       },
+       {
+        "id": "cohort",
+        "leaf": "glyph",
+        "flex": 1,
+        "glyph": "cohort",
+        "concept": "c_cohort",
+        "params": {
+         "n": 16,
+         "roles": [
+          "actor-a",
+          "actor-b"
+         ]
+        },
+        "caption": "16 trained together, no cost to the client",
+        "claim": "k1"
+       }
+      ]
+     },
+     {
+      "id": "colB",
+      "dir": "col",
+      "flex": 1.15,
+      "gap": 14,
+      "children": [
+       {
+        "id": "contract",
+        "leaf": "glyph",
+        "flex": 1,
+        "glyph": "contract",
+        "concept": "c_contract",
+        "caption": "8 billable · 40 h/wk",
+        "claim": "k2",
+        "params": {
+         "people": 8
+        }
+       },
+       {
+        "id": "taper",
+        "leaf": "glyph",
+        "flex": 1.1,
+        "glyph": "taper",
+        "concept": "c_coach",
+        "params": {
+         "levels": [
+          5,
+          3,
+          1.4,
+          0.6
+         ],
+         "ticks": [
+          "5 d/wk",
+          "3 d/wk",
+          "1 h/day",
+          "tapering"
+         ],
+         "dashed_last": true,
+         "actor": "coach"
+        },
+        "caption": "an hour a day, fewer days each month",
+        "claim": "k2"
+       }
+      ]
+     },
+     {
+      "id": "colC",
+      "dir": "col",
+      "flex": 0.8,
+      "children": [
+       {
+        "id": "fork",
+        "leaf": "glyph",
+        "flex": 1,
+        "glyph": "fork",
+        "concept": "c_contract",
+        "params": {
+         "branches": [
+          {
+           "label": "hire direct",
+           "concept": "c_hire",
+           "icon": "check"
+          },
+          {
+           "label": "dismiss",
+           "concept": "c_dismiss",
+           "icon": "exit"
+          },
+          {
+           "label": "extend · higher rate",
+           "concept": "c_extend",
+           "icon": "loop"
+          }
+         ]
+        },
+        "caption": "the client's year-end choice",
+        "claim": "k3"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "foot",
+    "dir": "row",
+    "h": 150,
+    "gap": 30,
+    "children": [
+     {
+      "id": "math",
+      "leaf": "glyph",
+      "flex": 1.6,
+      "glyph": "equation",
+      "concept": "c_margin",
+      "params": {
+       "terms": [
+        "$25/h margin",
+        "40 h/wk",
+        "8 people",
+        "50 wk"
+       ],
+       "result": "= $400,000",
+       "after": "profit per cohort · could run 10 a year"
+      },
+      "claim": "k4",
+      "cites": [
+       "c_repeat"
+      ]
+     },
+     {
+      "id": "ratio",
+      "leaf": "glyph",
+      "flex": 1,
+      "glyph": "balance",
+      "concept": "c_ratio",
+      "params": {
+       "left": 8,
+       "right": 8,
+       "pod_left": 8,
+       "pod": 3,
+       "tilt": 7,
+       "note_left": "8 : 8 too much?",
+       "note_right": "try 8 : 2–4"
+      },
+      "claim": "k5",
+      "cites": [
+       "c_hires",
+       "c_client"
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "beats": [
+  {
+   "id": "b1",
+   "claim": "k0",
+   "caption": "Staffing alone doesn't coach your people. Training alone doesn't add new ones. TAP does both.",
+   "reveal": [
+    "title",
+    "venn"
+   ],
+   "emphasis": [
+    "c_tap"
+   ],
+   "spans": [
+    "S14"
+   ]
+  },
+  {
+   "id": "b2",
+   "claim": "k1",
+   "caption": "The client picks six to eight of its own employees.",
+   "reveal": [
+    "client"
+   ],
+   "emphasis": [
+    "c_client"
+   ],
+   "spans": [
+    "S1"
+   ]
+  },
+  {
+   "id": "b3",
+   "claim": "k1",
+   "caption": "Pursuit matches them fifty-fifty with new hires at the same level.",
+   "reveal": [
+    "hires",
+    "gate",
+    "e_in_a",
+    "e_in_b"
+   ],
+   "emphasis": [
+    "c_hires",
+    "c_prereq"
+   ],
+   "spans": [
+    "S2",
+    "S3",
+    "S4"
+   ]
+  },
+  {
+   "id": "b4",
+   "claim": "k1",
+   "caption": "All sixteen train together, at no cost to the client.",
+   "reveal": [
+    "cohort",
+    "e_train"
+   ],
+   "emphasis": [
+    "c_cohort"
+   ],
+   "spans": [
+    "S5"
+   ]
+  },
+  {
+   "id": "b5",
+   "claim": "k2",
+   "caption": "Pursuit's eight stay billable, forty hours a week, for at least a year.",
+   "reveal": [
+    "contract",
+    "e_deploy"
+   ],
+   "emphasis": [
+    "c_contract"
+   ],
+   "spans": [
+    "S6",
+    "S7"
+   ]
+  },
+  {
+   "id": "b6",
+   "claim": "k2",
+   "caption": "A coach supports them, then steps down month by month.",
+   "reveal": [
+    "taper"
+   ],
+   "emphasis": [
+    "c_coach"
+   ],
+   "spans": [
+    "S8"
+   ]
+  },
+  {
+   "id": "b7",
+   "claim": "k3",
+   "caption": "At year end the client hires them, lets them go, or extends at a higher rate.",
+   "reveal": [
+    "fork",
+    "e_yearend"
+   ],
+   "emphasis": [
+    "c_hire",
+    "c_dismiss",
+    "c_extend"
+   ],
+   "spans": [
+    "S9",
+    "S10",
+    "S11"
+   ]
+  },
+  {
+   "id": "b8",
+   "claim": "k4",
+   "caption": "Twenty-five dollars an hour of margin comes to about four hundred thousand per cohort.",
+   "reveal": [
+    "math"
+   ],
+   "emphasis": [
+    "c_margin",
+    "c_repeat"
+   ],
+   "spans": [
+    "S12b",
+    "S12",
+    "S13"
+   ]
+  },
+  {
+   "id": "b9",
+   "claim": "k5",
+   "caption": "The open question: is one-to-one too much? Two to four core people may work better at first.",
+   "reveal": [
+    "ratio"
+   ],
+   "emphasis": [
+    "c_ratio"
+   ],
+   "spans": [
+    "S15",
+    "S16"
+   ]
+  }
+ ]
+}

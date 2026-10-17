@@ -1,0 +1,68 @@
+[
+ {
+  "check": "H1",
+  "severity": "warn",
+  "anchor": "c_staffing",
+  "msg": "concept never drawn"
+ },
+ {
+  "check": "H1",
+  "severity": "warn",
+  "anchor": "c_training",
+  "msg": "concept never drawn"
+ },
+ {
+  "check": "H1",
+  "severity": "warn",
+  "anchor": "c_repeat",
+  "msg": "concept never drawn"
+ },
+ {
+  "check": "H2",
+  "severity": "error",
+  "anchor": "title",
+  "msg": "number(s) [1] in “staffing and training as one cohort, from the Oct 9 call” not found in cited spans"
+ },
+ {
+  "check": "H2",
+  "severity": "error",
+  "anchor": "math",
+  "msg": "number(s) [10] in “per cohort · could run 10 a year” not found in cited spans"
+ },
+ {
+  "check": "H2",
+  "severity": "error",
+  "anchor": "b3",
+  "msg": "narration number(s) [100.0] not in beat spans"
+ },
+ {
+  "check": "H4",
+  "severity": "error",
+  "anchor": "e_in_a|client",
+  "msg": "edge crosses text “client picks 6–8”"
+ },
+ {
+  "check": "H4",
+  "severity": "error",
+  "anchor": "e_in_b|hires",
+  "msg": "edge crosses text “Pursuit matches 50/50”"
+ },
+ {
+  "check": "H4",
+  "severity": "error",
+  "anchor": "e_train|gate",
+  "msg": "edge crosses text “same prerequisites”"
+ },
+ {
+  "check": "H4",
+  "severity": "warn",
+  "anchor": "ratio",
+  "msg": "drawing spills 9px outside its layout box"
+ },
+ {
+  "check": "H6",
+  "severity": "error",
+  "anchor": "venn",
+  "msg": "only 2 drawn elements"
+ }
+]

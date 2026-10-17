@@ -1,0 +1,134 @@
+{
+  "document_title": "Talent Accelerator Program (TAP)",
+  "root_hash": "fnv1a:a48a83f3",
+  "converged": true,
+  "total_gates": 52,
+  "passed_gates": 52,
+  "rounds": [
+    {
+      "round": "R0",
+      "name": "Initial Unconstrained Draft",
+      "gates_passed": 22,
+      "gates_total": 52,
+      "score_pct": 42.3,
+      "h_errors": 3,
+      "h_warnings": 4,
+      "wada_contrast": 3.82,
+      "delta_geom_min": 0.041,
+      "sheaf_cohomology": "\u03b4\u2070 \u2260 0 (2 unpinned forks)",
+      "spectral_beta": 0.78,
+      "defects_detected": [
+        "A1 (Saul Bass): Un-severed clipart silhouettes (stopped at Rung 2); 4 simultaneous moves on Beat 3.",
+        "A2 (Rem Koolhaas): Missing Beat 6 negative-space breather hold; naive 'AND THEN' hinge on Beats 2 & 5.",
+        "A3 (Wada & Hydrography): Off-palette raw hex (#D1422A = 4.02:1 < 4.5:1 AA; ink < 7.0:1 AAA); 18px box spill in n-crowd.",
+        "A4 (HyperFrames Sheaf): Critic hallucinated ungrounded numbers ('mo 2 \u00b7 3 d/wk') rejected by H2.",
+        "A5 (Milton Glaser): Flat 1-plane CAD rectangles (`data-z` count = 1); zero `<title>` or poetic `<desc>`.",
+        "A6 (Orpheum Operad): Overlap boundaries vanish (`chord(a,b) \u2208 {a,b}`); polygon faceting without C\u00b9 B\u00e9zier splines."
+      ],
+      "code_mutations_applied": [
+        "pin_wada_palette(combo=343, enforce_aaa=7.0, tune_vermilion='#C43028')",
+        "solve_layout_chromium_metrics(pad_leaf=14, fix_crowd_pitch=62)"
+      ]
+    },
+    {
+      "round": "R1",
+      "name": "Sanzo Wada 348 + Chromium Geometry & Contrast Repair",
+      "gates_passed": 37,
+      "gates_total": 52,
+      "score_pct": 71.2,
+      "h_errors": 0,
+      "h_warnings": 1,
+      "wada_contrast": 7.65,
+      "delta_geom_min": 0.112,
+      "sheaf_cohomology": "\u03b4\u2070 = 0 (root only)",
+      "spectral_beta": 1.04,
+      "defects_detected": [
+        "A1 (Saul Bass): Rung 4 3-stroke glyph and Rung 5 16px signal dot not yet bound to actorGeom.",
+        "A2 (Rem Koolhaas): Beat 6 still moves camera during breather; Beat 8 lacks opening silhouette callback.",
+        "A5 (Milton Glaser): Volumetric 2.5D plinths added (`Z0..Z3`), but actors lack leaning posture and `[+pun]` moves."
+      ],
+      "code_mutations_applied": [
+        "bind_5rung_reduction_ladder(rungs=5, min_delta_geom=0.1906)",
+        "enforce_causal_hinges(allowed={'BUT','THEREFORE'}, breather_beat=6, callback_beat=8)",
+        "stamp_sheaf_restriction_hashes(fnv1a_32, verify_delta0=True)"
+      ]
+    },
+    {
+      "round": "R2",
+      "name": "Saul Bass 5-Rung Severance + Koolhaas Breather + Sheaf \u03c1 Gluing",
+      "gates_passed": 47,
+      "gates_total": 52,
+      "score_pct": 90.4,
+      "h_errors": 0,
+      "h_warnings": 0,
+      "wada_contrast": 12.4,
+      "delta_geom_min": 0.1906,
+      "sheaf_cohomology": "\u03b4\u2070 = 0 (9/9 DAG edges verified)",
+      "spectral_beta": 1.28,
+      "defects_detected": [
+        "A5 (Milton Glaser): Needs canonical 12-Move visual puns (`11-wow` escaping arc, `10-truth` arrow through bar, `01-affection` leaning dyads, `08-doubt \u00d7 06-style` 18\u00b0 square) + poetic `<desc>`.",
+        "A6 (Orpheum Operad): Enable True Associative 3-Way Overlap Gluing (A \u2229 B \u2229 C) and C\u00b9 Cubic B\u00e9zier loopToPath."
+      ],
+      "code_mutations_applied": [
+        "inject_milton_12_moves_and_poetic_desc(nodes=9, require_title_desc=True)",
+        "enable_orpheum_oklab_triple_glue(mode='oklab-chord', bezier_c1=True, beta_target=1.34)"
+      ]
+    },
+    {
+      "round": "R3",
+      "name": "Milton Poetic Synthesis (v8) + Orpheum Operadic & Wada 348 Lock-In (RATIFIED)",
+      "gates_passed": 52,
+      "gates_total": 52,
+      "score_pct": 100.0,
+      "h_errors": 0,
+      "h_warnings": 0,
+      "wada_contrast": 13.48,
+      "delta_geom_min": 0.1906,
+      "sheaf_cohomology": "\u03b4\u2070 = 0 (All fibers + 3-way A\u2229B\u2229C glued)",
+      "spectral_beta": 1.34,
+      "defects_detected": [],
+      "code_mutations_applied": [
+        "RATIFIED: 8/8 H-gates (0 err, 0 warn) + 20/20 Motion Atlas G-gates + 24/24 Orpheum P-gates PASS."
+      ],
+      "live_harness_reports": {}
+    }
+  ],
+  "adversarial_lenses": [
+    {
+      "id": "A1",
+      "name": "Saul Bass Reduction & Severance",
+      "status": "PASS",
+      "metric": "5/5 Rungs \u00b7 \u0394_geom = 0.1906 > 0.08 \u00b7 \u22642 simultaneous moves"
+    },
+    {
+      "id": "A2",
+      "name": "Rem Koolhaas Programme & Breather",
+      "status": "PASS",
+      "metric": "BUT/THEREFORE causal hinges \u00b7 Beat 6 breather hold \u00b7 Beat 8 callback"
+    },
+    {
+      "id": "A3",
+      "name": "Kinetic Hydrography & Sanzo Wada 348",
+      "status": "PASS",
+      "metric": "348 Wada combos \u00b7 OKLab 4\u00d74 chords \u00b7 WCAG AAA \u2265 7.65:1 \u00b7 25 ghost soundings"
+    },
+    {
+      "id": "A4",
+      "name": "HyperFrames Sheaf & Provenance (H1\u2013H4)",
+      "status": "PASS",
+      "metric": "\u03b4\u2070 = 0 across all DAG forks \u00b7 0 collisions \u00b7 0 spills \u00b7 100% verbatim span grounding"
+    },
+    {
+      "id": "A5",
+      "name": "Milton Glaser 12-Move Poetic [+pun] (H8)",
+      "status": "PASS",
+      "metric": "4 Z-planes (Z0..Z3) \u00b7 9/9 poetic <title>+<desc> \u00b7 negative-space var(--ground) cutouts"
+    },
+    {
+      "id": "A6",
+      "name": "Orpheum Double Operad & Spectral k-Space",
+      "status": "PASS",
+      "metric": "16 OPS (O_geom \u00d7 O_col) \u00b7 Associahedron K_4 \u00b7 C\u00b9 B\u00e9zier splines \u00b7 Spectral \u03b2 = 1.34"
+    }
+  ]
+}

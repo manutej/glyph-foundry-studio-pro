@@ -1,0 +1,2211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glyph Foundry · Next-Gen Volumetric &amp; Symbolic Video Explainer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,600&family=DM+Sans:wght@400;500;700&family=Caveat:wght@500&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root {
+  --paper: #ECEAE4;
+  --plate: #F9F7F2;
+  --elev-ui: #FFFFFF;
+  --ink: #151C24;
+  --sub: #525E6E;
+  --rule: #D0CDC4;
+  --redline: #C8432B;
+  --redline-tint: rgba(200, 67, 43, 0.10);
+  --teal: #1F6F78;
+  --teal-tint: rgba(31, 111, 120, 0.12);
+  --amber: #C97A2B;
+  --amber-tint: rgba(201, 122, 43, 0.14);
+  --mark: #E2DFD7;
+  --ok: #257953;
+  --ok-tint: rgba(37, 121, 83, 0.12);
+  --display: 'Young Serif', 'Fraunces', Georgia, serif;
+  --body: 'IBM Plex Sans', 'DM Sans', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', 'JetBrains Mono', ui-monospace, monospace;
+  --col: 1320px;
+  --shadow-sm: 0 2px 8px rgba(15, 20, 28, 0.05);
+  --shadow-md: 0 12px 32px rgba(15, 20, 28, 0.09);
+}
+:root[data-theme="dark"] {
+  --paper: #0B0E14;
+  --plate: #121721;
+  --elev-ui: #19202E;
+  --ink: #E8ECF4;
+  --sub: #94A0B8;
+  --rule: #252F42;
+  --redline: #FF7A6B;
+  --redline-tint: rgba(255, 122, 107, 0.14);
+  --teal: #38D2C8;
+  --teal-tint: rgba(56, 210, 200, 0.14);
+  --amber: #F5B041;
+  --amber-tint: rgba(245, 176, 65, 0.14);
+  --mark: #1B2333;
+  --ok: #5CE0A0;
+  --ok-tint: rgba(92, 224, 160, 0.14);
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 16px 40px rgba(0, 0, 0, 0.55);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font: 15.5px/1.6 var(--body);
+  margin: 0;
+  padding-inline: 24px;
+  transition: background-color .25s, color .25s;
+}
+.wrap {
+  max-width: var(--col);
+  margin: 0 auto;
+  padding-block: 32px 96px;
+  display: grid;
+  gap: 64px;
+}
+h1, h2, h3, h4 {
+  font-family: var(--display);
+  font-weight: 400;
+  text-wrap: balance;
+  margin: 0;
+  letter-spacing: -0.015em;
+}
+h1 { font-size: clamp(2.2rem, 4.6vw, 3.6rem); line-height: 1.04; }
+h2 { font-size: clamp(1.55rem, 2.8vw, 2.15rem); line-height: 1.12; }
+h3 { font-size: 1.12rem; line-height: 1.25; }
+h4 { font-size: 0.98rem; line-height: 1.3; font-family: var(--body); font-weight: 600; }
+p { margin: 0; max-width: 72ch; }
+.eyebrow {
+  font: 600 11.5px/1 var(--mono);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--sub);
+}
+.lede { font-size: 1.12rem; color: var(--sub); max-width: 68ch; line-height: 1.55; }
+.sec { display: grid; gap: 22px; }
+.sec > header { display: grid; gap: 8px; }
+code, .mono { font-family: var(--mono); font-size: .88em; }
+a { color: inherit; text-decoration-color: var(--rule); text-underline-offset: 3px; }
+a:hover { text-decoration-color: var(--ink); }
+
+/* Top Masthead & Telemetry */
+.hero {
+  display: grid;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--rule);
+}
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.hero .meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  font: 12px/1.3 var(--mono);
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--plate);
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  font: 500 11.5px/1 var(--mono);
+}
+.badge .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ok);
+}
+.badge.accent .dot { background: var(--redline); }
+.badge.teal .dot { background: var(--teal); }
+
+/* Buttons & Segments */
+button {
+  font: 500 12.5px/1.2 var(--body);
+  color: var(--ink);
+  background: var(--mark);
+  border: 1px solid var(--rule);
+  border-radius: 5px;
+  padding: 7px 11px;
+  cursor: pointer;
+  transition: all .15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+button:hover { border-color: var(--sub); background: var(--elev-ui); }
+button:focus-visible, input:focus-visible, g.leaf:focus-visible {
+  outline: 2px solid var(--redline);
+  outline-offset: 2px;
+}
+button[aria-pressed="true"], button.active {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.seg {
+  display: inline-flex;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--plate);
+}
+.seg button {
+  border: 0;
+  border-right: 1px solid var(--rule);
+  border-radius: 0;
+  background: transparent;
+  padding: 6px 10px;
+  font-size: 12px;
+}
+.seg button:last-child { border-right: 0; }
+.seg button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* Next-Gen Theatre Layout */
+.theatre {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 18px;
+  align-items: start;
+}
+@media (max-width: 1080px) {
+  .theatre { grid-template-columns: minmax(0, 1fr); }
+}
+.screen {
+  background: var(--plate);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+/* Director Bar above Stage */
+.director-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px 14px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--rule);
+  background: var(--elev-ui);
+}
+.director-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.director-label {
+  font: 600 10.5px/1 var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--sub);
+}
+
+/* Stage & 2.5D Viewport */
+.stage-viewport {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  background: #F4EFE6;
+  perspective: 1400px;
+  user-select: none;
+  transition: background-color .3s ease;
+}
+.stage-viewport[data-skin="ceti-night"] { background: #0E1116; }
+.stage-viewport[data-skin="deepmind-iridescent"] { background: #0B0F17; }
+
+#stage {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.12s ease-out;
+}
+#stage svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+#stage g.leaf {
+  cursor: pointer;
+  transition: opacity .24s ease, filter .24s ease;
+}
+#stage g.leaf:hover {
+  filter: brightness(1.04);
+}
+#stage g.leaf:focus { outline: none; }
+#stage g.z-layer {
+  transition: opacity .28s ease, transform .28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Floating Stage HUD */
+.stage-hud {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+  z-index: 5;
+}
+.hud-pill {
+  font: 500 11px/1.2 var(--mono);
+  padding: 5px 9px;
+  border-radius: 5px;
+  background: rgba(21, 28, 36, 0.78);
+  color: #F4EFE6;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+.hud-pill.rhetoric {
+  background: var(--redline);
+  color: #fff;
+  border-color: transparent;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+.stage-tilt-hint {
+  position: absolute;
+  bottom: 10px;
+  right: 14px;
+  font: 11px/1.2 var(--mono);
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: rgba(21, 28, 36, 0.72);
+  color: #E8ECF4;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .2s;
+}
+.stage-viewport[data-cam="tilt"] .stage-tilt-hint { opacity: 1; }
+
+/* Teleprompter Caption Band */
+.capband {
+  position: relative;
+  min-height: 4.1em;
+  padding: 13px 18px;
+  border-top: 1px solid var(--rule);
+  font-size: 1.02rem;
+  line-height: 1.48;
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+  background: var(--elev-ui);
+}
+.capband .bn {
+  font: 600 11.5px/1.3 var(--mono);
+  color: var(--paper);
+  background: var(--ink);
+  padding: 3px 7px;
+  border-radius: 4px;
+  flex: none;
+  text-transform: uppercase;
+}
+.capband .w-tok {
+  transition: color .12s, background-color .12s;
+  border-radius: 3px;
+  padding-inline: 1px;
+}
+.capband .w-tok.spoken {
+  color: var(--ink);
+  font-weight: 500;
+}
+.capband .w-tok.now {
+  background: var(--amber-tint);
+  color: var(--redline);
+  font-weight: 600;
+}
+.capband .w-tok.future {
+  color: var(--sub);
+  opacity: 0.78;
+}
+.beat-progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2.5px;
+  background: var(--redline);
+  width: 0%;
+  transition: width 0.06s linear;
+}
+
+/* Transport Controls */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  align-items: center;
+  padding: 10px 14px;
+  border-top: 1px solid var(--rule);
+  background: var(--plate);
+}
+#play {
+  font-weight: 600;
+  padding: 7px 14px;
+  min-width: 78px;
+  justify-content: center;
+}
+.scrub-wrap {
+  flex: 1 1 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 160px;
+}
+#scrub {
+  width: 100%;
+  accent-color: var(--redline);
+  margin: 0;
+  cursor: pointer;
+}
+.scrub-ticks {
+  display: flex;
+  justify-content: space-between;
+  font: 9.5px/1 var(--mono);
+  color: var(--sub);
+  padding-inline: 2px;
+}
+.time {
+  font: 500 12px var(--mono);
+  color: var(--sub);
+  font-variant-numeric: tabular-nums;
+  min-width: 74px;
+  text-align: right;
+}
+
+/* Beat Chips & X-Ray Bar */
+.chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 8px 14px 12px;
+  background: var(--plate);
+  border-top: 1px dashed var(--rule);
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.chip {
+  font: 500 11.5px/1.1 var(--mono);
+  padding: 5px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--rule);
+  background: var(--elev-ui);
+  color: var(--sub);
+}
+.chip:hover { color: var(--ink); border-color: var(--sub); }
+.chip.on {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.xray-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+}
+.xray-pill {
+  font: 500 10.5px/1 var(--mono);
+  padding: 4px 7px;
+  border-radius: 4px;
+}
+
+/* Sidebar: Evidence + Verbatim Transcript */
+.sidebar {
+  background: var(--plate);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  box-shadow: var(--shadow-sm);
+  max-height: 760px;
+}
+.sidebar-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--rule);
+  background: var(--elev-ui);
+}
+.sidebar-tabs button {
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  padding: 11px 12px;
+  justify-content: center;
+  font: 600 11.5px/1 var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--sub);
+}
+.sidebar-tabs button[aria-selected="true"] {
+  color: var(--ink);
+  border-bottom-color: var(--redline);
+  background: var(--plate);
+}
+.sidebar-pane {
+  padding: 16px;
+  overflow-y: auto;
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+.sidebar-pane[hidden] { display: none; }
+.claim-box {
+  background: var(--elev-ui);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--redline);
+  border-radius: 5px;
+  padding: 10px 12px;
+  font-size: 0.9rem;
+  display: grid;
+  gap: 4px;
+}
+.claim-box .cid {
+  font: 600 10.5px/1 var(--mono);
+  text-transform: uppercase;
+  color: var(--redline);
+}
+.quote {
+  border-left: 2.5px solid var(--teal);
+  background: var(--elev-ui);
+  padding: 8px 11px;
+  border-radius: 0 5px 5px 0;
+  font-size: .9rem;
+  line-height: 1.45;
+  cursor: pointer;
+  transition: transform .12s, border-color .12s, background-color .12s;
+}
+.quote:hover {
+  transform: translateX(2px);
+  border-left-color: var(--redline);
+}
+.quote.active-span {
+  border-left-color: var(--redline);
+  background: var(--amber-tint);
+}
+.quote .sid {
+  display: flex;
+  justify-content: space-between;
+  font: 600 10.5px var(--mono);
+  color: var(--sub);
+  margin-bottom: 3px;
+}
+.candidate-mini {
+  font-size: 0.82rem;
+  border: 1px dashed var(--rule);
+  border-radius: 5px;
+  padding: 8px 10px;
+  background: var(--elev-ui);
+  display: grid;
+  gap: 5px;
+}
+.candidate-mini .win { color: var(--ok); font-weight: 600; font-family: var(--mono); font-size: 11px; }
+.candidate-mini .rej { color: var(--sub); font-size: 11.5px; }
+.hint { font-size: .83rem; color: var(--sub); line-height: 1.45; }
+
+/* Section 2: Interactive What-If Economic Simulator & Live SVG Compiler */
+.sim-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 20px;
+  background: var(--plate);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 22px;
+  box-shadow: var(--shadow-sm);
+}
+@media (max-width: 920px) { .sim-grid { grid-template-columns: 1fr; } }
+.sim-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 18px;
+  align-content: start;
+}
+@media (max-width: 600px) { .sim-controls { grid-template-columns: 1fr; } }
+.sim-ctrl {
+  background: var(--elev-ui);
+  border: 1px solid var(--rule);
+  border-radius: 7px;
+  padding: 11px 13px;
+  display: grid;
+  gap: 6px;
+}
+.sim-ctrl label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font: 500 12.5px var(--body);
+}
+.sim-ctrl .val {
+  font: 600 13px var(--mono);
+  color: var(--redline);
+}
+.sim-ctrl input[type="range"] {
+  width: 100%;
+  accent-color: var(--teal);
+  margin: 0;
+}
+.sim-outputs {
+  display: grid;
+  gap: 12px;
+  align-content: space-between;
+}
+.kpi-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.kpi {
+  background: var(--elev-ui);
+  border: 1px solid var(--rule);
+  border-radius: 7px;
+  padding: 12px 14px;
+  display: grid;
+  gap: 3px;
+}
+.kpi.highlight {
+  border-color: var(--redline);
+  background: var(--redline-tint);
+}
+.kpi .k-label {
+  font: 600 10.5px/1.2 var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--sub);
+}
+.kpi .k-num {
+  font: 600 1.45rem/1.15 var(--mono);
+  color: var(--ink);
+}
+.kpi.highlight .k-num { color: var(--redline); }
+.kpi .k-sub { font-size: 11.5px; color: var(--sub); }
+.sim-formula-bar {
+  background: var(--elev-ui);
+  border: 1px solid var(--rule);
+  border-radius: 7px;
+  padding: 11px 14px;
+  font: 12.5px/1.5 var(--mono);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Section 3: Interactive Before/After Curtain Slider & Evolution Studio */
+.compare-studio {
+  display: grid;
+  gap: 16px;
+}
+.compare-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  background: var(--plate);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+.curtain-stage {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  overflow: hidden;
+  user-select: none;
+  background: #F4EFE6;
+  box-shadow: var(--shadow-md);
+}
+.curtain-stage img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+}
+#curtain-top {
+  clip-path: inset(0 0 0 50%);
+}
+.curtain-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 3px;
+  background: var(--redline);
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 4;
+}
+.curtain-knob {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--redline);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 700 13px var(--mono);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  border: 2px solid #fff;
+}
+.curtain-tag {
+  position: absolute;
+  top: 14px;
+  padding: 6px 11px;
+  border-radius: 6px;
+  font: 600 11.5px/1.2 var(--mono);
+  background: rgba(21, 28, 36, 0.84);
+  color: #F4EFE6;
+  backdrop-filter: blur(6px);
+  z-index: 3;
+  pointer-events: none;
+}
+.curtain-tag.left { left: 14px; }
+.curtain-tag.right { right: 14px; background: var(--redline); color: #fff; }
+.curtain-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: ew-resize;
+  z-index: 6;
+  margin: 0;
+}
+
+/* 9-Glyph Semiotic Catalog Grid */
+.glyph-catalog {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+.glyph-card {
+  background: var(--plate);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 16px;
+  display: grid;
+  gap: 8px;
+  align-content: space-between;
+  transition: border-color .15s, transform .15s;
+}
+.glyph-card:hover {
+  border-color: var(--sub);
+  transform: translateY(-2px);
+}
+.glyph-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+.glyph-card-head .g-name {
+  font: 600 12px var(--mono);
+  color: var(--teal);
+  text-transform: uppercase;
+}
+.glyph-card p { font-size: 0.88rem; color: var(--sub); }
+.glyph-card .upgrade {
+  font-size: 0.84rem;
+  color: var(--ink);
+  border-top: 1px dashed var(--rule);
+  padding-top: 8px;
+}
+
+/* Pipeline, Tables & Rounds */
+.stages {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.stage {
+  background: var(--plate);
+  padding: 18px;
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+.stage .n { font: 600 11.5px var(--mono); color: var(--redline); }
+.stage p { font-size: .91rem; color: var(--sub); }
+.stage .from {
+  font: 11.5px/1.45 var(--mono);
+  color: var(--sub);
+  border-top: 1px dashed var(--rule);
+  padding-top: 8px;
+}
+.stage .from b { color: var(--ink); font-weight: 600; }
+
+.tbl {
+  overflow-x: auto;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--plate);
+}
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: .91rem; }
+th, td { text-align: left; vertical-align: top; padding: 12px 14px; border-bottom: 1px solid var(--rule); }
+th { font: 600 11px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--sub); background: var(--elev-ui); }
+tr:last-child td { border-bottom: 0; }
+td:first-child { font-weight: 600; white-space: nowrap; }
+
+.rounds {
+  display: grid;
+  gap: 0;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--plate);
+  overflow: hidden;
+}
+.round {
+  display: grid;
+  grid-template-columns: 11em minmax(0, 1fr) auto;
+  gap: 16px;
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+  font-size: 0.92rem;
+}
+.round:last-child { border-bottom: 0; }
+@media (max-width: 680px) { .round { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
+.round .who { font: 600 12px var(--mono); }
+.round .tally { font: 600 11.5px var(--mono); color: var(--sub); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.redline { color: var(--redline); }
+.tealc { color: var(--teal); }
+.okc { color: var(--ok); }
+.callout {
+  border: 1px solid var(--redline);
+  border-left-width: 4px;
+  border-radius: 8px;
+  padding: 16px 18px;
+  display: grid;
+  gap: 6px;
+  background: var(--plate);
+}
+.callout .eyebrow { color: var(--redline); }
+ul.plain { margin: 0; padding-left: 1.2em; display: grid; gap: 7px; max-width: 72ch; }
+pre {
+  margin: 0;
+  padding: 16px;
+  background: var(--plate);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: auto;
+  max-height: 420px;
+  font: 12px/1.5 var(--mono);
+}
+details summary { cursor: pointer; font-weight: 600; font-family: var(--mono); font-size: 13px; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+@media (max-width: 760px) { .two { grid-template-columns: minmax(0, 1fr); } }
+.two > div { display: grid; gap: 10px; align-content: start; min-width: 0; }
+.refs { display: grid; gap: 10px; }
+.ref {
+  display: grid;
+  grid-template-columns: 12em minmax(0, 1fr);
+  gap: 14px;
+  font-size: .91rem;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule);
+}
+.ref:last-child { border-bottom: 0; }
+@media (max-width: 640px) { .ref { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
+.ref .id { font: 12px/1.5 var(--mono); color: var(--sub); }
+.ref .id b { color: var(--ink); font: 600 13px var(--body); display: block; }
+@media (prefers-reduced-motion: reduce) {
+  #stage g.leaf, #stage g.z-layer { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<section class="hero">
+  <div class="hero-top">
+    <span class="eyebrow">CETI · DeepMind-Caliber Symbolic Visual Systems · Volumetric v7 Engine</span>
+    <button id="theme-btn" aria-pressed="false" title="Toggle Page UI Theme">◐ UI Theme</button>
+  </div>
+  <h1>Glyph Foundry · Next-Gen Symbolic Video Explainer</h1>
+  <p class="lede">One declarative <code>SymSpec</code>, grounded verbatim in what was said on the Oct 9 TAP call, compiled through a 4-plane 2.5D volumetric pen (<code>data-z="0..3"</code>), real Chromium <code>@fontsource</code> metrics, and an 8-gate deterministic harness (<code>H1–H8</code>) into a live camera-directed interactive film and parametric sandbox.</p>
+  <div class="meta">
+    <span class="badge"><span class="dot"></span>source · Oct 9 Wispr Flow transcript</span>
+    <span class="badge teal"><span class="dot"></span>__NSPANS__ verbatim evidence spans</span>
+    <span class="badge accent"><span class="dot"></span>9 choreographed beats · __TOTAL__</span>
+    <span class="badge"><span class="dot"></span>v0 → v7 evolution · 0 errors · 0 warnings</span>
+    <span class="badge teal"><span class="dot"></span>4 Z-depth planes · 3 style records</span>
+  </div>
+</section>
+
+<!-- ==================== SECTION 1: NEXT-GEN VIDEO EXPLAINER THEATRE ==================== -->
+<section class="theatre" aria-label="TAP Next-Gen Video Explainer">
+  <div class="screen">
+    <!-- Director Toolbar -->
+    <div class="director-bar">
+      <div class="director-group">
+        <span class="director-label">Camera Director</span>
+        <span class="seg" role="group" aria-label="Camera mode">
+          <button id="cam-follow" aria-pressed="true" title="Spring-damped camera follows active beat nodes">🎬 Cinematic Follow</button>
+          <button id="cam-tilt" aria-pressed="false" title="Interactive 2.5D multi-plane parallax tilt">🧊 2.5D Parallax</button>
+          <button id="cam-overview" aria-pressed="false" title="Lock full 1280×720 drafting table">🗺️ Full Canvas</button>
+        </span>
+      </div>
+      <div class="director-group">
+        <span class="director-label">Style Record</span>
+        <span class="seg" role="group" aria-label="Style record">
+          <button id="sk-warm" aria-pressed="true">Milton Warm</button>
+          <button id="sk-irid" aria-pressed="false">DeepMind Iridescent</button>
+          <button id="sk-night" aria-pressed="false">CETI Night</button>
+        </span>
+      </div>
+    </div>
+
+    <!-- 16:9 Stage Viewport -->
+    <div class="stage-viewport" id="stage-vp" data-skin="milton-warm" data-cam="follow">
+      <div class="stage-hud">
+        <span class="hud-pill rhetoric" id="hud-rhetoric">OVERVIEW</span>
+        <span class="hud-pill" id="hud-cam">CAM 1.00× · 1280×720</span>
+      </div>
+      <div id="stage"></div>
+      <div class="stage-tilt-hint">Move cursor across stage to orbit 2.5D Z-planes (Z0–Z3) · Click glyph to pin</div>
+    </div>
+
+    <!-- Word-Level Synchronized Teleprompter Caption Band -->
+    <div class="capband" aria-live="polite">
+      <span class="bn" id="bn">ALL</span>
+      <span id="cap"></span>
+      <div class="beat-progress" id="beat-prog"></div>
+    </div>
+
+    <!-- Transport & Audio Controls -->
+    <div class="controls">
+      <button id="play" aria-pressed="false">▶ Play</button>
+      <button id="prev-beat" title="Previous Beat (←)">⏮</button>
+      <button id="next-beat" title="Next Beat (→)">⏭</button>
+      <div class="scrub-wrap">
+        <input id="scrub" type="range" min="0" max="1000" value="1000" aria-label="Timeline">
+        <div class="scrub-ticks" id="scrub-ticks"></div>
+      </div>
+      <span class="time" id="time">0:00</span>
+      <span class="seg" role="group" aria-label="Playback speed">
+        <button class="spd" data-spd="1" aria-pressed="true">1×</button>
+        <button class="spd" data-spd="1.25" aria-pressed="false">1.25×</button>
+      </span>
+      <button id="sfx-btn" aria-pressed="true" title="Procedural WebAudio harmonic chimes &amp; sub-beat ticks">🔔 Synth</button>
+      <button id="voice" aria-pressed="false" title="Narrate each beat with browser speech synthesis">🗣️ Voice</button>
+    </div>
+
+    <!-- Beat Choreography Chips & Z-Layer X-Ray Inspector -->
+    <div class="chips-row">
+      <div class="chips" id="chips"></div>
+      <div class="xray-pills" role="group" aria-label="Z-Plane X-Ray Toggles">
+        <span class="director-label" style="margin-right:4px">X-Ray:</span>
+        <button class="xray-pill" data-z="0" aria-pressed="true" title="Z0: Cast Shadows, Plinths &amp; Blueprint Grids">Z0 Plinth</button>
+        <button class="xray-pill" data-z="1" aria-pressed="true" title="Z1: Mechanisms, Connectors &amp; Stratum Columns">Z1 Mech</button>
+        <button class="xray-pill" data-z="2" aria-pressed="true" title="Z2: Sculpted 2.5D Actors, Ingots &amp; Seals">Z2 Actors</button>
+        <button class="xray-pill" data-z="3" aria-pressed="true" title="Z3: Specular Rims, Callouts &amp; Equations">Z3 Callouts</button>
+        <button class="xray-pill" id="xray-boxes" aria-pressed="false" title="Show FigTree solver layout boxes &amp; port coordinates">📐 Ports &amp; Boxes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Sidebar: Provenance + Full Verbatim Transcript -->
+  <aside class="sidebar" aria-live="polite">
+    <div class="sidebar-tabs" role="tablist">
+      <button id="tab-btn-ev" role="tab" aria-selected="true">Beat &amp; Idiom Proof</button>
+      <button id="tab-btn-tr" role="tab" aria-selected="false">Oct 9 Transcript (15)</button>
+    </div>
+    <div class="sidebar-pane" id="pane-ev" role="tabpanel">
+      <span class="eyebrow" id="ev-eyebrow">Grounded Provenance</span>
+      <h3 id="ev-title">All 9 Beats · TAP Architecture</h3>
+      <div id="ev-claim-wrap"></div>
+      <div id="ev-body" style="display:grid;gap:8px"></div>
+      <div id="ev-candidates"></div>
+      <p class="hint">Shortcuts: <code>Space</code> Play/Pause · <code>←/→</code> Step Beat · <code>1–9</code> Jump Beat · <code>0</code> Overview · Click any glyph or transcript quote to inspect.</p>
+    </div>
+    <div class="sidebar-pane" id="pane-tr" role="tabpanel" hidden>
+      <span class="eyebrow">Verbatim Wispr Flow Index · s1–s15</span>
+      <p class="hint">Active beat spans highlight automatically. Click any span to jump the camera and timeline to the glyph that cites it.</p>
+      <div id="transcript-list" style="display:grid;gap:8px"></div>
+    </div>
+  </aside>
+</section>
+
+<!-- ==================== SECTION 2: INTERACTIVE WHAT-IF ECONOMIC SIMULATOR ==================== -->
+<section class="sec" id="simulator-sec">
+  <header>
+    <span class="eyebrow">Parametric SymSpec Sandbox · Live DOM Re-Compiler</span>
+    <h2>Interactive “What-If” Cohort &amp; Margin Simulator</h2>
+    <p>In the Oct 9 call, the speakers derive <code>$25/h × 40 h/wk × 8 people × 50 wk = $400,000</code> profit per cohort, then question whether <code>8 : 8</code> unbilled matching is too heavy and propose <code>8 : 2–4</code>. Drag any parameter below to recompute the economics and <b>live-patch the SVG glyphs on the stage above</b>.</p>
+  </header>
+  <div class="sim-grid">
+    <div class="sim-controls">
+      <div class="sim-ctrl">
+        <label><span>Client Picks (Billable)</span><span class="val" id="lbl-sim-client">8 people</span></label>
+        <input type="range" id="sim-client" min="4" max="12" step="1" value="8">
+        <span class="hint">Transcript baseline: 6–8 billable engineers</span>
+      </div>
+      <div class="sim-ctrl">
+        <label><span>Pursuit Match (Unbilled Pool)</span><span class="val" id="lbl-sim-pursuit">8 (50/50 parity)</span></label>
+        <input type="range" id="sim-pursuit" min="2" max="10" step="1" value="8">
+        <span class="hint">Transcript: 8 (50/50) vs 2–4 catalyst pod</span>
+      </div>
+      <div class="sim-ctrl">
+        <label><span>Hourly Margin</span><span class="val" id="lbl-sim-margin">$25/h</span></label>
+        <input type="range" id="sim-margin" min="15" max="50" step="1" value="25">
+        <span class="hint">Transcript baseline: $25/h net margin</span>
+      </div>
+      <div class="sim-ctrl">
+        <label><span>Billable Hours / Week</span><span class="val" id="lbl-sim-hours">40 h/wk</span></label>
+        <input type="range" id="sim-hours" min="30" max="45" step="5" value="40">
+        <span class="hint">Transcript baseline: 40 hours a week</span>
+      </div>
+      <div class="sim-ctrl">
+        <label><span>Billable Weeks / Year</span><span class="val" id="lbl-sim-weeks">50 wk</span></label>
+        <input type="range" id="sim-weeks" min="40" max="52" step="1" value="50">
+        <span class="hint">Transcript baseline: 50 weeks (a year, min)</span>
+      </div>
+      <div class="sim-ctrl">
+        <label><span>Cohorts Run / Year</span><span class="val" id="lbl-sim-cohorts">10 / yr</span></label>
+        <input type="range" id="sim-cohorts" min="1" max="15" step="1" value="10">
+        <span class="hint">Transcript baseline: “could run 10 a year”</span>
+      </div>
+    </div>
+    <div class="sim-outputs">
+      <div class="kpi-cards">
+        <div class="kpi highlight">
+          <span class="k-label">Profit Per Cohort</span>
+          <span class="k-num" id="kpi-cohort-profit">$400,000</span>
+          <span class="k-sub" id="kpi-cohort-sub">Baseline: $400,000 (±0%)</span>
+        </div>
+        <div class="kpi">
+          <span class="k-label">Annual Portfolio Profit</span>
+          <span class="k-num" id="kpi-annual-profit">$4,000,000</span>
+          <span class="k-sub" id="kpi-annual-sub">Across 10 cohorts / year</span>
+        </div>
+        <div class="kpi">
+          <span class="k-label">Total Trained Cohort</span>
+          <span class="k-num" id="kpi-total-trained">16 engineers</span>
+          <span class="k-sub" id="kpi-ratio-sub">8 client : 8 Pursuit (1.00× match)</span>
+        </div>
+        <div class="kpi">
+          <span class="k-label">Reserve Efficiency</span>
+          <span class="k-num" id="kpi-efficiency">50% billable</span>
+          <span class="k-sub" id="kpi-eff-sub">Tension: “8:8 too much? try 8:2–4”</span>
+        </div>
+      </div>
+      <div class="sim-formula-bar">
+        <span id="sim-live-eq">$25/h × 40 h/wk × 8 people × 50 wk = $400,000</span>
+        <div style="display:flex;gap:6px">
+          <button id="sim-preset-catalyst" title="Apply the speaker's 8 : 3 catalyst counterpoint">⚡ Try 8 : 3 Catalyst</button>
+          <button id="sim-reset" title="Restore verbatim Oct 9 transcript numbers">↺ Reset to Spec</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SECTION 3: ITERATIVE EVOLUTION & CURTAIN STUDIO ==================== -->
+<section class="sec">
+  <header>
+    <span class="eyebrow">Iterative Visual Engineering · v0 → v4 → v5 → v6 → v7 → v8 (Milton Soul × 2.5D Litho)</span>
+    <h2>Before &amp; After Curtain Studio: From Flat Primitives to Feeling 2.5D Semiotics</h2>
+    <p>Drag the redline curtain handle across the plate to inspect the leap from the previous agent's <code>v4</code> baseline (flat 2D primitives, 1 layout spill warning, upward arrow entry artifacts, colliding cohort lines) through <code>v7</code> (2.5D volumetric architecture) to <b><code>v8</code> (Milton Glaser Poetic Semiotics × 2.5D Litho Printmaker)</b>—uniting the 5-actor semantic palette, leaning human gestures, negative-space paper cutouts, visual puns (<code>[+pun]</code>), mandatory <code>&lt;title&gt;</code> + poetic <code>&lt;desc&gt;</code>, and <code>0 errors · 0 warnings</code> across all 8 harness gates.</p>
+  </header>
+
+  <div class="compare-studio">
+    <div class="compare-toolbar">
+      <div class="director-group">
+        <span class="director-label">Left Plate (Before)</span>
+        <span class="seg" role="group" aria-label="Left comparison image">
+          <button class="cmp-left" data-img="v4_warm" aria-pressed="true">v4 Warm (Previous Final)</button>
+          <button class="cmp-left" data-img="v4_night" aria-pressed="false">v4 Night (Previous Final)</button>
+          <button class="cmp-left" data-img="v5" aria-pressed="false">v5 (Volumetric Pass 1)</button>
+          <button class="cmp-left" data-img="v6" aria-pressed="false">v6 (Semiotic Pass 2)</button>
+          <button class="cmp-left" data-img="v7_warm" aria-pressed="false">v7 (Metrological 2.5D)</button>
+        </span>
+      </div>
+      <div class="director-group">
+        <span class="director-label">Right Plate (After)</span>
+        <span class="seg" role="group" aria-label="Right comparison image">
+          <button class="cmp-right" data-img="v8_warm" aria-pressed="true">v8 Milton Warm (Soul × 2.5D)</button>
+          <button class="cmp-right" data-img="v8_irid" aria-pressed="false">v8 DeepMind Iridescent</button>
+          <button class="cmp-right" data-img="v8_night" aria-pressed="false">v8 CETI Night</button>
+          <button class="cmp-right" data-img="v7_warm" aria-pressed="false">v7 Warm</button>
+        </span>
+      </div>
+    </div>
+
+    <div class="curtain-stage" id="curtain-stage">
+      <img id="curtain-bot" src="__V4_WARM__" alt="Before comparison plate">
+      <img id="curtain-top" src="__V8_WARM__" alt="After comparison plate">
+      <span class="curtain-tag left" id="curtain-tag-left">v4 · Previous Baseline (0 err · 1 spill warn · flat 2D)</span>
+      <span class="curtain-tag right" id="curtain-tag-right">v8 · Milton Soul × 2.5D Litho Final (0 err · 0 warn · 5-Actor + Puns)</span>
+      <div class="curtain-handle" id="curtain-handle"><div class="curtain-knob">↔</div></div>
+      <input type="range" class="curtain-input" id="curtain-slider" min="0" max="100" value="50" aria-label="Comparison Curtain Slider">
+    </div>
+  </div>
+
+  <!-- 9-Round Evolution Ledger -->
+  <div class="rounds">
+    <div class="round"><span class="who">harness · v0</span><span>Caught 3 arrows running through captions and a figure printing “10” without citing the span that says it. Exposed two harness bugs: “one cohort” read as a quantity, “fifty-fifty” read as 100.</span><span class="tally">7 err · 4 warn</span></div>
+    <div class="round"><span class="who redline">critic · round 1–2 (v1–v4)</span><span>Resolved revenue vs profit framing, separated 8 billable people from 12 month tiles, routed year-end arrow from the contract rather than the coach, and enforced real Chromium `@fontsource` measurement. Left 1 layout spill warning (9 px on `balance`) and flat 2D primitives.</span><span class="tally">0 err · 1 warn</span></div>
+    <div class="round"><span class="who tealc">volumetric · v5</span><span>Upgraded `foundry/pen.py` with 4 explicit Z-planes (`data-z="0..3"`), 2.5D architectural plinths (`P.plinth`), 3-face axonometric prisms (`P.iso_block`), precision calipers (`P.caliper`), and sculpted 2.5D actors (`P.person`). Eliminated the 9 px `balance` spill (`beam_y = 52.0`).</span><span class="tally">0 err · 0 warn</span></div>
+    <div class="round"><span class="who tealc">semiotic · v6</span><span>Replaced the flat 2D `try 8 : 2–4` dot cluster with a Molecular Catalyst Cell (8 outer client nodes around 2–4 inner Pursuit catalysts). Added 1D/2D/3D/4D dimensional header badges to `equation` cards + 3D `$400,000` ingot + 10-cohort compounding stack.</span><span class="tally">0 err · 0 warn</span></div>
+    <div class="round"><span class="who tealc">optical &amp; spline · v7</span><span>Fixed vertical cubic Bezier control tangents (`cy1`, `cy2`) in `compile.py` so `e_in_a`, `e_in_b`, and `e_train` enter ports pointing cleanly downward; flipped `balance` protractor arc (`sweep=0`) to arch upward over the fulcrum.</span><span class="tally">0 err · 0 warn</span></div>
+    <div class="round"><span class="who okc">milton soul · v8 (/svg-enhance)</span><span>Synthesized Milton Glaser's iconography philosophy (`ICONS.md` + `PRINCIPLES.md` + `META_PROMPT.md`) into every glyph: 5-actor semantic palette (`cobalt`, `vermilion`, `sunflower`, `forest`, `plum`), leaning human gestures (`lean=±0.45`), negative-space `var(--ground)` paper cutouts, 4-cusp sunflower affection sparks (`01-affection`), `04-greatness` dashed autonomy peak, `09-aging` tree-rings on `50 wk`, `08-doubt` hinge + `06-style` 18°-rotated catalyst square, and mandatory `&lt;title&gt;` + poetic `&lt;desc&gt;` verified by `H8`.</span><span class="tally okc">0 err · 0 warn · WOW</span></div>
+  </div>
+
+  <!-- 9-Glyph Semiotic Deep-Dive Catalog -->
+  <div class="glyph-catalog">
+    <div class="glyph-card">
+      <div>
+        <div class="glyph-card-head"><span class="g-name">1 · venn (12-Ambiguity × 11-Wow)</span><button class="focus-glyph" data-gid="venn" data-beat="0">Focus ↗</button></div>
+        <h4>Resonance Crucible &amp; Escaping Arc</h4>
+        <p><b>v4:</b> Two plain overlapping circles with colliding bottom labels.</p>
+      </div>
+      <div class="upgrade"><b>v8 Milton Move:</b> Sunflower-lit Vesica Piscis crucible with two affection sparks and an outer dashed resonance arc cresting above the frame (<code>11-wow</code>: <i>“the third response escapes the frame”</i>).</div>
+    </div>
+    <div class="glyph-card">
+      <div>
+        <div class="glyph-card-head"><span class="g-name">2 · crowd (04-Greatness × 05-Just-Enough)</span><button class="focus-glyph" data-gid="client" data-beat="1">Focus ↗</button></div>
+        <h4>Leaning Ensemble &amp; Sunflower Potential Slots</h4>
+        <p><b>v4:</b> Featureless pegs with a plain dashed rectangle around slots 7–8.</p>
+      </div>
+      <div class="upgrade"><b>v8 Milton Move:</b> Six solid figures lean inward in conversation with negative-space paper eyes &amp; chest emblems, while two dashed silhouettes hold warm sunflower sparks at their hearts (<i>holding room open for the 7th &amp; 8th person</i>).</div>
+    </div>
+    <div class="glyph-card">
+      <div>
+        <div class="glyph-card-head"><span class="g-name">3 · gate (10-Truth Arrow)</span><button class="focus-glyph" data-gid="gate" data-beat="2">Focus ↗</button></div>
+        <h4>The Bar Both Streams Pass Through</h4>
+        <p><b>v4:</b> Dark pill with a single lower curve and upward arrow glitch.</p>
+      </div>
+      <div class="upgrade"><b>v8 Milton Move:</b> Braided double-helix funnel + Glaser's <code>10-truth</code> vermilion arrow passing completely through the bar into a sunflower synchronization spark (<i>a shared standard is a threshold you pass through, not a wall</i>).</div>
+    </div>
+    <div class="glyph-card">
+      <div>
+        <div class="glyph-card-head"><span class="g-name">4 · cohort (01-Affection Sparks)</span><button class="focus-glyph" data-gid="cohort" data-beat="3">Focus ↗</button></div>
+        <h4>16 Paired Dyads &amp; Negative-Space Sparks</h4>
+        <p><b>v4:</b> 16 rigid pegs with a horizontal line cutting across their chests.</p>
+      </div>
+      <div class="upgrade"><b>v8 Milton Move:</b> Sunflower-rimmed studio stadium where 8 cobalt client and 8 amber Pursuit engineers lean toward their partners, kindling 8 four-cusp sunflower sparks along the shared workbench (<code>01-affection</code>).</div>
+    </div>
+    <div class="glyph-card">
+      <div>
+        <div class="glyph-card-head"><span class="g-name">5 · contract (05-Just-Enough Seal)</span><button class="focus-glyph" data-gid="contract" data-beat="4">Focus ↗</button></div>
+        <h4>Forest-Sealed Charter &amp; 13th Open Horizon</h4>
+        <p><b>v4:</b> Flat rectangle + 12 flat boxes with a dashed <code>+</code> box.</p>
+      </div>
+      <div class="upgrade"><b>v8 Milton Move:</b> Sunflower-folded charter with a forest-green &amp; sunflower wax signet seal + 12 bevelled monthly blocks culminating in a forest 12th month and sunflower 13th open horizon.</div>
+    </div>
+    <div class="glyph-card">
+      <div>
+        <div class="glyph-card-head"><span class="g-name">6 · taper (04-Greatness × 07-Brain)</span><button class="focus-glyph" data-gid="taper" data-beat="5">Focus ↗</button></div>
+        <h4>Plum Coach Podium &amp; Dashed Autonomy Peak</h4>
+        <p><b>v4:</b> Flat bars that vanished in dark mode + single dashed line.</p>
+      </div>
+      <div class="upgrade"><b>v8 Milton Move:</b> Coach on a plum (<code>actor-5</code> wisdom) podium; as 3D cadence columns step down, Glaser's <code>04-greatness</code> dashed mountain peak and forest autonomy curve rise to a sunflower mastery spark.</div>
+    </div>
+    <div class="glyph-card">
+      <div>
+        <div class="glyph-card-head"><span class="g-name">7 · fork (10-Truth Open Doors)</span><button class="focus-glyph" data-gid="fork" data-beat="6">Focus ↗</button></div>
+        <h4>Sunflower Switchyard &amp; Forest Conversion</h4>
+        <p><b>v4:</b> Simple line split into 3 flat circles with plain text labels.</p>
+      </div>
+      <div class="upgrade"><b>v8 Milton Move:</b> Four-cusp sunflower spark at the junction branching into a forest-green direct-hire medallion (zero fee), clean exit, or sunflower-haloed extension portal.</div>
+    </div>
+    <div class="glyph-card">
+      <div>
+        <div class="glyph-card-head"><span class="g-name">8 · equation (09-Aging Rings + Ingot)</span><button class="focus-glyph" data-gid="math" data-beat="7">Focus ↗</button></div>
+        <h4>Tree-Ring Year Accumulation &amp; $400k Ingot</h4>
+        <p><b>v4:</b> Four plain rounded rectangles and a flat red rectangle.</p>
+      </div>
+      <div class="upgrade"><b>v8 Milton Move:</b> Sunflower computation bus + sunflower coin (<code>$25/h</code>), 5-day studio rhythm (<code>40 h/wk</code>), paired dots (<code>8 people</code>), and Glaser's <code>09-aging</code> off-centre tree rings (<code>50 wk</code>) feeding a 3D vermilion &amp; sunflower ingot.</div>
+    </div>
+    <div class="glyph-card">
+      <div>
+        <div class="glyph-card-head"><span class="g-name">9 · balance (08-Doubt × 06-Style)</span><button class="focus-glyph" data-gid="ratio" data-beat="8">Focus ↗</button></div>
+        <h4>The Doubt Hinge &amp; 18°-Rotated Catalyst Square</h4>
+        <p><b>v4:</b> 9 px top spill warning, inverted protractor arc, random dot cluster.</p>
+      </div>
+      <div class="upgrade"><b>v8 Milton Move:</b> Glaser's <code>08-doubt</code> question hinge above the tilted <code>8:8</code> scale paired with <code>06-style</code>'s <code>18°</code>-rotated sunflower square energizing the <code>8 : 2–4</code> catalyst pod.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SECTION 3.5: /SVG-ENHANCE & MILTON 12-MOVES STUDIO ==================== -->
+<section class="sec" id="svg-enhance-sec">
+  <header>
+    <span class="eyebrow">Antigravity Pipeline Skill · /svg-enhance × /milton</span>
+    <h2>The <code>/svg-enhance</code> Live Refactoring &amp; Poetic Icon Studio</h2>
+    <p>Why do most AI-generated SVGs feel lifeless? Because they draw <b>dictionary nouns</b> with cold rectangular CAD strokes on a flat plane. Our <code>/svg-enhance</code> pipeline refactors any primitive SVG on the fly using Milton Glaser's core principles—<b>Principle over Noun</b>, <b>One Geometric Move + Visual Pun (<code>[+pun]</code>)</b>, <b>Negative-Space Paper Cutouts (<code>var(--ground)</code>)</b>, <b>5-Actor Semantic Tokens</b>, <b>4-Plane 2.5D Litho Depth (<code>Z0..Z3</code>)</b>, and mandatory <code>&lt;title&gt;</code> + poetic <code>&lt;desc&gt;</code>.</p>
+  </header>
+
+  <div class="glyph-catalog" style="grid-template-columns:repeat(auto-fit,minmax(270px,1fr));margin-bottom:18px">
+    <!-- Case 1: 01-Affection -->
+    <div class="glyph-card" style="gap:12px">
+      <div class="glyph-card-head"><span class="g-name">Move 01 · Affection &amp; Pairing</span><span class="eyebrow" style="color:var(--ok)">Score: 34 → 100</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:center;background:var(--bg);padding:10px;border-radius:8px;border:1px solid var(--rule)">
+        <div style="text-align:center">
+          <div style="font:600 10px var(--mono);color:var(--muted);margin-bottom:4px">PRIMITIVE CAD (BEFORE)</div>
+          <svg viewBox="0 0 120 90" style="width:100%;height:74px;background:var(--card);border:1px solid var(--rule);border-radius:6px" role="img">
+            <title>Primitive Flat Pair (Before)</title>
+            <desc>Two flat rectangular blocks and circles connected by a straight line on a single plane without gesture or negative space.</desc>
+            <circle cx="38" cy="30" r="10" style="fill:var(--gf-actor-a)"/><rect x="26" y="44" width="24" height="30" style="fill:var(--gf-actor-a)"/>
+            <circle cx="82" cy="30" r="10" style="fill:var(--gf-actor-b)"/><rect x="70" y="44" width="24" height="30" style="fill:var(--gf-actor-b)"/>
+            <line x1="50" y1="58" x2="70" y2="58" style="stroke:var(--gf-line);stroke-width:2px"/>
+          </svg>
+        </div>
+        <div style="text-align:center">
+          <div style="font:600 10px var(--mono);color:var(--accent);margin-bottom:4px">/SVG-ENHANCE v8 (AFTER)</div>
+          <svg viewBox="0 0 120 90" style="width:100%;height:74px;background:var(--gf-ground);border:1px solid var(--rule);border-radius:6px" role="img">
+            <title>Paired Affection Dyad</title>
+            <desc>Two leaning figures incline toward each other across a studio bench while a four-cusp sunflower spark blooms in the negative space between them.</desc>
+            <rect x="11" y="13" width="100" height="68" rx="9" style="fill:var(--gf-shadow)"/>
+            <rect x="8" y="10" width="100" height="68" rx="9" style="fill:var(--gf-elev);stroke:var(--gf-line);stroke-width:1.4px"/>
+            <path d="M22,68 C22,44 30,44 37,44 C44,44 50,44 50,68 Z" style="fill:var(--gf-actor-a);stroke:var(--gf-line);stroke-width:1.5px"/>
+            <circle cx="38" cy="31" r="9.5" style="fill:var(--gf-actor-a);stroke:var(--gf-line);stroke-width:1.5px"/>
+            <circle cx="41" cy="29.5" r="2" style="fill:var(--gf-ground)"/>
+            <polygon points="36,52 40,56 36,60 32,56" style="fill:var(--gf-ground);stroke:var(--gf-line);stroke-width:0.9px"/>
+            <path d="M68,68 C68,44 74,44 81,44 C88,44 96,44 96,68 Z" style="fill:var(--gf-actor-b);stroke:var(--gf-line);stroke-width:1.5px"/>
+            <circle cx="80" cy="31" r="9.5" style="fill:var(--gf-actor-b);stroke:var(--gf-line);stroke-width:1.5px"/>
+            <circle cx="77" cy="29.5" r="2" style="fill:var(--gf-ground)"/>
+            <circle cx="82" cy="56" r="3.5" style="fill:var(--gf-ground);stroke:var(--gf-line);stroke-width:0.9px"/>
+            <path d="M59,42 Q59,49 66,49 Q59,49 59,56 Q59,49 52,49 Q59,49 59,42 Z" style="fill:var(--gf-sunflower);stroke:var(--gf-line);stroke-width:1px"/>
+          </svg>
+        </div>
+      </div>
+      <div class="upgrade"><b>&lt;desc&gt;:</b> <i>“Two leaning figures incline toward each other while a sunflower spark blooms in the negative space between them. Shared craft begins in affection.”</i></div>
+    </div>
+
+    <!-- Case 2: 10-Truth -->
+    <div class="glyph-card" style="gap:12px">
+      <div class="glyph-card-head"><span class="g-name">Move 10 · Truth &amp; Threshold</span><span class="eyebrow" style="color:var(--ok)">Score: 28 → 100</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:center;background:var(--bg);padding:10px;border-radius:8px;border:1px solid var(--rule)">
+        <div style="text-align:center">
+          <div style="font:600 10px var(--mono);color:var(--muted);margin-bottom:4px">PRIMITIVE CAD (BEFORE)</div>
+          <svg viewBox="0 0 120 90" style="width:100%;height:74px;background:var(--card);border:1px solid var(--rule);border-radius:6px" role="img">
+            <title>Primitive Target Icon (Before)</title>
+            <desc>Two flat concentric rings where a line stops dead at the center rather than passing through the standard.</desc>
+            <circle cx="60" cy="45" r="26" fill="none" style="stroke:var(--gf-line);stroke-width:2px"/>
+            <circle cx="60" cy="45" r="12" fill="none" style="stroke:var(--gf-line);stroke-width:2px"/>
+            <line x1="15" y1="45" x2="60" y2="45" style="stroke:var(--gf-accent);stroke-width:3px"/>
+          </svg>
+        </div>
+        <div style="text-align:center">
+          <div style="font:600 10px var(--mono);color:var(--accent);margin-bottom:4px">/SVG-ENHANCE v8 (AFTER)</div>
+          <svg viewBox="0 0 120 90" style="width:100%;height:74px;background:var(--gf-ground);border:1px solid var(--rule);border-radius:6px" role="img">
+            <title>Truth — The Arrow That Passed Through</title>
+            <desc>Three concentric target rings with a bold vermilion arrow that has already passed completely through the bullseye. A real standard is a threshold you pass through.</desc>
+            <circle cx="62.5" cy="48" r="30" style="fill:var(--gf-shadow)"/>
+            <circle cx="60" cy="45" r="30" style="fill:var(--gf-elev);stroke:var(--gf-line);stroke-width:1.8px"/>
+            <circle cx="60" cy="45" r="20" style="fill:var(--gf-panel);stroke:var(--gf-actor-a);stroke-width:1.4px;stroke-dasharray:3 2.5"/>
+            <circle cx="60" cy="45" r="10" style="fill:var(--gf-sunflower-tint);stroke:var(--gf-actor-b);stroke-width:1.4px"/>
+            <circle cx="60" cy="45" r="4" style="fill:var(--gf-sunflower);stroke:var(--gf-line);stroke-width:1px"/>
+            <line x1="12" y1="45" x2="106" y2="45" style="stroke:var(--gf-accent);stroke-width:3px;stroke-linecap:round"/>
+            <polygon points="110,45 100,40 100,50" style="fill:var(--gf-accent);stroke:var(--gf-line);stroke-width:1px"/>
+          </svg>
+        </div>
+      </div>
+      <div class="upgrade"><b>&lt;desc&gt;:</b> <i>“A target the vermilion arrow has already passed through. A prerequisite bar is not a wall you stop at, but a standard you clear.”</i></div>
+    </div>
+
+    <!-- Case 3: 08-Doubt x 06-Style -->
+    <div class="glyph-card" style="gap:12px">
+      <div class="glyph-card-head"><span class="g-name">Move 08 × 06 · Doubt &amp; Catalyst</span><span class="eyebrow" style="color:var(--ok)">Score: 30 → 100</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:center;background:var(--bg);padding:10px;border-radius:8px;border:1px solid var(--rule)">
+        <div style="text-align:center">
+          <div style="font:600 10px var(--mono);color:var(--muted);margin-bottom:4px">PRIMITIVE CAD (BEFORE)</div>
+          <svg viewBox="0 0 120 90" style="width:100%;height:74px;background:var(--card);border:1px solid var(--rule);border-radius:6px" role="img">
+            <title>Primitive Ratio Boxes (Before)</title>
+            <desc>Two identical grey squares with a text caption below, failing to distinguish parity from catalyst energy.</desc>
+            <rect x="20" y="25" width="32" height="32" style="fill:var(--rule)"/>
+            <rect x="68" y="25" width="32" height="32" style="fill:var(--rule)"/>
+            <text x="60" y="78" font-size="11" text-anchor="middle" style="fill:var(--muted)">8:8 vs 8:3</text>
+          </svg>
+        </div>
+        <div style="text-align:center">
+          <div style="font:600 10px var(--mono);color:var(--accent);margin-bottom:4px">/SVG-ENHANCE v8 (AFTER)</div>
+          <svg viewBox="0 0 120 90" style="width:100%;height:74px;background:var(--gf-ground);border:1px solid var(--rule);border-radius:6px" role="img">
+            <title>Doubt Hinge &amp; 18-Degree Catalyst Square</title>
+            <desc>Mirrored question marks open the hinge to a circular pod whose inner sunflower square rotates 18 degrees off the rigid grid.</desc>
+            <circle cx="80" cy="47" r="28" style="fill:var(--gf-shadow)"/>
+            <circle cx="78" cy="44" r="28" style="fill:var(--gf-elev);stroke:var(--gf-line);stroke-width:1.6px;stroke-dasharray:4 3"/>
+            <g transform="rotate(18 78 44)">
+              <rect x="64" y="30" width="28" height="28" rx="4" style="fill:var(--gf-sunflower-tint);stroke:var(--gf-actor-b);stroke-width:1.3px"/>
+            </g>
+            <circle cx="78" cy="23" r="3.5" style="fill:var(--gf-actor-a);stroke:var(--gf-line);stroke-width:1px"/>
+            <circle cx="99" cy="44" r="3.5" style="fill:var(--gf-actor-a);stroke:var(--gf-line);stroke-width:1px"/>
+            <circle cx="78" cy="65" r="3.5" style="fill:var(--gf-actor-a);stroke:var(--gf-line);stroke-width:1px"/>
+            <circle cx="57" cy="44" r="3.5" style="fill:var(--gf-actor-a);stroke:var(--gf-line);stroke-width:1px"/>
+            <circle cx="73" cy="44" r="4" style="fill:var(--gf-actor-b);stroke:var(--gf-line);stroke-width:1px"/>
+            <circle cx="83" cy="44" r="4" style="fill:var(--gf-actor-b);stroke:var(--gf-line);stroke-width:1px"/>
+            <text x="24" y="54" font-family="Fraunces, Georgia, serif" font-weight="700" font-size="38" text-anchor="middle" style="fill:var(--gf-accent)">?</text>
+            <circle cx="24" cy="64" r="3.2" style="fill:var(--gf-sunflower);stroke:var(--gf-line);stroke-width:1px"/>
+          </svg>
+        </div>
+      </div>
+      <div class="upgrade"><b>&lt;desc&gt;:</b> <i>“Certainty is a closed door; doubt is the hinge (08-doubt). Rotating the inner square 18° breaks the 8:8 habit (06-style).”</i></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SECTION 4: PIPELINE, SYMSPEC & RESEARCH ==================== -->
+<section class="sec">
+  <header>
+    <span class="eyebrow">The Architecture</span>
+    <h2>Stop hand-drawing coordinates. Compile visuals from a grounded spec.</h2>
+    <p>Instead of hand-baking coordinates and hex codes on every prompt, the foundry binds every visual mark to a verbatim transcript span, solves layout deterministically with real Chromium font metrics, layers 2.5D volumetric primitives across 4 depth planes, and verifies every pixel against an 8-gate harness (`H1–H8`).</p>
+  </header>
+  <div class="stages">
+    <div class="stage"><span class="n">1 · Ground</span><h3>Evidence spans</h3><p>Source adapters (Wispr, Krisp, briefs, course outlines) cut the material into short verbatim spans with stable ids. Agents work from the span index, not the raw transcript.</p><div class="from"><b>CoDA</b> schema and statistics, never raw rows</div></div>
+    <div class="stage"><span class="n">2 · Extract</span><h3>Concepts, relations, claims</h3><p>Actors, objects, quantities, outcomes and tensions, each citing spans. Claims carry a rhetoric: mechanism, choice, derivation, tension, union.</p><div class="from"><b>VIS-GEN</b> intent model · −14.6 pp without it</div></div>
+    <div class="stage"><span class="n">3 · Propose</span><h3>Three idioms per claim</h3><p>Structurally different metaphors, scored on fidelity, clarity, novelty, feasibility. Losers keep a written reason. This is where Milton's variants table lives.</p><div class="from"><b>VIS-GEN</b> 4 candidates + rubric · −5.8 pp with one</div></div>
+    <div class="stage"><span class="n">4 · Compose</span><h3>Layout tree with ports</h3><p>Boxes and flex weights only. A solver places everything with real font metrics; parents own every arrow that crosses a boundary.</p><div class="from"><b>FigTree</b> −2.11 without recursion, −1.35 without parent-owned edges</div></div>
+    <div class="stage"><span class="n">5 · Draw (2.5D)</span><h3>Volumetric glyph programs</h3><p>Leaves call parameterised 4-plane glyphs (`data-z="0..3"`, `data-seq="0..k"`): plinths, axonometric blocks, calipers, sculpted actors. Role tokens only, zero raw hex.</p><div class="from"><b>FigTree + Volumetric Pen</b> constrained SVG vocabulary</div></div>
+    <div class="stage"><span class="n">6 · Gate (H1–H8)</span><h3>Deterministic harness</h3><p>Refs, provenance of every printed number, vocabulary, Chromium-measured collisions &amp; spills, WCAG contrast, complexity floor, beat coverage, and Z-layer depth verification.</p><div class="from"><b>MultiVis-Agent</b> rule layer · +25 pp task success</div></div>
+    <div class="stage"><span class="n">7 · Critique</span><h3>Render-critic, anchored</h3><p>A fresh agent sees the 2× PNG, the spec and the source; returns typed fixes pinned to node ids. Local repair, gated by the same provenance check.</p><div class="from"><b>FigTree · SciFig · DataReel</b> 3 rounds is where gains flatten</div></div>
+    <div class="stage"><span class="n">8 · Skin</span><h3>Style record, injected last</h3><p>Palette, volumetric shadow/rim tokens, type roles, stroke widths and hand-wobble live in one record. Swapping it re-skins the entire film instantaneously.</p><div class="from"><b>PaperBanana</b> stylist re-gated by H5 contrast</div></div>
+    <div class="stage"><span class="n">9 · Direct</span><h3>Camera &amp; particle theatre</h3><p>Spring-damped viewBox camera framing, 2.5D perspective parallax, Bezier edge flow particles, WebAudio synthesis, and live parametric DOM re-compilation.</p><div class="from"><b>DataMagic · DataReel</b> narration-indexed choreography</div></div>
+  </div>
+</section>
+
+<section class="sec">
+  <header>
+    <span class="eyebrow">The Spec &amp; Verification Gates</span>
+    <h2>SymSpec &amp; H1–H8 Deterministic Harness</h2>
+    <p>Every span is verbatim; concepts and relations cite spans; claims carry rhetoric; candidates record why alternatives were rejected; layout leaves cite concepts; beats trigger by narration index.</p>
+  </header>
+  <details><summary>Inspect a slice of spec/tap.symspec.json</summary><pre>__SCHEMA__</pre></details>
+  <div class="two">
+    <div><h3>8 Binary Harness Checks (0 Errors · 0 Warnings)</h3><ul class="plain">
+      <li><b>H1 refs</b> — every id resolves; every leaf cites a concept, every edge cites a relation</li>
+      <li><b>H2 provenance</b> — quotes verbatim in source; every printed or spoken number grounded in cited spans, number words included</li>
+      <li><b>H3 vocabulary</b> — allow-listed tags only; zero <code>&lt;filter&gt;</code>, <code>&lt;image&gt;</code>, or raw hex outside the <code>&lt;style&gt;</code> block</li>
+      <li><b>H4 geometry</b> — text-text collisions, edge-through-text, canvas bounds, and leaf box spills measured in headless Chromium with real <code>@fontsource</code> fonts</li>
+      <li><b>H5 contrast</b> — WCAG contrast ratio $\ge 4.5:1$ per text role across all 3 style records (`milton-warm`, `deepmind-iridescent`, `ceti-night`)</li>
+      <li><b>H6 complexity floor</b> — balanced-tree minimum drawn elements per glyph so nothing gets “fixed” by deleting content</li>
+      <li><b>H7 beats</b> — every semantic claim (`k0–k5`) is revealed by at least one choreographed beat</li>
+      <li><b>H8 depth layering</b> — every volumetric glyph encodes $\ge 3$ distinct `data-z` planes (`Z0` plinths $\rightarrow$ `Z1` mechanisms $\rightarrow$ `Z2` actors $\rightarrow$ `Z3` callouts)</li>
+    </ul></div>
+    <div><h3>Why gating the critic matters</h3>
+      <div class="callout">
+        <span class="eyebrow">Key Verification Insight</span>
+        <p>Vision-language critics hallucinate too. During iteration, the critic twice proposed labels the transcript never supports (“mo 2 · 3 d/wk”, “12 months +”, “after · on call”). Because the deterministic provenance gate (`H2`) runs on every critic repair—not just the initial generator draft—all ungrounded critic suggestions were automatically rejected.</p>
+      </div>
+      <p>Similarly, Wispr Flow diarization labeled every turn “Victoria”, so the spec marks speaker attribution unreliable and visually frames the <code>8 : 2–4</code> ratio as an unattributed structural counterpoint.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <header>
+    <span class="eyebrow">Ecosystem Integration</span>
+    <h2>Four skills, one compiler layer underneath</h2>
+  </header>
+  <div class="tbl"><table>
+    <thead><tr><th>Skill</th><th>How it makes SVG today</th><th>What Glyph Foundry v7 gives it</th></tr></thead>
+    <tbody>
+      <tr><td>/milton</td><td>Hand-places primitives in 100×100 icons; 187 hardcoded hex literals; invents 2–3 idioms per run; validator only counts tags.</td><td>One geometry contract; queries the 2.5D glyph library before inventing; Milton's variants table becomes Stage 3, the review agent becomes Stage 7.</td></tr>
+      <tr><td>/editorial-dashboard</td><td>Maintains a forked copy of Milton's references and icon catalog.</td><td>Consumes <code>out/final/tap.glyphs.sprite.svg</code>; one verified source of truth instead of a fork.</td></tr>
+      <tr><td>/artifact-chain</td><td>Recovers SVG from client decks only; its <code>ADD_ICON</code> atom has no implementation.</td><td><code>ADD_ICON</code> calls the emitter: hex-resolved SVG (`tap.*.resolved.svg`) and 2× PNG (`2560×1440`), styled from <code>theme1.xml</code>.</td></tr>
+      <tr><td>/ceti-explainer</td><td>Builds every node with <code>el()</code> and hand-computed coordinates; estimates text width as <code>chars × size × 0.55</code>.</td><td>Beats, camera targets, Z-planes, and Bezier particle paths compile directly from <code>SymSpec</code> with real Chromium font metrics.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="sec">
+  <header>
+    <span class="eyebrow">Research Basis</span>
+    <h2>Foundational Papers Implemented</h2>
+  </header>
+  <div class="refs">
+    <div class="ref"><span class="id"><b>FigTree</b><a href="https://arxiv.org/abs/2609.01006" target="_blank" rel="noopener">2609.01006</a></span><span>Recursive layout tree, boundary ports, parent-owned edges, one global style record, render-critic with code anchors, 3-round local repair. 59.6 overall on PaperBananaBench vs 36.0 for PaperBanana.</span></div>
+    <div class="ref"><span class="id"><b>DataMagic</b><a href="https://arxiv.org/abs/2609.33403" target="_blank" rel="noopener">2609.33403</a></span><span>DVSpec with <code>target_data</code> semantic references and narration-index triggers; generate-then-orchestrate. Quality 2.13 → 3.89; editing time 39 → 8 min.</span></div>
+    <div class="ref"><span class="id"><b>VIS-GEN</b><a href="https://arxiv.org/abs/2609.26208" target="_blank" rel="noopener">2609.26208</a></span><span>Semantic intermediate representation that bans UI terms, parallel candidates, weighted critique. Claude Opus pass rate 41.5 → 57.4.</span></div>
+    <div class="ref"><span class="id"><b>CoDA</b><a href="https://arxiv.org/abs/2510.03194" target="_blank" rel="noopener">2510.03194</a></span><span>Metadata-only data agent, global TODO, visual evaluator routing issues upstream; max 3 iterations at θ 0.85.</span></div>
+    <div class="ref"><span class="id"><b>DataReel</b><a href="https://arxiv.org/abs/2604.25220" target="_blank" rel="noopener">2604.25220</a></span><span>Director, plan critic, coder, video critic with typed ADD / REMOVE / CHANGE / EDIT actions.</span></div>
+    <div class="ref"><span class="id"><b>SciFig</b><a href="https://arxiv.org/abs/2601.04390" target="_blank" rel="noopener">2601.04390</a></span><span>Plan, layout, components, feedback; deterministic overlap checks before the VLM; “prefer reposition over deletion”.</span></div>
+    <div class="ref"><span class="id"><b>PaperBanana</b><a href="https://arxiv.org/abs/2601.23265" target="_blank" rel="noopener">2601.23265</a></span><span>Style guide distilled from references; re-gating after styling prevents faithfulness loss.</span></div>
+    <div class="ref"><span class="id"><b>MultiVis-Agent</b><a href="https://arxiv.org/abs/2601.18320" target="_blank" rel="noopener">2601.18320</a></span><span>Rule layer that overrides the model: task success 74.5 → 99.6%.</span></div>
+    <div class="ref"><span class="id"><b>GVR-Coder</b><a href="https://arxiv.org/abs/2607.28073" target="_blank" rel="noopener">2607.28073</a></span><span>Meeting records to SVG logic diagrams with a generate-verify-repair loop; acceptance 66.6 → 95.9% within 3 rounds.</span></div>
+  </div>
+</section>
+
+</div>
+
+<script>
+const D = /*__DATA__*/null;
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+const stageVp = $('#stage-vp'), stage = $('#stage'), cap = $('#cap'), bn = $('#bn');
+const scrub = $('#scrub'), timeEl = $('#time'), beatProg = $('#beat-prog');
+const hudRhetoric = $('#hud-rhetoric'), hudCam = $('#hud-cam');
+
+let skin = 'milton-warm';
+let camMode = 'follow'; // 'follow' | 'tilt' | 'overview'
+let t = D.total;
+let playing = false;
+let speed = 1.0;
+let last = 0;
+let pinned = null;
+let voice = false;
+let sfxOn = true;
+let spoken = -1;
+let lastBeatIdx = -1;
+let zMask = {0: true, 1: true, 2: true, 3: true};
+let showBoxesOverlay = false;
+
+// Smooth Camera State (viewBox x, y, w, h)
+const W = D.canvas[0], H = D.canvas[1];
+let cam = {x: 0, y: 0, w: W, h: H};
+let targetCam = {x: 0, y: 0, w: W, h: H};
+let camAnimFrame = null;
+
+// Mouse Parallax State for 2.5D mode
+let tiltX = 0, tiltY = 0;
+
+const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+const ease = x => 1 - Math.pow(1 - Math.min(1, Math.max(0, x)), 3);
+const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+
+const first = {};
+D.beats.forEach(b => b.reveal.forEach(id => { if (!(id in first)) first[id] = b.start; }));
+const CLAIM_SHORT = {k0: 'why · union', k1: 'cohort · mechanism', k2: 'deploy · mechanism', k3: 'year end · choice', k4: 'money · derivation', k5: 'ratio · tension'};
+const BEAT_SHORT = ['1 · Why', '2 · Client 6–8', '3 · Match 50/50', '4 · Cohort 16', '5 · 8 Billable', '6 · Coach Taper', '7 · Year End', '8 · $400k Math', '9 · 8:8 vs 8:2–4'];
+
+// ==================== PROCEDURAL WEBAUDIO SYNTHESIZER ====================
+let audioCtx = null;
+const CHORDS = {
+  union: [261.63, 392.00, 523.25],       // C4, G4, C5 (open fifth union)
+  mechanism: [293.66, 369.99, 440.00],   // D4, F#4, A4 (warm marimba triad)
+  choice: [329.63, 415.30, 493.88],      // E4, G#4, B4 (bright fork)
+  derivation: [261.63, 329.63, 392.00, 493.88, 587.33], // Cmaj9 ($400,000 ingot chord)
+  tension: [293.66, 392.00, 440.00]      // Dsus4 (unresolved question)
+};
+
+function playBeatChime(rhetoric) {
+  if (!sfxOn) return;
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const freqs = CHORDS[rhetoric] || CHORDS.mechanism;
+    const now = audioCtx.currentTime;
+    freqs.forEach((f, idx) => {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = idx === 0 ? 'triangle' : 'sine';
+      osc.frequency.setValueAtTime(f, now + idx * 0.045);
+      gain.gain.setValueAtTime(0.0001, now + idx * 0.045);
+      gain.gain.exponentialRampToValueAtTime(0.038 / Math.sqrt(freqs.length), now + idx * 0.045 + 0.025);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.045 + 0.65);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now + idx * 0.045);
+      osc.stop(now + idx * 0.045 + 0.7);
+    });
+  } catch (e) {}
+}
+
+// ==================== CAMERA DIRECTOR & VIEWBOX SOLVER ====================
+function computeTargetCamera(b) {
+  if (camMode !== 'follow') {
+    return {x: 0, y: 0, w: W, h: H};
+  }
+  const focusIds = new Set();
+  if (pinned && D.boxes[pinned]) {
+    focusIds.add(pinned);
+  } else if (b) {
+    b.reveal.forEach(id => {
+      if (D.boxes[id]) focusIds.add(id);
+    });
+    stage.querySelectorAll('g.leaf').forEach(g => {
+      const id = g.id.slice(2);
+      if (b.emphasis.includes(g.dataset.concept) && D.boxes[id]) focusIds.add(id);
+    });
+    // Also include endpoints of active edges so the camera frames full transitions
+    b.reveal.forEach(id => {
+      if (D.edges_map && D.edges_map[id]) {
+        const [a, bNode] = D.edges_map[id];
+        if (D.boxes[a]) focusIds.add(a);
+        if (D.boxes[bNode]) focusIds.add(bNode);
+      }
+    });
+  }
+  if (focusIds.size === 0) {
+    return {x: 0, y: 0, w: W, h: H};
+  }
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  focusIds.forEach(id => {
+    const bx = D.boxes[id];
+    if (!bx) return;
+    x0 = Math.min(x0, bx[0]);
+    y0 = Math.min(y0, bx[1]);
+    x1 = Math.max(x1, bx[0] + bx[2]);
+    y1 = Math.max(y1, bx[1] + bx[3]);
+  });
+  // Include header on beat 1 (venn) so the title + venn frame together cleanly
+  if (focusIds.size === 1 && focusIds.has('venn') && D.boxes['title']) {
+    x0 = Math.min(x0, D.boxes['title'][0]);
+    y0 = Math.min(y0, D.boxes['title'][1]);
+  }
+  const padX = 76, padY = 64;
+  let bw = Math.max(580, (x1 - x0) + padX * 2);
+  let bh = Math.max(326, (y1 - y0) + padY * 2);
+  const aspect = W / H;
+  if (bw / bh > aspect) {
+    bh = bw / aspect;
+  } else {
+    bw = bh * aspect;
+  }
+  if (bw >= W * 0.94) {
+    return {x: 0, y: 0, w: W, h: H};
+  }
+  const cx = (x0 + x1) / 2;
+  const cy = (y0 + y1) / 2;
+  const tx = clamp(cx - bw / 2, 0, W - bw);
+  const ty = clamp(cy - bh / 2, 0, H - bh);
+  return {x: tx, y: ty, w: bw, h: bh};
+}
+
+function stepCamera() {
+  const svg = stage.querySelector('svg');
+  if (!svg) return;
+  const dx = targetCam.x - cam.x;
+  const dy = targetCam.y - cam.y;
+  const dw = targetCam.w - cam.w;
+  const dh = targetCam.h - cam.h;
+  if (Math.abs(dx) < 0.25 && Math.abs(dy) < 0.25 && Math.abs(dw) < 0.25 && Math.abs(dh) < 0.25) {
+    cam = {...targetCam};
+    svg.setAttribute('viewBox', `${cam.x.toFixed(1)} ${cam.y.toFixed(1)} ${cam.w.toFixed(1)} ${cam.h.toFixed(1)}`);
+    const zoom = (W / cam.w).toFixed(2);
+    hudCam.textContent = `CAM ${zoom}× · ${Math.round(cam.w)}×${Math.round(cam.h)}`;
+    camAnimFrame = null;
+    return;
+  }
+  const k = 0.14;
+  cam.x += dx * k;
+  cam.y += dy * k;
+  cam.w += dw * k;
+  cam.h += dh * k;
+  svg.setAttribute('viewBox', `${cam.x.toFixed(1)} ${cam.y.toFixed(1)} ${cam.w.toFixed(1)} ${cam.h.toFixed(1)}`);
+  const zoom = (W / cam.w).toFixed(2);
+  hudCam.textContent = `CAM ${zoom}× · ${Math.round(cam.w)}×${Math.round(cam.h)}`;
+  camAnimFrame = requestAnimationFrame(stepCamera);
+}
+
+function updateCameraTarget(b) {
+  targetCam = computeTargetCamera(b);
+  if (!camAnimFrame) camAnimFrame = requestAnimationFrame(stepCamera);
+}
+
+// ==================== STAGE MOUNT & OVERLAYS ====================
+function mount() {
+  stageVp.dataset.skin = skin;
+  stageVp.dataset.cam = camMode;
+  stage.innerHTML = D.svgs[skin];
+  const svg = stage.querySelector('svg');
+
+  // Create Flow Particle Overlay Group & X-Ray Solver Box Overlay Group
+  const ns = 'http://www.w3.org/2000/svg';
+  const flowG = document.createElementNS(ns, 'g');
+  flowG.setAttribute('id', 'flow-particles');
+  flowG.setAttribute('pointer-events', 'none');
+  svg.appendChild(flowG);
+
+  const xrayG = document.createElementNS(ns, 'g');
+  xrayG.setAttribute('id', 'xray-overlay');
+  xrayG.setAttribute('pointer-events', 'none');
+  svg.appendChild(xrayG);
+  buildXrayOverlay(xrayG);
+
+  stage.querySelectorAll('g.leaf').forEach(g => {
+    g.setAttribute('tabindex', '0');
+    g.setAttribute('role', 'button');
+    const id = g.id.slice(2);
+    const pick = () => {
+      pinned = pinned === id ? null : id;
+      showEvidence(beatAt(t));
+      updateCameraTarget(beatAt(t));
+      render(t);
+    };
+    g.addEventListener('click', pick);
+    g.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); }
+    });
+  });
+
+  stage.querySelectorAll('g.edge path.edge-path, g.edge path.edge-bed').forEach(p => {
+    p.style.strokeDasharray = '1';
+  });
+
+  applyZMask();
+  applySimToStage();
+  svg.setAttribute('viewBox', `${cam.x.toFixed(1)} ${cam.y.toFixed(1)} ${cam.w.toFixed(1)} ${cam.h.toFixed(1)}`);
+  render(t);
+}
+
+function buildXrayOverlay(xrayG) {
+  const ns = 'http://www.w3.org/2000/svg';
+  xrayG.innerHTML = '';
+  if (!showBoxesOverlay) return;
+  Object.entries(D.boxes).forEach(([id, [bx, by, bw, bh]]) => {
+    if (!['venn','client','hires','gate','cohort','contract','taper','fork','math','ratio','title'].includes(id)) return;
+    const r = document.createElementNS(ns, 'rect');
+    r.setAttribute('x', bx); r.setAttribute('y', by);
+    r.setAttribute('width', bw); r.setAttribute('height', bh);
+    r.setAttribute('fill', 'none');
+    r.setAttribute('stroke', '#38D2C8');
+    r.setAttribute('stroke-width', '1');
+    r.setAttribute('stroke-dasharray', '4 3');
+    xrayG.appendChild(r);
+
+    const lbl = document.createElementNS(ns, 'text');
+    lbl.setAttribute('x', bx + 4); lbl.setAttribute('y', by + 11);
+    lbl.setAttribute('fill', '#38D2C8');
+    lbl.setAttribute('style', 'font: 600 9.5px JetBrains Mono, monospace');
+    lbl.textContent = `${id} (${Math.round(bw)}×${Math.round(bh)})`;
+    xrayG.appendChild(lbl);
+  });
+  Object.entries(D.ports || {}).forEach(([id, pmap]) => {
+    Object.entries(pmap).forEach(([side, [px, py]]) => {
+      const c = document.createElementNS(ns, 'circle');
+      c.setAttribute('cx', px); c.setAttribute('cy', py); c.setAttribute('r', '3.2');
+      c.setAttribute('fill', '#FF6E5B');
+      xrayG.appendChild(c);
+    });
+  });
+}
+
+function applyZMask() {
+  stage.querySelectorAll('g.z-layer').forEach(zl => {
+    const z = zl.getAttribute('data-z');
+    zl.style.display = zMask[z] ? '' : 'none';
+  });
+  const xrayG = stage.querySelector('#xray-overlay');
+  if (xrayG) buildXrayOverlay(xrayG);
+}
+
+// ==================== RENDER LOOP (CHOREOGRAPHY + FLOW PARTICLES + TELEPROMPTER) ====================
+function beatAt(x) { return D.beats.find(b => x >= b.start && x < b.end) || null; }
+
+function render(x) {
+  const b = beatAt(x);
+  const bIdx = b ? D.beats.indexOf(b) : -1;
+  if (bIdx !== lastBeatIdx) {
+    lastBeatIdx = bIdx;
+    updateCameraTarget(b);
+    if (playing && b) {
+      const claimObj = D.claims_full[b.claim];
+      playBeatChime(claimObj ? claimObj.rhetoric : 'mechanism');
+    }
+  }
+
+  const emph = new Set();
+  if (b) {
+    b.reveal.forEach(id => emph.add(id));
+    stage.querySelectorAll('g.leaf').forEach(g => {
+      if (b.emphasis.includes(g.dataset.concept)) emph.add(g.id.slice(2));
+    });
+  }
+  if (pinned) emph.add(pinned);
+
+  // Leaf & Sub-Glyph Staged Choreography
+  stage.querySelectorAll('g.leaf').forEach(g => {
+    const id = g.id.slice(2), s = first[id];
+    const vis = s === undefined ? 1 : ease((x - s) / 0.72);
+    const isEmph = !b && !pinned ? true : emph.has(id);
+    const dim = isEmph ? 1 : 0.28;
+    g.style.opacity = (vis * dim).toFixed(3);
+
+    // Sub-layer staged entry (data-seq)
+    g.querySelectorAll('g.z-layer').forEach(zl => {
+      const seq = parseInt(zl.getAttribute('data-seq') || '0', 10);
+      const z = parseInt(zl.getAttribute('data-z') || '1', 10);
+      const subVis = s === undefined ? 1 : ease((x - s - seq * 0.11) / 0.48);
+      const liftY = (1 - subVis) * 8;
+      const px = camMode === 'tilt' ? tiltX * (z - 1) * 5.5 : 0;
+      const py = camMode === 'tilt' ? tiltY * (z - 1) * 5.5 : 0;
+      zl.style.opacity = subVis.toFixed(3);
+      zl.style.transform = `translate(${px.toFixed(1)}px, ${(liftY + py).toFixed(1)}px)`;
+    });
+  });
+
+  // Edges & Live Bezier Flow Particles
+  const flowG = stage.querySelector('#flow-particles');
+  if (flowG) flowG.innerHTML = '';
+  const ns = 'http://www.w3.org/2000/svg';
+
+  stage.querySelectorAll('g.edge').forEach(g => {
+    const id = g.id.slice(2), s = first[id];
+    const k = s === undefined ? 1 : ease((x - s) / 0.85);
+    const p = g.querySelector('path.edge-path');
+    const bed = g.querySelector('path.edge-bed');
+    if (p) p.style.strokeDashoffset = (1 - k).toFixed(3);
+    if (bed) bed.style.strokeDashoffset = (1 - k).toFixed(3);
+    const lab = g.querySelector('text');
+    if (lab) lab.style.opacity = k.toFixed(3);
+    const isEdgeActive = (!b && !pinned) || emph.has(id);
+    g.style.opacity = isEdgeActive ? 1 : 0.25;
+
+    // Spawn luminous flow particles along active revealed edges
+    if (flowG && p && k > 0.65 && isEdgeActive) {
+      try {
+        const len = p.getTotalLength();
+        if (len > 10) {
+          for (let i = 0; i < 2; i++) {
+            const u = ((performance.now() * 0.00042 + i * 0.5) % 1);
+            if (u <= k) {
+              const pt = p.getPointAtLength(u * len);
+              const dot = document.createElementNS(ns, 'circle');
+              dot.setAttribute('cx', pt.x.toFixed(1));
+              dot.setAttribute('cy', pt.y.toFixed(1));
+              dot.setAttribute('r', b ? '3.6' : '2.8');
+              dot.setAttribute('style', 'fill:var(--accent);stroke:var(--elev);stroke-width:1.2px');
+              flowG.appendChild(dot);
+            }
+          }
+        }
+      } catch (e) {}
+    }
+  });
+
+  // HUD & Word-Synchronized Teleprompter
+  if (b) {
+    bn.textContent = b.id.toUpperCase();
+    const claimObj = D.claims_full[b.claim];
+    hudRhetoric.textContent = `${b.id.toUpperCase()} · ${(claimObj ? claimObj.rhetoric : 'SCENE').toUpperCase()}`;
+    const frac = clamp((x - b.start) / Math.max(0.1, b.end - b.start), 0, 1);
+    beatProg.style.width = `${(frac * 100).toFixed(1)}%`;
+    const words = b.caption.split(/\s+/);
+    const activeW = Math.floor(frac * words.length);
+    cap.innerHTML = words.map((w, idx) => {
+      const cls = idx < activeW ? 'w-tok spoken' : (idx === activeW ? 'w-tok now' : 'w-tok future');
+      return `<span class="${cls}">${w}</span>`;
+    }).join(' ');
+  } else {
+    bn.textContent = pinned ? pinned.toUpperCase() : 'ALL';
+    hudRhetoric.textContent = pinned ? `PINNED · ${pinned.toUpperCase()}` : 'MASTER OVERVIEW';
+    beatProg.style.width = '100%';
+    cap.textContent = 'Full TAP Volumetric Architecture (v7). Press Play for the camera-directed walkthrough, drag the 2.5D stage, or click any glyph to inspect its verbatim transcript proof.';
+  }
+
+  $$('.chip').forEach(c => c.classList.toggle('on', (b && c.dataset.b === b.id) || (!b && c.dataset.b === 'all')));
+  scrub.value = Math.round(x / D.total * 1000);
+  timeEl.textContent = `${fmt(Math.min(x, D.total))} / ${fmt(D.total)}`;
+  showEvidence(b);
+
+  if (playing && voice && b && D.beats.indexOf(b) !== spoken) {
+    spoken = D.beats.indexOf(b);
+    try {
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(b.caption);
+      u.rate = 1.04 * speed;
+      speechSynthesis.speak(u);
+    } catch (e) {}
+  }
+}
+
+// ==================== SIDEBAR: EVIDENCE, CANDIDATE IDIOMS & FULL TRANSCRIPT ====================
+function showEvidence(b) {
+  const eyebrow = $('#ev-eyebrow'), title = $('#ev-title'), claimWrap = $('#ev-claim-wrap');
+  const body = $('#ev-body'), candBox = $('#ev-candidates');
+  let ids = [], head = '', claimId = null;
+
+  if (pinned && D.evidence[pinned]) {
+    const ev = D.evidence[pinned];
+    eyebrow.textContent = `Pinned Glyph · #n-${pinned}`;
+    head = ev.label;
+    ids = ev.spans;
+    claimId = ev.claim;
+  } else if (b) {
+    const idx = D.beats.indexOf(b) + 1;
+    eyebrow.textContent = `Beat ${idx} of ${D.beats.length} · ${fmt(b.start)}–${fmt(b.end)}`;
+    head = (CLAIM_SHORT[b.claim] || b.id).toUpperCase();
+    ids = b.spans;
+    claimId = b.claim;
+  } else {
+    eyebrow.textContent = 'Complete Figure Overview · 15 Spans';
+    title.textContent = 'Click any glyph or play the film';
+    claimWrap.innerHTML = `<div class="claim-box"><span class="cid">Zero Unverified Marks</span><span>Every number, arrow, and label on the stage is bound to a verbatim span from the Oct 9 TAP call.</span></div>`;
+    body.innerHTML = '';
+    ['S2','S5','S7','S12','S14'].forEach(sid => {
+      if (D.spans[sid]) body.appendChild(makeQuoteEl(sid, false));
+    });
+    candBox.innerHTML = '';
+    highlightTranscriptSpans([]);
+    return;
+  }
+
+  title.textContent = head;
+  claimWrap.innerHTML = '';
+  if (claimId && D.claims_full[claimId]) {
+    const cObj = D.claims_full[claimId];
+    claimWrap.innerHTML = `<div class="claim-box"><span class="cid">Claim ${claimId} · Rhetoric: ${cObj.rhetoric}</span><span>${cObj.statement}</span></div>`;
+  }
+
+  body.innerHTML = '';
+  ids.forEach(id => body.appendChild(makeQuoteEl(id, true)));
+
+  // Show winning vs rejected visual candidates + Milton Poetic <desc> for this claim
+  candBox.innerHTML = '';
+  let activeNodeKey = pinned || (b && b.focus && b.focus.length ? b.focus[0] : null);
+  let poeticDesc = '';
+  if (activeNodeKey) {
+    const descEl = document.querySelector(`#fig #n-${activeNodeKey} > desc`);
+    if (descEl) poeticDesc = descEl.textContent;
+  }
+  if (claimId && D.candidates_by_claim[claimId]) {
+    const cands = D.candidates_by_claim[claimId];
+    const win = cands.find(c => !c.rejected);
+    const rejs = cands.filter(c => c.rejected);
+    if (win) {
+      let html = `<div class="candidate-mini"><span class="win">✓ Selected Idiom: ${win.idiom}</span><span>${win.encoding}</span>`;
+      if (poeticDesc) {
+        html += `<span style="display:block;margin-top:6px;padding-top:6px;border-top:1px dashed var(--rule);color:var(--ink);font-style:italic">✦ <b>Milton Poetic &lt;desc&gt;:</b> “${poeticDesc}”</span>`;
+      }
+      rejs.forEach(r => {
+        html += `<span class="rej">✗ Rejected (${r.idiom}): ${r.rejected}</span>`;
+      });
+      html += `</div>`;
+      candBox.innerHTML = html;
+    }
+  }
+  highlightTranscriptSpans(ids);
+}
+
+function makeQuoteEl(sid, isActive) {
+  const q = document.createElement('div');
+  q.className = 'quote' + (isActive ? ' active-span' : '');
+  const s = document.createElement('span');
+  s.className = 'sid';
+  s.innerHTML = `<span>span ${sid}</span><span>Jump to beat ↗</span>`;
+  q.appendChild(s);
+  q.appendChild(document.createTextNode('“' + D.spans[sid] + '”'));
+  q.addEventListener('click', () => jumpToSpan(sid));
+  return q;
+}
+
+function buildFullTranscript() {
+  const list = $('#transcript-list');
+  list.innerHTML = '';
+  Object.keys(D.spans).forEach(sid => {
+    const el = makeQuoteEl(sid, false);
+    el.dataset.sid = sid;
+    list.appendChild(el);
+  });
+}
+
+function highlightTranscriptSpans(activeIds) {
+  const set = new Set(activeIds);
+  $$('#transcript-list .quote').forEach(el => {
+    el.classList.toggle('active-span', set.has(el.dataset.sid));
+  });
+}
+
+function jumpToSpan(sid) {
+  const targetBeat = D.beats.find(b => b.spans.includes(sid));
+  if (targetBeat) {
+    pinned = null;
+    t = Math.min(targetBeat.end - 0.15, targetBeat.start + 1.4);
+    spoken = -1;
+    render(t);
+  }
+}
+
+// ==================== TRANSPORT, CAMERA & 2.5D PARALLAX EVENTS ====================
+function tick(now) {
+  if (!playing) return;
+  const dt = ((now - last) / 1000) * speed;
+  last = now;
+  t += dt;
+  if (t >= D.total) {
+    t = D.total;
+    setPlaying(false);
+  }
+  render(t);
+  if (playing) requestAnimationFrame(tick);
+}
+
+function setPlaying(on) {
+  playing = on;
+  const btn = $('#play');
+  btn.textContent = on ? '⏸ Pause' : '▶ Play';
+  btn.setAttribute('aria-pressed', String(on));
+  if (on) {
+    pinned = null;
+    if (t >= D.total - 0.08) { t = 0; spoken = -1; lastBeatIdx = -1; }
+    last = performance.now();
+    requestAnimationFrame(tick);
+  } else {
+    try { speechSynthesis.cancel(); } catch (e) {}
+  }
+}
+
+$('#play').addEventListener('click', () => setPlaying(!playing));
+$('#prev-beat').addEventListener('click', () => {
+  const cur = beatAt(t);
+  const idx = cur ? Math.max(0, D.beats.indexOf(cur) - 1) : D.beats.length - 1;
+  pinned = null; t = Math.min(D.beats[idx].end - 0.15, D.beats[idx].start + 1.4); spoken = -1; render(t);
+});
+$('#next-beat').addEventListener('click', () => {
+  const cur = beatAt(t);
+  if (!cur) { pinned = null; t = Math.min(D.beats[0].end - 0.15, D.beats[0].start + 1.4); spoken = -1; render(t); return; }
+  const idx = D.beats.indexOf(cur) + 1;
+  pinned = null;
+  t = idx < D.beats.length ? Math.min(D.beats[idx].end - 0.15, D.beats[idx].start + 1.4) : D.total;
+  spoken = -1; render(t);
+});
+
+scrub.addEventListener('input', () => {
+  t = scrub.value / 1000 * D.total;
+  spoken = -1;
+  render(t);
+});
+
+$$('.spd').forEach(btn => {
+  btn.addEventListener('click', () => {
+    speed = parseFloat(btn.dataset.spd);
+    $$('.spd').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+  });
+});
+
+function setSkin(s) {
+  skin = s;
+  $('#sk-warm').setAttribute('aria-pressed', String(s === 'milton-warm'));
+  $('#sk-irid').setAttribute('aria-pressed', String(s === 'deepmind-iridescent'));
+  $('#sk-night').setAttribute('aria-pressed', String(s === 'ceti-night'));
+  mount();
+}
+$('#sk-warm').addEventListener('click', () => setSkin('milton-warm'));
+$('#sk-irid').addEventListener('click', () => setSkin('deepmind-iridescent'));
+$('#sk-night').addEventListener('click', () => setSkin('ceti-night'));
+
+function setCamMode(m) {
+  camMode = m;
+  stageVp.dataset.cam = m;
+  $('#cam-follow').setAttribute('aria-pressed', String(m === 'follow'));
+  $('#cam-tilt').setAttribute('aria-pressed', String(m === 'tilt'));
+  $('#cam-overview').setAttribute('aria-pressed', String(m === 'overview'));
+  if (m !== 'tilt') {
+    tiltX = 0; tiltY = 0;
+    stage.style.transform = '';
+  }
+  updateCameraTarget(beatAt(t));
+  render(t);
+}
+$('#cam-follow').addEventListener('click', () => setCamMode('follow'));
+$('#cam-tilt').addEventListener('click', () => setCamMode('tilt'));
+$('#cam-overview').addEventListener('click', () => setCamMode('overview'));
+
+// 2.5D Interactive Parallax Mouse Handler
+stageVp.addEventListener('mousemove', e => {
+  if (camMode !== 'tilt') return;
+  const r = stageVp.getBoundingClientRect();
+  const nx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+  const ny = ((e.clientY - r.top) / r.height - 0.5) * 2;
+  tiltX = nx;
+  tiltY = ny;
+  stage.style.transform = `rotateY(${(nx * 7.5).toFixed(2)}deg) rotateX(${(-ny * 6.0).toFixed(2)}deg) scale(0.97)`;
+  render(t);
+});
+stageVp.addEventListener('mouseleave', () => {
+  if (camMode !== 'tilt') return;
+  tiltX = 0; tiltY = 0;
+  stage.style.transform = '';
+  render(t);
+});
+
+$('#sfx-btn').addEventListener('click', e => {
+  sfxOn = !sfxOn;
+  e.currentTarget.setAttribute('aria-pressed', String(sfxOn));
+});
+$('#voice').addEventListener('click', e => {
+  voice = !voice;
+  e.currentTarget.setAttribute('aria-pressed', String(voice));
+  if (!voice) { try { speechSynthesis.cancel(); } catch (er) {} }
+});
+
+// Z-Layer X-Ray Toggles
+$$('.xray-pill[data-z]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const z = btn.dataset.z;
+    zMask[z] = !zMask[z];
+    btn.setAttribute('aria-pressed', String(zMask[z]));
+    applyZMask();
+  });
+});
+$('#xray-boxes').addEventListener('click', e => {
+  showBoxesOverlay = !showBoxesOverlay;
+  e.currentTarget.setAttribute('aria-pressed', String(showBoxesOverlay));
+  applyZMask();
+});
+
+// Sidebar Tabs
+$('#tab-btn-ev').addEventListener('click', () => {
+  $('#tab-btn-ev').setAttribute('aria-selected', 'true');
+  $('#tab-btn-tr').setAttribute('aria-selected', 'false');
+  $('#pane-ev').hidden = false;
+  $('#pane-tr').hidden = true;
+});
+$('#tab-btn-tr').addEventListener('click', () => {
+  $('#tab-btn-tr').setAttribute('aria-selected', 'true');
+  $('#tab-btn-ev').setAttribute('aria-selected', 'false');
+  $('#pane-tr').hidden = false;
+  $('#pane-ev').hidden = true;
+});
+
+// Theme Toggle
+$('#theme-btn').addEventListener('click', e => {
+  const root = document.documentElement;
+  const isDark = root.getAttribute('data-theme') === 'dark';
+  root.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  e.currentTarget.setAttribute('aria-pressed', String(!isDark));
+});
+
+// Build Beat Chips & Scrubber Ticks
+const chips = $('#chips');
+D.beats.forEach((b, i) => {
+  const c = document.createElement('button');
+  c.className = 'chip';
+  c.dataset.b = b.id;
+  c.textContent = BEAT_SHORT[i];
+  c.addEventListener('click', () => {
+    pinned = null;
+    t = Math.min(b.end - 0.15, b.start + 1.4);
+    spoken = -1;
+    render(t);
+  });
+  chips.appendChild(c);
+});
+const allChip = document.createElement('button');
+allChip.className = 'chip on';
+allChip.dataset.b = 'all';
+allChip.textContent = '0 · Full Overview';
+allChip.addEventListener('click', () => {
+  setPlaying(false);
+  pinned = null;
+  t = D.total;
+  spoken = -1;
+  render(t);
+});
+chips.appendChild(allChip);
+
+const scrubTicks = $('#scrub-ticks');
+D.beats.forEach((b, i) => {
+  const sp = document.createElement('span');
+  sp.textContent = `b${i+1}`;
+  scrubTicks.appendChild(sp);
+});
+
+// Focus Glyph Buttons in Semiotic Catalog
+$$('.focus-glyph').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const gid = btn.dataset.gid;
+    const bIdx = parseInt(btn.dataset.beat, 10);
+    pinned = gid;
+    if (D.beats[bIdx]) t = Math.min(D.beats[bIdx].end - 0.15, D.beats[bIdx].start + 1.4);
+    stageVp.scrollIntoView({behavior: 'smooth', block: 'center'});
+    updateCameraTarget(beatAt(t));
+    render(t);
+  });
+});
+
+// Keyboard Shortcuts
+window.addEventListener('keydown', e => {
+  if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
+  if (e.code === 'Space') { e.preventDefault(); setPlaying(!playing); }
+  else if (e.code === 'ArrowRight') { e.preventDefault(); $('#next-beat').click(); }
+  else if (e.code === 'ArrowLeft') { e.preventDefault(); $('#prev-beat').click(); }
+  else if (e.key >= '1' && e.key <= '9') {
+    const idx = parseInt(e.key, 10) - 1;
+    if (D.beats[idx]) { pinned = null; t = Math.min(D.beats[idx].end - 0.15, D.beats[idx].start + 1.4); render(t); }
+  } else if (e.key === '0') {
+    allChip.click();
+  }
+});
+
+// ==================== INTERACTIVE WHAT-IF SIMULATOR & LIVE SVG PATCHER ====================
+const simInputs = ['sim-client', 'sim-pursuit', 'sim-margin', 'sim-hours', 'sim-weeks', 'sim-cohorts'];
+function getSimState() {
+  return {
+    client: parseInt($('#sim-client').value, 10),
+    pursuit: parseInt($('#sim-pursuit').value, 10),
+    margin: parseInt($('#sim-margin').value, 10),
+    hours: parseInt($('#sim-hours').value, 10),
+    weeks: parseInt($('#sim-weeks').value, 10),
+    cohorts: parseInt($('#sim-cohorts').value, 10)
+  };
+}
+
+function updateSimulator() {
+  const s = getSimState();
+  const cohortProfit = s.margin * s.hours * s.client * s.weeks;
+  const annualProfit = cohortProfit * s.cohorts;
+  const totalTrained = s.client + s.pursuit;
+  const billablePct = Math.round((s.client / totalTrained) * 100);
+  const diffPct = Math.round(((cohortProfit - 400000) / 400000) * 100);
+
+  $('#lbl-sim-client').textContent = `${s.client} people`;
+  $('#lbl-sim-pursuit').textContent = `${s.pursuit} (${s.pursuit === s.client ? '50/50 parity' : s.client + ':' + s.pursuit + ' catalyst'})`;
+  $('#lbl-sim-margin').textContent = `$${s.margin}/h`;
+  $('#lbl-sim-hours').textContent = `${s.hours} h/wk`;
+  $('#lbl-sim-weeks').textContent = `${s.weeks} wk`;
+  $('#lbl-sim-cohorts').textContent = `${s.cohorts} / yr`;
+
+  $('#kpi-cohort-profit').textContent = `$${cohortProfit.toLocaleString()}`;
+  $('#kpi-cohort-sub').textContent = `Baseline: $400,000 (${diffPct >= 0 ? '+' : ''}${diffPct}%)`;
+  $('#kpi-annual-profit').textContent = `$${annualProfit.toLocaleString()}`;
+  $('#kpi-annual-sub').textContent = `Across ${s.cohorts} cohort${s.cohorts > 1 ? 's' : ''} / year`;
+  $('#kpi-total-trained').textContent = `${totalTrained} engineers`;
+  $('#kpi-ratio-sub').textContent = `${s.client} client : ${s.pursuit} Pursuit (${(s.pursuit / s.client).toFixed(2)}× match)`;
+  $('#kpi-efficiency').textContent = `${billablePct}% billable`;
+  $('#kpi-eff-sub').textContent = s.pursuit <= 4 ? '✓ Catalyst pod target (2–4 reserve)' : '⚠ High unbilled reserve overhead';
+  $('#sim-live-eq').textContent = `$${s.margin}/h × ${s.hours} h/wk × ${s.client} people × ${s.weeks} wk = $${cohortProfit.toLocaleString()}`;
+
+  applySimToStage();
+}
+
+function applySimToStage() {
+  const svg = stage.querySelector('svg');
+  if (!svg) return;
+  const s = getSimState();
+  const cohortProfit = s.margin * s.hours * s.client * s.weeks;
+  const totalTrained = s.client + s.pursuit;
+
+  // Live-patch equation glyph (#n-math) term labels & result without touching operator badges
+  const t0 = svg.querySelector('#n-math .eq-term-0 text.t-num');
+  const t1 = svg.querySelector('#n-math .eq-term-1 text.t-num');
+  const t2 = svg.querySelector('#n-math .eq-term-2 text.t-num');
+  const t3 = svg.querySelector('#n-math .eq-term-3 text.t-num');
+  const tRes = svg.querySelector('#n-math .eq-result text.t-num');
+  if (t0) t0.textContent = `$${s.margin}/h margin`;
+  if (t1) t1.textContent = `${s.hours} h/wk`;
+  if (t2) t2.textContent = `${s.client} people`;
+  if (t3) t3.textContent = `${s.weeks} wk`;
+  if (tRes) tRes.textContent = `$${cohortProfit.toLocaleString()}`;
+  const eqHand = svg.querySelector('#n-math text.t-hand');
+  if (eqHand) {
+    eqHand.textContent = `— profit per cohort · could run ${s.cohorts} a year —`;
+  }
+  // Live-patch cohort, contract & balance (#n-ratio) captions
+  const cohortCap = svg.querySelector('#n-cohort text.caption');
+  if (cohortCap) cohortCap.textContent = `${totalTrained} trained together, no cost to the client`;
+  const contractCap = svg.querySelector('#n-contract text.caption');
+  if (contractCap) contractCap.textContent = `${s.client} billable · ${s.hours} h/wk`;
+  const balHands = svg.querySelectorAll('#n-ratio text.t-hand');
+  if (balHands.length >= 1) {
+    balHands[0].textContent = s.pursuit >= s.client ? `${s.client} : ${s.pursuit} too much?` : `${s.client} : ${s.pursuit} catalyst!`;
+  }
+}
+
+simInputs.forEach(id => {
+  $('#' + id).addEventListener('input', updateSimulator);
+});
+$('#sim-preset-catalyst').addEventListener('click', () => {
+  $('#sim-client').value = 8;
+  $('#sim-pursuit').value = 3;
+  $('#sim-margin').value = 25;
+  $('#sim-hours').value = 40;
+  $('#sim-weeks').value = 50;
+  $('#sim-cohorts').value = 10;
+  updateSimulator();
+});
+$('#sim-reset').addEventListener('click', () => {
+  $('#sim-client').value = 8;
+  $('#sim-pursuit').value = 8;
+  $('#sim-margin').value = 25;
+  $('#sim-hours').value = 40;
+  $('#sim-weeks').value = 50;
+  $('#sim-cohorts').value = 10;
+  updateSimulator();
+});
+
+// ==================== BEFORE / AFTER CURTAIN STUDIO ====================
+const PLATES = {
+  v4_warm: {src: '__V4_WARM__', label: 'v4 · Milton Warm Baseline (0 err · 1 spill warn · flat 2D)'},
+  v4_night: {src: '__V4_NIGHT__', label: 'v4 · CETI Night Baseline (0 err · 1 spill warn · flat 2D)'},
+  v5: {src: '__V5__', label: 'v5 · Volumetric Pass 1 (2.5D plinths + actors · 0 spill)'},
+  v6: {src: '__V6__', label: 'v6 · Semiotic Pass 2 (Catalyst cell + 1D–4D equation)'},
+  v7_warm: {src: '__V7_WARM__', label: 'v7 · Milton Warm Volumetric (0 err · 0 warn · 4 Z-planes)'},
+  v7_irid: {src: '__V7_IRID__', label: 'v7 · DeepMind Iridescent Volumetric (0 err · 0 warn)'},
+  v7_night: {src: '__V7_NIGHT__', label: 'v7 · CETI Night Volumetric (0 err · 0 warn)'},
+  v8_warm: {src: '__V8_WARM__', label: 'v8 · Milton Poetic Synthesis — Warm (12 Glaser Moves · 0 err · 0 warn)'},
+  v8_irid: {src: '__V8_IRID__', label: 'v8 · Milton Poetic Synthesis — DeepMind Iridescent (0 err · 0 warn)'},
+  v8_night: {src: '__V8_NIGHT__', label: 'v8 · Milton Poetic Synthesis — CETI Night (0 err · 0 warn)'}
+};
+
+const curtainSlider = $('#curtain-slider');
+const curtainTop = $('#curtain-top'), curtainBot = $('#curtain-bot');
+const curtainHandle = $('#curtain-handle');
+const curtainTagLeft = $('#curtain-tag-left'), curtainTagRight = $('#curtain-tag-right');
+
+curtainSlider.addEventListener('input', () => {
+  const v = curtainSlider.value;
+  curtainTop.style.clipPath = `inset(0 0 0 ${v}%)`;
+  curtainHandle.style.left = `${v}%`;
+});
+
+$$('.cmp-left').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const k = btn.dataset.img;
+    curtainBot.src = PLATES[k].src;
+    curtainTagLeft.textContent = PLATES[k].label;
+    $$('.cmp-left').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+  });
+});
+$$('.cmp-right').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const k = btn.dataset.img;
+    curtainTop.src = PLATES[k].src;
+    curtainTagRight.textContent = PLATES[k].label;
+    $$('.cmp-right').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+  });
+});
+
+if (!('speechSynthesis' in window)) $('#voice').hidden = true;
+buildFullTranscript();
+mount();
+</script>
+</body>
+</html>
