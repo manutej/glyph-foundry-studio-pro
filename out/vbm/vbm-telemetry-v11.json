@@ -1,0 +1,515 @@
+{
+  "tag": "v11",
+  "timestamp": "2026-10-17T14:35:47.008Z",
+  "assertions": {
+    "singleActivePanelPerTab": true,
+    "zeroClippedSvgTexts": true,
+    "allSpritesRenderedAndAboveFold": true,
+    "minStageCoveragePct": 37.6
+  },
+  "steps": [
+    {
+      "id": "01-motion-atlas-milton25d",
+      "label": "Default Studio Load: Motion Atlas Chrome + Milton 2.5D Lithograph",
+      "screenshot": "01-motion-atlas-milton25d-v11.png",
+      "probe": {
+        "chrome": "motion-atlas",
+        "viewport": {
+          "vw": 1720,
+          "vh": 1040
+        },
+        "visiblePanels": [
+          {
+            "id": "panel-infographic",
+            "top": 117,
+            "left": 292,
+            "width": 1126,
+            "height": 912,
+            "viewportCoveragePct": 57.4
+          }
+        ],
+        "svgHealth": {
+          "id": "milton-25d-svg",
+          "width": 1107,
+          "height": 623,
+          "textCount": 36,
+          "clippedTexts": 0,
+          "zPlaneGroups": 43,
+          "titleCount": 22,
+          "descCount": 21,
+          "actorA": "#2D5BA9",
+          "ground": "#F5EEDF"
+        },
+        "spriteVaultHealth": null,
+        "inspectorHealth": {
+          "hasSelection": false,
+          "snippet": "✦ TAP — Talent Accelerator Program“concept=c_tap spans=S0”Sub-Glyph Poetic <desc> Nodes (21 embedded · click a"
+        },
+        "canvasHealth": null,
+        "scrollMetrics": {
+          "leftDockOverflowPx": 0,
+          "rightDockOverflowPx": 0,
+          "centerStageOverflowPx": 0
+        }
+      }
+    },
+    {
+      "id": "02-orpheum-dark-operad",
+      "label": "Orpheum Pro Obsidian-Gold Chrome + Double-Operad & Sheaf Field Plate",
+      "screenshot": "02-orpheum-dark-operad-v11.png",
+      "probe": {
+        "chrome": "orpheum-dark",
+        "viewport": {
+          "vw": 1720,
+          "vh": 1040
+        },
+        "visiblePanels": [
+          {
+            "id": "panel-infographic",
+            "top": 117,
+            "left": 292,
+            "width": 1126,
+            "height": 912,
+            "viewportCoveragePct": 57.4
+          }
+        ],
+        "svgHealth": {
+          "id": "orpheum-operadic-svg",
+          "width": 1107,
+          "height": 664,
+          "textCount": 60,
+          "clippedTexts": 0,
+          "zPlaneGroups": 4,
+          "titleCount": 1,
+          "descCount": 1,
+          "actorA": "#58B8A8",
+          "ground": "#0A0A0B"
+        },
+        "spriteVaultHealth": null,
+        "inspectorHealth": {
+          "hasSelection": false,
+          "snippet": "✦ Orpheum Operadic & Sheaf-Glued Field Infographic — Double Operad O_geom x O_col“An aperspectival, palette-cl"
+        },
+        "canvasHealth": null,
+        "scrollMetrics": {
+          "leftDockOverflowPx": 0,
+          "rightDockOverflowPx": 0,
+          "centerStageOverflowPx": 0
+        }
+      }
+    },
+    {
+      "id": "03-hydrographic-survey",
+      "label": "Hydrographic Bathysphere Chrome + 25-Ghost Bathymetric Survey Plate",
+      "screenshot": "03-hydrographic-survey-v11.png",
+      "probe": {
+        "chrome": "hydrographic",
+        "viewport": {
+          "vw": 1720,
+          "vh": 1040
+        },
+        "visiblePanels": [
+          {
+            "id": "panel-infographic",
+            "top": 117,
+            "left": 292,
+            "width": 1126,
+            "height": 912,
+            "viewportCoveragePct": 57.4
+          }
+        ],
+        "svgHealth": {
+          "id": "hydrographic-survey-svg",
+          "width": 1107,
+          "height": 664,
+          "textCount": 60,
+          "clippedTexts": 0,
+          "zPlaneGroups": 6,
+          "titleCount": 1,
+          "descCount": 1,
+          "actorA": "#38BDF8",
+          "ground": "#0E151B"
+        },
+        "spriteVaultHealth": null,
+        "inspectorHealth": {
+          "hasSelection": false,
+          "snippet": "✦ Kinetic Hydrography Survey Infographic — Bathymetric Trajectory & Wada Soundings“A dark hydrographic soundin"
+        },
+        "canvasHealth": null,
+        "scrollMetrics": {
+          "leftDockOverflowPx": 0,
+          "rightDockOverflowPx": 0,
+          "centerStageOverflowPx": 0
+        }
+      }
+    },
+    {
+      "id": "04-milton-warm-saul-bass",
+      "label": "Push Pin / Milton Warm Chrome + Saul Bass 3-Color Cut-Paper & 5-Rung Plate",
+      "screenshot": "04-milton-warm-saul-bass-v11.png",
+      "probe": {
+        "chrome": "milton-warm",
+        "viewport": {
+          "vw": 1720,
+          "vh": 1040
+        },
+        "visiblePanels": [
+          {
+            "id": "panel-infographic",
+            "top": 117,
+            "left": 292,
+            "width": 1126,
+            "height": 912,
+            "viewportCoveragePct": 57.4
+          }
+        ],
+        "svgHealth": {
+          "id": "saul-bass-infographic-svg",
+          "width": 1107,
+          "height": 664,
+          "textCount": 37,
+          "clippedTexts": 0,
+          "zPlaneGroups": 13,
+          "titleCount": 1,
+          "descCount": 1,
+          "actorA": "#14110F",
+          "ground": "#F5EEDF"
+        },
+        "spriteVaultHealth": null,
+        "inspectorHealth": {
+          "hasSelection": false,
+          "snippet": "✦ Saul Bass Severe Cut-Paper Infographic & 5-Rung Reduction Plate“A stark three-tone cut-paper infographic pla"
+        },
+        "canvasHealth": null,
+        "scrollMetrics": {
+          "leftDockOverflowPx": 0,
+          "rightDockOverflowPx": 0,
+          "centerStageOverflowPx": 0
+        }
+      }
+    },
+    {
+      "id": "05-iridescent-voxel3d",
+      "label": "DeepMind Frontier Iridescent Chrome + Isometric Voxel & 3D Massing Plate",
+      "screenshot": "05-iridescent-voxel3d-v11.png",
+      "probe": {
+        "chrome": "deepmind-iridescent",
+        "viewport": {
+          "vw": 1720,
+          "vh": 1040
+        },
+        "visiblePanels": [
+          {
+            "id": "panel-infographic",
+            "top": 117,
+            "left": 292,
+            "width": 1126,
+            "height": 912,
+            "viewportCoveragePct": 57.4
+          }
+        ],
+        "svgHealth": {
+          "id": "isometric-voxel-svg",
+          "width": 1107,
+          "height": 664,
+          "textCount": 82,
+          "clippedTexts": 0,
+          "zPlaneGroups": 4,
+          "titleCount": 1,
+          "descCount": 1,
+          "actorA": "#38BDF8",
+          "ground": "#070B14"
+        },
+        "spriteVaultHealth": null,
+        "inspectorHealth": {
+          "hasSelection": false,
+          "snippet": "✦ Isometric Voxel & 3D Architectural Massing Infographic“An axonometric 3D architectural and voxel massing dia"
+        },
+        "canvasHealth": null,
+        "scrollMetrics": {
+          "leftDockOverflowPx": 0,
+          "rightDockOverflowPx": 0,
+          "centerStageOverflowPx": 0
+        }
+      }
+    },
+    {
+      "id": "06-editorial-collage-wada",
+      "label": "Motion Atlas Chrome + Editorial Collage + Live Wada No. 126 Re-Theming",
+      "screenshot": "06-editorial-collage-wada-v11.png",
+      "probe": {
+        "chrome": "motion-atlas",
+        "viewport": {
+          "vw": 1720,
+          "vh": 1040
+        },
+        "visiblePanels": [
+          {
+            "id": "panel-infographic",
+            "top": 117,
+            "left": 292,
+            "width": 1126,
+            "height": 912,
+            "viewportCoveragePct": 57.4
+          }
+        ],
+        "svgHealth": {
+          "id": "editorial-collage-svg",
+          "width": 1107,
+          "height": 664,
+          "textCount": 83,
+          "clippedTexts": 0,
+          "zPlaneGroups": 11,
+          "titleCount": 1,
+          "descCount": 1,
+          "actorA": "#7a705c",
+          "ground": "#FBF3E6"
+        },
+        "spriteVaultHealth": null,
+        "inspectorHealth": {
+          "hasSelection": false,
+          "snippet": "✦ Editorial Push Pin Collage & Causal Bento Infographic“A warm editorial magazine spread (Wada No. 343) pairin"
+        },
+        "canvasHealth": null,
+        "scrollMetrics": {
+          "leftDockOverflowPx": 0,
+          "rightDockOverflowPx": 0,
+          "centerStageOverflowPx": 0
+        }
+      }
+    },
+    {
+      "id": "07-live-tweaks-catalyst",
+      "label": "Live 2.5D Tilt (14°) + 8:3 Catalyst Simulation ($1.2M) + Poetic Node Inspector",
+      "screenshot": "07-live-tweaks-catalyst-v11.png",
+      "probe": {
+        "chrome": "motion-atlas",
+        "viewport": {
+          "vw": 1720,
+          "vh": 1040
+        },
+        "visiblePanels": [
+          {
+            "id": "panel-infographic",
+            "top": 117,
+            "left": 292,
+            "width": 1126,
+            "height": 912,
+            "viewportCoveragePct": 57.4
+          }
+        ],
+        "svgHealth": {
+          "id": "milton-25d-svg",
+          "width": 1181,
+          "height": 607,
+          "textCount": 36,
+          "clippedTexts": 0,
+          "zPlaneGroups": 43,
+          "titleCount": 22,
+          "descCount": 21,
+          "actorA": "#7a705c",
+          "ground": "#F5EEDF"
+        },
+        "spriteVaultHealth": null,
+        "inspectorHealth": {
+          "hasSelection": true,
+          "snippet": "🎯 Selected Node: #n-math · c_margin\n        “concept=c_margin spans=S12b,S12”\n        Grounded Text Readout: "
+        },
+        "canvasHealth": null,
+        "scrollMetrics": {
+          "leftDockOverflowPx": 0,
+          "rightDockOverflowPx": 0,
+          "centerStageOverflowPx": 0
+        }
+      }
+    },
+    {
+      "id": "08-tab-workflow-diagram",
+      "label": "Tab II: Master Combined Programmatic Workflow Diagram (Tier I–III)",
+      "screenshot": "08-tab-workflow-diagram-v11.png",
+      "probe": {
+        "chrome": "motion-atlas",
+        "viewport": {
+          "vw": 1720,
+          "vh": 1040
+        },
+        "visiblePanels": [
+          {
+            "id": "panel-workflow",
+            "top": 117,
+            "left": 292,
+            "width": 1126,
+            "height": 744,
+            "viewportCoveragePct": 46.8
+          }
+        ],
+        "svgHealth": {
+          "id": "combined-workflow-svg",
+          "width": 1107,
+          "height": 689,
+          "textCount": 118,
+          "clippedTexts": 0,
+          "zPlaneGroups": 13,
+          "titleCount": 1,
+          "descCount": 1,
+          "actorA": "#7a705c",
+          "ground": "#F5EEDF"
+        },
+        "spriteVaultHealth": null,
+        "inspectorHealth": {
+          "hasSelection": true,
+          "snippet": "🎯 Selected Node: #n-math · c_margin\n        “concept=c_margin spans=S12b,S12”\n        Grounded Text Readout: "
+        },
+        "canvasHealth": null,
+        "scrollMetrics": {
+          "leftDockOverflowPx": 0,
+          "rightDockOverflowPx": 0,
+          "centerStageOverflowPx": 0
+        }
+      }
+    },
+    {
+      "id": "09-tab-motion-theatre",
+      "label": "Tab III: Single-Clock Animation (Hydrographic Phasor) + Saul Bass Rung 4 Severance",
+      "screenshot": "09-tab-motion-theatre-v11.png",
+      "probe": {
+        "chrome": "motion-atlas",
+        "viewport": {
+          "vw": 1720,
+          "vh": 1040
+        },
+        "visiblePanels": [
+          {
+            "id": "panel-motion",
+            "top": 117,
+            "left": 292,
+            "width": 1126,
+            "height": 597,
+            "viewportCoveragePct": 37.6
+          }
+        ],
+        "svgHealth": null,
+        "spriteVaultHealth": null,
+        "inspectorHealth": {
+          "hasSelection": true,
+          "snippet": "🎯 Selected Node: #n-math · c_margin\n        “concept=c_margin spans=S12b,S12”\n        Grounded Text Readout: "
+        },
+        "canvasHealth": {
+          "width": 960,
+          "height": 600,
+          "nonBlankSamples": 2395
+        },
+        "scrollMetrics": {
+          "leftDockOverflowPx": 0,
+          "rightDockOverflowPx": 0,
+          "centerStageOverflowPx": 0
+        }
+      }
+    },
+    {
+      "id": "10-tab-rsi-sprite-vault",
+      "label": "Tab IV: 4-Round RSI Convergence Cards, 6 MOE Lenses & Core SVG Sprite Vault",
+      "screenshot": "10-tab-rsi-sprite-vault-v11.png",
+      "probe": {
+        "chrome": "motion-atlas",
+        "viewport": {
+          "vw": 1720,
+          "vh": 1040
+        },
+        "visiblePanels": [
+          {
+            "id": "panel-rsi",
+            "top": 117,
+            "left": 292,
+            "width": 1126,
+            "height": 666,
+            "viewportCoveragePct": 41.9
+          }
+        ],
+        "svgHealth": null,
+        "spriteVaultHealth": {
+          "totalUseNodes": 9,
+          "renderedNonEmpty": 9,
+          "spritesAboveFold": 9
+        },
+        "inspectorHealth": {
+          "hasSelection": true,
+          "snippet": "🎯 Selected Node: #n-math · c_margin\n        “concept=c_margin spans=S12b,S12”\n        Grounded Text Readout: "
+        },
+        "canvasHealth": null,
+        "scrollMetrics": {
+          "leftDockOverflowPx": 0,
+          "rightDockOverflowPx": 0,
+          "centerStageOverflowPx": 0
+        }
+      }
+    },
+    {
+      "id": "11-live-source-compile",
+      "label": "Live Source Document Ingest & Re-Compilation into Infographic Plate",
+      "screenshot": "11-live-source-compile-v11.png",
+      "probe": {
+        "chrome": "motion-atlas",
+        "viewport": {
+          "vw": 1720,
+          "vh": 1040
+        },
+        "visiblePanels": [
+          {
+            "id": "panel-infographic",
+            "top": 117,
+            "left": 292,
+            "width": 1126,
+            "height": 912,
+            "viewportCoveragePct": 57.4
+          }
+        ],
+        "svgHealth": {
+          "id": "editorial-collage-svg",
+          "width": 1107,
+          "height": 664,
+          "textCount": 83,
+          "clippedTexts": 0,
+          "zPlaneGroups": 11,
+          "titleCount": 1,
+          "descCount": 1,
+          "actorA": "#7a705c",
+          "ground": "#FBF3E6"
+        },
+        "spriteVaultHealth": null,
+        "inspectorHealth": {
+          "hasSelection": false,
+          "snippet": "✦ Editorial Push Pin Collage & Causal Bento Infographic“A warm editorial magazine spread (Wada No. 343) pairin"
+        },
+        "canvasHealth": null,
+        "scrollMetrics": {
+          "leftDockOverflowPx": 0,
+          "rightDockOverflowPx": 0,
+          "centerStageOverflowPx": 0
+        }
+      }
+    },
+    {
+      "id": "12-video-explainer-theatre",
+      "label": "Next-Gen Video Explainer: Beat 8 ($1M Math) + Interactive Camera Director",
+      "screenshot": "12-video-explainer-theatre-v11.png",
+      "probe": {
+        "chrome": "explainer",
+        "viewport": {
+          "vw": 1720,
+          "vh": 1040
+        },
+        "visiblePanels": [],
+        "svgHealth": null,
+        "spriteVaultHealth": null,
+        "inspectorHealth": null,
+        "canvasHealth": null,
+        "scrollMetrics": {
+          "leftDockOverflowPx": 0,
+          "rightDockOverflowPx": 0,
+          "centerStageOverflowPx": 0
+        }
+      }
+    }
+  ]
+}

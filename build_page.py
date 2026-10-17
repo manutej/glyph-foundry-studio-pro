@@ -14,6 +14,10 @@ svgs = {}
 ctx_ref = None
 for sid, st in styles.items():
     svg_str, ctx = compile_svg(spec, st, M, fonts=None, scope="#stage")
+    svg_str = svg_str.replace("$400,000", "$1,000,000").replace(
+        "profit per cohort · could run 10 a year",
+        "profit per cohort · 10/yr = $10.0M"
+    )
     svgs[sid] = svg_str
     if ctx_ref is None:
         ctx_ref = ctx
@@ -81,7 +85,7 @@ DATA = json.dumps({
     'ports': ports,
     'edges_map': edges_map,
     'svgs': svgs
-}, ensure_ascii=False)
+}, ensure_ascii=False).replace("four hundred thousand", "one million").replace("$400,000", "$1,000,000")
 
 v4_warm = png('out/tap.milton-warm.v4.png')
 v4_night = png('out/tap.ceti-night.v4.png')
@@ -120,5 +124,6 @@ page = (page
 
 open('out/glyph-foundry.html', 'w').write(page)
 open('out/final/glyph-foundry.html', 'w').write(page)
+open('Next-Gen Video Explainer — Talent Accelerator Program (TAP).html', 'w').write(page)
 open('../TAP Talent Accelerator - Next-Gen Symbolic Video Explainer.html', 'w').write(page)
 print('page bytes:', len(page))

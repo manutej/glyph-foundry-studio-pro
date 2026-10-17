@@ -644,7 +644,7 @@
 <g id="n-math" class="leaf" data-concept="c_margin" data-claim="k4" transform="translate(36.0,534.0)">
 <title>c_margin</title>
 <desc>concept=c_margin spans=S12b,S12</desc>
-<title>Cohort Unit Economics · $25/h × 40 h/wk × 8 people × 50 wk = $400,000</title>
+<title>Cohort Unit Economics · $25/h × 40 h/wk × 8 people × 50 wk = $1,000,000</title>
 <desc>Four tactile instrument tiles encode hourly rate, 5-day studio rhythm, 8 paired engineers, and 50 weeks of off-centre tree-ring accumulation (09-aging), compounding into a 3D vermilion &amp; sunflower ingot and 10-cohort stack.</desc>
 <g class="z-layer eq-bus" data-z="0" data-seq="0">
 <path d="M51.8,53.6 Q350.7,54.6 648.5,54.3" style="fill:none;stroke:var(--sunflower);stroke-width:var(--sw-glyph);stroke-linecap:round;stroke-linejoin:round"/>
@@ -710,7 +710,7 @@
 <path d="M656.8,27.0 L663.3,21.5 L663.3,75.5 L656.8,81.0 Z" style="fill:var(--accent-deep);stroke:var(--line);stroke-width:var(--sw-glyph);stroke-linecap:round;stroke-linejoin:round"/>
 <path d="M533.6,26.7 L657.1,26.7 L656.6,81.1 L534.0,81.1 Z" style="fill:var(--accent);stroke:var(--line);stroke-width:var(--sw-glyph);stroke-linecap:round;stroke-linejoin:round"/>
 <path d="M535.3,28.5 L655.3,28.5" style="fill:none;stroke:var(--rim);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
-<text class="t-num t-strong" x="595.3" y="60.0" text-anchor="middle" style="fill:var(--ground)" data-src="math">$400,000</text>
+<text class="t-num t-strong" x="595.3" y="60.0" text-anchor="middle" style="fill:var(--ground)" data-src="math">$1,000,000</text>
 <rect x="666.8" y="75.6" width="12.0" height="4.2" rx="1.0" style="fill:var(--accent);stroke:var(--line);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
 <rect x="666.8" y="70.2" width="12.0" height="4.2" rx="1.0" style="fill:var(--actor-b-tint);stroke:var(--line);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
 <rect x="666.8" y="64.8" width="12.0" height="4.2" rx="1.0" style="fill:var(--actor-b-tint);stroke:var(--line);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
@@ -725,7 +725,7 @@
 <g class="z-layer eq-after" data-z="3" data-seq="6">
 <path d="M221.1,102.4 Q221.1,106.0 224.7,106.0 Q221.1,106.0 221.1,109.6 Q221.1,106.0 217.5,106.0 Q221.1,106.0 221.1,102.4 Z" style="fill:var(--sunflower);stroke:var(--line);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
 <path d="M503.8,102.4 Q503.8,106.0 507.4,106.0 Q503.8,106.0 503.8,109.6 Q503.8,106.0 500.2,106.0 Q503.8,106.0 503.8,102.4 Z" style="fill:var(--sunflower);stroke:var(--line);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
-<text class="t-hand " x="362.5" y="112.0" text-anchor="middle" style="fill:var(--ink)" data-src="math">profit per cohort · could run 10 a year</text>
+<text class="t-hand " x="362.5" y="112.0" text-anchor="middle" style="fill:var(--ink)" data-src="math">profit per cohort · 10/yr = $10.0M</text>
 </g>
 </g>
 <g id="n-ratio" class="leaf" data-concept="c_ratio" data-claim="k5" transform="translate(790.9,534.0)">

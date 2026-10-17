@@ -182,37 +182,37 @@
 <path class="plinth-rim" d="M1124.0,89.8 L1538.0,89.8" style="fill:none;stroke:var(--rim);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
 <text class="t-sub" x="1134.0" y="120.0" text-anchor="start">III · STASHEFF ASSOCIAHEDRON K₄ HOMOTOPY</text>
 <text class="t-h" x="1134.0" y="146.0" text-anchor="start">5 Catalan Bracketings of the Profit Equation</text>
-<path d="M1331.0,190.0 L1418.5,253.6" style="fill:none;stroke:var(--sunflower);stroke-width:var(--sw-glyph);stroke-linecap:round;stroke-linejoin:round"/>
-<path d="M1331.0,190.0 L1385.1,356.4" style="fill:none;stroke:var(--plum);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:3 3"/>
-<text class="t-gold" x="1387.0" y="204.9" text-anchor="middle">μ₁:assoc_L</text>
-<path d="M1418.5,253.6 L1385.1,356.4" style="fill:none;stroke:var(--sunflower);stroke-width:var(--sw-glyph);stroke-linecap:round;stroke-linejoin:round"/>
-<path d="M1418.5,253.6 L1276.9,356.4" style="fill:none;stroke:var(--plum);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:3 3"/>
-<text class="t-gold" x="1421.6" y="311.4" text-anchor="middle">μ₂:step_R</text>
-<path d="M1385.1,356.4 L1276.9,356.4" style="fill:none;stroke:var(--sunflower);stroke-width:var(--sw-glyph);stroke-linecap:round;stroke-linejoin:round"/>
-<path d="M1385.1,356.4 L1243.5,253.6" style="fill:none;stroke:var(--plum);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:3 3"/>
-<text class="t-gold" x="1331.0" y="377.3" text-anchor="middle">μ₃:pentagon</text>
-<path d="M1276.9,356.4 L1243.5,253.6" style="fill:none;stroke:var(--sunflower);stroke-width:var(--sw-glyph);stroke-linecap:round;stroke-linejoin:round"/>
-<path d="M1276.9,356.4 L1331.0,190.0" style="fill:none;stroke:var(--plum);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:3 3"/>
-<text class="t-gold" x="1240.4" y="311.4" text-anchor="middle">μ₄:step_L</text>
-<path d="M1243.5,253.6 L1331.0,190.0" style="fill:none;stroke:var(--sunflower);stroke-width:var(--sw-glyph);stroke-linecap:round;stroke-linejoin:round"/>
-<path d="M1243.5,253.6 L1418.5,253.6" style="fill:none;stroke:var(--plum);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:3 3"/>
-<text class="t-gold" x="1275.0" y="204.9" text-anchor="middle">μ₅:split_2×2</text>
-<circle cx="1331.0" cy="190.0" r="13.0" style="fill:var(--accent);stroke:var(--ink);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
-<text class="t-h" x="1331.0" y="194.0" text-anchor="middle">v1</text>
-<text class="t-b" x="1331.0" y="170.0" text-anchor="middle">(($25×40)×8)×50</text>
-<circle cx="1418.5" cy="253.6" r="13.0" style="fill:var(--actor-a);stroke:var(--ink);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
-<text class="t-h" x="1418.5" y="257.6" text-anchor="middle">v2</text>
-<text class="t-b" x="1434.5" y="235.6" text-anchor="middle">($25×(40×8))×50</text>
-<circle cx="1385.1" cy="356.4" r="13.0" style="fill:var(--actor-a);stroke:var(--ink);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
-<text class="t-h" x="1385.1" y="360.4" text-anchor="middle">v3</text>
-<text class="t-b" x="1385.1" y="384.4" text-anchor="middle">$25×((40×8)×50)</text>
-<circle cx="1276.9" cy="356.4" r="13.0" style="fill:var(--actor-a);stroke:var(--ink);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
-<text class="t-h" x="1276.9" y="360.4" text-anchor="middle">v4</text>
-<text class="t-b" x="1276.9" y="384.4" text-anchor="middle">$25×(40×(8×50))</text>
-<circle cx="1243.5" cy="253.6" r="13.0" style="fill:var(--actor-a);stroke:var(--ink);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
-<text class="t-h" x="1243.5" y="257.6" text-anchor="middle">v5</text>
-<text class="t-b" x="1227.5" y="235.6" text-anchor="middle">($25×40)×(8×50)</text>
-<text class="t-gold" x="1331.0" y="286.0" text-anchor="middle">K₄ = $1M</text>
+<path d="M1331.0,206.0 L1399.5,255.8" style="fill:none;stroke:var(--sunflower);stroke-width:var(--sw-glyph);stroke-linecap:round;stroke-linejoin:round"/>
+<path d="M1331.0,206.0 L1373.3,336.2" style="fill:none;stroke:var(--plum);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:3 3"/>
+<text class="t-gold" x="1353.3" y="250.4" text-anchor="middle" style="font-size:8.5px;paint-order:stroke;stroke:var(--panel);stroke-width:3px;stroke-linejoin:round">μ₁:assoc_L</text>
+<path d="M1399.5,255.8 L1373.3,336.2" style="fill:none;stroke:var(--sunflower);stroke-width:var(--sw-glyph);stroke-linecap:round;stroke-linejoin:round"/>
+<path d="M1399.5,255.8 L1288.7,336.2" style="fill:none;stroke:var(--plum);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:3 3"/>
+<text class="t-gold" x="1367.0" y="292.7" text-anchor="middle" style="font-size:8.5px;paint-order:stroke;stroke:var(--panel);stroke-width:3px;stroke-linejoin:round">μ₂:step_R</text>
+<path d="M1373.3,336.2 L1288.7,336.2" style="fill:none;stroke:var(--sunflower);stroke-width:var(--sw-glyph);stroke-linecap:round;stroke-linejoin:round"/>
+<path d="M1373.3,336.2 L1262.5,255.8" style="fill:none;stroke:var(--plum);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:3 3"/>
+<text class="t-gold" x="1331.0" y="318.9" text-anchor="middle" style="font-size:8.5px;paint-order:stroke;stroke:var(--panel);stroke-width:3px;stroke-linejoin:round">μ₃:pentagon</text>
+<path d="M1288.7,336.2 L1262.5,255.8" style="fill:none;stroke:var(--sunflower);stroke-width:var(--sw-glyph);stroke-linecap:round;stroke-linejoin:round"/>
+<path d="M1288.7,336.2 L1331.0,206.0" style="fill:none;stroke:var(--plum);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:3 3"/>
+<text class="t-gold" x="1295.0" y="292.7" text-anchor="middle" style="font-size:8.5px;paint-order:stroke;stroke:var(--panel);stroke-width:3px;stroke-linejoin:round">μ₄:step_L</text>
+<path d="M1262.5,255.8 L1331.0,206.0" style="fill:none;stroke:var(--sunflower);stroke-width:var(--sw-glyph);stroke-linecap:round;stroke-linejoin:round"/>
+<path d="M1262.5,255.8 L1399.5,255.8" style="fill:none;stroke:var(--plum);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:3 3"/>
+<text class="t-gold" x="1308.7" y="250.4" text-anchor="middle" style="font-size:8.5px;paint-order:stroke;stroke:var(--panel);stroke-width:3px;stroke-linejoin:round">μ₅:split_2×2</text>
+<circle cx="1331.0" cy="206.0" r="12.0" style="fill:var(--accent);stroke:var(--ink);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
+<text class="t-h" x="1331.0" y="210.0" text-anchor="middle">v1</text>
+<text class="t-b" x="1331.0" y="188.0" text-anchor="middle" style="paint-order:stroke;stroke:var(--panel);stroke-width:3px;stroke-linejoin:round">(($25×40)×8)×50</text>
+<circle cx="1399.5" cy="255.8" r="12.0" style="fill:var(--actor-a);stroke:var(--ink);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
+<text class="t-h" x="1399.5" y="259.8" text-anchor="middle">v2</text>
+<text class="t-b" x="1415.5" y="253.8" text-anchor="start" style="paint-order:stroke;stroke:var(--panel);stroke-width:3px;stroke-linejoin:round">($25×(40×8))×50</text>
+<circle cx="1373.3" cy="336.2" r="12.0" style="fill:var(--actor-a);stroke:var(--ink);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
+<text class="t-h" x="1373.3" y="340.2" text-anchor="middle">v3</text>
+<text class="t-b" x="1385.3" y="358.2" text-anchor="start" style="paint-order:stroke;stroke:var(--panel);stroke-width:3px;stroke-linejoin:round">$25×((40×8)×50)</text>
+<circle cx="1288.7" cy="336.2" r="12.0" style="fill:var(--actor-a);stroke:var(--ink);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
+<text class="t-h" x="1288.7" y="340.2" text-anchor="middle">v4</text>
+<text class="t-b" x="1276.7" y="358.2" text-anchor="end" style="paint-order:stroke;stroke:var(--panel);stroke-width:3px;stroke-linejoin:round">$25×(40×(8×50))</text>
+<circle cx="1262.5" cy="255.8" r="12.0" style="fill:var(--actor-a);stroke:var(--ink);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
+<text class="t-h" x="1262.5" y="259.8" text-anchor="middle">v5</text>
+<text class="t-b" x="1246.5" y="253.8" text-anchor="end" style="paint-order:stroke;stroke:var(--panel);stroke-width:3px;stroke-linejoin:round">($25×40)×(8×50)</text>
+<text class="t-gold" x="1331.0" y="282.0" text-anchor="middle">K₄ = $1M</text>
 <rect x="1130.0" y="430.0" width="402.0" height="52.0" rx="6.0" style="fill:var(--elev);stroke:var(--plum);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
 <text class="t-gold" x="1331.0" y="450.0" text-anchor="middle">MAC LANE PENTAGON IDENTITY: μ₂∘μ₁ = μ₅∘μ₄∘μ₃ (COHERENT)</text>
 <text class="t-b" x="1331.0" y="469.0" text-anchor="middle">All 5 Catalan parenthesizations evaluate to $1,000,000 (δ⁰ = 0)</text>

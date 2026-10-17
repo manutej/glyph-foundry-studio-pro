@@ -23,7 +23,7 @@ const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 
 function parseArgs() {
   const args = process.argv.slice(2);
-  let tag = 'v9';
+  let tag = 'v11';
   let outDir = path.join(__dirname, 'out', 'vbm');
   for (let i = 0; i < args.length; i++) {
     if (args[i] === '--tag' && args[i + 1]) tag = args[++i];
@@ -204,9 +204,24 @@ const UX_PROBE_JS = `(() => {
       const r = u.getBoundingClientRect();
       return r.width > 5 && r.height > 5;
     }).length;
+    const spritesAboveFold = Array.from(rsiPanel.querySelectorAll('.sprite-card-svg')).filter(s => {
+      const r = s.getBoundingClientRect();
+      return r.top >= 0 && r.bottom <= vh;
+    }).length;
     spriteVaultHealth = {
       totalUseNodes: uses.length,
-      renderedNonEmpty: nonEmptySprites
+      renderedNonEmpty: nonEmptySprites,
+      spritesAboveFold
+    };
+  }
+
+  // Check Poetic Inspector health
+  let inspectorHealth = null;
+  const descBox = document.querySelector('#poetic-desc-box');
+  if (descBox) {
+    inspectorHealth = {
+      hasSelection: (descBox.textContent || '').includes('Selected Node:'),
+      snippet: (descBox.textContent || '').trim().slice(0, 110)
     };
   }
 
@@ -238,6 +253,7 @@ const UX_PROBE_JS = `(() => {
     visiblePanels,
     svgHealth,
     spriteVaultHealth,
+    inspectorHealth,
     canvasHealth,
     scrollMetrics: {
       leftDockOverflowPx: leftDock ? Math.max(0, leftDock.scrollHeight - leftDock.clientHeight) : 0,
@@ -332,14 +348,19 @@ async function main() {
       `);
     });
 
-    // STEP 07: Live Parametric 2.5D Tilt (14 deg) + 8:3 Catalyst Simulation on Milton 2.5D
-    await recordStep('07-live-tweaks-catalyst', 'Live 2.5D Isometric Tilt (14°) + 8:3 Catalyst Simulation + Z-Plane Control', async () => {
+    // STEP 07: Live Parametric 2.5D Tilt (14 deg) + 8:3 Catalyst Simulation + $30/hr Margin + Click #n-math Inspector
+    await recordStep('07-live-tweaks-catalyst', 'Live 2.5D Tilt (14°) + 8:3 Catalyst Simulation ($1.2M) + Poetic Node Inspector', async () => {
       await cdp.evaluate(`
         document.querySelector('[data-quick-plate="milton-25d"]').click();
         const tilt = document.querySelector('#tw-tilt');
         tilt.value = '14';
         tilt.dispatchEvent(new Event('input'));
         document.querySelector('#btn-preset-catalyst').click();
+        const m = document.querySelector('#tw-margin');
+        m.value = '30';
+        m.dispatchEvent(new Event('input'));
+        const mathNode = document.querySelector('#svg-plate-mount svg #n-math');
+        if (mathNode) mathNode.dispatchEvent(new MouseEvent('click', { bubbles: true }));
       `);
     });
 
@@ -386,12 +407,14 @@ async function main() {
 
     // STEP 12: Next-Gen Video Explainer Beat Walkthrough & Curtain Studio
     if (fs.existsSync(path.join(__dirname, 'Next-Gen Video Explainer — Talent Accelerator Program (TAP).html'))) {
-      await recordStep('12-video-explainer-theatre', 'Next-Gen Video Explainer: Beat 7 Equation Focus + Interactive Camera Director', async () => {
+      await recordStep('12-video-explainer-theatre', 'Next-Gen Video Explainer: Beat 8 ($1M Math) + Interactive Camera Director', async () => {
         await cdp.send('Page.navigate', { url: explainerUrl });
         await cdp.wait(800);
         await cdp.evaluate(`
-          const b7 = document.querySelectorAll('.beat-pill, [data-beat]')[6];
-          if (b7) b7.click();
+          const b8 = document.querySelector('[data-beat="7"]') || document.querySelectorAll('.beat-pill, [data-beat]')[7];
+          if (b8) b8.click();
+          const th = document.querySelector('.theatre');
+          if (th) th.scrollIntoView({ behavior: 'instant', block: 'start' });
         `);
       });
     }
@@ -399,10 +422,18 @@ async function main() {
     cdp.close();
   }
 
-  // Write VBM telemetry JSON
+  // Write VBM telemetry JSON with top-level assertions
+  const totalClippedTexts = steps.reduce((acc, s) => acc + ((s.probe.svgHealth && s.probe.svgHealth.clippedTexts) || 0), 0);
+  const step10Sprites = (steps.find(s => s.id === '10-tab-rsi-sprite-vault')?.probe?.spriteVaultHealth) || {};
+  const assertions = {
+    singleActivePanelPerTab: steps.slice(0, 11).every(s => s.probe.visiblePanels.length === 1),
+    zeroClippedSvgTexts: totalClippedTexts === 0,
+    allSpritesRenderedAndAboveFold: step10Sprites.renderedNonEmpty === 9 && step10Sprites.spritesAboveFold === 9,
+    minStageCoveragePct: Math.min(...steps.slice(0, 11).map(s => s.probe.visiblePanels[0]?.viewportCoveragePct || 0))
+  };
   const telemetryPath = path.join(outDir, `vbm-telemetry-${tag}.json`);
-  fs.writeFileSync(telemetryPath, JSON.stringify({ tag, timestamp: new Date().toISOString(), steps }, null, 2));
-  console.log(`[VBM] Wrote telemetry -> ${telemetryPath}`);
+  fs.writeFileSync(telemetryPath, JSON.stringify({ tag, timestamp: new Date().toISOString(), assertions, steps }, null, 2));
+  console.log(`[VBM] Wrote telemetry -> ${telemetryPath}`, assertions);
 
   // Assemble MP4 and GIF walkthrough recording via ffmpeg
   try {

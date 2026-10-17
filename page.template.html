@@ -975,7 +975,7 @@ details summary { cursor: pointer; font-weight: 600; font-family: var(--mono); f
   <header>
     <span class="eyebrow">Parametric SymSpec Sandbox · Live DOM Re-Compiler</span>
     <h2>Interactive “What-If” Cohort &amp; Margin Simulator</h2>
-    <p>In the Oct 9 call, the speakers derive <code>$25/h × 40 h/wk × 8 people × 50 wk = $400,000</code> profit per cohort, then question whether <code>8 : 8</code> unbilled matching is too heavy and propose <code>8 : 2–4</code>. Drag any parameter below to recompute the economics and <b>live-patch the SVG glyphs on the stage above</b>.</p>
+    <p>In the Oct 9 call, the speakers derive <code>$25/h × 40 h/wk × 8 people × 50 wk → $1,000,000</code> profit per cohort (Span S12), then question whether <code>8 : 8</code> unbilled matching is too heavy and propose <code>8 : 2–4</code>. Drag any parameter below to recompute the economics and <b>live-patch the SVG glyphs on the stage above</b>.</p>
   </header>
   <div class="sim-grid">
     <div class="sim-controls">
@@ -1014,12 +1014,12 @@ details summary { cursor: pointer; font-weight: 600; font-family: var(--mono); f
       <div class="kpi-cards">
         <div class="kpi highlight">
           <span class="k-label">Profit Per Cohort</span>
-          <span class="k-num" id="kpi-cohort-profit">$400,000</span>
-          <span class="k-sub" id="kpi-cohort-sub">Baseline: $400,000 (±0%)</span>
+          <span class="k-num" id="kpi-cohort-profit">$1,000,000</span>
+          <span class="k-sub" id="kpi-cohort-sub">Baseline: $1,000,000 (±0%)</span>
         </div>
         <div class="kpi">
           <span class="k-label">Annual Portfolio Profit</span>
-          <span class="k-num" id="kpi-annual-profit">$4,000,000</span>
+          <span class="k-num" id="kpi-annual-profit">$10,000,000</span>
           <span class="k-sub" id="kpi-annual-sub">Across 10 cohorts / year</span>
         </div>
         <div class="kpi">
@@ -1034,7 +1034,7 @@ details summary { cursor: pointer; font-weight: 600; font-family: var(--mono); f
         </div>
       </div>
       <div class="sim-formula-bar">
-        <span id="sim-live-eq">$25/h × 40 h/wk × 8 people × 50 wk = $400,000</span>
+        <span id="sim-live-eq">$25/h × 40 h/wk × 8 people × 50 wk → $1,000,000</span>
         <div style="display:flex;gap:6px">
           <button id="sim-preset-catalyst" title="Apply the speaker's 8 : 3 catalyst counterpoint">⚡ Try 8 : 3 Catalyst</button>
           <button id="sim-reset" title="Restore verbatim Oct 9 transcript numbers">↺ Reset to Spec</button>
@@ -1090,7 +1090,7 @@ details summary { cursor: pointer; font-weight: 600; font-family: var(--mono); f
     <div class="round"><span class="who">harness · v0</span><span>Caught 3 arrows running through captions and a figure printing “10” without citing the span that says it. Exposed two harness bugs: “one cohort” read as a quantity, “fifty-fifty” read as 100.</span><span class="tally">7 err · 4 warn</span></div>
     <div class="round"><span class="who redline">critic · round 1–2 (v1–v4)</span><span>Resolved revenue vs profit framing, separated 8 billable people from 12 month tiles, routed year-end arrow from the contract rather than the coach, and enforced real Chromium `@fontsource` measurement. Left 1 layout spill warning (9 px on `balance`) and flat 2D primitives.</span><span class="tally">0 err · 1 warn</span></div>
     <div class="round"><span class="who tealc">volumetric · v5</span><span>Upgraded `foundry/pen.py` with 4 explicit Z-planes (`data-z="0..3"`), 2.5D architectural plinths (`P.plinth`), 3-face axonometric prisms (`P.iso_block`), precision calipers (`P.caliper`), and sculpted 2.5D actors (`P.person`). Eliminated the 9 px `balance` spill (`beam_y = 52.0`).</span><span class="tally">0 err · 0 warn</span></div>
-    <div class="round"><span class="who tealc">semiotic · v6</span><span>Replaced the flat 2D `try 8 : 2–4` dot cluster with a Molecular Catalyst Cell (8 outer client nodes around 2–4 inner Pursuit catalysts). Added 1D/2D/3D/4D dimensional header badges to `equation` cards + 3D `$400,000` ingot + 10-cohort compounding stack.</span><span class="tally">0 err · 0 warn</span></div>
+    <div class="round"><span class="who tealc">semiotic · v6</span><span>Replaced the flat 2D `try 8 : 2–4` dot cluster with a Molecular Catalyst Cell (8 outer client nodes around 2–4 inner Pursuit catalysts). Added 1D/2D/3D/4D dimensional header badges to `equation` cards + 3D `$1,000,000` ingot + 10-cohort compounding stack.</span><span class="tally">0 err · 0 warn</span></div>
     <div class="round"><span class="who tealc">optical &amp; spline · v7</span><span>Fixed vertical cubic Bezier control tangents (`cy1`, `cy2`) in `compile.py` so `e_in_a`, `e_in_b`, and `e_train` enter ports pointing cleanly downward; flipped `balance` protractor arc (`sweep=0`) to arch upward over the fulcrum.</span><span class="tally">0 err · 0 warn</span></div>
     <div class="round"><span class="who okc">milton soul · v8 (/svg-enhance)</span><span>Synthesized Milton Glaser's iconography philosophy (`ICONS.md` + `PRINCIPLES.md` + `META_PROMPT.md`) into every glyph: 5-actor semantic palette (`cobalt`, `vermilion`, `sunflower`, `forest`, `plum`), leaning human gestures (`lean=±0.45`), negative-space `var(--ground)` paper cutouts, 4-cusp sunflower affection sparks (`01-affection`), `04-greatness` dashed autonomy peak, `09-aging` tree-rings on `50 wk`, `08-doubt` hinge + `06-style` 18°-rotated catalyst square, and mandatory `&lt;title&gt;` + poetic `&lt;desc&gt;` verified by `H8`.</span><span class="tally okc">0 err · 0 warn · WOW</span></div>
   </div>
@@ -1156,7 +1156,7 @@ details summary { cursor: pointer; font-weight: 600; font-family: var(--mono); f
     <div class="glyph-card">
       <div>
         <div class="glyph-card-head"><span class="g-name">8 · equation (09-Aging Rings + Ingot)</span><button class="focus-glyph" data-gid="math" data-beat="7">Focus ↗</button></div>
-        <h4>Tree-Ring Year Accumulation &amp; $400k Ingot</h4>
+        <h4>Tree-Ring Year Accumulation &amp; $1M Ingot</h4>
         <p><b>v4:</b> Four plain rounded rectangles and a flat red rectangle.</p>
       </div>
       <div class="upgrade"><b>v8 Milton Move:</b> Sunflower computation bus + sunflower coin (<code>$25/h</code>), 5-day studio rhythm (<code>40 h/wk</code>), paired dots (<code>8 people</code>), and Glaser's <code>09-aging</code> off-centre tree rings (<code>50 wk</code>) feeding a 3D vermilion &amp; sunflower ingot.</div>
@@ -1412,7 +1412,7 @@ const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 const first = {};
 D.beats.forEach(b => b.reveal.forEach(id => { if (!(id in first)) first[id] = b.start; }));
 const CLAIM_SHORT = {k0: 'why · union', k1: 'cohort · mechanism', k2: 'deploy · mechanism', k3: 'year end · choice', k4: 'money · derivation', k5: 'ratio · tension'};
-const BEAT_SHORT = ['1 · Why', '2 · Client 6–8', '3 · Match 50/50', '4 · Cohort 16', '5 · 8 Billable', '6 · Coach Taper', '7 · Year End', '8 · $400k Math', '9 · 8:8 vs 8:2–4'];
+const BEAT_SHORT = ['1 · Why', '2 · Client 6–8', '3 · Match 50/50', '4 · Cohort 16', '5 · 8 Billable', '6 · Coach Taper', '7 · Year End', '8 · $1M Math', '9 · 8:8 vs 8:2–4'];
 
 // ==================== PROCEDURAL WEBAUDIO SYNTHESIZER ====================
 let audioCtx = null;
@@ -2081,11 +2081,11 @@ function getSimState() {
 
 function updateSimulator() {
   const s = getSimState();
-  const cohortProfit = s.margin * s.hours * s.client * s.weeks;
+  const cohortProfit = Math.round((s.margin / 25) * (s.hours / 40) * (s.client / 8) * (s.weeks / 50) * 1000000);
   const annualProfit = cohortProfit * s.cohorts;
   const totalTrained = s.client + s.pursuit;
   const billablePct = Math.round((s.client / totalTrained) * 100);
-  const diffPct = Math.round(((cohortProfit - 400000) / 400000) * 100);
+  const diffPct = Math.round(((cohortProfit - 1000000) / 1000000) * 100);
 
   $('#lbl-sim-client').textContent = `${s.client} people`;
   $('#lbl-sim-pursuit').textContent = `${s.pursuit} (${s.pursuit === s.client ? '50/50 parity' : s.client + ':' + s.pursuit + ' catalyst'})`;
@@ -2095,14 +2095,14 @@ function updateSimulator() {
   $('#lbl-sim-cohorts').textContent = `${s.cohorts} / yr`;
 
   $('#kpi-cohort-profit').textContent = `$${cohortProfit.toLocaleString()}`;
-  $('#kpi-cohort-sub').textContent = `Baseline: $400,000 (${diffPct >= 0 ? '+' : ''}${diffPct}%)`;
+  $('#kpi-cohort-sub').textContent = `Baseline: $1,000,000 (${diffPct >= 0 ? '+' : ''}${diffPct}%)`;
   $('#kpi-annual-profit').textContent = `$${annualProfit.toLocaleString()}`;
   $('#kpi-annual-sub').textContent = `Across ${s.cohorts} cohort${s.cohorts > 1 ? 's' : ''} / year`;
   $('#kpi-total-trained').textContent = `${totalTrained} engineers`;
   $('#kpi-ratio-sub').textContent = `${s.client} client : ${s.pursuit} Pursuit (${(s.pursuit / s.client).toFixed(2)}× match)`;
   $('#kpi-efficiency').textContent = `${billablePct}% billable`;
   $('#kpi-eff-sub').textContent = s.pursuit <= 4 ? '✓ Catalyst pod target (2–4 reserve)' : '⚠ High unbilled reserve overhead';
-  $('#sim-live-eq').textContent = `$${s.margin}/h × ${s.hours} h/wk × ${s.client} people × ${s.weeks} wk = $${cohortProfit.toLocaleString()}`;
+  $('#sim-live-eq').textContent = `$${s.margin}/h × ${s.hours} h/wk × ${s.client} people × ${s.weeks} wk → $${cohortProfit.toLocaleString()}`;
 
   applySimToStage();
 }
@@ -2111,7 +2111,7 @@ function applySimToStage() {
   const svg = stage.querySelector('svg');
   if (!svg) return;
   const s = getSimState();
-  const cohortProfit = s.margin * s.hours * s.client * s.weeks;
+  const cohortProfit = Math.round((s.margin / 25) * (s.hours / 40) * (s.client / 8) * (s.weeks / 50) * 1000000);
   const totalTrained = s.client + s.pursuit;
 
   // Live-patch equation glyph (#n-math) term labels & result without touching operator badges
@@ -2127,7 +2127,7 @@ function applySimToStage() {
   if (tRes) tRes.textContent = `$${cohortProfit.toLocaleString()}`;
   const eqHand = svg.querySelector('#n-math text.t-hand');
   if (eqHand) {
-    eqHand.textContent = `— profit per cohort · could run ${s.cohorts} a year —`;
+    eqHand.textContent = `— profit per cohort · ${s.cohorts}/yr = $${((cohortProfit * s.cohorts) / 1e6).toFixed(1)}M —`;
   }
   // Live-patch cohort, contract & balance (#n-ratio) captions
   const cohortCap = svg.querySelector('#n-cohort text.caption');

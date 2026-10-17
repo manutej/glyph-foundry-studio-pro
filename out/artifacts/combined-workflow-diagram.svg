@@ -345,7 +345,7 @@
 <rect class="plinth-face" x="1442.0" y="730.0" width="300.0" height="328.0" rx="12.0" style="fill:var(--elev);stroke:var(--line);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
 <path class="plinth-rim" d="M1456.0,731.8 L1728.0,731.8" style="fill:none;stroke:var(--rim);stroke-width:var(--sw-hair);stroke-linecap:round;stroke-linejoin:round"/>
 <rect x="1442" y="730" width="300" height="28" rx="8" style="fill:var(--forest)"/>
-<text class="t-badge" x="1454.0" y="749.0" text-anchor="start">EMITTED ARTIFACT BUNDLE (v10)</text>
+<text class="t-badge" x="1454.0" y="749.0" text-anchor="start">EMITTED ARTIFACT BUNDLE (v11)</text>
 <rect x="1456.0" y="766.0" width="272.0" height="42.0" rx="7.0" style="fill:var(--panel);stroke:var(--line);stroke-width:var(--sw-frame);stroke-linecap:round;stroke-linejoin:round"/>
 <text class="t-h" x="1466.0" y="782.0" text-anchor="start">1. Infographic Plates</text>
 <text class="t-mono" x="1466.0" y="799.0" text-anchor="start">18 Styles × 348 Wada Combos</text>

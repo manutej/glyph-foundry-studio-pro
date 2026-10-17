@@ -535,7 +535,7 @@ def emit_combined_workflow_diagram(spec: dict, rsi: dict) -> str:
     vx, vy, vw, vh = 1442, t3_y + 52, 300, 328
     P.s_plinth(vx, vy, vw, vh, rx=12, depth=5, fill="elev")
     P.raw(f'<rect x="{vx}" y="{vy}" width="{vw}" height="28" rx="8" style="fill:var(--forest)"/>')
-    P.s_text(vx + 12, vy + 19, "EMITTED ARTIFACT BUNDLE (v10)", cls="t-badge")
+    P.s_text(vx + 12, vy + 19, "EMITTED ARTIFACT BUNDLE (v11)", cls="t-badge")
     outputs = [
         ("1. Infographic Plates", "18 Styles × 348 Wada Combos"),
         ("2. Single-Clock Animations", "frame = f(t, seed) · 8 Rigs"),
@@ -767,9 +767,12 @@ def emit_hydrographic_survey_infographic(spec: dict) -> str:
             iso_pts.append((ix, iy))
         d_iso = "M " + " L ".join(f"{ix:.1f} {iy:.1f}" for ix, iy in iso_pts)
         P.raw(f'<path d="{d_iso}" style="fill:none;stroke:var(--forest);stroke-width:0.85px;stroke-dasharray:{dash_iso};opacity:{op_iso}"/>')
-        lbl_idx = 4 if y_shift > 0 else 14
+        lbl_idx = 8 if y_shift > 0 else 5
         lx_iso, ly_iso = iso_pts[lbl_idx]
-        P.s_text(lx_iso, ly_iso - 5, iso_lbl, cls="t-mono")
+        P.raw(
+            f'<text class="t-mono" x="{lx_iso:.1f}" y="{ly_iso - 6:.1f}" '
+            f'style="paint-order:stroke;stroke:var(--ground);stroke-width:4px;stroke-linejoin:round">{esc(iso_lbl)}</text>'
+        )
 
     P.set_layer(2, 1, "hy-trajectory")
     pts = []
@@ -976,7 +979,7 @@ def emit_orpheum_operadic_infographic(spec: dict) -> str:
     P.s_plinth(1110, 88, 442, 410, rx=12, depth=5, fill="panel")
     P.s_text(1134, 120, "III · STASHEFF ASSOCIAHEDRON K₄ HOMOTOPY", cls="t-sub")
     P.s_text(1134, 146, "5 Catalan Bracketings of the Profit Equation", cls="t-h")
-    kcx, kcy, kr = 1331, 282, 92
+    kcx, kcy, kr = 1331, 278, 72
     k_labels = [
         "(($25×40)×8)×50", "($25×(40×8))×50", "$25×((40×8)×50)",
         "$25×(40×(8×50))", "($25×40)×(8×50)",
@@ -993,15 +996,29 @@ def emit_orpheum_operadic_infographic(spec: dict) -> str:
         x3, y3 = k_pts[(vi + 2) % 5]
         P.line(x1, y1, x3, y3, stroke="plum", sw="hair", dash="3 3")
         emx, emy = (x1 + x2) * 0.5, (y1 + y2) * 0.5
-        ox_e = emx + (emx - kcx) * 0.28
-        oy_e = emy + (emy - kcy) * 0.28
-        P.s_text(ox_e, oy_e, edge_labels[vi], cls="t-gold", anchor="middle")
+        in_x = emx + (kcx - emx) * 0.35
+        in_y = emy + (kcy - emy) * 0.35
+        P.raw(
+            f'<text class="t-gold" x="{in_x:.1f}" y="{in_y + 3:.1f}" text-anchor="middle" '
+            f'style="font-size:8.5px;paint-order:stroke;stroke:var(--panel);stroke-width:3px;stroke-linejoin:round">{esc(edge_labels[vi])}</text>'
+        )
     for vi, (vx, vy) in enumerate(k_pts):
-        P.disc(vx, vy, 13, fill="accent" if vi == 0 else "actor-a", stroke="ink")
+        P.disc(vx, vy, 12, fill="accent" if vi == 0 else "actor-a", stroke="ink")
         P.s_text(vx, vy + 4, f"v{vi+1}", cls="t-h", anchor="middle")
-        ly = vy - 20 if vi == 0 else (vy - 18 if vi in (1, 4) else vy + 28)
-        lx = vx + (16 if vi == 1 else (-16 if vi == 4 else 0))
-        P.s_text(lx, ly, k_labels[vi], cls="t-b", anchor="middle")
+        if vi == 0:
+            lx, ly, anc = vx, vy - 18, "middle"
+        elif vi == 1:
+            lx, ly, anc = vx + 16, vy - 2, "start"
+        elif vi == 2:
+            lx, ly, anc = vx + 12, vy + 22, "start"
+        elif vi == 3:
+            lx, ly, anc = vx - 12, vy + 22, "end"
+        else:
+            lx, ly, anc = vx - 16, vy - 2, "end"
+        P.raw(
+            f'<text class="t-b" x="{lx:.1f}" y="{ly:.1f}" text-anchor="{anc}" '
+            f'style="paint-order:stroke;stroke:var(--panel);stroke-width:3px;stroke-linejoin:round">{esc(k_labels[vi])}</text>'
+        )
     P.s_text(kcx, kcy + 4, "K₄ = $1M", cls="t-gold", anchor="middle")
     P.rect(1130, 430, 402, 52, rx=6, fill="elev", stroke="plum", sw="hair")
     P.s_text(1331, 450, "MAC LANE PENTAGON IDENTITY: μ₂∘μ₁ = μ₅∘μ₄∘μ₃ (COHERENT)", cls="t-gold", anchor="middle")
@@ -1401,6 +1418,10 @@ def scope_milton_svg(raw_svg: str) -> str:
         1
     )
     out = out.replace("svg{", "#milton-25d-svg{").replace("svg .", "#milton-25d-svg .")
+    out = out.replace("$400,000", "$1,000,000").replace(
+        "profit per cohort · could run 10 a year",
+        "profit per cohort · 10/yr = $10.0M"
+    )
     return out
 
 

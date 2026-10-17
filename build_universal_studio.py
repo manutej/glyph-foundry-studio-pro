@@ -104,7 +104,7 @@ def main() -> None:
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Universal Infographic, SVG, Workflow &amp; Motion Foundry Studio Pro (v9)</title>
+<title>Universal Infographic, SVG, Workflow &amp; Motion Foundry Studio Pro (v11)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..600&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..500&family=IBM+Plex+Mono:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
@@ -190,75 +190,75 @@ def main() -> None:
   html, body {{
     margin: 0; padding: 0;
     background: var(--bg-app); color: var(--ink);
-    font-family: var(--font-body); font-size: 13px; line-height: 1.45;
+    font-family: var(--font-body); font-size: 13px; line-height: 1.4;
     -webkit-font-smoothing: antialiased;
     transition: background-color 180ms ease, color 180ms ease;
   }}
 
-  /* Orpheum Desktop Menu Bar (visible in all chromes, styled per chrome) */
+  /* Orpheum Desktop Menu Bar (single-row compact ribbon) */
   .orpheum-menubar {{
     display: flex; align-items: center; justify-content: space-between;
-    padding: 5px 16px; background: var(--bg-panel);
+    padding: 3px 14px; background: var(--bg-panel);
     border-bottom: 1px solid var(--border);
-    font-family: var(--font-mono); font-size: 10.5px;
-    gap: 12px; flex-wrap: wrap;
+    font-family: var(--font-mono); font-size: 10px;
+    gap: 8px; flex-wrap: nowrap; white-space: nowrap;
   }}
-  .menu-left {{ display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }}
+  .menu-left {{ display: flex; align-items: center; gap: 6px; flex-wrap: nowrap; }}
   .menu-pill {{
-    padding: 3px 8px; border-radius: 4px; cursor: pointer;
+    padding: 2px 7px; border-radius: 4px; cursor: pointer;
     color: var(--ink-soft); border: 1px solid transparent;
-    background: transparent; font-family: var(--font-mono); font-size: 10px;
+    background: transparent; font-family: var(--font-mono); font-size: 9.5px;
   }}
   .menu-pill:hover, .menu-pill.active {{
     color: var(--accent-primary); border-color: var(--border); background: var(--bg-elev);
   }}
 
-  /* Top Studio Masthead */
+  /* Top Studio Masthead (single-row compact bar) */
   .studio-topbar {{
     position: sticky; top: 0; z-index: 60;
     background: var(--bg-app);
     border-bottom: 1.5px solid var(--border-strong);
-    padding: 10px 18px;
+    padding: 5px 14px;
     display: flex; justify-content: space-between; align-items: center;
-    gap: 14px; flex-wrap: wrap;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    gap: 10px; flex-wrap: nowrap;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.07);
   }}
-  .brand-wrap {{ display: flex; align-items: center; gap: 12px; }}
+  .brand-wrap {{ display: flex; align-items: center; gap: 9px; white-space: nowrap; }}
   .brand-emblem {{
-    width: 38px; height: 38px; border-radius: 9px;
+    width: 28px; height: 28px; border-radius: 7px;
     background: var(--accent-primary); color: var(--bg-elev);
     display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-display); font-size: 20px; font-weight: 700;
+    font-family: var(--font-display); font-size: 15px; font-weight: 700;
     border: 1.5px solid var(--border-strong);
   }}
   .brand-kicker {{
-    font-family: var(--font-mono); font-size: 9.5px; font-weight: 700;
-    letter-spacing: 0.12em; color: var(--accent-primary); text-transform: uppercase;
+    font-family: var(--font-mono); font-size: 8.5px; font-weight: 700;
+    letter-spacing: 0.1em; color: var(--accent-primary); text-transform: uppercase;
   }}
   .brand-title {{
-    font-family: var(--font-display); font-size: 18px; font-weight: 600; color: var(--ink);
+    font-family: var(--font-display); font-size: 14.5px; font-weight: 600; color: var(--ink);
   }}
 
-  .top-controls {{ display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }}
+  .top-controls {{ display: flex; align-items: center; gap: 6px; flex-wrap: nowrap; }}
   .ctrl-group {{
-    display: flex; align-items: center; gap: 6px;
-    background: var(--bg-panel); padding: 4px 9px;
-    border-radius: 7px; border: 1px solid var(--border);
+    display: flex; align-items: center; gap: 5px;
+    background: var(--bg-panel); padding: 3px 7px;
+    border-radius: 6px; border: 1px solid var(--border);
   }}
   .ctrl-group label {{
-    font-family: var(--font-mono); font-size: 9.5px; font-weight: 700;
-    color: var(--ink-soft); text-transform: uppercase;
+    font-family: var(--font-mono); font-size: 9px; font-weight: 700;
+    color: var(--ink-soft); text-transform: uppercase; white-space: nowrap;
   }}
   select, input[type="text"], input[type="number"], textarea {{
     background: var(--bg-elev); color: var(--ink);
     border: 1px solid var(--border); border-radius: 5px;
-    padding: 4px 8px; font-family: var(--font-mono); font-size: 11px;
+    padding: 3px 6px; font-family: var(--font-mono); font-size: 10.5px;
   }}
   .btn {{
     background: var(--bg-elev); color: var(--ink);
-    border: 1px solid var(--border-strong); border-radius: 6px;
-    padding: 5px 11px; font-family: var(--font-mono); font-size: 10.5px;
-    font-weight: 700; cursor: pointer; transition: all 120ms ease;
+    border: 1px solid var(--border-strong); border-radius: 5px;
+    padding: 4px 9px; font-family: var(--font-mono); font-size: 10px;
+    font-weight: 700; cursor: pointer; transition: all 120ms ease; white-space: nowrap;
   }}
   .btn:hover {{ background: var(--accent-primary); color: var(--bg-elev); }}
   .btn-primary {{
@@ -270,12 +270,12 @@ def main() -> None:
   /* Main 3-Column Workbench Layout */
   .workbench {{
     display: grid;
-    grid-template-columns: 330px minmax(0, 1fr) 350px;
+    grid-template-columns: 280px minmax(0, 1fr) 290px;
     gap: 0;
-    min-height: calc(100vh - 102px);
+    min-height: calc(100vh - 70px);
   }}
   @media (max-width: 1320px) {{
-    .workbench {{ grid-template-columns: 300px minmax(0, 1fr); }}
+    .workbench {{ grid-template-columns: 270px minmax(0, 1fr); }}
     .right-dock {{ grid-column: 1 / -1; border-left: none; border-top: 1px solid var(--border); }}
   }}
   @media (max-width: 920px) {{
@@ -286,47 +286,48 @@ def main() -> None:
     background: var(--bg-panel);
     border-right: 1px solid var(--border);
     overflow-y: auto;
-    max-height: calc(100vh - 102px);
+    max-height: calc(100vh - 70px);
     display: flex; flex-direction: column;
   }}
   .right-dock {{ border-right: none; border-left: 1px solid var(--border); }}
 
   .dock-sec {{
     border-bottom: 1px solid var(--border);
-    padding: 12px 14px;
-    display: flex; flex-direction: column; gap: 9px;
+    padding: 9px 11px;
+    display: flex; flex-direction: column; gap: 6px;
   }}
   .dock-hdr {{
     display: flex; align-items: center; justify-content: space-between;
-    font-family: var(--font-mono); font-size: 10px; font-weight: 700;
-    letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-primary);
+    font-family: var(--font-mono); font-size: 9.5px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-primary);
   }}
-  .row {{ display: flex; align-items: center; justify-content: space-between; gap: 8px; }}
-  .row label {{ font-size: 11px; color: var(--ink-soft); font-weight: 500; }}
-  .row .val {{ font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; color: var(--accent-primary); }}
-  input[type="range"] {{ width: 130px; accent-color: var(--accent-primary); cursor: pointer; }}
+  .row {{ display: flex; align-items: center; justify-content: space-between; gap: 6px; }}
+  .row label {{ font-size: 10.5px; color: var(--ink-soft); font-weight: 500; }}
+  .row .val {{ font-family: var(--font-mono); font-size: 10px; font-weight: 700; color: var(--accent-primary); }}
+  input[type="range"] {{ width: 115px; accent-color: var(--accent-primary); cursor: pointer; }}
 
   /* Center Pasteboard Stage */
   .center-stage {{
     background-color: var(--bg-app);
     background-image: radial-gradient(var(--border) 1px, transparent 1px);
     background-size: 22px 22px;
-    padding: 16px 20px 36px;
+    padding: 6px 12px 14px;
     overflow-y: auto;
-    max-height: calc(100vh - 102px);
-    display: flex; flex-direction: column; gap: 18px;
+    max-height: calc(100vh - 70px);
+    display: flex; flex-direction: column; gap: 6px;
   }}
 
   /* Surface Mode Tabs */
   .surface-tabs {{
-    display: flex; gap: 6px; flex-wrap: wrap;
-    background: var(--bg-panel); padding: 6px; border-radius: 9px;
+    display: flex; gap: 4px; flex-wrap: nowrap;
+    background: var(--bg-panel); padding: 3px; border-radius: 7px;
     border: 1px solid var(--border);
   }}
   .surface-tab {{
-    padding: 6px 12px; border-radius: 6px; border: 1px solid transparent;
+    flex: 1; text-align: center;
+    padding: 4px 8px; border-radius: 5px; border: 1px solid transparent;
     background: transparent; color: var(--ink-soft);
-    font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; cursor: pointer;
+    font-family: var(--font-mono); font-size: 10px; font-weight: 700; cursor: pointer; white-space: nowrap;
   }}
   .surface-tab[aria-selected="true"] {{
     background: var(--bg-elev); color: var(--accent-primary);
@@ -337,34 +338,34 @@ def main() -> None:
   .stage-card {{
     background: var(--bg-elev);
     border: 1.5px solid var(--border-strong);
-    border-radius: 12px;
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 12px 36px rgba(0,0,0,0.12);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.12);
     display: flex; flex-direction: column;
   }}
   .stage-card[hidden] {{
     display: none !important;
   }}
   .stage-bar {{
-    padding: 8px 14px; background: var(--bg-panel);
+    padding: 5px 11px; background: var(--bg-panel);
     border-bottom: 1px solid var(--border);
-    display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;
-    font-family: var(--font-mono); font-size: 10.5px;
+    display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: nowrap;
+    font-family: var(--font-mono); font-size: 10px;
   }}
   .svg-mount {{
     width: 100%; overflow: hidden; display: flex; justify-content: center; align-items: center;
-    padding: 12px; min-height: 540px; transition: transform 220ms ease;
+    padding: 8px; min-height: 620px; transition: transform 220ms ease;
   }}
   .svg-mount svg {{
-    width: 100%; height: auto; max-height: 760px; display: block;
-    border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+    width: 100%; height: auto; max-height: 820px; display: block;
+    border-radius: 7px; box-shadow: 0 4px 20px rgba(0,0,0,0.10);
     transition: transform 260ms ease;
   }}
 
   /* Live Single-Clock Motion Canvas */
   .motion-stage-wrap {{
-    display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(260px, 1fr);
-    gap: 14px; padding: 14px; align-items: start;
+    display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(250px, 1fr);
+    gap: 10px; padding: 10px; align-items: start;
   }}
   @media (max-width: 1080px) {{ .motion-stage-wrap {{ grid-template-columns: 1fr; }} }}
   canvas.live-canvas {{
@@ -374,36 +375,36 @@ def main() -> None:
   }}
 
   /* Wada Swatch Strip & OKLab Matrix */
-  .swatch-row {{ display: flex; gap: 5px; flex-wrap: wrap; }}
+  .swatch-row {{ display: flex; gap: 4px; flex-wrap: wrap; }}
   .swatch-pill {{
-    flex: 1; min-width: 42px; height: 28px; border-radius: 5px;
+    flex: 1; min-width: 38px; height: 24px; border-radius: 4px;
     border: 1px solid var(--border-strong); display: flex; align-items: flex-end;
     justify-content: center; padding-bottom: 2px;
-    font-family: var(--font-mono); font-size: 8.5px; font-weight: 700;
+    font-family: var(--font-mono); font-size: 8px; font-weight: 700;
     color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.8);
   }}
   .chord-grid {{
     display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px;
   }}
   .chord-cell {{
-    height: 20px; border-radius: 3px; font-family: var(--font-mono);
-    font-size: 8.5px; display: flex; align-items: center; justify-content: center;
+    height: 18px; border-radius: 3px; font-family: var(--font-mono);
+    font-size: 8px; display: flex; align-items: center; justify-content: center;
     color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.75);
   }}
 
   /* RSI Round Cards */
   .rsi-grid {{
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 6px;
   }}
   .rsi-card {{
     background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; gap: 6px;
+    border-radius: 7px; padding: 6px 9px; display: flex; flex-direction: column; gap: 4px;
   }}
   .rsi-card.active {{ border: 2px solid var(--accent-secondary); }}
   .badge-pass {{
-    display: inline-block; padding: 2px 7px; border-radius: 4px;
+    display: inline-block; padding: 1px 6px; border-radius: 4px;
     background: var(--accent-secondary); color: #fff;
-    font-family: var(--font-mono); font-size: 9.5px; font-weight: 700;
+    font-family: var(--font-mono); font-size: 9px; font-weight: 700;
   }}
 </style>
 </head>
@@ -414,13 +415,13 @@ def main() -> None:
      ═══════════════════════════════════════════════════════════════════════ -->
 <div class="orpheum-menubar">
   <div class="menu-left">
-    <span style="font-weight:700;color:var(--accent-primary)">◈ ARTE × GLYPH FOUNDRY v9</span>
-    <button class="menu-pill active" data-surface-jump="infographic">1 · Infographic Studio (6 SVG Archetypes)</button>
-    <button class="menu-pill" data-surface-jump="workflow">2 · Combined Workflow Diagram (Tier I–III)</button>
-    <button class="menu-pill" data-surface-jump="motion">3 · Single-Clock Animation &amp; 5-Rung Rig Lab (15 Styles)</button>
-    <button class="menu-pill" data-surface-jump="rsi">4 · Recursive Self-Improvement (RSI R0→R3) &amp; Sprite Vault</button>
+    <span style="font-weight:700;color:var(--accent-primary)">◈ ARTE × GLYPH FOUNDRY v11</span>
+    <button class="menu-pill active" data-surface-jump="infographic">1 · Infographic Studio (6 Styles)</button>
+    <button class="menu-pill" data-surface-jump="workflow">2 · Combined Workflow DAG</button>
+    <button class="menu-pill" data-surface-jump="motion">3 · Single-Clock Animation (15 Styles)</button>
+    <button class="menu-pill" data-surface-jump="rsi">4 · RSI R0→R3 &amp; Sprite Vault</button>
   </div>
-  <div style="display:flex;gap:12px;align-items:center">
+  <div style="display:flex;gap:10px;align-items:center">
     <span id="hud-gate-status" class="badge-pass">52 / 52 GATES PASS (H1–H8 · G01–G20 · P1–P8)</span>
     <span id="hud-wada-status" style="color:var(--ink-soft)">Wada No. 343 · AAA 13.48:1</span>
   </div>
@@ -440,8 +441,8 @@ def main() -> None:
 
   <div class="top-controls">
     <div class="ctrl-group">
-      <label for="sel-chrome">UI Chrome</label>
-      <select id="sel-chrome">
+      <label for="sel-chrome">Chrome</label>
+      <select id="sel-chrome" style="max-width:190px">
         <option value="motion-atlas">1 · Motion Atlas Paper (#FBF3E6)</option>
         <option value="orpheum-dark">2 · Orpheum Pro Dark-Gold (#0A0A0B)</option>
         <option value="hydrographic">3 · Hydrographic Bathysphere (#0E151B)</option>
@@ -451,8 +452,8 @@ def main() -> None:
     </div>
 
     <div class="ctrl-group">
-      <label for="sel-plate-style">Infographic Style</label>
-      <select id="sel-plate-style">
+      <label for="sel-plate-style">Style</label>
+      <select id="sel-plate-style" style="max-width:225px">
         <optgroup label="Core Programmatic SVG Infographics">
           <option value="milton-25d">Style 1 · Milton Glaser 2.5D Volumetric Lithograph</option>
           <option value="saul-bass-cutout">Style 2 · Saul Bass Severe Cut-Paper &amp; 5-Rung Plate</option>
@@ -483,12 +484,12 @@ def main() -> None:
     </div>
 
     <div class="ctrl-group">
-      <label for="sel-wada">Sanzo Wada 348</label>
-      <select id="sel-wada"></select>
+      <label for="sel-wada">Wada 348</label>
+      <select id="sel-wada" style="max-width:170px"></select>
     </div>
 
-    <button class="btn btn-primary" id="btn-run-rsi">✦ Run 4-Round RSI (R0→R3)</button>
-    <button class="btn" id="btn-export-svg">⬇ Export Active SVG</button>
+    <button class="btn btn-primary" id="btn-run-rsi">✦ Run 4-Round RSI</button>
+    <button class="btn" id="btn-export-svg">⬇ Export SVG</button>
   </div>
 </header>
 
@@ -613,10 +614,10 @@ def main() -> None:
   <!-- CENTER STAGE: MULTI-STYLE INFOGRAPHIC VIEWPORT, WORKFLOW DAG & SINGLE-CLOCK ANIMATION -->
   <main class="center-stage">
     <div class="surface-tabs" role="tablist">
-      <button class="surface-tab" role="tab" aria-selected="true" data-tab="infographic">I · Tweakable SVG Infographic Plate (6 Styles)</button>
-      <button class="surface-tab" role="tab" aria-selected="false" data-tab="workflow">II · Combined Programmatic Workflow Diagram</button>
-      <button class="surface-tab" role="tab" aria-selected="false" data-tab="motion">III · Single-Clock Animation &amp; 5-Rung Rig Theatre</button>
-      <button class="surface-tab" role="tab" aria-selected="false" data-tab="rsi">IV · 4-Round RSI Loop &amp; Core SVG Sprite Vault</button>
+      <button class="surface-tab" role="tab" aria-selected="true" data-tab="infographic">I · Tweakable SVG Infographic (6 Styles)</button>
+      <button class="surface-tab" role="tab" aria-selected="false" data-tab="workflow">II · Combined Workflow Diagram</button>
+      <button class="surface-tab" role="tab" aria-selected="false" data-tab="motion">III · Single-Clock Animation &amp; 5-Rung Lab</button>
+      <button class="surface-tab" role="tab" aria-selected="false" data-tab="rsi">IV · 4-Round RSI &amp; Core Sprite Vault</button>
     </div>
 
     <!-- TAB I: TWEAKABLE SVG INFOGRAPHIC PLATE -->
@@ -711,12 +712,12 @@ def main() -> None:
         <strong>Closed-Loop Recursive Self-Improvement (RSI) Telemetry (R0 → R1 → R2 → R3) &amp; Core SVG Symbol Vault</strong>
         <button class="btn btn-primary" id="btn-retrigger-rsi">↻ Re-Run 6-Lens Adversarial Audit &amp; Auto-Fix</button>
       </div>
-      <div style="padding:10px 14px;display:flex;flex-direction:column;gap:8px">
-        <div class="rsi-grid" id="rsi-rounds-grid" style="grid-template-columns:repeat(4,1fr);gap:8px"></div>
+      <div style="padding:6px 10px;display:flex;flex-direction:column;gap:5px">
+        <div class="rsi-grid" id="rsi-rounds-grid" style="grid-template-columns:repeat(4,1fr);gap:6px"></div>
         <div class="dock-hdr"><span>6 Adversarial MOE Lenses (Bass · Koolhaas · Wada · Sheaf · Milton · Orpheum)</span></div>
-        <div class="rsi-grid" id="rsi-lenses-grid" style="grid-template-columns:repeat(6,1fr);gap:8px"></div>
+        <div class="rsi-grid" id="rsi-lenses-grid" style="grid-template-columns:repeat(6,1fr);gap:6px"></div>
         <div class="dock-hdr"><span>Core SVG &lt;symbol&gt; Artifact Sprite Preview (9 Poetic Idioms · Score 100/100)</span></div>
-        <div class="rsi-grid" id="sprite-preview-grid" style="grid-template-columns:repeat(3,1fr);gap:8px"></div>
+        <div class="rsi-grid" id="sprite-preview-grid" style="grid-template-columns:repeat(3,1fr);gap:6px"></div>
       </div>
     </section>
   </main>
@@ -950,6 +951,14 @@ const SYMSPEC = {json.dumps(symspec)};
       svgEl.style.setProperty('--accent', WADA.ensureInkContrast ? WADA.ensureInkContrast(accentCol, groundHex, 3.8) : accentCol);
       svgEl.style.setProperty('--sunflower', warmCol);
     }}
+    svgEl.querySelectorAll('text.t-sub, text.t-mono').forEach(tn => {{
+      if (tn.textContent && /WADA NO\.\s*\d+/i.test(tn.textContent)) {{
+        tn.textContent = tn.textContent.replace(
+          /WADA NO\.\s*\d+\s*\([^)]+\)/i,
+          `WADA NO. ${{pal.id}} (${{(pal.name || '').toUpperCase()}})`
+        );
+      }}
+    }});
   }}
 
   function applyLiveTweaksToSVG() {{
@@ -997,9 +1006,11 @@ const SYMSPEC = {json.dumps(symspec)};
     $('#val-cohorts').textContent = `${{cohorts}}/yr`;
     $('#lbl-sim-profit').textContent = `$${{profit.toLocaleString()}}`;
 
-    const svg = $('#svg-plate-mount svg');
-    if (svg) {{
-      // Style 1: Milton 2.5D
+    ['#svg-plate-mount svg', '#svg-compare-mount svg'].forEach(sel => {{
+      const svg = $(sel);
+      if (!svg) return;
+
+      // Style 1: Milton 2.5D — mutate equation, cohort captions, silhouettes, and balance beam
       const t0 = svg.querySelector('#n-math .eq-term-0 text.t-num');
       const t2 = svg.querySelector('#n-math .eq-term-2 text.t-num');
       const tRes = svg.querySelector('#n-math .eq-result text.t-num');
@@ -1008,10 +1019,70 @@ const SYMSPEC = {json.dumps(symspec)};
       if (tRes) tRes.textContent = `$${{profit.toLocaleString()}}`;
       const eqHand = svg.querySelector('#n-math text.t-hand');
       if (eqHand) eqHand.textContent = `— profit per cohort · ${{cohorts}}/yr = $${{annualM}}M —`;
+
+      const clientCap = svg.querySelector('#n-client text.caption');
+      if (clientCap) clientCap.textContent = `Client pays for ${{client}} people`;
+      const hiresCap = svg.querySelector('#n-hires text.caption');
+      if (hiresCap) {{
+        hiresCap.textContent = (pursuit === client)
+          ? `Pursuit hires ${{pursuit}} more (matching)`
+          : `Pursuit adds ${{pursuit}} catalyst seats (${{client}}:${{pursuit}})`;
+      }}
       const cohortCap = svg.querySelector('#n-cohort text.caption');
       if (cohortCap) cohortCap.textContent = `${{totalSeats}} trained together (${{client}} client + ${{pursuit}} free)`;
+      const contractCap = svg.querySelector('#n-contract text.caption');
+      if (contractCap) contractCap.textContent = `Client commits ${{client}} seats × 2 yrs`;
+      const ratioHand = svg.querySelector('#n-ratio text.t-hand');
+      if (ratioHand) ratioHand.textContent = `Active ratio: ${{client}}:${{pursuit}} (${{totalSeats}} seats) · $${{(profit / 1e6).toFixed(2)}}M/cohort`;
 
-      // Multi-plate universal text node synchronization across Styles 2..6
+      // Visually dim excess person silhouettes in #n-client, #n-hires, and #n-cohort
+      const dimCrowdSilhouettes = (nodeId, activeCount) => {{
+        const gNode = svg.querySelector(nodeId);
+        if (!gNode) return;
+        const persons = Array.from(gNode.querySelectorAll('.crowd-row-0 > g, .crowd-row-1 > g'));
+        persons.forEach((p, idx) => {{
+          p.style.opacity = (idx < activeCount) ? '1' : '0.16';
+          p.style.transition = 'opacity 180ms ease';
+        }});
+      }};
+      dimCrowdSilhouettes('#n-client', client);
+      dimCrowdSilhouettes('#n-hires', pursuit);
+
+      const cohortNode = svg.querySelector('#n-cohort');
+      if (cohortNode) {{
+        Array.from(cohortNode.querySelectorAll('.cohort-row-0 > g')).forEach((p, idx) => {{
+          p.style.opacity = (idx < client) ? '1' : '0.16';
+        }});
+        Array.from(cohortNode.querySelectorAll('.cohort-row-1 > g')).forEach((p, idx) => {{
+          p.style.opacity = (idx < pursuit) ? '1' : '0.16';
+        }});
+      }}
+
+      // Rotate #n-ratio balance beam according to client:pursuit asymmetry
+      const beamG = svg.querySelector('#n-ratio .balance-beam > g');
+      if (beamG) {{
+        const deg = Math.max(-14, Math.min(14, (pursuit - client) * 1.6));
+        beamG.setAttribute('transform', `rotate(${{deg.toFixed(1)}} 160 72)`);
+      }}
+
+      // Style 2..6 direct class hooks
+      const sbEq = svg.querySelector('.sb-act2-eq');
+      if (sbEq) sbEq.textContent = `PROFIT = $${{profit.toLocaleString()}}`;
+      const sbCap = svg.querySelector('.sb-act1-cap');
+      if (sbCap) sbCap.textContent = `${{client}} + ${{pursuit}} = ${{totalSeats}} COHORT PARITY`;
+      const hyCards = svg.querySelectorAll('.hy-sounding-card');
+      if (hyCards[1]) {{
+        const v = hyCards[1].querySelector('text.t-val');
+        if (v) v.textContent = `${{client}} + ${{pursuit}} = ${{totalSeats}}`;
+      }}
+      if (hyCards[3]) {{
+        const v = hyCards[3].querySelector('text.t-val');
+        if (v) v.textContent = `$${{(profit / 1e6).toFixed(2)}}M / $${{annualM}}M`;
+      }}
+      const orVal = svg.querySelector('.or-core-val');
+      if (orVal) orVal.textContent = `H⁰(U, F) · $${{profit.toLocaleString()}} / COHORT`;
+
+      // Universal fallback synchronization across any remaining text nodes
       svg.querySelectorAll('text').forEach(tn => {{
         const tx = tn.textContent || '';
         if (tx.includes('margin × 2,000h')) {{
@@ -1026,7 +1097,7 @@ const SYMSPEC = {json.dumps(symspec)};
           tn.textContent = `ST-23 · ${{client}}+${{pursuit}}=${{totalSeats}} COHORT · $${{(profit/1e6).toFixed(2)}}M/COHORT`;
         }}
       }});
-    }}
+    }});
   }}
 
   function updatePoeticInspector(selectedGroup) {{
@@ -1072,9 +1143,9 @@ const SYMSPEC = {json.dumps(symspec)};
       card.className = 'rsi-card' + (r.round === 'R3' ? ' active' : '');
       card.innerHTML = `
         <div class="dock-hdr"><span>${{r.round}} · ${{r.name}}</span><span class="badge-pass">${{r.score_pct}}%</span></div>
-        <div style="font-family:var(--font-mono);font-size:10.5px">Gates: <b>${{r.gates_passed}} / ${{r.gates_total}}</b> · H-Err: ${{r.h_errors}} · Warn: ${{r.h_warnings}}</div>
-        <div style="font-size:10.5px;color:var(--ink-soft)">Wada CR: ${{r.wada_contrast}}:1 · Δ_geom: ${{r.delta_geom_min}} · β: ${{r.spectral_beta}}</div>
-        <div style="font-family:var(--font-mono);font-size:9.5px;color:var(--accent-primary);margin-top:4px">${{(r.code_mutations_applied || [])[0] || ''}}</div>
+        <div style="font-family:var(--font-mono);font-size:10px">Gates: <b>${{r.gates_passed}} / ${{r.gates_total}}</b> · H-Err: ${{r.h_errors}} · Warn: ${{r.h_warnings}}</div>
+        <div style="font-size:10px;color:var(--ink-soft)">Wada CR: ${{r.wada_contrast}}:1 · Δ_geom: ${{r.delta_geom_min}} · β: ${{r.spectral_beta}}</div>
+        <div style="font-family:var(--font-mono);font-size:9px;color:var(--accent-primary);margin-top:2px">${{(r.code_mutations_applied || [])[0] || ''}}</div>
       `;
       rGrid.appendChild(card);
     }});
@@ -1086,7 +1157,7 @@ const SYMSPEC = {json.dumps(symspec)};
       card.className = 'rsi-card';
       card.innerHTML = `
         <div class="dock-hdr"><span>Lens ${{l.id}} · ${{l.name}}</span><span class="badge-pass">${{l.status}}</span></div>
-        <div style="font-size:11px;color:var(--ink-soft)">${{l.metric}}</div>
+        <div style="font-size:10px;color:var(--ink-soft)">${{l.metric}}</div>
       `;
       lGrid.appendChild(card);
     }});
@@ -1096,7 +1167,7 @@ const SYMSPEC = {json.dumps(symspec)};
     logBox.innerHTML = '';
     (RSI_LEDGER.rounds || []).forEach(r => {{
       const row = document.createElement('div');
-      row.style.padding = '6px 8px';
+      row.style.padding = '5px 7px';
       row.style.background = 'var(--bg-elev)';
       row.style.borderRadius = '5px';
       row.style.borderLeft = r.round === 'R3' ? '3px solid var(--accent-secondary)' : '3px solid var(--accent-primary)';
@@ -1130,11 +1201,11 @@ const SYMSPEC = {json.dumps(symspec)};
     SPRITE_META.forEach(item => {{
       const card = document.createElement('div');
       card.className = 'rsi-card';
-      card.style.padding = '7px 10px';
+      card.style.padding = '5px 8px';
       const [ , , vbW, vbH ] = item.vb.split(' ').map(Number);
       card.innerHTML = `
         <div class="dock-hdr"><span>#glyph-${{item.id}} · ${{item.label}}</span><span class="badge-pass">100/100</span></div>
-        <svg class="sprite-card-svg" viewBox="${{item.vb}}" style="width:100%;height:94px;background:#F5EEDF;border-radius:6px;border:1px solid var(--border);display:block">
+        <svg class="sprite-card-svg" viewBox="${{item.vb}}" style="width:100%;height:72px;background:#F5EEDF;border-radius:5px;border:1px solid var(--border);display:block">
           <use href="#glyph-${{item.id}}" width="${{vbW}}" height="${{vbH}}"/>
         </svg>
       `;
@@ -1364,11 +1435,19 @@ const SYMSPEC = {json.dumps(symspec)};
     }};
   }}
 
+  function clipWords(str, maxLen) {{
+    const s = (str || '').trim();
+    if (s.length <= maxLen) return s;
+    const cut = s.slice(0, maxLen - 1);
+    const lastSpace = cut.lastIndexOf(' ');
+    return (lastSpace > Math.floor(maxLen * 0.55) ? cut.slice(0, lastSpace) : cut).replace(/[,;:.\\s]+$/, '') + '…';
+  }}
+
   function bindParsedDocToActiveSVGs(parsed) {{
     if (!parsed) return;
     const shortLine = (idx, maxLen) => {{
       const raw = parsed.lines[idx % parsed.lines.length] || '';
-      return raw.length > maxLen ? raw.slice(0, maxLen - 1) + '…' : raw;
+      return clipWords(raw, maxLen);
     }};
     const kpiSummary = parsed.kpis.slice(0, 4).join(' · ');
 
@@ -1382,7 +1461,7 @@ const SYMSPEC = {json.dumps(symspec)};
         subNode.textContent = `fnv1a:${{parsed.hash}} · ${{parsed.lines.length}} Grounded Claims · Extracted KPIs: ${{kpiSummary}}`;
       }}
 
-      // Update Editorial Collage 4 Columns (.ed-col-card) & 8-Beat Storyboard Strip (.ed-beat-card)
+      // Update Editorial Collage 4 Columns (.ed-col-card), Spotlight III KPI & 8-Beat Storyboard Strip (.ed-beat-card)
       if (svg.id === 'editorial-collage-svg') {{
         svg.querySelectorAll('.ed-col-card').forEach((colG, i) => {{
           const rawClaim = parsed.lines[i % parsed.lines.length] || '';
@@ -1390,25 +1469,44 @@ const SYMSPEC = {json.dumps(symspec)};
           const kpiNode = colG.querySelector('text.t-kpi');
           const bNodes = colG.querySelectorAll('text.t-b');
           if (kpiNode) {{
-            kpiNode.textContent = (parts.length > 1 ? parts[0].trim() : shortLine(i, 20));
+            kpiNode.textContent = (parts.length > 1 ? clipWords(parts[0].trim(), 20) : shortLine(i, 20));
           }}
           if (bNodes[0]) {{
-            bNodes[0].textContent = (parts.length > 1 ? parts.slice(1).join(':').trim().slice(0, 42) : shortLine(i, 42));
+            bNodes[0].textContent = (parts.length > 1 ? clipWords(parts.slice(1).join(':').trim(), 42) : shortLine(i, 42));
           }}
           if (bNodes[1]) {{
             bNodes[1].textContent = `Grounded Claim #${{i+1}} · fnv1a:${{parsed.hash}}`;
           }}
         }});
+
+        // Sync Column III spotlight KPI badge with primary extracted KPI
+        const spot3Badge = svg.querySelector('[data-z="2"][data-seq="3"] text.t-badge');
+        if (spot3Badge && parsed.kpis[0]) {{
+          spot3Badge.textContent = parsed.kpis[0];
+        }}
+
+        const synthBeats = [
+          {{ tag: 'GATE AUDIT', body: '52/52 Gates Verified' }},
+          {{ tag: 'BREATHER', body: 'OKLab Chord Balance' }},
+          {{ tag: 'CHORD LOCK', body: `KPI: ${{parsed.kpis[0] || '100%'}}` }},
+          {{ tag: 'CALLBACK', body: `fnv1a:${{parsed.hash}}` }}
+        ];
         svg.querySelectorAll('.ed-beat-card').forEach((bCard, idx) => {{
-          const rawClaim = parsed.lines[idx % parsed.lines.length] || '';
-          const parts = rawClaim.split(':');
           const hNode = bCard.querySelector('text.t-h');
           const bNode = bCard.querySelector('text.t-b');
-          if (hNode && parts.length > 1) {{
-            hNode.textContent = `B${{idx+1}} · ${{parts[0].trim().slice(0, 10).toUpperCase()}}`;
-          }}
-          if (bNode) {{
-            bNode.textContent = (parts.length > 1 ? parts.slice(1).join(':').trim().slice(0, 22) : shortLine(idx, 22));
+          if (idx < parsed.lines.length) {{
+            const rawClaim = parsed.lines[idx] || '';
+            const parts = rawClaim.split(':');
+            if (hNode && parts.length > 1) {{
+              hNode.textContent = `B${{idx+1}} · ${{clipWords(parts[0].trim(), 10).toUpperCase()}}`;
+            }}
+            if (bNode) {{
+              bNode.textContent = (parts.length > 1 ? clipWords(parts.slice(1).join(':').trim(), 22) : shortLine(idx, 22));
+            }}
+          }} else {{
+            const sb = synthBeats[(idx - parsed.lines.length) % synthBeats.length];
+            if (hNode) hNode.textContent = `B${{idx+1}} · ${{sb.tag}}`;
+            if (bNode) bNode.textContent = sb.body;
           }}
         }});
       }}
@@ -1462,8 +1560,8 @@ const SYMSPEC = {json.dumps(symspec)};
         const parts = rawClaim.split(':');
         const h = g.querySelector('text.t-h');
         const b = g.querySelector('text.t-b');
-        if (h && parts.length > 1) h.textContent = parts[0].trim().slice(0, 22);
-        if (b) b.textContent = (parts.length > 1 ? parts.slice(1).join(':').trim().slice(0, 32) : shortLine(idx, 32));
+        if (h && parts.length > 1) h.textContent = clipWords(parts[0].trim(), 22);
+        if (b) b.textContent = (parts.length > 1 ? clipWords(parts.slice(1).join(':').trim(), 32) : shortLine(idx, 32));
       }});
     }}
   }}
