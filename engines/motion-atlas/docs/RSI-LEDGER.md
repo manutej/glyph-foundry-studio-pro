@@ -1,8 +1,8 @@
 # CETI MOTION ATLAS STUDIO PRO — 4-ROUND ADVERSARIAL MOE & RSI LEDGER (`v1 → v4`)
 
-**Workspace:** `/Users/cairo/Documents/CETI/ACCENTURE/content-factory v2/ARTE/motion-atlas/`  
-**Contracts:** [`docs/TYPED-CONTRACT-MOTION-ATLAS.md`](file:///Users/cairo/Documents/CETI/ACCENTURE/content-factory%20v2/ARTE/motion-atlas/docs/TYPED-CONTRACT-MOTION-ATLAS.md) · [`docs/META-PLAN-AND-RSI.md`](file:///Users/cairo/Documents/CETI/ACCENTURE/content-factory%20v2/ARTE/motion-atlas/docs/META-PLAN-AND-RSI.md)  
-**Validator:** [`scripts/validate-motion-studio.mjs`](file:///Users/cairo/Documents/CETI/ACCENTURE/content-factory%20v2/ARTE/motion-atlas/scripts/validate-motion-studio.mjs) (`--selftest` enabled)
+**Workspace:** `<workspace>/ARTE/motion-atlas/`  
+**Contracts:** [`docs/TYPED-CONTRACT-MOTION-ATLAS.md`](file://WORKSPACE/ARTE/motion-atlas/docs/TYPED-CONTRACT-MOTION-ATLAS.md) · [`docs/META-PLAN-AND-RSI.md`](file://WORKSPACE/ARTE/motion-atlas/docs/META-PLAN-AND-RSI.md)  
+**Validator:** [`scripts/validate-motion-studio.mjs`](file://WORKSPACE/ARTE/motion-atlas/scripts/validate-motion-studio.mjs) (`--selftest` enabled)
 
 ---
 

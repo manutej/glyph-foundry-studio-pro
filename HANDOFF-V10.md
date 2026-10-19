@@ -1,8 +1,8 @@
 # HANDOFF-V10 — Visual Browser Monitor (`vbm`) Audit, Adversarial UX/Design Review & `v10` Upgrade Specification
 
 - **Repository**: `https://github.com/manutej/glyph-foundry-studio-pro`
-- **Local Workspace**: `/Users/cairo/Documents/CETI/ACCENTURE/content-factory v2/glyph-foundry-next/`
-- **VBM CLI**: `/Users/cairo/.local/bin/vbm` (`vbm.mjs`)
+- **Local Workspace**: `<workspace>/glyph-foundry-next/`
+- **VBM CLI**: `~/.local/bin/vbm` (`vbm.mjs`)
 - **VBM v9 Captures**: `out/vbm/01..12-*-v9.png`, `out/vbm/vbm-walkthrough-v9.mp4`, `out/vbm/vbm-walkthrough-v9.gif`, `out/vbm/vbm-telemetry-v9.json`
 
 ---

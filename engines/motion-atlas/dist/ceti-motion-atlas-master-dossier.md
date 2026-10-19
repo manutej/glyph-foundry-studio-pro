@@ -16,7 +16,7 @@
 # STATUS — CETI Motion Atlas Studio Pro (`v4` Locked)
 
 **Last Updated:** 2026-10-16  
-**Workspace:** `/Users/cairo/Documents/CETI/ACCENTURE/content-factory v2/ARTE/motion-atlas/`  
+**Workspace:** `<workspace>/ARTE/motion-atlas/`  
 **Current Version:** `v4.0.0` (4 Adversarial MOE Rounds Complete · `20/20 Gates PASS` · `5/5 Negative Mutation Selftests CAUGHT`)
 
 ---
@@ -25,23 +25,23 @@
 
 | Deliverable | Path / URL | Status |
 |---|---|---|
-| **Live Local Studio & OAuth 2.0 PKCE Server** | `http://127.0.0.1:43110/` (served by [`scripts/oauth-bridge-server.mjs`](file:///Users/cairo/Documents/CETI/ACCENTURE/content-factory%20v2/ARTE/motion-atlas/scripts/oauth-bridge-server.mjs)) | **ONLINE** |
-| **Standalone Single-File Studio (Downloads)** | [`/Users/cairo/Downloads/CETI Motion Atlas Studio Pro.html`](file:///Users/cairo/Downloads/CETI%20Motion%20Atlas%20Studio%20Pro.html) (`432,859 bytes`) | **LOCKED (`v4`)** |
-| **Standalone Single-File Studio (Workspace)** | [`ARTE/motion-atlas/Motion Atlas Studio Pro — Standalone.html`](file:///Users/cairo/Documents/CETI/ACCENTURE/content-factory%20v2/ARTE/motion-atlas/Motion%20Atlas%20Studio%20Pro%20%E2%80%94%20Standalone.html) (`432,859 bytes`) | **LOCKED (`v4`)** |
-| **Modular Studio Entry HTML** | [`ARTE/motion-atlas/Motion Atlas Studio Pro.dc.html`](file:///Users/cairo/Documents/CETI/ACCENTURE/content-factory%20v2/ARTE/motion-atlas/Motion%20Atlas%20Studio%20Pro.dc.html) & [`ARTE/motion-atlas/index.html`](file:///Users/cairo/Documents/CETI/ACCENTURE/content-factory%20v2/ARTE/motion-atlas/index.html) | **LOCKED (`v4`)** |
-| **Sanzo Wada 348 Harmonic Dictionary** | [`ARTE/motion-atlas/geome-wada.js`](file:///Users/cairo/Documents/CETI/ACCENTURE/content-factory%20v2/ARTE/motion-atlas/geome-wada.js) (`348` combinations) | **LOCKED** |
-| **Parametric Motion & Multi-Character Engine** | [`ARTE/motion-atlas/studio-motion-engine.js`](file:///Users/cairo/Documents/CETI/ACCENTURE/content-factory%20v2/ARTE/motion-atlas/studio-motion-engine.js) (`8` distinct archetypes · `8` feels · `15` styles · `8` stories · `24` elements) | **LOCKED (`v4`)** |
-| **Living Canvas DAG, Sheaf Cohomology & OAuth PKCE** | [`ARTE/motion-atlas/studio-canvas-oauth.js`](file:///Users/cairo/Documents/CETI/ACCENTURE/content-factory%20v2/ARTE/motion-atlas/studio-canvas-oauth.js) | **LOCKED (`v4`)** |
-| **7-Surface Interactive Studio UI** | [`ARTE/motion-atlas/studio-ui.js`](file:///Users/cairo/Documents/CETI/ACCENTURE/content-factory%20v2/ARTE/motion-atlas/studio-ui.js) | **LOCKED (`v4`)** |
-| **20-Gate Mechanical Validator + Selftest** | [`ARTE/motion-atlas/scripts/validate-motion-studio.mjs`](file:///Users/cairo/Documents/CETI/ACCENTURE/content-factory%20v2/ARTE/motion-atlas/scripts/validate-motion-studio.mjs) | **`20/20 PASS` + `5/5 SELFTEST`** |
-| **Typed Contract & Meta-Plan** | [`docs/TYPED-CONTRACT-MOTION-ATLAS.md`](file:///Users/cairo/Documents/CETI/ACCENTURE/content-factory%20v2/ARTE/motion-atlas/docs/TYPED-CONTRACT-MOTION-ATLAS.md) · [`docs/META-PLAN-AND-RSI.md`](file:///Users/cairo/Documents/CETI/ACCENTURE/content-factory%20v2/ARTE/motion-atlas/docs/META-PLAN-AND-RSI.md) · [`docs/RSI-LEDGER.md`](file:///Users/cairo/Documents/CETI/ACCENTURE/content-factory%20v2/ARTE/motion-atlas/docs/RSI-LEDGER.md) | **COMPLETE** |
+| **Live Local Studio & OAuth 2.0 PKCE Server** | `http://127.0.0.1:43110/` (served by [`scripts/oauth-bridge-server.mjs`](file://WORKSPACE/ARTE/motion-atlas/scripts/oauth-bridge-server.mjs)) | **ONLINE** |
+| **Standalone Single-File Studio (Downloads)** | [`~/Downloads/CETI Motion Atlas Studio Pro.html`](file://~/Downloads/CETI%20Motion%20Atlas%20Studio%20Pro.html) (`432,859 bytes`) | **LOCKED (`v4`)** |
+| **Standalone Single-File Studio (Workspace)** | [`ARTE/motion-atlas/Motion Atlas Studio Pro — Standalone.html`](file://WORKSPACE/ARTE/motion-atlas/Motion%20Atlas%20Studio%20Pro%20%E2%80%94%20Standalone.html) (`432,859 bytes`) | **LOCKED (`v4`)** |
+| **Modular Studio Entry HTML** | [`ARTE/motion-atlas/Motion Atlas Studio Pro.dc.html`](file://WORKSPACE/ARTE/motion-atlas/Motion%20Atlas%20Studio%20Pro.dc.html) & [`ARTE/motion-atlas/index.html`](file://WORKSPACE/ARTE/motion-atlas/index.html) | **LOCKED (`v4`)** |
+| **Sanzo Wada 348 Harmonic Dictionary** | [`ARTE/motion-atlas/geome-wada.js`](file://WORKSPACE/ARTE/motion-atlas/geome-wada.js) (`348` combinations) | **LOCKED** |
+| **Parametric Motion & Multi-Character Engine** | [`ARTE/motion-atlas/studio-motion-engine.js`](file://WORKSPACE/ARTE/motion-atlas/studio-motion-engine.js) (`8` distinct archetypes · `8` feels · `15` styles · `8` stories · `24` elements) | **LOCKED (`v4`)** |
+| **Living Canvas DAG, Sheaf Cohomology & OAuth PKCE** | [`ARTE/motion-atlas/studio-canvas-oauth.js`](file://WORKSPACE/ARTE/motion-atlas/studio-canvas-oauth.js) | **LOCKED (`v4`)** |
+| **7-Surface Interactive Studio UI** | [`ARTE/motion-atlas/studio-ui.js`](file://WORKSPACE/ARTE/motion-atlas/studio-ui.js) | **LOCKED (`v4`)** |
+| **20-Gate Mechanical Validator + Selftest** | [`ARTE/motion-atlas/scripts/validate-motion-studio.mjs`](file://WORKSPACE/ARTE/motion-atlas/scripts/validate-motion-studio.mjs) | **`20/20 PASS` + `5/5 SELFTEST`** |
+| **Typed Contract & Meta-Plan** | [`docs/TYPED-CONTRACT-MOTION-ATLAS.md`](file://WORKSPACE/ARTE/motion-atlas/docs/TYPED-CONTRACT-MOTION-ATLAS.md) · [`docs/META-PLAN-AND-RSI.md`](file://WORKSPACE/ARTE/motion-atlas/docs/META-PLAN-AND-RSI.md) · [`docs/RSI-LEDGER.md`](file://WORKSPACE/ARTE/motion-atlas/docs/RSI-LEDGER.md) | **COMPLETE** |
 
 ---
 
 ## 2. Verification Command
 
 ```bash
-cd "/Users/cairo/Documents/CETI/ACCENTURE/content-factory v2/ARTE/motion-atlas"
+cd "<workspace>/ARTE/motion-atlas"
 node scripts/validate-motion-studio.mjs --selftest
 ```
 
@@ -53,7 +53,7 @@ node scripts/validate-motion-studio.mjs --selftest
 # HANDOFF — CETI Motion Atlas Studio Pro (`v4.0.0`)
 
 **Cold-Resume Entry Point for Engineers, Motion Directors, and Autonomous Agents**  
-**Root:** `/Users/cairo/Documents/CETI/ACCENTURE/content-factory v2/ARTE/motion-atlas/`
+**Root:** `<workspace>/ARTE/motion-atlas/`
 
 ---
 
@@ -87,7 +87,7 @@ ARTE/motion-atlas/
 └── HANDOFF.md                               # This cold-resume guide & extension playbook
 ```
 
-Also mirrored to `/Users/cairo/Downloads/CETI Motion Atlas Studio Pro.html` for one-click standalone launch.
+Also mirrored to `~/Downloads/CETI Motion Atlas Studio Pro.html` for one-click standalone launch.
 
 ---
 
@@ -95,20 +95,20 @@ Also mirrored to `/Users/cairo/Downloads/CETI Motion Atlas Studio Pro.html` for 
 
 ### A. Run the 20-Gate Mechanical Audit + Negative Mutation Selftest
 ```bash
-cd "/Users/cairo/Documents/CETI/ACCENTURE/content-factory v2/ARTE/motion-atlas"
+cd "<workspace>/ARTE/motion-atlas"
 node scripts/validate-motion-studio.mjs --selftest
 ```
 
 ### B. Start the Local Studio & OAuth 2.0 PKCE Loopback Server
 ```bash
-cd "/Users/cairo/Documents/CETI/ACCENTURE/content-factory v2/ARTE/motion-atlas"
+cd "<workspace>/ARTE/motion-atlas"
 node scripts/oauth-bridge-server.mjs
 # Opens http://127.0.0.1:43110/ with live PKCE S256 handshake & /oauth/enhance endpoints
 ```
 
 ### C. Rebuild the Zero-Dependency Standalone HTML Bundle after Edits
 ```bash
-cd "/Users/cairo/Documents/CETI/ACCENTURE/content-factory v2/ARTE/motion-atlas"
+cd "<workspace>/ARTE/motion-atlas"
 node -e '
 const fs = require("fs");
 const html = fs.readFileSync("Motion Atlas Studio Pro.dc.html", "utf8");
@@ -122,7 +122,7 @@ const standalone = html
   .replace("<script src=\"./studio-canvas-oauth.js\"></script>", () => "<script>\n" + co + "\n</script>")
   .replace("<script src=\"./studio-ui.js\"></script>", () => "<script>\n" + ui + "\n</script>");
 fs.writeFileSync("Motion Atlas Studio Pro — Standalone.html", standalone);
-fs.writeFileSync("/Users/cairo/Downloads/CETI Motion Atlas Studio Pro.html", standalone);
+fs.writeFileSync("~/Downloads/CETI Motion Atlas Studio Pro.html", standalone);
 '
 ```
 
@@ -132,16 +132,16 @@ fs.writeFileSync("/Users/cairo/Downloads/CETI Motion Atlas Studio Pro.html", sta
 
 ### 4.1 Adding a New Character Archetype or Preset Rig
 1. **Runtime / UI Way:** Open the **OAuth 2.0 PKCE Live Enhancer Modal** (`✦ OAuth PKCE Enhancer`) or **Surface III (`Character & Emblem Foundry`)**, click **`✦ Synthesize Character Rig`**, or call `window.MA.registerCustomCharacter(spec)`.
-2. **Permanent Preset Way:** Add a new entry to `CHARACTERS` and `CHARACTER_ORDER` in [`studio-motion-engine.js`](file:///Users/cairo/Documents/CETI/ACCENTURE/content-factory%20v2/ARTE/motion-atlas/studio-motion-engine.js).
+2. **Permanent Preset Way:** Add a new entry to `CHARACTERS` and `CHARACTER_ORDER` in [`studio-motion-engine.js`](file://WORKSPACE/ARTE/motion-atlas/studio-motion-engine.js).
    - Ensure its `bodyProfile`, `spineWave`, and `appendages` produce a contour signature with $\Delta_{\text{geom}} > 0.08$ against all existing rigs (verified automatically by `G17` via `MA.auditArchetypeDiscriminability()`).
 
 ### 4.2 Adding or Curating New Sanzo Wada Harmonic Plates
-1. All 348 historical Sanzo Wada combinations are already loaded in [`geome-wada.js`](file:///Users/cairo/Documents/CETI/ACCENTURE/content-factory%20v2/ARTE/motion-atlas/geome-wada.js) (`window.GEOME_WADA_LIST`).
+1. All 348 historical Sanzo Wada combinations are already loaded in [`geome-wada.js`](file://WORKSPACE/ARTE/motion-atlas/geome-wada.js) (`window.GEOME_WADA_LIST`).
 2. To promote any of the 348 combinations to a curated top-bar studio plate with custom Japanese/English editorial notes, append an entry to `PALS` in `STUDIO_WADA_ENGINE` (`studio-motion-engine.js`).
 3. Ensure `cr >= 7.0` (WCAG AAA ink-on-paper contrast); `WADA.enrichPalette(raw, ground)` will automatically compute the $4\times 4$ OKLab chord matrix and CIEDE2000 nearest CETI tokens.
 
 ### 4.3 Connecting External Cloud LLM Keys to the OAuth 2.0 PKCE Bridge
-1. In [`scripts/oauth-bridge-server.mjs`](file:///Users/cairo/Documents/CETI/ACCENTURE/content-factory%20v2/ARTE/motion-atlas/scripts/oauth-bridge-server.mjs), the `/oauth/enhance` endpoint validates the PKCE bearer token and returns a schema-checked `OAuthEnhanceResponse`.
+1. In [`scripts/oauth-bridge-server.mjs`](file://WORKSPACE/ARTE/motion-atlas/scripts/oauth-bridge-server.mjs), the `/oauth/enhance` endpoint validates the PKCE bearer token and returns a schema-checked `OAuthEnhanceResponse`.
 2. To route `/oauth/enhance` through a live upstream model (Anthropic Claude, OpenAI, Gemini, or OpenRouter), pass `OPENROUTER_API_KEY` or `ANTHROPIC_API_KEY` in the environment of `oauth-bridge-server.mjs` and validate the JSON output through `CO.validateEnhancementResponse(payload)` before returning it to the client.
 
 ---
@@ -170,7 +170,7 @@ fs.writeFileSync("/Users/cairo/Downloads/CETI Motion Atlas Studio Pro.html", sta
 
 ## 0. Why This Contract Exists (What We Keep, What We Generalize, What We Refuse)
 
-From your existing exploration in [`Motion Atlas Explorer`](file:///Users/cairo/Documents/CETI/ACCENTURE/content-factory%20v2/ARTE/motion-atlas/source_bundle/Motion%20Atlas%20Explorer.dc.html), [`ARTE/hyperframes/pipeline/TYPES.md`](file:///Users/cairo/Documents/ARTE/hyperframes/pipeline/TYPES.md), [`ARTE/orpheum/docs/ORPHIC-META-SPEC.md`](file:///Users/cairo/Documents/CETI/ACCENTURE/content-factory%20v2/ARTE/orpheum/docs/ORPHIC-META-SPEC.md), and [`Kinetic Hydrography`](file:///Users/cairo/Downloads/philosophy.md), four structural truths are already proven:
+From your existing exploration in [`Motion Atlas Explorer`](file://WORKSPACE/ARTE/motion-atlas/source_bundle/Motion%20Atlas%20Explorer.dc.html), [`ARTE/hyperframes/pipeline/TYPES.md`](file://~/Documents/ARTE/hyperframes/pipeline/TYPES.md), [`ARTE/orpheum/docs/ORPHIC-META-SPEC.md`](file://WORKSPACE/ARTE/orpheum/docs/ORPHIC-META-SPEC.md), and [`Kinetic Hydrography`](file://~/Downloads/philosophy.md), four structural truths are already proven:
 
 1. **The Prompt is 10%; the Harness & Typed Packets are 90%.** Open strings and untyped "vibe prompts" produce LLM slop. Every stage in this studio is a typed packet (`CanvasDecision → Intake → ClaimsFile → Brief → Direction → Storyboard → ShotList → CompositionSet → CheckReport`) governed by four morphism classes (`collect`, `derive`, `choose`, `gate`) and sheaf restriction equality $\rho(\text{later}) = \text{frozen earlier}$.
 2. **One Deterministic Clock (`frame = f(t)` / `window.seek(t)`).** Every proof, storyboard panel, character rig preview, and infinite-canvas node is a pure function of time $t$, palette $P$, feel $F$, character rig $C$, and seed $s$. No `Math.random()`, no `Date.now()`, no CSS `@keyframes` for narrative motion.
@@ -488,7 +488,7 @@ The OAuth Enhancer **never** accepts freeform prose from an LLM. Every AI reques
 # META-PLAN & RECURSIVE SELF-IMPROVEMENT (RSI) PROTOCOL: Motion Atlas Studio Pro
 
 **Document ID:** `CETI-MOTION-RSI-V1.0`  
-**Contract Reference:** [`TYPED-CONTRACT-MOTION-ATLAS.md`](file:///Users/cairo/Documents/CETI/ACCENTURE/content-factory%20v2/ARTE/motion-atlas/docs/TYPED-CONTRACT-MOTION-ATLAS.md)  
+**Contract Reference:** [`TYPED-CONTRACT-MOTION-ATLAS.md`](file://WORKSPACE/ARTE/motion-atlas/docs/TYPED-CONTRACT-MOTION-ATLAS.md)  
 **Discipline:** `Brief → Typed Schema → Executed Instrument → 16-Gate Mechanical Audit → Adversarial Critique → Surgical v2 Refinement → Compounding Ledger`
 
 ---
@@ -583,9 +583,9 @@ flowchart LR
 
 # CETI MOTION ATLAS STUDIO PRO — 4-ROUND ADVERSARIAL MOE & RSI LEDGER (`v1 → v4`)
 
-**Workspace:** `/Users/cairo/Documents/CETI/ACCENTURE/content-factory v2/ARTE/motion-atlas/`  
-**Contracts:** [`docs/TYPED-CONTRACT-MOTION-ATLAS.md`](file:///Users/cairo/Documents/CETI/ACCENTURE/content-factory%20v2/ARTE/motion-atlas/docs/TYPED-CONTRACT-MOTION-ATLAS.md) · [`docs/META-PLAN-AND-RSI.md`](file:///Users/cairo/Documents/CETI/ACCENTURE/content-factory%20v2/ARTE/motion-atlas/docs/META-PLAN-AND-RSI.md)  
-**Validator:** [`scripts/validate-motion-studio.mjs`](file:///Users/cairo/Documents/CETI/ACCENTURE/content-factory%20v2/ARTE/motion-atlas/scripts/validate-motion-studio.mjs) (`--selftest` enabled)
+**Workspace:** `<workspace>/ARTE/motion-atlas/`  
+**Contracts:** [`docs/TYPED-CONTRACT-MOTION-ATLAS.md`](file://WORKSPACE/ARTE/motion-atlas/docs/TYPED-CONTRACT-MOTION-ATLAS.md) · [`docs/META-PLAN-AND-RSI.md`](file://WORKSPACE/ARTE/motion-atlas/docs/META-PLAN-AND-RSI.md)  
+**Validator:** [`scripts/validate-motion-studio.mjs`](file://WORKSPACE/ARTE/motion-atlas/scripts/validate-motion-studio.mjs) (`--selftest` enabled)
 
 ---
 

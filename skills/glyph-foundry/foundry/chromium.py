@@ -1,11 +1,11 @@
 """Headless Chromium bridge using local Playwright + Google Chrome."""
 import json, pathlib, subprocess, tempfile
 
-NODE_BIN = "/Users/cairo/.local/bin/node"
+NODE_BIN = "~/.local/bin/node"
 if not pathlib.Path(NODE_BIN).exists():
     NODE_BIN = "node"
 
-PW_PATH = "/Users/cairo/ESMERALDA/node_modules/playwright"
+PW_PATH = "~/ESMERALDA/node_modules/playwright"
 CHROME_PATH = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 
 

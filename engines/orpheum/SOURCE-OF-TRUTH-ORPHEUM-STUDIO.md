@@ -1,7 +1,7 @@
 # SOURCE OF TRUTH — Orpheum Studio Pro (v4 Unified Engine)
 
-**Canonical Workspace:** `/Users/cairo/Documents/ARTE/orpheum`  
-**Mirrored Workspace:** `/Users/cairo/Documents/CETI/ACCENTURE/content-factory v2/ARTE/orpheum`  
+**Canonical Workspace:** `~/Documents/ARTE/orpheum`  
+**Mirrored Workspace:** `<workspace>/ARTE/orpheum`  
 **Dev Preview URL:** `https://orpheum-dev-preview.vercel.app`  
 **Local Dev Preview:** `http://localhost:8787`  
 **Production URL (Protected):** `https://orpheum-omega.vercel.app`  

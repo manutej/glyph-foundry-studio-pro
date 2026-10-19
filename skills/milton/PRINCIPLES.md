@@ -2,7 +2,7 @@
 
 The philosophical contract. **This file is brand-agnostic.** Every Milton output, regardless of which preset or fork it uses, must honour these principles. They are the part of the skill that does not vary.
 
-The full source notes — including original quotes and attribution — live at `/Users/manu/Documents/CETI/DESIGN/research/glaser-notes.md`.
+The full source notes — including original quotes and attribution — live at `~/Documents/CETI/DESIGN/research/glaser-notes.md`.
 
 ---
 

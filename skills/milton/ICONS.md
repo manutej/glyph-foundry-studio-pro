@@ -26,7 +26,7 @@ Every Milton icon follows these rules without exception, in any brand fork:
 
 ## 2 · The 12 canonical icons (default preset)
 
-The reference set, mapped 1:1 to Glaser's Ten Things plus two foundational extras (`wow` and `ambiguity`). They live as standalone files in `/Users/manu/Documents/CETI/DESIGN/icons/` and as `<symbol>`s in `DESIGN/icons/sprite.svg`.
+The reference set, mapped 1:1 to Glaser's Ten Things plus two foundational extras (`wow` and `ambiguity`). They live as standalone files in `~/Documents/CETI/DESIGN/icons/` and as `<symbol>`s in `DESIGN/icons/sprite.svg`.
 
 | File                  | Name         | Concept embodied                          | Form                                                |
 |-----------------------|--------------|-------------------------------------------|-----------------------------------------------------|
@@ -114,7 +114,7 @@ The `<title>` is the screen-reader name. The `<desc>` is your future self's note
 
 Once the standalone `NN-name.svg` is finalized:
 
-1. Open `/Users/manu/Documents/CETI/DESIGN/icons/sprite.svg` (or your fork's equivalent).
+1. Open `~/Documents/CETI/DESIGN/icons/sprite.svg` (or your fork's equivalent).
 2. Append `<symbol id="{name}" viewBox="0 0 200 200">…</symbol>` with the geometry.
 3. **Strip the `<rect width="200" height="200" fill="..."/>`** — sprites should be transparent so they adopt parent backgrounds.
 4. Keep `currentColor` on every fill/stroke that should adapt to context.

@@ -96,7 +96,7 @@ Every mode honours the contract — the philosophy, the web standards, the anti-
 1. Start from `references/page-template.html` and extend.
 2. Section number eyebrow (`01`, `02`, …) in mono caps with a section title in display.
 3. Reveal-on-scroll via IntersectionObserver. Stagger via `:nth-child` transition-delay.
-4. Reference the gold standard: `/Users/manu/Documents/CETI/DESIGN/index.html`.
+4. Reference the gold standard: `~/Documents/CETI/DESIGN/index.html`.
 5. Mandatory: light + dark, mobile menu, theme toggle.
 
 ---

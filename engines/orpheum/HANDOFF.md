@@ -14,7 +14,7 @@
    - `docs/ORPHIC-META-SPEC.md` & `docs/Orpheum Review Ledger.md` — Mathematical specification and full `#1`–`#39` defect closure table.
 2. **Run the 25-Gate Verification Suite**:
    ```bash
-   cd /Users/cairo/Documents/ARTE/orpheum
+   cd ~/Documents/ARTE/orpheum
    node scripts/adversarial-verify.mjs
    ```
 3. **Preview Locally**:
@@ -23,7 +23,7 @@
      - `http://localhost:8787/`
    - If restarting from cold boot:
      ```bash
-     cd /Users/cairo/Documents/ARTE/orpheum && python3 -m http.server 8787
+     cd ~/Documents/ARTE/orpheum && python3 -m http.server 8787
      ```
 
 ---
@@ -34,14 +34,14 @@
 - **Protected Production URL**: `https://orpheum-omega.vercel.app`
 - **To promote to production once the user signs off**:
   ```bash
-  cd /Users/cairo/Documents/ARTE/orpheum
+  cd ~/Documents/ARTE/orpheum
   node scripts/adversarial-verify.mjs
   cp "Orpheum Studio Pro.dc.html" index.html
   vercel deploy --prod --yes
   ```
 - **Mirror Synchronization Command** (always keep both trees identical):
   ```bash
-  rsync -av --exclude='.git' --exclude='.vercel' /Users/cairo/Documents/ARTE/orpheum/ "/Users/cairo/Documents/CETI/ACCENTURE/content-factory v2/ARTE/orpheum/"
+  rsync -av --exclude='.git' --exclude='.vercel' ~/Documents/ARTE/orpheum/ "<workspace>/ARTE/orpheum/"
   ```
 
 ---
